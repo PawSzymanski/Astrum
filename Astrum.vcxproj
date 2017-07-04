@@ -152,10 +152,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExitStage.cpp" />
+    <ClCompile Include="GameplayStage.cpp" />
+    <ClCompile Include="GameStage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuStage.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ExitStage.h" />
+    <ClInclude Include="GameplayStage.h" />
+    <ClInclude Include="GameStage.h" />
+    <ClInclude Include="LibsAndDeclarations.h" />
+    <ClInclude Include="MenuStage.h" />
+    <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
