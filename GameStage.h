@@ -17,7 +17,7 @@ private:
 public:
 	static bool run(float dt, sf::RenderWindow &window);
 	static void setEvents(sf::Event &event);
-	static GameStage* activeStage() { return active_stage; };
+    static GameStage* activeStage() { return active_stage; }
 
 private:
 public:
@@ -26,5 +26,5 @@ public:
 	virtual bool update(float dt) = 0;
 	virtual void draw(sf::RenderWindow &window) = 0;
 	virtual void release() = 0;
-	virtual void eventsManage(sf::Event &) = 0;
+    virtual void eventsManage(sf::Event &);
 };
