@@ -152,7 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dirreader.cpp" />
+    <ClCompile Include="Button_menu.cpp" />
     <ClCompile Include="ExitStage.cpp" />
     <ClCompile Include="GameplayStage.cpp" />
     <ClCompile Include="GameStage.cpp" />
@@ -165,7 +165,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dirreader.h" />
+    <ClInclude Include="Button_menu.h" />
     <ClInclude Include="ExitStage.h" />
     <ClInclude Include="GameplayStage.h" />
     <ClInclude Include="GameStage.h" />

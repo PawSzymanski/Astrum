@@ -16,6 +16,7 @@ private:
 	uint8_t actionCode;
 	sf::Font font;
 	sf::Text start_message, options_message, exit_message;
+	RoundRect rect;
 
 public:
 	virtual bool init() override;
@@ -27,3 +28,4 @@ private:
 	void returnFun();
 	void showBar();
 };
+

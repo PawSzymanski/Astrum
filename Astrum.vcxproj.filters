@@ -36,7 +36,7 @@
     <ClCompile Include="roundrect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dirreader.cpp">
+    <ClCompile Include="Button_menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <ClInclude Include="roundrect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dirreader.h">
+    <ClInclude Include="Button_menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

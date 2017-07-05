@@ -25,8 +25,7 @@ while (resources_manager.window.isOpen())
 				resources_manager.exit_stage.set();
 				break;
 			}
-				GameStage::setEvents(event);
-				break;	
+				GameStage::setEvents(event);	
 		}
 	}
 

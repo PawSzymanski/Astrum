@@ -1,7 +1,7 @@
 #include "MenuStage.h"
 #include "ResourceManager.h"
 
-MenuStage::MenuStage() : actionCode(0)
+MenuStage::MenuStage() : actionCode(0), rect(sf::Vector2f(3, 2), 1.0f)
 {
 }
 
@@ -14,6 +14,10 @@ bool MenuStage::init()
 {
 	if (!font.loadFromFile("resources/sansation.ttf"))
 		return false;
+
+	rect.setFillColor(sf::Color(0, 0, 0, 0));
+	rect.setOutlineColor(sf::Color::Black);
+	rect.setOutlineThickness(0.5);
 
 	start_message.setFont(font);
 	start_message.setCharacterSize(40);

@@ -26,5 +26,5 @@ public:
 	virtual bool update(float dt) = 0;
 	virtual void draw(sf::RenderWindow &window) = 0;
 	virtual void release() = 0;
-	virtual void eventsManage(sf::Event &) = 0;
+	virtual void eventsManage(sf::Event &);
 };
