@@ -34,3 +34,7 @@ void ExitStage::draw(sf::RenderWindow & window)
 void ExitStage::release()
 {
 }
+
+void ExitStage::eventsManage(sf::Event & event)
+{
+}

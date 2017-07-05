@@ -38,6 +38,11 @@ bool GameStage::run(float dt, sf::RenderWindow &window)
 	return false;
 }
 
+void GameStage::setEvents(sf::Event & event)
+{
+	active_stage->eventsManage(event);
+}
+
 void GameStage::set()
 {
 	next_stage = this;

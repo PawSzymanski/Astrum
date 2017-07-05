@@ -21,4 +21,5 @@ public:
 	virtual bool update(float dt) override;
 	virtual void draw(sf::RenderWindow &window) override;
 	virtual void release() override;
+	virtual void eventsManage(sf::Event &event) override;
 };

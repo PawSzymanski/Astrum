@@ -26,7 +26,7 @@ bool GameplayStage::update(float dt)
 
 	//if (ecs_gameplay_ptr->update(dt)) return true;
 
-	return false;
+	return true;
 }
 
 void GameplayStage::draw(sf::RenderWindow &window)
@@ -42,4 +42,8 @@ void GameplayStage::draw(sf::RenderWindow &window)
 void GameplayStage::release()
 {
 	//ecs_gameplay_ptr.reset();
+}
+
+void GameplayStage::eventsManage(sf::Event & event)
+{
 }

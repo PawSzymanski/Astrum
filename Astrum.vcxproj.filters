@@ -33,6 +33,12 @@
     <ClCompile Include="MenuStage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="roundrect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dirreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuStage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="roundrect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dirreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

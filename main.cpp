@@ -19,12 +19,14 @@ while (resources_manager.window.isOpen())
 		sf::Event event;
 		while (resources_manager.window.pollEvent(event))
 		{
-			// Window closed or escape key pressed: ExitStage
-			if ((event.type == sf::Event::Closed) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
+			// Window closed 
+			if (event.type == sf::Event::Closed)
 			{
 				resources_manager.exit_stage.set();
 				break;
 			}
+				GameStage::setEvents(event);
+				break;	
 		}
 	}
 
