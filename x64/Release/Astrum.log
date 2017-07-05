@@ -1,8 +1,13 @@
-﻿  GameplayStage.cpp
+﻿  ExitStage.cpp
+  GameStage.cpp
+  GameplayStage.cpp
+  MenuStage.cpp
+  ResourceManager.cpp
+  main.cpp
   Generating code
-  5 of 113 functions ( 4.4%) were compiled, the rest were copied from previous compilation.
+  4 of 113 functions ( 3.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Astrum.vcxproj -> c:\users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
-  Astrum.vcxproj -> c:\users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
+  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
+  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
