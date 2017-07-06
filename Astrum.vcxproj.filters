@@ -36,10 +36,16 @@
     <ClCompile Include="roundrect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button_menu.cpp">
+    <ClCompile Include="dirreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lvlsetstage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lvlbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +74,16 @@
     <ClInclude Include="roundrect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button_menu.h">
+    <ClInclude Include="dirreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lvlsetstage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lvlbutton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

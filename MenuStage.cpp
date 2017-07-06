@@ -1,0 +1,176 @@
+#include "MenuStage.h"
+#include "ResourceManager.h"
+
+
+MenuStage::MenuStage() : actionCode(0), startButton(0), optionsButton(1), exitButton(2), isPressed(0), buttonSpeed(0.0f)
+{
+}
+
+MenuStage::~MenuStage()
+{
+	release();
+}
+
+bool MenuStage::init()
+{
+	font = ResourcesManager::getInstanceRef().font; 
+
+	startButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Start", sf::Vector2f(40, 20));
+	startButton.rect.setOutlineThickness(12);
+	optionsButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Options", sf::Vector2f(60, 20));
+	exitButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Exit", sf::Vector2f(30, 20));
+
+	return true;
+}
+
+void MenuStage::slidingRight(float dt)
+{
+	if (startButton.rect.getPosition().x > 0)
+	{
+		buttonSpeed += 30;
+		startButton.rect.setPosition(startButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
+		startButton.text.setPosition(startButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
+		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
+		optionsButton.text.setPosition(optionsButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
+		exitButton.rect.setPosition(exitButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+		exitButton.text.setPosition(exitButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+		std::cout << " x:" <<startButton.rect.getPosition().x << std::endl;
+	}
+	else {
+		isSliding = 0;
+	}
+}
+
+bool MenuStage::update(float dt)
+{
+	auto &resources_manager = ResourcesManager::getInstanceRef();
+	if (isSliding)
+	{
+		slidingRight(dt);
+	}
+	else if(isPressed)
+	{
+		isPressed = 0;
+		buttonSpeed = 0.0f;
+		if (actionCode == 0)
+		{
+			resources_manager.lvl_set_stage.set();
+		}
+		else if (actionCode == 1)
+		{
+			resources_manager.gameplay_stage.set();
+		}
+		else if (actionCode == 2)
+		{
+			resources_manager.exit_stage.set();
+		}
+	}
+	else
+	{
+		startButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 10);
+		startButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 10);
+		optionsButton.text.setPosition(windowSize.x / 2, windowSize.y / 2);
+		optionsButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2);
+		exitButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 10);
+		exitButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 10);
+	}
+	return true;
+}
+
+void MenuStage::render(sf::RenderWindow &window)
+{
+	windowSize = window.getSize();
+	window.clear(sf::Color(0, 0, 0));
+
+	//startButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2 - window.getSize().y / 10);
+	//startButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2 - window.getSize().y / 10);
+	window.draw(startButton.text);
+	window.draw(startButton.rect);
+
+	//optionsButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	//optionsButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	window.draw(optionsButton.text);
+	window.draw(optionsButton.rect);
+
+	//exitButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2 + window.getSize().y / 10);
+	//exitButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2 + window.getSize().y / 10);
+	window.draw(exitButton.text);
+	window.draw(exitButton.rect);
+}
+
+
+void MenuStage::release()
+{
+    startButton.text = sf::Text();
+    optionsButton.text = sf::Text();
+    exitButton.text = sf::Text();
+}
+
+
+
+void MenuStage::showBar()
+{
+	if (actionCode == 0)
+	{
+		startButton.rect.setOutlineThickness(12);
+	}
+	else if (actionCode == 1)
+	{
+		optionsButton.rect.setOutlineThickness(12);
+	}
+	else if (actionCode == 2)
+	{
+		exitButton.rect.setOutlineThickness(12);
+	}
+}
+
+
+void MenuStage::input(sf::Event & event)
+{
+	auto &resources_manager = ResourcesManager::getInstanceRef();
+
+	if (event.type == sf::Event::KeyPressed)
+	{
+		
+		//reset bar
+		startButton.rect.setOutlineThickness(8);
+		optionsButton.rect.setOutlineThickness(8);
+		exitButton.rect.setOutlineThickness(8);
+
+		if (event.key.code == sf::Keyboard::Escape)
+		{
+			resources_manager.exit_stage.set();
+		}
+		else if (event.key.code == sf::Keyboard::Up)
+		{
+			if (actionCode != 0)
+				--actionCode;
+			else
+			actionCode = 2;
+
+			showBar();
+		}
+		else if (event.key.code == sf::Keyboard::Down)
+		{
+			if (actionCode != 2)
+				++actionCode;
+			else
+			actionCode = 0;
+
+			showBar();
+		}
+		else if (event.key.code == sf::Keyboard::Return)
+		{
+			isPressed = 1;
+			isSliding = 1;
+		}
+	}
+	else if (event.type == sf::Event::MouseButtonPressed)
+	{
+		if (event.key.code == sf::Mouse::Left)
+		{
+			isPressed = 1;
+			isSliding = 1;
+		}
+	}
+}

@@ -152,10 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Button_menu.cpp" />
+    <ClCompile Include="ButtonMenu.cpp" />
+    <ClCompile Include="dirreader.cpp" />
     <ClCompile Include="ExitStage.cpp" />
     <ClCompile Include="GameplayStage.cpp" />
     <ClCompile Include="GameStage.cpp" />
+    <ClCompile Include="lvlbutton.cpp" />
     <ClCompile Include="lvlsetstage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuStage.cpp" />
@@ -166,11 +168,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button_menu.h" />
+    <ClInclude Include="ButtonMenu.h" />
+    <ClInclude Include="dirreader.h" />
     <ClInclude Include="ExitStage.h" />
     <ClInclude Include="GameplayStage.h" />
     <ClInclude Include="GameStage.h" />
     <ClInclude Include="LibsAndDeclarations.h" />
+    <ClInclude Include="lvlbutton.h" />
     <ClInclude Include="lvlsetstage.h" />
     <ClInclude Include="MenuStage.h" />
     <ClInclude Include="ResourceManager.h" />
