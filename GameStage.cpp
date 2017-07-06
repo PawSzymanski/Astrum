@@ -40,10 +40,16 @@ bool GameStage::run(float dt, sf::RenderWindow &window)
 
 void GameStage::setEvents(sf::Event & event)
 {
+    if(active_stage)
 	active_stage->eventsManage(event);
 }
 
 void GameStage::set()
 {
-	next_stage = this;
+    next_stage = this;
+}
+
+void GameStage::eventsManage(sf::Event &)
+{
+
 }

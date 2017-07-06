@@ -1,2 +1,9 @@
-﻿ExitStage.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl GameStage::eventsManage(class sf::Event &)" (?eventsManage@GameStage@@UEAAXAEAVEvent@sf@@@Z)
-C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe : fatal error LNK1120: 1 unresolved externals
+﻿  Button_menu.cpp
+  ResourceManager.cpp
+  Generating code
+  7 of 129 functions ( 5.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
+  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
