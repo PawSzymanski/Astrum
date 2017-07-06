@@ -156,6 +156,7 @@
     <ClCompile Include="ExitStage.cpp" />
     <ClCompile Include="GameplayStage.cpp" />
     <ClCompile Include="GameStage.cpp" />
+    <ClCompile Include="lvlsetstage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuStage.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="GameplayStage.h" />
     <ClInclude Include="GameStage.h" />
     <ClInclude Include="LibsAndDeclarations.h" />
+    <ClInclude Include="lvlsetstage.h" />
     <ClInclude Include="MenuStage.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="roundrect.h" />
