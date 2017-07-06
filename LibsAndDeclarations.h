@@ -8,4 +8,3 @@
 
 #include "2d_phisLIB/phisics_2d.h"
 #include "roundrect.h"
-#include "dirreader.h"

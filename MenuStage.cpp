@@ -12,8 +12,7 @@ MenuStage::~MenuStage()
 
 bool MenuStage::init()
 {
-	if (!font.loadFromFile("resources/sansation.ttf"))
-		return false;
+    font = ResourcesManager::getInstanceRef().font;
 
 	start_message.setFont(font);
 	start_message.setCharacterSize(40);
@@ -41,11 +40,10 @@ bool MenuStage::init()
 
 bool MenuStage::update(float dt)
 {
-
 	return true;
 }
 
-void MenuStage::draw(sf::RenderWindow &window)
+void MenuStage::render(sf::RenderWindow &window)
 {
 	window.clear(sf::Color(255, 0, 0));
 	start_message.setPosition(window.getSize().x / 2, window.getSize().y / 2 - window.getSize().y / 10);
@@ -58,8 +56,9 @@ void MenuStage::draw(sf::RenderWindow &window)
 
 void MenuStage::release()
 {
-	//message = sf::Text();
-	font = sf::Font();
+    start_message = sf::Text();
+    options_message = sf::Text();
+    exit_message = sf::Text();
 }
 
 void MenuStage::returnFun()
@@ -68,7 +67,7 @@ void MenuStage::returnFun()
 
 	if (actionCode == 0)
 	{
-		resources_manager.gameplay_stage.set();
+        resources_manager.lvl_set_stage.set();
 	}
 	else if (actionCode == 1)
 	{
@@ -86,7 +85,7 @@ void MenuStage::showBar()
 }
 
 
-void MenuStage::eventsManage(sf::Event & event)
+void MenuStage::input(sf::Event & event)
 {
 	auto &resources_manager = ResourcesManager::getInstanceRef();
 	

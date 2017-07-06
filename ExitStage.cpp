@@ -27,14 +27,16 @@ bool ExitStage::update(float dt)
 	return true;
 }
 
-void ExitStage::draw(sf::RenderWindow & window)
+void ExitStage::render(sf::RenderWindow & window)
 {
+    float c = 255.0f - (timer * 255.0f);
+    window.clear(sf::Color(c,c,c));
 }
 
 void ExitStage::release()
 {
 }
 
-void ExitStage::eventsManage(sf::Event & event)
+void ExitStage::input(sf::Event & event)
 {
 }

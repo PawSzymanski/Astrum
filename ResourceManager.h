@@ -3,6 +3,7 @@
 #include "MenuStage.h"
 #include "GameplayStage.h"
 #include "ExitStage.h"
+#include "lvlsetstage.h"
 
 class ResourcesManager
 {
@@ -23,8 +24,10 @@ public:
 	static void deleteInstance();
 
 public:
+    sf::Font font;
 	sf::RenderWindow window;
 	MenuStage menu_stage;
+    LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
 	ExitStage exit_stage;
 };

@@ -29,7 +29,7 @@ bool GameplayStage::update(float dt)
 	return true;
 }
 
-void GameplayStage::draw(sf::RenderWindow &window)
+void GameplayStage::render(sf::RenderWindow &window)
 {
 	window.setView(camera);
 	window.clear(sf::Color(0, 255, 0));
@@ -44,6 +44,6 @@ void GameplayStage::release()
 	//ecs_gameplay_ptr.reset();
 }
 
-void GameplayStage::eventsManage(sf::Event & event)
+void GameplayStage::input(sf::Event & event)
 {
 }

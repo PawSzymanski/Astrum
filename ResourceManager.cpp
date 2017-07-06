@@ -10,6 +10,8 @@ ResourcesManager::ResourcesManager()
 	window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close, settings);
 
 	window.setVerticalSyncEnabled(true);
+
+    font.loadFromFile("resources/sansation.ttf");
 }
 
 ResourcesManager::~ResourcesManager()

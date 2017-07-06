@@ -1,52 +1,80 @@
 #include "LibsAndDeclarations.h"
-
 #include "ResourceManager.h"
-int main(void)
+#include "sstream"
+
+void input();
+bool update();
+void render();
+
+int main()
 {
-// Getting resources_manager reference
-auto p = ResourcesManager::getInstance();
+    auto &resource_manager = ResourcesManager::getInstanceRef();
 
-auto &resources_manager = ResourcesManager::getInstanceRef();
-// Setting first (MenuStage) state
-resources_manager.menu_stage.set();
+    resource_manager.menu_stage.set();
 
-sf::Clock clock;
-bool is_playing = false;
-while (resources_manager.window.isOpen())
-{
-	// EVENTS
-	{
-		sf::Event event;
-		while (resources_manager.window.pollEvent(event))
-		{
-			// Window closed 
-			if (event.type == sf::Event::Closed)
-			{
-				resources_manager.exit_stage.set();
-				break;
-			}
-            GameStage::setEvents(event);
-		}
-	}
+    while(resource_manager.window.isOpen())
+    {
+        if(!GameStage::stage_switch())
+            resource_manager.exit_stage.set();
 
-	// UPDATE
-	{
-		float delta_time = clock.restart().asSeconds();
-		resources_manager.window.clear(sf::Color(0, 0, 0));
-		if (GameStage::run(delta_time, resources_manager.window))
-		{
-			resources_manager.window.display();
-		}
-		else
-		{
-			resources_manager.window.close();
-			break;
-		}
-	}
+        input();
+
+        if(!update())
+            resource_manager.window.close();
+
+        render();
+    }
+
+    ResourcesManager::deleteInstance();
+    return 0;
 }
 
-// Deleteing singleton instance...
-ResourcesManager::deleteInstance();
+void input()
+{
+    auto & resource = ResourcesManager::getInstanceRef();
+    sf::Event ev;
+    while(resource.window.pollEvent(ev))
+    {
+        if(ev.type == sf::Event::Closed)
+            resource.exit_stage.set();
 
-return 0;
+        GameStage::stage_input(ev);
+    }
+}
+
+bool update()
+{
+    const float dt = 0.01;
+    static sf::Clock clock;
+    static sf::Time time = sf::Time::Zero;
+
+    time += clock.restart();
+    while(time.asSeconds() >= dt)
+    {
+        if(!GameStage::stage_update(dt))
+            return false;
+
+        time -= sf::seconds(dt);
+    }
+
+    return true;
+}
+
+void render()
+{
+    static sf::Clock clock;
+    auto & resource = ResourcesManager::getInstanceRef();
+    sf::Text fps;
+    fps.setCharacterSize(16);
+    fps.setFillColor(sf::Color::Black);
+    fps.setFont(resource.font);
+    fps.setPosition(1,1);
+    std::stringstream ss;
+    ss<< ( sf::seconds(1.0f) / clock.restart());
+    fps.setString(ss.str());
+
+    resource.window.clear(sf::Color::Cyan);
+    GameStage::stage_render(resource.window);
+    resource.window.draw(fps);
+    resource.window.display();
 }
