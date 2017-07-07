@@ -30,4 +30,8 @@ public:
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
 	ExitStage exit_stage;
+	Container vertCont;
+	entityx::EntityX ex;
+	Phisics_2D phisics;
+	sf::Vector2f gravity;
 };

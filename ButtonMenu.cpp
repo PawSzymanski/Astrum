@@ -23,7 +23,6 @@ void ButtonMenu::init(sf::Font &font, int chSize, sf::Vector2f position, sf::Col
 	rect.setFillColor(sf::Color(0, 0, 0, 0));
 	rect.setOutlineColor(sf::Color::White);
 	rect.setOutlineThickness(8);
-	
 }
 
 

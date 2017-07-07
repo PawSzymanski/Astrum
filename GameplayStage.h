@@ -2,6 +2,9 @@
 
 #include "LibsAndDeclarations.h"
 #include "GameStage.h"
+#include "engine_system.h"
+#include "player_input_system.h"
+#include "render_system.h"
 
 class GameplayStage : public GameStage
 {

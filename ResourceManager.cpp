@@ -2,7 +2,7 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() 
+ResourcesManager::ResourcesManager() : gravity(0.0f, 9.8), phisics(ex, vertCont, gravity)
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
