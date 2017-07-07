@@ -7,7 +7,7 @@ ResourcesManager::ResourcesManager()
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	
-	window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close, settings);
+    window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize, settings);
 
 	window.setVerticalSyncEnabled(true);
 

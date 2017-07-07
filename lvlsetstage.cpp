@@ -1,3 +1,10 @@
+/*
+ *  lvlsetstage.cpp
+ *
+ *  Created: 2017-07-06
+ *   Author: Patryk Wojtanowski
+ */
+
 #include "lvlsetstage.h"
 #include "ResourceManager.h"
 
@@ -68,7 +75,7 @@ void LvlSetStage::input(sf::Event &event)
         if(button[i].input(event))
         {
             slide_out = true;
-            next_stage = &(ResourcesManager::getInstanceRef().gameplay_stage);
+            next_stage = &(ResourcesManager::getInstanceRef().creator_stage);
         }
 }
 

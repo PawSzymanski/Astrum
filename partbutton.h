@@ -1,31 +1,27 @@
 /*
- *  lvlbutton.h
+ *  partbutton.h
  *
- *  Created: 2017-07-06
+ *  Created: 2017-07-07
  *   Author: Patryk Wojtanowski
  */
 
-#ifndef LVLBUTTON_H
-#define LVLBUTTON_H
+#ifndef PARTBUTTON_H
+#define PARTBUTTON_H
 
 #include "LibsAndDeclarations.h"
-#include <sstream>
 
-class LvlButton : public sf::Drawable
+class PartButton : public sf::Drawable
 {
-    sf::Text num, text;
+    sf::Text text;
     RoundRect rect;
     sf::Vector2f pos;
 
     bool has_mouse;
-    bool clicked;
-public:
-    bool highlighted;
 
 public:
-    LvlButton();
+    PartButton();
 
-    void init(sf::Vector2f pos, int num, std::string text, sf::Font & font);
+    void init(sf::Vector2f pos, std::string text, sf::Font & font);
     bool input(sf::Event & ev);
     void setPosition(const sf::Vector2f& pos);
     sf::Vector2f getPosition();
@@ -33,4 +29,4 @@ public:
     void release();
 };
 
-#endif // LVLBUTTON_H
+#endif // PARTBUTTON_H
