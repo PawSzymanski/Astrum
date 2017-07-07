@@ -1,3 +1,10 @@
+/*
+ *  lvlsetstage.h
+ *
+ *  Created: 2017-07-06
+ *   Author: Patryk Wojtanowski
+ */
+
 #ifndef LVLSETSTAGE_H
 #define LVLSETSTAGE_H
 

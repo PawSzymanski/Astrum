@@ -1,3 +1,10 @@
+/*
+ *  roundrect.h
+ *
+ *  Created: 2017-07-06
+ *   Author: Patryk Wojtanowski
+ */
+
 #ifndef ROUNDRECT_H
 #define ROUNDRECT_H
 

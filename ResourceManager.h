@@ -4,6 +4,8 @@
 #include "GameplayStage.h"
 #include "ExitStage.h"
 #include "lvlsetstage.h"
+#include "creatorstage.h"
+#include "2d_phisLIB\Container.h"
 
 class ResourcesManager
 {
@@ -29,6 +31,7 @@ public:
 	MenuStage menu_stage;
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
+    CreatorStage creator_stage;
 	ExitStage exit_stage;
 	Container vertCont;
 	entityx::EntityX ex;

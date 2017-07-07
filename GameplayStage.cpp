@@ -29,6 +29,7 @@ bool GameplayStage::init()
 
 bool GameplayStage::update(float dt)
 {
+	dtime = dt;
 	auto &ex = ResourcesManager::getInstanceRef().ex;
 	updateCamera();
 
@@ -38,15 +39,15 @@ bool GameplayStage::update(float dt)
 	
 	
 	//render
-	ex.systems.update<render_system>(dt);
+	
 	return true;
 }
 
 void GameplayStage::render(sf::RenderWindow &window)
 {
-	//auto &ex = ResourcesManager::getInstanceRef().ex;
+	auto &ex = ResourcesManager::getInstanceRef().ex;
 	window.setView(camera);
-	
+	ex.systems.update<render_system>(dtime);
 }
 
 void GameplayStage::release()

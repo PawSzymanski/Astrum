@@ -38,7 +38,7 @@ void player_input_system::init()
 
 
 	auto poly1 = ex.entities.create();
-	//phisics.createPolygon(poly1, sf::Vector2f(8.75, 10.15), sf::Vector2f(0, 0), 0, 0, 1);
+	phisics.createPolygon(poly1, sf::Vector2f(8.75, 10.15), sf::Vector2f(0, 0), 0, 0, 1);
 }
 
 

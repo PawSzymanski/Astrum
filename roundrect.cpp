@@ -1,3 +1,10 @@
+/*
+ *  roundrect.cpp
+ *
+ *  Created: 2017-07-06
+ *   Author: Patryk Wojtanowski
+ */
+
 #include "roundrect.h"
 
 RoundRect::RoundRect()

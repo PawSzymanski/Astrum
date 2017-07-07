@@ -16,7 +16,7 @@ public:
 
 private:
 	sf::View camera;
-
+	float dtime;
 	void updateCamera();
 
 public:

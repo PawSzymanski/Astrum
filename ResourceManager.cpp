@@ -7,11 +7,13 @@ ResourcesManager::ResourcesManager() : gravity(0.0f, 9.8), phisics(ex, vertCont,
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	
-	window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close, settings);
+    window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize, settings);
 
 	window.setVerticalSyncEnabled(true);
 
     font.loadFromFile("resources/sansation.ttf");
+
+	phisics.init();
 }
 
 ResourcesManager::~ResourcesManager()

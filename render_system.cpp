@@ -21,6 +21,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	for (auto entity : en.entities_with_components(vArray, trans))
 	{
 		win.draw(vArray->vert, trans->trans);
+		std::cout << "array disp";
 	}
 	for (auto entity : en.entities_with_components(circ, pos, line, trans))
 	{
@@ -31,11 +32,13 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		c_shape.setOrigin(sf::Vector2f(circ->r, circ->r));
 		win.draw(c_shape);
 		win.draw(line->line, trans->trans);
+		std::cout << "cir disp";
 	}
 	for (auto entity : en.entities_with_components(line))
 	{
 		//std::cout << "line" << std::endl;
 		win.draw(line->line);
+		std::cout << "line disp";
 	}
 
 	win.display();

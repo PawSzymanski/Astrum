@@ -65,7 +65,7 @@ void render()
     static sf::Clock clock;
     auto & resource = ResourcesManager::getInstanceRef();
     sf::Text fps;
-    fps.setCharacterSize(16);
+    fps.setCharacterSize(6);
     fps.setFillColor(sf::Color::Black);
     fps.setFont(resource.font);
     fps.setPosition(1,1);
@@ -77,6 +77,6 @@ void render()
 
     resource.window.clear(sf::Color::Cyan);
     GameStage::stage_render(resource.window);
-    resource.window.draw(fps);
+   // resource.window.draw(fps);
     resource.window.display();
 }
