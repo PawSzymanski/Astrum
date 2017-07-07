@@ -17,11 +17,11 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	Joint::Handle joint;
 
 	win.clear(sf::Color::Blue);
-
+	//std::cout << "render gameplpay, entity size: " << en.size() << std::endl;
 	for (auto entity : en.entities_with_components(vArray, trans))
 	{
 		win.draw(vArray->vert, trans->trans);
-		std::cout << "array disp";
+		//std::cout << "array disp  "<< vArray->vert.getVertexCount();
 	}
 	for (auto entity : en.entities_with_components(circ, pos, line, trans))
 	{
@@ -38,7 +38,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	{
 		//std::cout << "line" << std::endl;
 		win.draw(line->line);
-		std::cout << "line disp";
+		//std::cout << "line disp";
 	}
 
 	win.display();

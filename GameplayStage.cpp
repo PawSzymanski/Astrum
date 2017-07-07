@@ -12,6 +12,7 @@ GameplayStage::~GameplayStage()
 
 void GameplayStage::updateCamera()
 {
+	//camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 }
 
 bool GameplayStage::init()
@@ -23,7 +24,8 @@ bool GameplayStage::init()
 	ex.systems.add<engine_system>();
 	ex.systems.add<player_input_system>();
 	ex.systems.add<render_system>(window);
-
+	
+	ex.systems.update<player_input_system>(dtime);
 	return true;
 }
 
@@ -31,12 +33,14 @@ bool GameplayStage::update(float dt)
 {
 	dtime = dt;
 	auto &ex = ResourcesManager::getInstanceRef().ex;
+	auto &phisics = ResourcesManager::getInstanceRef().phisics;
 	updateCamera();
 
 	//if (ecs_gameplay_ptr->update(dt)) return true;
 
-	ex.systems.update<player_input_system>(dt);
 	
+	phisics.update(dt);
+	ex.systems.update<engine_system>(dt);
 	
 	//render
 	
