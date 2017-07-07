@@ -5,7 +5,7 @@
 #include "ExitStage.h"
 #include "lvlsetstage.h"
 #include "creatorstage.h"
-#include "2d_phisLIB\Container.h"
+#include "2d_phisLIB/Container.h"
 
 class ResourcesManager
 {

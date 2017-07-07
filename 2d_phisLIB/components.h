@@ -7,7 +7,7 @@
 
 struct Position : public entityx::Component<Position>
 {
-	Position(sf::Vector2f & pos) 
+    Position(const sf::Vector2f & pos)
 		:pos(pos), prevPos(pos) {}
 	sf::Vector2f pos;
 	sf::Vector2f prevPos;
