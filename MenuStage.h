@@ -14,8 +14,8 @@ public:
 
 private:
 	
-	bool isPressed, isSliding;
-	uint8_t actionCode;
+	bool isPressed;
+	uint8_t actionCode, isSliding;
 	float buttonSpeed;
 	sf::Font font;
 	ButtonMenu startButton,
@@ -35,4 +35,5 @@ public:
 private:
 	void showBar();
 	void slidingRight(float dt);
+	void slidingLeft(float dt);
 };

@@ -17,9 +17,9 @@ bool LvlSetStage::init()
 
     auto & resource = ResourcesManager::getInstanceRef();
 
-    button[0].init(sf::Vector2f(-550,600/2), 1, "sample text 1", resource.font);
-    button[1].init(sf::Vector2f(-350,600/2), 2, "sample text 2", resource.font);
-    button[2].init(sf::Vector2f(-150,600/2), 3, "sample text 3", resource.font);
+    button[0].init(sf::Vector2f(1450,600/2), 1, "sample text 1", resource.font);
+    button[1].init(sf::Vector2f(1450,600/2), 2, "sample text 2", resource.font);
+    button[2].init(sf::Vector2f(1450,600/2), 3, "sample text 3", resource.font);
 
     slide_in = true;
     slide_out = false;
@@ -76,13 +76,14 @@ bool LvlSetStage::update(float dt)
 {
     if(slide_in)
     {
-        float pos_x[3] = {450,650,850};
+        float pos_x[3] =  {430, 630, 830};
             bool in_pos = true;
         for(int i=0; i<3; ++i)
         {
             sf::Vector2f pos = button[i].getPosition();
             float dp = pos.x - pos_x[i] ;
-            if(dp < -40)
+			
+            if(dp > 5)
             {
                 button[i].setPosition(pos + sf::Vector2f(-dp/50,0));
                 in_pos = false;
@@ -93,15 +94,18 @@ bool LvlSetStage::update(float dt)
     }
     if(slide_out)
     {
-       float pos_x[3] = {1450,1650,1850};
+		
+       float pos_x[3] = { -700,-950,-1200 };
         bool in_pos = true;
         for(int i=0; i<3; ++i)
         {
             sf::Vector2f pos = button[i].getPosition();
-            float dp = pos.x - pos_x[i] ;
-            if(dp < -40)
+            float dp = pos.x + pos_x[i] ;
+			std::cout << "DP: " << dp << std::endl;
+
+            if(dp > -2000)
             {
-                button[i].setPosition(pos + sf::Vector2f(-dp/50,0));
+                button[i].setPosition(pos - sf::Vector2f(-dp/50,0));
                 in_pos = false;
             }
         }

@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 
 
-MenuStage::MenuStage() : actionCode(0), startButton(0), optionsButton(1), exitButton(2), isPressed(0), buttonSpeed(0.0f)
+MenuStage::MenuStage() : actionCode(0), startButton(0), optionsButton(1), exitButton(2), isPressed(0), buttonSpeed(0.0f), isSliding(2)
 {
 }
 
@@ -37,16 +37,40 @@ void MenuStage::slidingRight(float dt)
 		std::cout << " x:" <<startButton.rect.getPosition().x << std::endl;
 	}
 	else {
+		this->isSliding = 2;
+	}
+}
+//ZROBIC PRZESUWANIE W LEWO
+void MenuStage::slidingLeft(float dt)
+{
+	if (startButton.rect.getPosition().x > windowSize.y / 2)
+	{
+		buttonSpeed += 30;
+		startButton.rect.setPosition(startButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
+		startButton.text.setPosition(startButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
+		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
+		optionsButton.text.setPosition(optionsButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
+		exitButton.rect.setPosition(exitButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+		exitButton.text.setPosition(exitButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+		std::cout << " x:" << startButton.rect.getPosition().x << std::endl;
+	}
+	else {
 		isSliding = 0;
 	}
 }
 
+
 bool MenuStage::update(float dt)
 {
 	auto &resources_manager = ResourcesManager::getInstanceRef();
-	if (isSliding)
+	if (isSliding == 1)
 	{
 		slidingRight(dt);
+	}
+	else if (isSliding == 2)
+	{
+		slidingLeft(dt);
+		std::cout << "issliding 2" << std::endl;
 	}
 	else if(isPressed)
 	{
@@ -82,18 +106,12 @@ void MenuStage::render(sf::RenderWindow &window)
 	windowSize = window.getSize();
 	window.clear(sf::Color(0, 0, 0));
 
-	//startButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2 - window.getSize().y / 10);
-	//startButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2 - window.getSize().y / 10);
 	window.draw(startButton.text);
 	window.draw(startButton.rect);
 
-	//optionsButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-	//optionsButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 	window.draw(optionsButton.text);
 	window.draw(optionsButton.rect);
 
-	//exitButton.text.setPosition(window.getSize().x / 2, window.getSize().y / 2 + window.getSize().y / 10);
-	//exitButton.rect.setPosition(window.getSize().x / 2, window.getSize().y / 2 + window.getSize().y / 10);
 	window.draw(exitButton.text);
 	window.draw(exitButton.rect);
 }
@@ -170,7 +188,7 @@ void MenuStage::input(sf::Event & event)
 		if (event.key.code == sf::Mouse::Left)
 		{
 			isPressed = 1;
-			isSliding = 1;
+			isSliding = 2;
 		}
 	}
 }
