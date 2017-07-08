@@ -38,7 +38,6 @@ bool GameplayStage::update(float dt)
 
 	//if (ecs_gameplay_ptr->update(dt)) return true;
 
-	
 	phisics.update(dt);
 	ex.systems.update<engine_system>(dt);
 	
@@ -50,6 +49,7 @@ bool GameplayStage::update(float dt)
 void GameplayStage::render(sf::RenderWindow &window)
 {
 	auto &ex = ResourcesManager::getInstanceRef().ex;
+	
 	window.setView(camera);
 	ex.systems.update<render_system>(dtime);
 }
