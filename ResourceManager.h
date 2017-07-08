@@ -6,6 +6,7 @@
 #include "lvlsetstage.h"
 #include "creatorstage.h"
 #include "2d_phisLIB/Container.h"
+#include "configparser.h"
 
 class ResourcesManager
 {
@@ -18,7 +19,10 @@ private:
 	~ResourcesManager();
 
 private:
-	static ResourcesManager *instance;
+    static ResourcesManager *instance;
+
+private:
+    void loadContainer();
 
 public:
 	static ResourcesManager* getInstance();

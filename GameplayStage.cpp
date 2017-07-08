@@ -21,10 +21,7 @@ bool GameplayStage::init()
 	auto &ex = ResourcesManager::getInstanceRef().ex;
 	auto &window = ResourcesManager::getInstanceRef().window;
 	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
-	ex.systems.add<engine_system>();
-	ex.systems.add<player_input_system>();
-	ex.systems.add<render_system>(window);
-	
+
 	ex.systems.update<player_input_system>(dtime);
 	return true;
 }
@@ -56,9 +53,11 @@ void GameplayStage::render(sf::RenderWindow &window)
 
 void GameplayStage::release()
 {
-	//ecs_gameplay_ptr.reset();
+
 }
 
 void GameplayStage::input(sf::Event & event)
 {
+    if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        ResourcesManager::getInstanceRef().lvl_set_stage.set();
 }

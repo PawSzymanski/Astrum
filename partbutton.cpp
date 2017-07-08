@@ -6,14 +6,18 @@
  */
 
 #include "partbutton.h"
+#include "ResourceManager.h"
 
 PartButton::PartButton()
+    :v_array(nullptr)
 {
 
 }
 
-void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font)
+void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font, std::string name)
 {
+    part_name = name;
+    rot = 0;
     this->pos = pos;
     rect.corner_radius = 6;
     rect.size = sf::Vector2f(60,60);
@@ -27,6 +31,11 @@ void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font)
     this->text.setCharacterSize(18);
     this->text.setFont(font);
     this->text.setString(text);
+
+    auto & resource = ResourcesManager::getInstanceRef();
+    v_array = &(resource.vertCont.getPoly(name));
+
+    assert(v_array);
 }
 
 bool PartButton::input(sf::Event &ev)
@@ -44,24 +53,49 @@ bool PartButton::input(sf::Event &ev)
     return false;
 }
 
+void PartButton::update(float dt)
+{
+    rot += 50*dt;
+}
+
 void PartButton::setPosition(const sf::Vector2f &pos)
 {
 
 }
 
-sf::Vector2f PartButton::getPosition()
+sf::Vector2f PartButton::getPosition() const
 {
 
+}
+
+const std::string &PartButton::getName() const
+{
+    return part_name;
 }
 
 void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(rect);
     target.draw(text);
+
+    sf::Transform trans;
+    trans.translate(pos+ sf::Vector2f(30,30));
+    trans.scale(30,30);
+    trans.rotate(rot);
+
+    if(v_array == nullptr)
+    {
+        assert(false);
+    }
+
+    //std::cout<<(*v_array)[0].position.x<<std::endl;
+    target.draw(*v_array, trans);
 }
 
 void PartButton::release()
 {
     pos = sf::Vector2f(0,0);
     text = sf::Text();
+    rot = 0;
+    part_name = std::string();
 }

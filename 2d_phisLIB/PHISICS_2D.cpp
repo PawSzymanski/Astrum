@@ -46,7 +46,7 @@ void Phisics_2D::createCircle(entityx::Entity en, sf::Vector2f pos, sf::Vector2f
 /*
 *en, pos, vel, rot, mass, polyindex
 */
-void Phisics_2D::createPolygon(entityx::Entity en, sf::Vector2f pos,sf::Vector2f vel, float rotation, float mass, int polyIndex)
+void Phisics_2D::createPolygon(entityx::Entity en, sf::Vector2f pos,sf::Vector2f vel, float rotation, float mass, const std::string & polyName)
 {
     en.assign<Rotation>(rotation);
     en.assign<Position>(pos);
@@ -58,7 +58,7 @@ void Phisics_2D::createPolygon(entityx::Entity en, sf::Vector2f pos,sf::Vector2f
     en.assign<Mass>(mass);
     en.assign<MOfInertia>(mass);
     en.assign<Friction>(0.7);
-    en.assign<VertexArray>(cont.vertexArrays[polyIndex], cont.normals[polyIndex]);
+    en.assign<VertexArray>(cont.getPoly(polyName), cont.getNormals(polyName));
     en.assign<Type>(Type::POLYGON);
     en.assign<IsResting>();
 }

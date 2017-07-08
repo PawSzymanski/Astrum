@@ -17,14 +17,20 @@ class PartButton : public sf::Drawable
     sf::Vector2f pos;
 
     bool has_mouse;
+    sf::VertexArray * v_array;
+    float rot;
+
+    std::string part_name;
 
 public:
     PartButton();
 
-    void init(sf::Vector2f pos, std::string text, sf::Font & font);
+    void init(sf::Vector2f pos, std::string text, sf::Font & font, std::string name);
     bool input(sf::Event & ev);
+    void update(float dt);
     void setPosition(const sf::Vector2f& pos);
-    sf::Vector2f getPosition();
+    sf::Vector2f getPosition() const;
+    const std::string & getName() const;
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void release();
 };
