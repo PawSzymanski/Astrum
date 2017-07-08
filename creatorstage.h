@@ -19,8 +19,14 @@ class CreatorStage : public GameStage
     PartButton partbuttons[4];
     ButtonMenu start_button;
     sf::Text esc_text;
+    sf::RectangleShape mask_rect;
 
     bool fade_in, fade_out;
+    float timer;
+
+    GameStage * next;
+    sf::VertexArray * current_body;
+    sf::Transform body_transform;
 
 public:
     CreatorStage();

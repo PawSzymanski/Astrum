@@ -6,9 +6,12 @@ Container::Container()
 {
 }
 
-void Container::addPoly(sf::VertexArray & v, int size)
+void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 {
 	std::vector <sf::Vector2f> n;
+
+    indexes[name] = vertexArrays.size();
+
 	vertexArrays.push_back(v);
 	for (int i = 0; i <size; ++i)
 	{										
@@ -23,8 +26,29 @@ void Container::addPoly(sf::VertexArray & v, int size)
 	}
 
 	normals.push_back(n);
+    std::cout << " size :"  <<normals[0].size() << std::endl;
+}
 
-	std::cout << " size :"  <<normals[0].size() << std::endl;
+sf::VertexArray & Container::getPoly(const std::string &name)
+{
+    if(indexes.find(name) == indexes.end())
+    {
+        std::cout <<"zla nazwa: "<<name<<std::endl;
+        assert(false);
+    }
+
+    return vertexArrays[indexes[name]];
+}
+
+std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
+{
+    if(indexes.find(name) == indexes.end())
+    {
+        std::cout <<"zla nazwa: "<<name<<std::endl;
+        assert(false);
+    }
+
+    return normals[indexes[name]];
 }
 
 Container::~Container()

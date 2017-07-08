@@ -18,6 +18,7 @@ class LvlSetStage :public GameStage
     bool slide_in, slide_out;
     GameStage * next_stage;
     sf::Text esc_text;
+    float timer;
 
 public:
     LvlSetStage();

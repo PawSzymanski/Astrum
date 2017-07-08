@@ -21,6 +21,7 @@ LvlSetStage::~LvlSetStage()
 bool LvlSetStage::init()
 {
     next_stage = nullptr;
+    timer = 0;
 
     auto & resource = ResourcesManager::getInstanceRef();
 
@@ -55,7 +56,6 @@ void LvlSetStage::input(sf::Event &event)
         {
             std::cout<<"left"<<std::endl;
             high_nr--;
-
         }
         else if( event.key.code == sf::Keyboard::Right)
         {
@@ -83,6 +83,11 @@ bool LvlSetStage::update(float dt)
 {
     if(slide_in)
     {
+        sf::Color col = esc_text.getFillColor();
+        col.a = (timer * 255.0f > 255.0f)? 255 : timer*255.0f;
+        esc_text.setFillColor(col);
+        timer = ((timer + dt/2) > 1.0f)? 1.0f: (timer + dt/2);
+                ;
         float pos_x[3] =  {430, 630, 830};
             bool in_pos = true;
         for(int i=0; i<3; ++i)
@@ -101,8 +106,12 @@ bool LvlSetStage::update(float dt)
     }
     if(slide_out)
     {
-		
-       float pos_x[3] = { -700,-950,-1200 };
+        sf::Color col = esc_text.getFillColor();
+        col.a = (timer * 255.0f < 0.0f)? 0 : timer*255.0f;
+        esc_text.setFillColor(col);
+        timer = ((timer - dt/2) < 0.0f)? 0 : (timer - dt/2);
+
+        float pos_x[3] = { -700,-950,-1200 };
         bool in_pos = true;
         for(int i=0; i<3; ++i)
         {
