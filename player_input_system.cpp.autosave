@@ -47,24 +47,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	
 	}
-//	sf::VertexArray potato(sf::TriangleFan, 6);
-
-//	potato[0].position = sf::Vector2f(-0.4, -0.5);
-//	potato[0].color = sf::Color::Yellow;
-//	potato[1].position = sf::Vector2f(0.6, -0.5);
-//	potato[1].color = sf::Color::Yellow;
-//	potato[2].position = sf::Vector2f(0.8, -0.2);
-//	potato[2].color = sf::Color::Yellow;
-//	potato[3].position = sf::Vector2f(0.3, 0.4);
-//	potato[3].color = sf::Color::Yellow;
-//	potato[4].position = sf::Vector2f(-0.7, 0.9);
-//	potato[4].color = sf::Color::Yellow;
-//	potato[5].position = sf::Vector2f(-0.8, -0.0);
-//	potato[5].color = sf::Color::Yellow;
-
-//	auto &vertCont = ResourcesManager::getInstanceRef().vertCont;
-
-//    vertCont.addPoly(potato, 6, "potato");
 
 	auto player1 = en.create();
     phisics.createPolygon(player1, sf::Vector2f(1.5, 9), sf::Vector2f(0, 0), 0, 1, "TRIANGLE_BODY");
