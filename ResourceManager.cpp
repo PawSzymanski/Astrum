@@ -33,6 +33,11 @@ void ResourcesManager::loadContainer()
     sf_colors["RED"] = sf::Color::Red;
     sf_colors["MAGENTA"] = sf::Color::Magenta;
     sf_colors["CYAN"] = sf::Color::Cyan;
+    sf_colors["BLUE"] = sf::Color::Blue;
+    sf_colors["GREEN"] = sf::Color::Green;
+    sf_colors["WHITE"] = sf::Color::White;
+    sf_colors["YELLOW"] = sf::Color::Yellow;
+
 
     std::string dir("resources/parts/");
     std::vector < std::string > filenames = {
@@ -40,6 +45,9 @@ void ResourcesManager::loadContainer()
         "long_body.cfg",
         "cobra_body.cfg",
         "large_engine.cfg",
+        "small_engine.cfg",
+        "landing_legs.cfg",
+        "crane.cfg",
         "wall.cfg"
     };
 
