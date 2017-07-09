@@ -44,8 +44,9 @@ bool GameplayStage::update(float dt)
 
 	//if (ecs_gameplay_ptr->update(dt)) return true;
 
-	(*phisics_ptr).update(dt);
+	
 	(*ex_ptr).systems.update<engine_system>(dt);
+	(*phisics_ptr).update(dt);
 	
     //render
 
@@ -62,6 +63,7 @@ void GameplayStage::render(sf::RenderWindow &window)
 void GameplayStage::release()
 {
 	ex_ptr.reset();
+	phisics_ptr.reset();
 }
 
 void GameplayStage::input(sf::Event & event)

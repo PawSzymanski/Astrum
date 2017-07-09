@@ -41,7 +41,11 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		//std::cout << "line disp";
 	}
 
+
+
+
 	win.display();
+
 }
 render_system::~render_system()
 {

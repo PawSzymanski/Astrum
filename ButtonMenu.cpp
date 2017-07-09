@@ -36,13 +36,13 @@ void ButtonMenu::init(sf::Font &font, int chSize, sf::Vector2f position, sf::Col
 bool ButtonMenu::input(sf::Event &ev)
 {
 
-    std::cout<<"hasmouse "<< has_mouse<<std::endl;
+   /// std::cout<<"hasmouse "<< has_mouse<<std::endl;
     rect.setOutlineThickness((has_mouse)? 15 : 10);
 
     if(ev.type == sf::Event::MouseMoved)
     {
-        has_mouse = (ev.mouseMove.x > rect.getPosition().x && ev.mouseMove.x < rect.getPosition().x + rect.size.x &&
-                ev.mouseMove.y > rect.getPosition().y && ev.mouseMove.y < rect.getPosition().y + + rect.size.y);
+        has_mouse = (ev.mouseMove.x > rect.getPosition().x - 80 && ev.mouseMove.x < rect.getPosition().x + 80 &&
+                ev.mouseMove.y > rect.getPosition().y - 20 && ev.mouseMove.y < rect.getPosition().y + 40);
     }
     else if(ev.type == sf::Event::MouseButtonReleased && has_mouse)
         return true;

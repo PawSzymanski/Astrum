@@ -148,6 +148,22 @@ void MenuStage::input(sf::Event & event)
 {
 	auto &resources_manager = ResourcesManager::getInstanceRef();
 
+	if (startButton.input(event))
+	{
+		actionCode = 0;
+		showBar();
+	}
+	else if (optionsButton.input(event))
+	{
+		actionCode = 1;
+		showBar();
+	}
+	else if (exitButton.input(event))
+	{
+		actionCode = 2;
+		showBar();
+	}
+
 	if (event.type == sf::Event::KeyPressed)
 	{
 		
@@ -184,12 +200,13 @@ void MenuStage::input(sf::Event & event)
 			isSliding = 1;
 		}
 	}
-	else if (event.type == sf::Event::MouseButtonPressed)
+	if (event.type == sf::Event::MouseButtonReleased)
 	{
 		if (event.key.code == sf::Mouse::Left)
 		{
-			isPressed = 1;
-			isSliding = 2;
+			isPressed = true;
+
+			isSliding = 1;
 		}
 	}
 }
