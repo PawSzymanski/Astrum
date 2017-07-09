@@ -33,7 +33,15 @@ bool GameplayStage::init()
 
 
 	(*ex_ptr).systems.update<player_input_system>(dtime);
-	return true;
+
+    fps_text.setCharacterSize(18);
+    fps_text.setFillColor(sf::Color::Black);
+    fps_text.setFont(ResourcesManager::getInstanceRef().font);
+    fps_text.setPosition(sf::Vector2f(60,20));
+    fps_text.setString("NULL");
+
+
+    return true;
 }
 
 bool GameplayStage::update(float dt)
@@ -56,12 +64,22 @@ bool GameplayStage::update(float dt)
 
 void GameplayStage::render(sf::RenderWindow &window)
 {
+    static sf::Clock fps_clock;
+    std::stringstream ss;
+    float fps_f = (1.0f/fps_clock.restart().asSeconds());
+    ss<<fps_f;
+    fps_text.setString(ss.str());
+
 	window.setView(camera);
 	(*ex_ptr).systems.update<render_system>(dtime);
+
+    window.setView(window.getDefaultView());
+    window.draw(fps_text);
 }
 
 void GameplayStage::release()
 {
+    fps_text = sf::Text();
 	ex_ptr.reset();
 	phisics_ptr.reset();
 }

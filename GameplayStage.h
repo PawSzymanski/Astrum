@@ -24,6 +24,8 @@ private:
 	Container &vertCont;
 	std::unique_ptr<entityx::EntityX> ex_ptr;
 	std::unique_ptr<Phisics_2D> phisics_ptr;
+
+    sf::Text fps_text;
 	//entityx::EntityX ex;
 public:
 
