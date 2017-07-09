@@ -30,6 +30,9 @@ public:
 	static void deleteInstance();
 
 public:
+	std::string levelInfo;
+	std::string shipInfo;
+	Container vertCont;
     sf::Font font;
 	sf::RenderWindow window;
 	MenuStage menu_stage;
@@ -37,10 +40,9 @@ public:
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
 	ExitStage exit_stage;
-	Container vertCont;
+
 	
-	entityx::EntityX ex;
 	
-	Phisics_2D phisics;
-	sf::Vector2f gravity;
+	
+	
 };

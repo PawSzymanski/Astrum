@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 
 
-player_input_system::player_input_system() 
+player_input_system::player_input_system(Phisics_2D &phs) : phisics(phs)
 {
 }
 
@@ -11,10 +11,37 @@ void player_input_system::init()
 
 }
 
-
 void player_input_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
+	ConfigParser parser;
 
+	auto levelInfo = ResourcesManager::getInstanceRef().levelInfo;
+	auto shipInfo = ResourcesManager::getInstanceRef().shipInfo;
+
+	if (!parser.load(levelInfo))
+	{
+		assert(false);
+	}
+	std::string typeOfElement;
+	float xPos, yPos, xVel, yVel, rot, mass;
+
+	parser.setSection("world");
+	while (!parser.EndOfSection())
+	{
+		typeOfElement = parser.getString();
+		xPos = parser.getFloat();
+		std::cout << "X: " << xPos << std::endl;
+		yPos = parser.getFloat();
+		std::cout << "Y: " << yPos << std::endl;
+		xVel = parser.getFloat();
+		yVel = parser.getFloat();
+		rot = parser.getFloat();
+		mass = parser.getFloat();
+		auto poly = en.create();
+		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
+			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
+	
+	}
 	sf::VertexArray potato(sf::TriangleFan, 6);
 
 	potato[0].position = sf::Vector2f(-0.4, -0.5);
@@ -31,40 +58,27 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	potato[5].color = sf::Color::Yellow;
 
 	auto &vertCont = ResourcesManager::getInstanceRef().vertCont;
-	auto &ex = ResourcesManager::getInstanceRef().ex;
-	auto &phisics = ResourcesManager::getInstanceRef().phisics;
 
     vertCont.addPoly(potato, 6, "potato");
 
-
-	auto poly1 = ex.entities.create();
-	auto poly2 = ex.entities.create();
-	auto poly3 = ex.entities.create();
-
-	std::cout << "SSSSSSSSSSSSSSIZE :" << ex.entities.size() << std::endl;
-
-    phisics.createPolygon(poly1, sf::Vector2f(8.75, 10.15), sf::Vector2f(0, 0), 0, 0, "wall");
-    phisics.createPolygon(poly2, sf::Vector2f(0.5, 4.5), sf::Vector2f(0, 0), 90, 0, "wall");
-    phisics.createPolygon(poly3, sf::Vector2f(17, 4.5), sf::Vector2f(0, 0), 90, 0,  "wall");
-
-	auto player1 = ex.entities.create();
+	auto player1 = en.create();
     phisics.createPolygon(player1, sf::Vector2f(1.5, 9), sf::Vector2f(0, 0), 0, 1, "TRIANGLE_BODY");
 
 
-	auto engine1 = ex.entities.create();
+	auto engine1 = en.create();
 
 	engine1.assign<Position>(sf::Vector2f(0, 0));
 	engine1.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, -0.2));
     engine1.assign<KeyAssigned>(sf::Keyboard::X);
 	engine1.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
 
-	auto engine2 = ex.entities.create();
+	auto engine2 = en.create();
 	engine2.assign<Position>(sf::Vector2f(0, 0));
 	engine2.assign<ForcePoint>(sf::Vector2f(0.5, 0), sf::Vector2f(0, -0.2));
     engine2.assign<KeyAssigned>(sf::Keyboard::Z);
 	engine2.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
 
-	auto engine3 = ex.entities.create();
+	auto engine3 = en.create();
 	engine3.assign<Position>(sf::Vector2f(0, 0));
 	engine3.assign<ForcePoint>(sf::Vector2f(-0.5, 0), sf::Vector2f(0, -0.2));
     engine3.assign<KeyAssigned>(sf::Keyboard::C);

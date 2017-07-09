@@ -30,9 +30,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuStage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="roundrect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,9 +99,24 @@
     <ClCompile Include="render_system.cpp">
       <Filter>Source Files\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="configcreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="configparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuStage.cpp">
+      <Filter>Source Files\stages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="resources\parts\cobra_body (kopia).cfg" />
+    <None Include="resources\parts\cobra_body.cfg" />
+    <None Include="resources\parts\large_engine.cfg" />
+    <None Include="resources\parts\long_body.cfg" />
+    <None Include="resources\parts\triangle_body.cfg" />
+    <None Include="resources\parts\wall.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LibsAndDeclarations.h">
@@ -190,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="2d_phisLIB\systems\MovementSystem.h">
       <Filter>Header Files\phisics_2d</Filter>
+    </ClInclude>
+    <ClInclude Include="configcreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="configparser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

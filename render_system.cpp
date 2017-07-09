@@ -32,7 +32,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		c_shape.setOrigin(sf::Vector2f(circ->r, circ->r));
 		win.draw(c_shape);
 		win.draw(line->line, trans->trans);
-		std::cout << "cir disp";
+		//std::cout << "cir disp";
 	}
 	for (auto entity : en.entities_with_components(line))
 	{

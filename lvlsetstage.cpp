@@ -117,7 +117,7 @@ bool LvlSetStage::update(float dt)
         {
             sf::Vector2f pos = button[i].getPosition();
             float dp = pos.x + pos_x[i] ;
-			std::cout << "DP: " << dp << std::endl;
+			//std::cout << "DP: " << dp << std::endl;
 
             if(dp > -2000)
             {
