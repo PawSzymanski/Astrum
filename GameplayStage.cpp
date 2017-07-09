@@ -47,7 +47,8 @@ bool GameplayStage::update(float dt)
 	(*phisics_ptr).update(dt);
 	(*ex_ptr).systems.update<engine_system>(dt);
 	
-	//render
+    //render
+
 	
 	return true;
 }

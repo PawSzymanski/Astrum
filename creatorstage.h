@@ -12,6 +12,7 @@
 #include "GameStage.h"
 #include "partbutton.h"
 #include "ButtonMenu.h"
+#include "partsmanager.h"
 
 class CreatorStage : public GameStage
 {
@@ -25,8 +26,8 @@ class CreatorStage : public GameStage
     float timer;
 
     GameStage * next;
-    sf::VertexArray * current_body;
-    sf::Transform body_transform;
+
+    PartsManager manager;
 
 public:
     CreatorStage();

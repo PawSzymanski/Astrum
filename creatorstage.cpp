@@ -18,10 +18,6 @@ bool CreatorStage::init()
     auto& resource = ResourcesManager::getInstanceRef();
 
     next = nullptr;
-    current_body = nullptr;
-
-    body_transform.translate(650, 500);
-    body_transform.scale(200,200);
 
     esc_text.setCharacterSize(32);
     esc_text.setFillColor(sf::Color::White);
@@ -47,6 +43,13 @@ bool CreatorStage::init()
         "LONG_BODY",
         "COBRA_BODY"};
 
+    std::string parts[4] ={
+        "large_engine",
+        "small_engine",
+        "landing_legs",
+        "crane"
+    };
+
     for(int i=0; i<3; ++i)
     {
         bodybuttons[i].init(sf::Vector2f(bodyposition,50), bodynames[i], resource.font, bodys[i]);
@@ -55,11 +58,13 @@ bool CreatorStage::init()
 
     for(int i=0; i<4; ++i)
     {
-        partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, bodys[1]);
+        partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, parts[i]);
         partposition += 120;
     }
 
     start_button.init(resource.font,32, sf::Vector2f(150,700),sf::Color::White, "START", sf::Vector2f(40,15));
+
+    manager.init();
 
     return true;
 }
@@ -84,15 +89,18 @@ void CreatorStage::input(sf::Event &event)
 
     for(int i=0; i<3; ++i)
         if(bodybuttons[i].input(event))
-            current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(bodybuttons[i].getName()));
+           manager.set_body(bodybuttons[i].getName());
     for(int i=0; i<4; ++i)
-        partbuttons[i].input(event);
+        if(partbuttons[i].input(event))
+           manager.add_part(partbuttons[i].getName());
 
     if(start_button.input(event))
     {
         next = &(ResourcesManager::getInstanceRef().gameplay_stage);
         fade_out = true;
     }
+
+    manager.input(event);
 
 }
 
@@ -103,7 +111,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer -= dt/2;
+        timer -= dt/4;
         fade_in = (timer >=0);
     }
 
@@ -112,7 +120,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer += dt/2;
+        timer += dt/4;
         fade_out = (timer < 1.f);
     }
 
@@ -139,8 +147,7 @@ void CreatorStage::render(sf::RenderWindow &window)
     for(int i=0; i<4; ++i)
         window.draw(partbuttons[i]);
 
-    if(current_body)
-        window.draw(*current_body, body_transform);
+    window.draw(manager);
 
     window.draw(start_button);
     window.draw(mask_rect);
@@ -149,14 +156,13 @@ void CreatorStage::render(sf::RenderWindow &window)
 void CreatorStage::release()
 {
     next = nullptr;
-    current_body = nullptr;
-    body_transform = sf::Transform();
     for(int i=0; i<3; ++i)
         bodybuttons[i].release();
     for(int i=0; i<4; ++i)
         partbuttons[i].release();
 
     start_button.release();
+    manager.release();
 
     esc_text = sf::Text();
 }

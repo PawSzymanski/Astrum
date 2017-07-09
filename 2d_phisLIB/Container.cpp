@@ -31,13 +31,16 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 
 sf::VertexArray & Container::getPoly(const std::string &name)
 {
+    std::cout<<"index: "<<indexes[name]<<std::endl;
+    std::cout<<"size: "<<vertexArrays.size()<<std::endl;
+
     if(indexes.find(name) == indexes.end())
     {
         std::cout <<"zla nazwa: "<<name<<std::endl;
         assert(false);
     }
 
-    return vertexArrays[indexes[name]];
+    return vertexArrays.at(indexes[name]);
 }
 
 std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
@@ -48,7 +51,7 @@ std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
         assert(false);
     }
 
-    return normals[indexes[name]];
+    return normals.at(indexes[name]);
 }
 
 Container::~Container()
