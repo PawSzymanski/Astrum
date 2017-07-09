@@ -162,6 +162,8 @@
     <ClCompile Include="2d_phisLIB\systems\MouseDragSystem.cpp" />
     <ClCompile Include="2d_phisLIB\systems\MovementSystem.cpp" />
     <ClCompile Include="ButtonMenu.cpp" />
+    <ClCompile Include="configcreator.cpp" />
+    <ClCompile Include="configparser.cpp" />
     <ClCompile Include="creatorstage.cpp" />
     <ClCompile Include="dirreader.cpp" />
     <ClCompile Include="engine_system.cpp" />
@@ -180,6 +182,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="resources\parts\cobra_body (kopia).cfg" />
+    <None Include="resources\parts\cobra_body.cfg" />
+    <None Include="resources\parts\large_engine.cfg" />
+    <None Include="resources\parts\long_body.cfg" />
+    <None Include="resources\parts\triangle_body.cfg" />
+    <None Include="resources\parts\wall.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d_phisLIB\AutisticCmath.h" />
@@ -195,6 +203,8 @@
     <ClInclude Include="2d_phisLIB\systems\MouseDragSystem.h" />
     <ClInclude Include="2d_phisLIB\systems\MovementSystem.h" />
     <ClInclude Include="ButtonMenu.h" />
+    <ClInclude Include="configcreator.h" />
+    <ClInclude Include="configparser.h" />
     <ClInclude Include="creatorstage.h" />
     <ClInclude Include="dirreader.h" />
     <ClInclude Include="engine_system.h" />

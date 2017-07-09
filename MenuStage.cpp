@@ -59,6 +59,7 @@ void MenuStage::slidingLeft(float dt)
 	}
 }
 
+//DODAC SIEBIE JAKO AUTORA DO PLIKÓW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 bool MenuStage::update(float dt)
 {

@@ -2,7 +2,7 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() : gravity(0.0f, 9.8), phisics(ex, vertCont, gravity)
+ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg")
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
@@ -14,12 +14,7 @@ ResourcesManager::ResourcesManager() : gravity(0.0f, 9.8), phisics(ex, vertCont,
 
     font.loadFromFile("resources/sansation.ttf");
 
-    ex.systems.add<engine_system>();
-    ex.systems.add<player_input_system>();
-    ex.systems.add<render_system>(window);
-
     loadContainer();
-	phisics.init();
 }
 
 ResourcesManager::~ResourcesManager()
