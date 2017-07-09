@@ -1,13 +1,13 @@
 ﻿  player_input_system.cpp
-player_input_system.cpp(46): warning C4305: 'argument': truncation from 'double' to 'float'
 player_input_system.cpp(48): warning C4305: 'argument': truncation from 'double' to 'float'
 player_input_system.cpp(50): warning C4305: 'argument': truncation from 'double' to 'float'
 player_input_system.cpp(52): warning C4305: 'argument': truncation from 'double' to 'float'
 player_input_system.cpp(54): warning C4305: 'argument': truncation from 'double' to 'float'
 player_input_system.cpp(56): warning C4305: 'argument': truncation from 'double' to 'float'
-player_input_system.cpp(70): warning C4305: 'argument': truncation from 'double' to 'float'
-player_input_system.cpp(76): warning C4305: 'argument': truncation from 'double' to 'float'
-player_input_system.cpp(82): warning C4305: 'argument': truncation from 'double' to 'float'
+player_input_system.cpp(58): warning C4305: 'argument': truncation from 'double' to 'float'
+player_input_system.cpp(72): warning C4305: 'argument': truncation from 'double' to 'float'
+player_input_system.cpp(78): warning C4305: 'argument': truncation from 'double' to 'float'
+player_input_system.cpp(84): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
   C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty>(entityx::Entity::Id,_Ty &&)' being compiled
@@ -17,7 +17,7 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
               C=Position,
               _Ty=sf::Vector2<float>
           ]
-  player_input_system.cpp(69): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Position,sf::Vector2<float>>(sf::Vector2<float> &&)' being compiled
+  player_input_system.cpp(71): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Position,sf::Vector2<float>>(sf::Vector2<float> &&)' being compiled
           with
           [
               Derived=Position
@@ -25,7 +25,7 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
   Generating code
   59 of 3701 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    14 functions had inline decision re-evaluated but remain unchanged
+    20 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

@@ -28,6 +28,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	parser.setSection("world");
 	while (!parser.EndOfSection())
 	{
+		std::cout << "XXXXXXXXXXXXXXXXXXxx" << std::endl;
 		typeOfElement = parser.getString();
 		xPos = parser.getFloat();
 		std::cout << "X: " << xPos << std::endl;
