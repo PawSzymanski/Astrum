@@ -28,16 +28,20 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	parser.setSection("world");
 	while (!parser.EndOfSection())
 	{
-		std::cout << "XXXXXXXXXXXXXXXXXXxx" << std::endl;
 		typeOfElement = parser.getString();
+
 		xPos = parser.getFloat();
-		std::cout << "X: " << xPos << std::endl;
+
 		yPos = parser.getFloat();
-		std::cout << "Y: " << yPos << std::endl;
+
 		xVel = parser.getFloat();
+
 		yVel = parser.getFloat();
+
 		rot = parser.getFloat();
+
 		mass = parser.getFloat();
+
 		auto poly = en.create();
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);

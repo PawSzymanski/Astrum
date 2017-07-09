@@ -108,6 +108,9 @@
     <ClCompile Include="MenuStage.cpp">
       <Filter>Source Files\stages</Filter>
     </ClCompile>
+    <ClCompile Include="partsmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -117,6 +120,7 @@
     <None Include="resources\parts\long_body.cfg" />
     <None Include="resources\parts\triangle_body.cfg" />
     <None Include="resources\parts\wall.cfg" />
+    <None Include="resources\levelData\ship_1.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LibsAndDeclarations.h">
@@ -207,6 +211,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="configparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="partsmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

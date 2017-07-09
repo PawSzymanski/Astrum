@@ -175,6 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuStage.cpp" />
     <ClCompile Include="partbutton.cpp" />
+    <ClCompile Include="partsmanager.cpp" />
     <ClCompile Include="player_input_system.cpp" />
     <ClCompile Include="render_system.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -182,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="resources\levelData\ship_1.cfg" />
     <None Include="resources\parts\cobra_body (kopia).cfg" />
     <None Include="resources\parts\cobra_body.cfg" />
     <None Include="resources\parts\large_engine.cfg" />
@@ -216,6 +218,7 @@
     <ClInclude Include="lvlsetstage.h" />
     <ClInclude Include="MenuStage.h" />
     <ClInclude Include="partbutton.h" />
+    <ClInclude Include="partsmanager.h" />
     <ClInclude Include="player_input_system.h" />
     <ClInclude Include="render_system.h" />
     <ClInclude Include="ResourceManager.h" />
