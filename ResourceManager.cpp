@@ -43,7 +43,8 @@ void ResourcesManager::loadContainer()
         "small_engine.cfg",
         "landing_legs.cfg",
         "crane.cfg",
-        "wall.cfg"
+        "wall.cfg",
+        "potato.cfg"
     };
 
     ConfigParser parser;
