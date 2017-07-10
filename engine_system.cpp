@@ -2,8 +2,9 @@
 
 
 
-engine_system::engine_system()
+engine_system::engine_system(entityx::EventManager &ev)
 {
+	ev.subscribe<ApplyForceEvent>(*this);
 }
 
 void engine_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
@@ -14,13 +15,15 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	Position::Handle posH, posPlayerH;
 	ForcePoint::Handle pointH;
 	KeyAssigned::Handle keyH;
+	LinearVelocity::Handle velH;
 
 	for (auto en1 : en.entities_with_components(verH))
 	{
-		for (auto en2 : en.entities_with_components(posH, lineH, pointH, keyH))
+		for (auto en2 : en.entities_with_components(posH, lineH, pointH, keyH, velH))
 		{
 			rotH = en1.component<Rotation>();
 			posH = en1.component<Position>();
+
 
 			pointH = en2.component<ForcePoint>();
 			keyH = en2.component<KeyAssigned>();
@@ -50,6 +53,18 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			pointH->force = rotMatrix.getInverse() * pointH->force;
 		}
 	}
+}
+
+void engine_system::receive(const ApplyForceEvent & ev)
+{
+	LinearVelocity::Handle velH;
+	entityx::Entity en = ev.en;
+	velH = en.component<LinearVelocity>();
+	std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
+	
+	if (vecLenght(velH->vel) > 0.5)
+		std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
+	//if (vecLenght(vecLenght))
 }
 
 

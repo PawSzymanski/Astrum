@@ -3,7 +3,7 @@
 
 GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 9.8), vertCont(cont)
 {
-
+	display_fps_time = sf::Time::Zero;
 }
 
 GameplayStage::~GameplayStage()
@@ -25,12 +25,20 @@ bool GameplayStage::init()
 	auto &window = ResourcesManager::getInstanceRef().window;
 	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 
-	(*ex_ptr).systems.add<engine_system>();
+	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.add<render_system>(window);
 
 	(*ex_ptr).systems.update<player_input_system>(dtime);
-	return true;
+
+    fps_text.setCharacterSize(18);
+    fps_text.setFillColor(sf::Color::Black);
+    fps_text.setFont(ResourcesManager::getInstanceRef().font);
+    fps_text.setPosition(sf::Vector2f(60,20));
+    fps_text.setString("NULL");
+
+
+    return true;
 }
 
 bool GameplayStage::update(float dt)
@@ -47,13 +55,31 @@ bool GameplayStage::update(float dt)
 
 void GameplayStage::render(sf::RenderWindow &window)
 {
+	static sf::Clock fps_clock, display_fps_clock;;
+
+    std::stringstream ss;
+
+	const float dt = 0.1;
+	display_fps_time += display_fps_clock.restart();
+	float fps_f = (1.0f / fps_clock.restart().asSeconds());
+	if (display_fps_time.asSeconds() >= dt)
+	{
+		display_fps_time = sf::Time::Zero;
+		
+		ss << fps_f;
+		fps_text.setString(ss.str());
+	}
 	window.setView(camera);
 	(*ex_ptr).systems.update<render_system>(dtime);
-	window.getDefaultView();
+
+    window.setView(window.getDefaultView());
+	window.draw(fps_text);
+	
 }
 
 void GameplayStage::release()
 {
+    fps_text = sf::Text();
 	ex_ptr.reset();
 	phisics_ptr.reset();
 }

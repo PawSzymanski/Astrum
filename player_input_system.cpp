@@ -75,18 +75,21 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	engine1.assign<Position>(sf::Vector2f(0, 0));
 	engine1.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, -0.2));
     engine1.assign<KeyAssigned>(sf::Keyboard::X);
+	engine1.assign<LinearVelocity>(sf::Vector2f(0, 0));
 	engine1.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
 
 	auto engine2 = en.create();
 	engine2.assign<Position>(sf::Vector2f(0, 0));
 	engine2.assign<ForcePoint>(sf::Vector2f(0.5, 0), sf::Vector2f(0, -0.2));
     engine2.assign<KeyAssigned>(sf::Keyboard::Z);
+	engine2.assign<LinearVelocity>(sf::Vector2f(0, 0));
 	engine2.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
 
 	auto engine3 = en.create();
 	engine3.assign<Position>(sf::Vector2f(0, 0));
 	engine3.assign<ForcePoint>(sf::Vector2f(-0.5, 0), sf::Vector2f(0, -0.2));
     engine3.assign<KeyAssigned>(sf::Keyboard::C);
+	engine3.assign<LinearVelocity>(sf::Vector2f(0, 0));
 	engine3.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
 }
 
