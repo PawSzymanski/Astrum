@@ -10,7 +10,7 @@ ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("reso
     window.create(sf::VideoMode(1366, 768, 32), "Astrum", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize, settings);
 
 	window.setVerticalSyncEnabled(true);
-    window.setFramerateLimit(60);
+    //window.setFramerateLimit(60);
 
     font.loadFromFile("resources/sansation.ttf");
 

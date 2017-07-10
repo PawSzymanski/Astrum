@@ -1,24 +1,9 @@
-﻿  render_system.cpp
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)'
-          with
-          [
-              Derived=Line
-          ]
-  render_system.cpp(37): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
-          with
-          [
-              Derived=Line
-          ]
-  render_system.cpp(37): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
-          with
-          [
-              Derived=Line
-          ]
+﻿  GameplayStage.cpp
+GameplayStage.cpp(5): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating code
-  65 of 3791 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+  66 of 3791 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    16 functions had inline decision re-evaluated but remain unchanged
+    13 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

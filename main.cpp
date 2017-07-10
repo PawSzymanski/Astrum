@@ -75,7 +75,7 @@ void render()
 
     fps.setString(ss.str());
 
-    resource.window.clear(sf::Color::Cyan);
+    resource.window.clear(sf::Color::Blue);
     GameStage::stage_render(resource.window);
    // resource.window.draw(fps);
     resource.window.display();
