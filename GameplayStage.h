@@ -16,6 +16,8 @@ public:
 	virtual ~GameplayStage();
 
 private:
+	
+	sf::Time display_fps_time;
 	sf::View camera;
 	float dtime;
 	void updateCamera();

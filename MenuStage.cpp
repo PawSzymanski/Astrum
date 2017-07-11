@@ -120,9 +120,9 @@ void MenuStage::render(sf::RenderWindow &window)
 
 void MenuStage::release()
 {
-    startButton.text = sf::Text();
-    optionsButton.text = sf::Text();
-    exitButton.text = sf::Text();
+   // startButton.text = sf::Text();
+  //  optionsButton.text = sf::Text();
+  //  exitButton.text = sf::Text();
 }
 
 
@@ -147,6 +147,12 @@ void MenuStage::showBar()
 void MenuStage::input(sf::Event & event)
 {
 	auto &resources_manager = ResourcesManager::getInstanceRef();
+	std::cout << actionCode << std::endl;
+	
+	//startButton.rect.setOutlineThickness(8);
+	//optionsButton.rect.setOutlineThickness(8);
+	//exitButton.rect.setOutlineThickness(8);
+	showBar();
 
 	if (startButton.input(event))
 	{
@@ -168,9 +174,7 @@ void MenuStage::input(sf::Event & event)
 	{
 		
 		//reset bar
-		startButton.rect.setOutlineThickness(8);
-		optionsButton.rect.setOutlineThickness(8);
-		exitButton.rect.setOutlineThickness(8);
+		
 
 		if (event.key.code == sf::Keyboard::Escape)
 		{
@@ -209,4 +213,5 @@ void MenuStage::input(sf::Event & event)
 			isSliding = 1;
 		}
 	}
+
 }

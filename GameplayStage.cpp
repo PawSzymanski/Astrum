@@ -3,7 +3,7 @@
 
 GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 9.8), vertCont(cont)
 {
-
+	display_fps_time = sf::Time::Zero;
 }
 
 GameplayStage::~GameplayStage()
@@ -22,15 +22,12 @@ bool GameplayStage::init()
 	phisics_ptr = std::make_unique<Phisics_2D>((*ex_ptr), vertCont, gravity);
 	(*phisics_ptr).init();
 
-
 	auto &window = ResourcesManager::getInstanceRef().window;
 	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 
-
-	(*ex_ptr).systems.add<engine_system>();
+	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.add<render_system>(window);
-
 
 	(*ex_ptr).systems.update<player_input_system>(dtime);
 
@@ -50,31 +47,34 @@ bool GameplayStage::update(float dt)
 	
 	updateCamera();
 
-	//if (ecs_gameplay_ptr->update(dt)) return true;
-
-	
 	(*ex_ptr).systems.update<engine_system>(dt);
 	(*phisics_ptr).update(dt);
-	
-    //render
-
 	
 	return true;
 }
 
 void GameplayStage::render(sf::RenderWindow &window)
 {
-    static sf::Clock fps_clock;
-    std::stringstream ss;
-    float fps_f = (1.0f/fps_clock.restart().asSeconds());
-    ss<<fps_f;
-    fps_text.setString(ss.str());
+	static sf::Clock fps_clock, display_fps_clock;;
 
+    std::stringstream ss;
+
+	const float dt = 0.1;
+	display_fps_time += display_fps_clock.restart();
+	float fps_f = (1.0f / fps_clock.restart().asSeconds());
+	if (display_fps_time.asSeconds() >= dt)
+	{
+		display_fps_time = sf::Time::Zero;
+		
+		ss << fps_f;
+		fps_text.setString(ss.str());
+	}
 	window.setView(camera);
 	(*ex_ptr).systems.update<render_system>(dtime);
 
     window.setView(window.getDefaultView());
-    window.draw(fps_text);
+	window.draw(fps_text);
+	
 }
 
 void GameplayStage::release()
@@ -86,6 +86,8 @@ void GameplayStage::release()
 
 void GameplayStage::input(sf::Event & event)
 {
-    if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-        ResourcesManager::getInstanceRef().lvl_set_stage.set();
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+	{
+		ResourcesManager::getInstanceRef().lvl_set_stage.set();
+	}
 }
