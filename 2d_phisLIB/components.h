@@ -36,7 +36,7 @@ struct Mass : public entityx::Component<Mass>
 
 struct LinearVelocity : public entityx::Component<LinearVelocity>
 {
-	LinearVelocity(sf::Vector2f & vel)
+    LinearVelocity(const sf::Vector2f & vel)
 		:vel(vel) {}
 	sf::Vector2f vel;
 };
