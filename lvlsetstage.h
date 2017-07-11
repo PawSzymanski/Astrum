@@ -19,6 +19,8 @@ class LvlSetStage :public GameStage
     GameStage * next_stage;
     sf::Text esc_text;
     float timer;
+    std::string ships[3];
+    std::string levels[3];
 
 public:
     LvlSetStage();

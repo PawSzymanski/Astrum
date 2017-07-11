@@ -25,9 +25,9 @@ bool LvlSetStage::init()
 
     auto & resource = ResourcesManager::getInstanceRef();
 
-    button[0].init(sf::Vector2f(1450,600/2), 1, "sample text 1", resource.font);
-    button[1].init(sf::Vector2f(1450,600/2), 2, "sample text 2", resource.font);
-    button[2].init(sf::Vector2f(1450,600/2), 3, "sample text 3", resource.font);
+    button[0].init(sf::Vector2f(1450,600/2), 1, "ship repair", resource.font);
+    button[1].init(sf::Vector2f(1450,600/2), 2, "supply run", resource.font);
+    button[2].init(sf::Vector2f(1450,600/2), 3, "bomb drop", resource.font);
 
     slide_in = true;
     slide_out = false;
@@ -37,6 +37,14 @@ bool LvlSetStage::init()
     esc_text.setPosition(50,50);
     esc_text.setFont(resource.font);
     esc_text.setString("Menu:  ESC");
+
+    ships[0] = "resources/levelData/ship_1.cfg";
+    ships[1] = "resources/levelData/ship_2.cfg";
+    ships[2] = "resources/levelData/ship_3.cfg";
+
+    levels[0] = "resources/levelData/level_1.cfg";
+    levels[1] = "resources/levelData/level_2.cfg";
+    levels[2] = "resources/levelData/level_3.cfg";
 
     return true;
 }
@@ -74,6 +82,8 @@ void LvlSetStage::input(sf::Event &event)
     for(int i=0; i<3; ++i)
         if(button[i].input(event))
         {
+            ResourcesManager::getInstanceRef().levelInfo = levels[i];
+            ResourcesManager::getInstanceRef().shipInfo = ships[i];
             slide_out = true;
             next_stage = &(ResourcesManager::getInstanceRef().creator_stage);
         }

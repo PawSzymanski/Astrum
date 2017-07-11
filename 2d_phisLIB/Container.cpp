@@ -31,8 +31,6 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 
 sf::VertexArray & Container::getPoly(const std::string &name)
 {
-    std::cout<<"index: "<<indexes[name]<<std::endl;
-    std::cout<<"size: "<<vertexArrays.size()<<std::endl;
 
     if(indexes.find(name) == indexes.end())
     {

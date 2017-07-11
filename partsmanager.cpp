@@ -1,3 +1,9 @@
+/*
+ *  partsmanager.cpp
+ *
+ *  Created: 2017-07-09
+ *   Author: Patryk Wojtanowski
+ */
 #include "partsmanager.h"
 #include "ResourceManager.h"
 
@@ -8,14 +14,53 @@ PartsManager::PartsManager()
 
 void PartsManager::init()
 {
-    current_body = nullptr;
-    current_normals = nullptr;
     latch_part = nullptr;
-    latch_part_rot = 0;
-    latch_part_pos = sf::Vector2f(0,0);
+    mouse_pos = sf::Vector2f(0,0);
 
+    body_trans = sf::Transform();
     body_trans.translate(650, 500);
     body_trans.scale(200,200);
+    good_place = false;
+
+    std::string &dir = ResourcesManager::getInstanceRef().shipInfo;
+
+    ConfigParser parser;
+    assert(parser.load(dir));
+    if(parser.setSection("body_info"))
+    {
+        current_body_name = parser.getString();
+        current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(current_body_name));
+        current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(current_body_name));
+
+        std::cout<<"current body: "<<current_body_name<<std::endl;
+    }
+
+    if(parser.setSection("parts_info"))
+    {
+        while(!parser.EndOfSection())
+        {
+            Part new_part;
+            sf::Vector2f pos;
+
+            new_part.name = parser.getString();
+            pos.x =  parser.getFloat();
+            pos.y = parser.getFloat();
+            sf::Vector2f npos = body_trans * pos;
+            new_part.pos = npos;
+            new_part.rot = parser.getFloat();
+            new_part.key = parser.getString();
+
+            new_part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(new_part.name));
+            new_part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(new_part.name));
+
+            new_part.trans = sf::Transform();
+            new_part.trans.translate(npos);
+            new_part.trans.rotate(new_part.rot);
+            new_part.trans.scale(200,200);
+
+            parts.push_back(new_part);
+        }
+    }
 }
 
 void PartsManager::set_body(const std::string &name)
@@ -34,52 +79,164 @@ void PartsManager::add_part(const std::string &name)
         return;
 
     sf::VertexArray &temp = ResourcesManager::getInstanceRef().vertCont.getPoly(name);
-    parts.push_back(Part(name, temp));
+    std::vector <sf::Vector2f> &temp_normals = ResourcesManager::getInstanceRef().vertCont.getNormals(name);
+    parts.push_back(Part(name, temp, temp_normals));
     latch_part =  &(parts.at( parts.size() -1 ));
+}
+
+void PartsManager::saveShip(const std::string &dir)
+{
+    std::vector < std::vector <std::string> > body_data, parts_data;
+    ConfigCreator creator;
+
+    body_data.resize(1);
+    body_data.at(0).push_back(current_body_name);
+
+    creator.addSection("body_info", body_data);
+
+    for( Part & part: parts)
+    {
+        std::stringstream posx, posy, rot;
+        sf::Vector2f pos = body_trans.getInverse() * part.pos;
+        posx<<pos.x;
+        posy<<pos.y;
+        rot<<part.rot;
+        std::vector < std::string > temp = {
+            part.name,
+            posx.str(),
+            posy.str(),
+            rot.str(),
+            part.key
+        };
+
+        parts_data.push_back(temp);
+    }
+
+    creator.addSection("parts_info", parts_data);
+    creator.setDir(dir);
+    creator.create();
+}
+
+Part *PartsManager::findClicked()
+{
+    for(auto & part: parts)
+    {
+        sf::VertexArray& v_array = *(part.v_array);
+        std::vector<sf::Vector2f> &normals = *(part.normals);
+        unsigned int size = normals.size();
+
+        sf::Vector2f pos = part.trans.getInverse() * mouse_pos;
+        float best_distance = -FLT_MAX;
+
+        for(unsigned int i=0 ; i <size; ++i)
+        {
+            sf::Vector2f normal =  normals.at(i);
+            sf::Vector2f vert_to_point = pos - v_array[i].position;
+            float dist = dot(normal,vert_to_point);
+            best_distance = (dist > best_distance)? dist: best_distance;
+        }
+
+        if(best_distance < 0.0f)
+            return &part;
+    }
+
+    return nullptr;
 }
 
 void PartsManager::input(sf::Event ev)
 {
-    if(ev.type == sf::Event::MouseMoved && latch_part)
+    if(ev.type == sf::Event::MouseMoved)
     {
-        latch_part_pos = sf::Vector2f(ev.mouseMove.x, ev.mouseMove.y);
-        latch_part->trans = sf::Transform();
-        latch_part->trans.translate(latch_part_pos);
-        latch_part->trans.scale(200, 200);
-        latch_part->trans.rotate(latch_part_rot);
+        mouse_pos = sf::Vector2f(ev.mouseMove.x, ev.mouseMove.y);
+
+        if(latch_part)
+        {
+            latch_part->pos = sf::Vector2f(ev.mouseMove.x - ev.mouseMove.x%10, ev.mouseMove.y - ev.mouseMove.y%10);
+            latch_part->trans = sf::Transform();
+            latch_part->trans.translate(latch_part->pos);
+            latch_part->trans.scale(200, 200);
+            latch_part->trans.rotate(latch_part->rot);
+        }
     }
     else if(ev.type == sf::Event::MouseWheelScrolled && latch_part)
     {
-        latch_part_rot += ev.mouseWheelScroll.delta * 10;
+        latch_part->rot += ev.mouseWheelScroll.delta * 10;
         latch_part->trans.rotate(ev.mouseWheelScroll.delta * 10);
     }
     else if( ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Delete && latch_part)
     {
+        for(auto iter = parts.begin(); iter< parts.end(); ++iter)
+        {
+            if(&(*iter) == latch_part)
+            {
+                parts.erase(iter);
+                break;
+            }
+        }
+
         latch_part = nullptr;
-        latch_part_rot = 0;
-        parts.pop_back();
     }
+    else if( ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
+    {
+        if(latch_part && good_place)
+            latch_part = nullptr;
+        else if(!latch_part)
+        {
+            Part * clicked = findClicked();
+            latch_part = (clicked)? clicked : nullptr;
+        }
+    }
+    else if( ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Right)
+    {
+        Part * clicked = findClicked();
+        assigner.assign(clicked);
+    }
+
+    assigner.input(ev);
 
     if(!current_body || !latch_part)
         return;
 
-    unsigned int size = current_body->getVertexCount();
-    sf::Vector2f pos = body_trans.getInverse() * latch_part_pos;
+    const unsigned int size = current_body->getVertexCount();
+    const sf::Vector2f pos = body_trans.getInverse() * latch_part->pos;
 
     sf::Vector2f best_normal;
-    float best_distance = FLT_MAX;
+    float best_distance = -FLT_MAX;
 
-    for(int i=0 ; i <size; ++i)
+    for(unsigned int i=0 ; i <size; ++i)
     {
         sf::Vector2f normal =  current_normals->at(i);
         sf::Vector2f vert_to_point = pos - (*current_body)[i].position;
         float dist = dot(normal,vert_to_point);
-        bool good = abs_f(dist) < best_distance;
+        bool good = dist > best_distance;
         best_distance = (good)? dist: best_distance;
         best_normal = (good)? normal : best_normal;
     }
 
-    std::cout<<"best distance: "<<best_distance<<std::endl;
+    good_place = best_distance < 0.1f;
+    if(good_place)
+    {
+        latch_part->pos += -best_normal * best_distance *200.0f;
+        latch_part->trans = sf::Transform();
+        latch_part->trans.translate(latch_part->pos);
+        latch_part->trans.scale(200, 200);
+        latch_part->trans.rotate(latch_part->rot);
+    }
+
+    for(unsigned int i=0; i<size; i++)
+    {
+        sf::Vector2f vert = (*current_body)[i].position;
+        float dist = distance(vert, pos);
+        if(dist < 0.1f)
+        {
+            latch_part->pos += vert;//body_trans * vert;
+            latch_part->trans = sf::Transform();
+            latch_part->trans.translate(latch_part->pos);
+            latch_part->trans.scale(200, 200);
+            latch_part->trans.rotate(latch_part->rot);
+        }
+    }
+
 }
 
 void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -89,8 +246,25 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
     for(auto &p: parts)
     {
-        target.draw(p.v_array, p.trans);
+        sf::Vertex line[2]
+        {
+            sf::Vertex(p.trans * sf::Vector2f(0,0), sf::Color::White),
+            sf::Vertex(p.trans * sf::Vector2f(0,0.4f), sf::Color::White)
+        };
+
+        target.draw(*(p.v_array), p.trans);
+        target.draw(line,2,sf::Lines);
+
+        sf::Text key;
+        key.setCharacterSize(32);
+        key.setFillColor(sf::Color::Black);
+        key.setFont(ResourcesManager::getInstanceRef().font);
+        key.setPosition(p.pos- sf::Vector2f(16,16));
+        key.setString(p.key);
+        target.draw(key);
     }
+
+    target.draw(assigner);
 }
 
 void PartsManager::release()
@@ -99,6 +273,10 @@ void PartsManager::release()
     current_normals = nullptr;
     latch_part = nullptr;
 
+    good_place = false;
+    assigner.release();
+
+    mouse_pos = sf::Vector2f(0,0);
     current_body_name = std::string();
     parts.clear();
 }

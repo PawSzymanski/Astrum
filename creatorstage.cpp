@@ -62,7 +62,8 @@ bool CreatorStage::init()
         partposition += 120;
     }
 
-    start_button.init(resource.font,32, sf::Vector2f(150,700),sf::Color::White, "START", sf::Vector2f(40,15));
+    start_button.init(resource.font,32, sf::Vector2f(150,670),sf::Color::White, "START", sf::Vector2f(40,15));
+    save_button.init(resource.font,32, sf::Vector2f(150,600),sf::Color::White, "SAVE", sf::Vector2f(40,15));
 
     manager.init();
 
@@ -81,6 +82,7 @@ void CreatorStage::input(sf::Event &event)
         }
         else if(event.key.code == sf::Keyboard::Return)
         {
+            manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
             next = &(ResourcesManager::getInstanceRef().gameplay_stage);
             fade_out = true;
             fade_in = false;
@@ -96,9 +98,14 @@ void CreatorStage::input(sf::Event &event)
 
     if(start_button.input(event))
     {
+        manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
         next = &(ResourcesManager::getInstanceRef().gameplay_stage);
         fade_out = true;
+        fade_in = false;
     }
+
+    if(save_button.input(event))
+        manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
 
     manager.input(event);
 
@@ -111,7 +118,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer -= dt/4;
+        timer -= dt/2;
         fade_in = (timer >=0);
     }
 
@@ -120,7 +127,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer += dt/4;
+        timer += dt/2;
         fade_out = (timer < 1.f);
     }
 
@@ -147,9 +154,10 @@ void CreatorStage::render(sf::RenderWindow &window)
     for(int i=0; i<4; ++i)
         window.draw(partbuttons[i]);
 
-    window.draw(manager);
 
     window.draw(start_button);
+    window.draw(save_button);
+    window.draw(manager);
     window.draw(mask_rect);
 }
 
@@ -162,6 +170,7 @@ void CreatorStage::release()
         partbuttons[i].release();
 
     start_button.release();
+    save_button.release();
     manager.release();
 
     esc_text = sf::Text();
