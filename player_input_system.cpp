@@ -22,7 +22,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	{
 		assert(false);
 	}
-	std::string typeOfElement;
+	std::string typeOfElement, pathToShip = "resources/parts/";
 	float xPos, yPos, xVel, yVel, rot, mass;
 
 	parser.setSection("world");
@@ -43,54 +43,103 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		mass = parser.getFloat();
 
 		auto poly = en.create();
+		
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	
 	}
-//	sf::VertexArray potato(sf::TriangleFan, 6);
 
-//	potato[0].position = sf::Vector2f(-0.4, -0.5);
-//	potato[0].color = sf::Color::Yellow;
-//	potato[1].position = sf::Vector2f(0.6, -0.5);
-//	potato[1].color = sf::Color::Yellow;
-//	potato[2].position = sf::Vector2f(0.8, -0.2);
-//	potato[2].color = sf::Color::Yellow;
-//	potato[3].position = sf::Vector2f(0.3, 0.4);
-//	potato[3].color = sf::Color::Yellow;
-//	potato[4].position = sf::Vector2f(-0.7, 0.9);
-//	potato[4].color = sf::Color::Yellow;
-//	potato[5].position = sf::Vector2f(-0.8, -0.0);
-//	potato[5].color = sf::Color::Yellow;
+	//SHIP
+	if (!parser.load(shipInfo))
+	{
+		assert(false);
+	}
+	std::cout << shipInfo << std::endl;
+	parser.setSection("body_info");
+	std::string typeOfShip, shipColor;
+	
+	while (!parser.EndOfSection())
+	{
+		typeOfShip = parser.getString();
+	}
+	
+	if (typeOfShip.size() == 0)
+	{
+		auto &stage = ResourcesManager::getInstanceRef();
+		std::cout << "WYBIERZ JAKIS STATEK DO CHUJA" << std::endl;
+		stage.creator_stage.set();	
+	}
+	parser.setSection("color");
+	
+	while (!parser.EndOfSection())
+	{	
+		shipColor = parser.getString();
+	}
+	
+	
+	auto playerEn = en.create();
+	playerEn.assign<isPlayer>();
+	phisics.createPolygon(playerEn, sf::Vector2f(2, 8),
+		sf::Vector2f(0, 0), 0, 1, typeOfShip);
+	
 
-//	auto &vertCont = ResourcesManager::getInstanceRef().vertCont;
+	
+	//PARTS
+	parser.setSection("parts_info");
+	std::string partName, partKey, pathToPart, partColor, partVert;
+	Conversion conversion;
+	float partPosX, partPosY, partDegree;
+	
+	
+	while (!parser.EndOfSection())
+	{
+		typeOfShip = parser.getString();
+		partPosX = parser.getFloat();
+		partPosY = parser.getFloat();
+		partDegree = parser.getFloat();
+		partKey = parser.getString();
+		ConfigParser parser2;
+	
+		
+		//PART INFO LOAD
+		pathToPart.clear();
+		pathToPart.insert(pathToPart.size(), "resources/parts/");
+		pathToPart.insert(pathToPart.size(), typeOfShip);
+		pathToPart.insert(pathToPart.size(), ".cfg");
+		if (!parser2.load(pathToPart))
+		{
+			assert(false);
+		}
+		while (!parser2.EndOfSection())
+		{
+			parser2.setSection("name");
+			partVert = parser2.getString();	
+		}
 
-//    vertCont.addPoly(potato, 6, "potato");
+		auto &container = ResourcesManager::getInstanceRef().vertCont;
 
-	auto player1 = en.create();
-    phisics.createPolygon(player1, sf::Vector2f(1.5, 9), sf::Vector2f(0, 0), 0, 1, "TRIANGLE_BODY");
+		auto engine = en.create();
+		
+		sf::Vector2f engineForce = sf::Vector2f(0, -0.2);
+		
+		sf::Transform transForce;
+		transForce.rotate(partDegree);
+		engineForce = transForce * engineForce;
 
+		
+		engine.assign<Position>(sf::Vector2f(0, 0));
 
-	auto engine1 = en.create();
+		engine.assign<ForcePoint>(sf::Vector2f(partPosX, partPosY), engineForce);
 
-	engine1.assign<Position>(sf::Vector2f(0, 0));
-	engine1.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, -0.2));
-    engine1.assign<KeyAssigned>(sf::Keyboard::X);
-	engine1.assign<LinearVelocity>(sf::Vector2f(0, 0));
-	engine1.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
+		engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 
-	auto engine2 = en.create();
-	engine2.assign<Position>(sf::Vector2f(0, 0));
-	engine2.assign<ForcePoint>(sf::Vector2f(0.5, 0), sf::Vector2f(0, -0.2));
-    engine2.assign<KeyAssigned>(sf::Keyboard::Z);
-	engine2.assign<LinearVelocity>(sf::Vector2f(0, 0));
-	engine2.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
+		engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
 
-	auto engine3 = en.create();
-	engine3.assign<Position>(sf::Vector2f(0, 0));
-	engine3.assign<ForcePoint>(sf::Vector2f(-0.5, 0), sf::Vector2f(0, -0.2));
-    engine3.assign<KeyAssigned>(sf::Keyboard::C);
-	engine3.assign<LinearVelocity>(sf::Vector2f(0, 0));
-	engine3.assign<Line>(sf::Vector2f(0, 0), sf::Vector2f(0, 0), sf::Color::Magenta);
+		engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
+
+		sf::Vector2f enginePos = sf::Vector2f(partPosX, partPosY) + sf::Vector2f(2, 8); //ship pos + enging pos by ship
+		engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+	}
 }
 
 player_input_system::~player_input_system()

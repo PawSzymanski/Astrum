@@ -76,8 +76,10 @@ struct Transform : entityx::Component<Transform>
 	Transform(sf::Vector2f pos, float rot) {
 		trans.rotate(rot);
 		trans.translate(pos);
+		defaultTrans.rotate(rot);
+		defaultTrans.translate(pos);
 	}
-	sf::Transform trans;
+	sf::Transform trans, defaultTrans;
 };
 
 struct LinearForce : entityx::Component<LinearForce> 
@@ -168,3 +170,15 @@ struct KeyAssigned : entityx::Component<KeyAssigned>
 	{}
 	sf::Keyboard::Key key;
 };
+
+struct isPlayer : entityx::Component<isPlayer>
+{
+};
+struct isLegs : entityx::Component<isLegs>
+{
+};
+struct isPlatform : entityx::Component<isPlatform>
+{
+};
+
+

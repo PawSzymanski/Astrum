@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-const float EPSILON = 0.000001f;
+const float EPSILON = 0.0001f;
 
 inline float abs_f(float x)
 {
