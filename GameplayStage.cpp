@@ -25,11 +25,13 @@ bool GameplayStage::init()
 	auto &window = ResourcesManager::getInstanceRef().window;
 	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 
-	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
+	(*ex_ptr).systems.update<player_input_system>(dtime);
+
+	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<render_system>(window);
 
-	(*ex_ptr).systems.update<player_input_system>(dtime);
+	
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);

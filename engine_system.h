@@ -3,6 +3,7 @@
 
 class engine_system : public entityx::System<engine_system>, public entityx::Receiver<engine_system>
 {
+	sf::Transform matrix;
 public:
 	engine_system(entityx::EventManager &ev);
 

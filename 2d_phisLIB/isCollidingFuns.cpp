@@ -394,12 +394,6 @@ float leastPenetration(VertexArray::Handle verH1, sf::Vector2f point, int &side)
 	return -max_sep;
 }
 
-
-
-
-
-
-
 int side=0;
 //czy (2) jest w obiekcie (1)
 for (int i = 0; i < verH2->vert.getVertexCount(); ++i)

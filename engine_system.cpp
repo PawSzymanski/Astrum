@@ -9,48 +9,49 @@ engine_system::engine_system(entityx::EventManager &ev)
 
 void engine_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
+	isPlayer::Handle playerH;
 	VertexArray::Handle verH;
-	Line::Handle lineH;
+	//Line::Handle lineH;
 	Rotation::Handle rotH;
 	Position::Handle posH, posPlayerH;
 	ForcePoint::Handle pointH;
 	KeyAssigned::Handle keyH;
 	LinearVelocity::Handle velH;
+	Transform::Handle transEngH, transPlayerH;
 
-	for (auto en1 : en.entities_with_components(verH))
+	for (auto en1 : en.entities_with_components(posH, playerH, transPlayerH, rotH))
 	{
-		for (auto en2 : en.entities_with_components(posH, lineH, pointH, keyH, velH))
+		for (auto en2 : en.entities_with_components(verH, pointH, keyH, velH, transEngH))
 		{
 			rotH = en1.component<Rotation>();
 			posH = en1.component<Position>();
-
+			transPlayerH = en1.component<Transform>();
 
 			pointH = en2.component<ForcePoint>();
 			keyH = en2.component<KeyAssigned>();
-			lineH = en2.component<Line>();
+			verH = en2.component<VertexArray>();
+			transEngH = en2.component<Transform>();
+	
+			transEngH->trans = transEngH->defaultTrans;
 
+			//rotating force
 			sf::Transform rotMatrix;
 			rotMatrix.rotate(rotH->degree);
 
 			pointH->point = rotMatrix * pointH->point;
 			pointH->force = rotMatrix * pointH->force;
+			
+			std::cout << posH->pos.x << "  " << posH->pos.y << std::endl;
 
-			sf::Vector2f vec00 = pointH->point;
-			vec00 += posH->pos;
-
-			lineH->line[0].position = vec00;
-			lineH->line[1].position = vec00 - pointH->force;
+			transEngH->trans.translate(posH->pos + pointH->point);
+			transEngH->trans.rotate(rotH->degree);
 
 			if (sf::Keyboard::isKeyPressed(keyH->key))
-			{
-				
+			{			
 				ev.emit<ApplyForceEvent>(pointH->point, pointH->force, en1);
-		
-				//std::cout << "engine disp  " << pointH->force.x << " " << pointH->force.y << std::endl;
-
 			}
 			pointH->point = rotMatrix.getInverse() * pointH->point;
-			pointH->force = rotMatrix.getInverse() * pointH->force;
+			pointH->force = rotMatrix.getInverse() * pointH->force;	
 		}
 	}
 }
@@ -60,10 +61,10 @@ void engine_system::receive(const ApplyForceEvent & ev)
 	LinearVelocity::Handle velH;
 	entityx::Entity en = ev.en;
 	velH = en.component<LinearVelocity>();
-	std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
+	//std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
 	
-	if (vecLenght(velH->vel) > 0.5)
-		std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
+	//if (vecLenght(velH->vel) > 0.5)
+	//	std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
 	//if (vecLenght(vecLenght))
 }
 
