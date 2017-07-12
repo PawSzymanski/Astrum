@@ -44,7 +44,8 @@ void ResourcesManager::loadContainer()
         "landing_legs.cfg",
         "crane.cfg",
         "wall.cfg",
-        "potato.cfg"
+        "potato.cfg",
+        "platform.cfg"
     };
 
     ConfigParser parser;

@@ -120,9 +120,9 @@ void MenuStage::render(sf::RenderWindow &window)
 
 void MenuStage::release()
 {
-   // startButton.text = sf::Text();
-  //  optionsButton.text = sf::Text();
-  //  exitButton.text = sf::Text();
+    startButton.text = sf::Text();
+    optionsButton.text = sf::Text();
+    exitButton.text = sf::Text();
 }
 
 
