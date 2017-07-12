@@ -12,7 +12,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	isPlayer::Handle playerH;
 	VertexArray::Handle verH;
 	//Line::Handle lineH;
-	Rotation::Handle rotH;
+	Rotation::Handle rotH, rotEngH;
 	Position::Handle posH, posPlayerH;
 	ForcePoint::Handle pointH;
 	KeyAssigned::Handle keyH;
@@ -31,6 +31,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			keyH = en2.component<KeyAssigned>();
 			verH = en2.component<VertexArray>();
 			transEngH = en2.component<Transform>();
+			rotEngH = en2.component<Rotation>();
 	
 			transEngH->trans = transEngH->defaultTrans;
 
@@ -44,7 +45,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			std::cout << posH->pos.x << "  " << posH->pos.y << std::endl;
 
 			transEngH->trans.translate(posH->pos + pointH->point);
-			transEngH->trans.rotate(rotH->degree);
+			transEngH->trans.rotate(rotH->degree + rotEngH->degree);
 
 			if (sf::Keyboard::isKeyPressed(keyH->key))
 			{			
