@@ -48,9 +48,9 @@ bool GameplayStage::update(float dt)
 	dtime = dt;
 	
 	updateCamera();
-
-	(*ex_ptr).systems.update<engine_system>(dt);
 	(*phisics_ptr).update(dt);
+	(*ex_ptr).systems.update<engine_system>(dt);
+	
 	
 	return true;
 }

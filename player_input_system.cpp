@@ -126,8 +126,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		transForce.rotate(partDegree);
 		engineForce = transForce * engineForce;
 
-		
-		engine.assign<Position>(sf::Vector2f(0, 0));
+		engine.assign<Rotation>(partDegree);
 
 		engine.assign<ForcePoint>(sf::Vector2f(partPosX, partPosY), engineForce);
 
@@ -137,8 +136,9 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 		engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
 
-		sf::Vector2f enginePos = sf::Vector2f(partPosX, partPosY) + sf::Vector2f(2, 8); //ship pos + enging pos by ship
 		engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+
+		
 	}
 }
 
