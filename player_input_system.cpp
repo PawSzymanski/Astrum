@@ -101,7 +101,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		ConfigParser parser2;
 	
 		
-		//PART INFO LOAD
+		//PART INFO LOAD engine maybe legs
 		pathToPart.clear();
 		pathToPart.insert(pathToPart.size(), "resources/parts/");
 		pathToPart.insert(pathToPart.size(), typeOfShip);
@@ -125,20 +125,43 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		sf::Transform transForce;
 		transForce.rotate(partDegree);
 		engineForce = transForce * engineForce;
+		std::cout<<std::endl;
+		if (partVert.substr(0, 12) != "landing_legs")
+		{
+			
+			std::cout << "not legs" << std::endl;
+			engine.assign<Rotation>(partDegree);
 
-		engine.assign<Rotation>(partDegree);
+			engine.assign<ForcePoint>(sf::Vector2f(partPosX, partPosY), engineForce);
 
-		engine.assign<ForcePoint>(sf::Vector2f(partPosX, partPosY), engineForce);
+			engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 
-		engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+			engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
 
-		engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
+			engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
 
-		engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
+			engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+		}
+		else {
+			
+			std::cout << "legs" << std::endl;
+			//phisics.createPolygon(engine, sf::Vector2f(partPosX, partPosY),
+			//	sf::Vector2f(0,0), partDegree, mass, partVert);
+			engine.assign<isLegs>();
+			engine.assign<Rotation>(partDegree);
 
-		engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+			engine.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
 
-		
+			engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+
+			engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
+
+			engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
+
+			engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+			//engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+			//engine.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
+		}
 	}
 }
 
