@@ -122,7 +122,7 @@ void MenuStage::release()
 {
     startButton.text = sf::Text();
     optionsButton.text = sf::Text();
-	exitButton.text = sf::Text();
+    exitButton.text = sf::Text();
 }
 
 

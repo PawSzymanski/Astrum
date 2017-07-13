@@ -39,6 +39,7 @@ public:
     PartsManager();
 
     void init();
+    bool is_body_set();
     void set_body(const std::string &name);
     void add_part(const std::string &name);
     void saveShip(const std::string &dir);

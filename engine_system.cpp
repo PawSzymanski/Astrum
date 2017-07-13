@@ -18,10 +18,11 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	KeyAssigned::Handle keyH;
 	LinearVelocity::Handle velH;
 	Transform::Handle transEngH, transPlayerH;
+	isLegs::Handle legsH;
 
 	for (auto en1 : en.entities_with_components(posH, playerH, transPlayerH, rotH))
 	{
-		for (auto en2 : en.entities_with_components(verH, pointH, keyH, velH, transEngH))
+		for (auto en2 : en.entities_with_components(verH, pointH, keyH, velH, transEngH ))
 		{
 			rotH = en1.component<Rotation>();
 			posH = en1.component<Position>();

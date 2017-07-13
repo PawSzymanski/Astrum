@@ -82,6 +82,9 @@ void CreatorStage::input(sf::Event &event)
         }
         else if(event.key.code == sf::Keyboard::Return)
         {
+            if(!manager.is_body_set())
+                return;
+
             manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
             next = &(ResourcesManager::getInstanceRef().gameplay_stage);
             fade_out = true;
@@ -98,6 +101,9 @@ void CreatorStage::input(sf::Event &event)
 
     if(start_button.input(event))
     {
+        if(!manager.is_body_set())
+            return;
+
         manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
         next = &(ResourcesManager::getInstanceRef().gameplay_stage);
         fade_out = true;

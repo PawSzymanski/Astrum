@@ -167,7 +167,7 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 		IsResting::Handle isRestingH = ens[i].component<IsResting>();
         Mass::Handle mass = ens[i].component<Mass>();
 		if (!isRestingH->isIt)
-            ev.emit<ApplyForceEvent>(sf::Vector2f(0, 0), gravity * mass->mass * static_cast<float>(dt), ens[i]); //GRAWITEJSZYN
+           ev.emit<ApplyForceEvent>(sf::Vector2f(0, 0), gravity * mass->mass * static_cast<float>(dt), ens[i]); //GRAWITEJSZYN
 
 		isRestingH->isIt = false;
 	}

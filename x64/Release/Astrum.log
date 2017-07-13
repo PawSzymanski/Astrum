@@ -1,21 +1,4 @@
-﻿  engine_system.cpp
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,ForcePoint,KeyAssigned,LinearVelocity,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,ForcePoint,KeyAssigned,LinearVelocity,Transform>::end(void)'
-          with
-          [
-              Derived=VertexArray
-          ]
-  engine_system.cpp(24): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,ForcePoint,KeyAssigned,LinearVelocity,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,ForcePoint,KeyAssigned,LinearVelocity,Transform>::end(void)' being compiled
-          with
-          [
-              Derived=VertexArray
-          ]
-  engine_system.cpp(24): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,ForcePoint,KeyAssigned,LinearVelocity,Transform>' being compiled
-          with
-          [
-              Derived=VertexArray
-          ]
-  player_input_system.cpp
+﻿  player_input_system.cpp
 player_input_system.cpp(123): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
@@ -25,7 +8,7 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
               Derived=Rotation,
               C=Rotation
           ]
-  player_input_system.cpp(129): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Rotation,float&>(float &)' being compiled
+  player_input_system.cpp(133): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Rotation,float&>(float &)' being compiled
           with
           [
               Derived=Rotation
@@ -38,15 +21,15 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
               C=Transform,
               _Ty=sf::Vector2<float>
           ]
-  player_input_system.cpp(139): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Transform,sf::Vector2<float>,int>(sf::Vector2<float> &&,int &&)' being compiled
+  player_input_system.cpp(143): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Transform,sf::Vector2<float>,int>(sf::Vector2<float> &&,int &&)' being compiled
           with
           [
               Derived=Transform
           ]
   Generating code
-  71 of 4199 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+  66 of 4227 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    14 functions had inline decision re-evaluated but remain unchanged
+    25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
