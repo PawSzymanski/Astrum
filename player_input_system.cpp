@@ -136,9 +136,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 		engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
 
-		engine.assign<Transform>(sf::Vector2f(0, 0), 0);
-
-		
+		engine.assign<Transform>(sf::Vector2f(0, 0), 0);	
 	}
 }
 
