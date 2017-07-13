@@ -159,6 +159,8 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 
 			if (!m.contactsCount)
 				continue;
+
+            ev.emit<CollisionEvent>(ens[i], ens[j]);
 		
 			ResolveCollision(m,ev,dt);
 					

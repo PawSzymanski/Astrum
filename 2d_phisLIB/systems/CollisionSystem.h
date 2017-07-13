@@ -7,6 +7,7 @@
 #include "../components.h"
 #include "../Events.h"
 #include "../AutisticCmath.h"
+#include "../Events.h"
 
 class CollisionSystem : public entityx::System<CollisionSystem>
 {
