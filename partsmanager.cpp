@@ -63,6 +63,11 @@ void PartsManager::init()
     }
 }
 
+bool PartsManager::is_body_set()
+{
+    return (current_body);
+}
+
 void PartsManager::set_body(const std::string &name)
 {
     if(parts.size() > 0)
