@@ -158,9 +158,16 @@ struct Joint :entityx::Component<Joint>
 
 struct ForcePoint : entityx::Component<ForcePoint>
 {
-	ForcePoint(sf::Vector2f po, sf::Vector2f force) : point(po), force(force)
+	ForcePoint( sf::Vector2f force) : force(force)
 	{}
-	sf::Vector2f point, force;
+	sf::Vector2f force;
+};
+
+struct AttachToPlayerPoint : entityx::Component<AttachToPlayerPoint>
+{
+	AttachToPlayerPoint(sf::Vector2f point) : point(point)
+	{}
+	sf::Vector2f point;
 };
 
 struct KeyAssigned : entityx::Component<KeyAssigned>
@@ -175,6 +182,9 @@ struct isPlayer : entityx::Component<isPlayer>
 {
 };
 struct isLegs : entityx::Component<isLegs>
+{
+};
+struct isEngine : entityx::Component<isLegs>
 {
 };
 struct isPlatform : entityx::Component<isPlatform>

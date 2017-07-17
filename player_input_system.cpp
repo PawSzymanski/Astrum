@@ -66,7 +66,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	if (typeOfShip.size() == 0)
 	{
 		auto &stage = ResourcesManager::getInstanceRef();
-		std::cout << "WYBIERZ JAKIS STATEK DO CHUJA" << std::endl;
+		std::cout << "WYBIERZ JAKIS STATEK" << std::endl;
 		stage.creator_stage.set();	
 	}
 	parser.setSection("color");
@@ -118,49 +118,37 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 		auto &container = ResourcesManager::getInstanceRef().vertCont;
 
-		auto engine = en.create();
+		auto partEn = en.create();
 		
 		sf::Vector2f engineForce = sf::Vector2f(0, -0.2);
 		
 		sf::Transform transForce;
 		transForce.rotate(partDegree);
 		engineForce = transForce * engineForce;
+		
+		partEn.assign<Rotation>(partDegree);
+		partEn.assign<AttachToPlayerPoint>(sf::Vector2f(partPosX, partPosY));
+		partEn.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
+		partEn.assign<Transform>(sf::Vector2f(0, 0), 0);
+		partEn.assign<LinearVelocity>(sf::Vector2f(0, 0));
+
 		std::cout<<std::endl;
 		if (partVert.substr(0, 12) != "landing_legs")
 		{
 			
-			std::cout << "not legs" << std::endl;
-			engine.assign<Rotation>(partDegree);
+			std::cout << "engine loaded" << std::endl;
+			partEn.assign<isEngine>();
 
-			engine.assign<ForcePoint>(sf::Vector2f(partPosX, partPosY), engineForce);
+			partEn.assign<ForcePoint>(engineForce);
 
-			engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+			partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 
-			engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
-
-			engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
-
-			engine.assign<Transform>(sf::Vector2f(0, 0), 0);
+	
 		}
 		else {
-			
-			std::cout << "legs" << std::endl;
-			//phisics.createPolygon(engine, sf::Vector2f(partPosX, partPosY),
-			//	sf::Vector2f(0,0), partDegree, mass, partVert);
-			engine.assign<isLegs>();
-			engine.assign<Rotation>(partDegree);
+			std::cout << "legs loaded" << std::endl;
 
-			engine.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
-
-			engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
-
-			engine.assign<LinearVelocity>(sf::Vector2f(0, 0));
-
-			engine.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
-
-			engine.assign<Transform>(sf::Vector2f(0, 0), 0);
-			//engine.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
-			//engine.assign<ForcePoint>(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
+			partEn.assign<isLegs>();
 		}
 	}
 }
