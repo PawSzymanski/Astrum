@@ -10,3 +10,10 @@ struct ApplyForceEvent
 	sf::Vector2f point, force;
 	entityx::Entity en;
 };
+
+struct CollisionEvent
+{
+    CollisionEvent(entityx::Entity en1, entityx::Entity en2)
+        :en1(en1), en2(en2){}
+    entityx::Entity en1, en2;
+};
