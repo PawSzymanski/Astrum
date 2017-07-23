@@ -42,6 +42,7 @@ bool ButtonMenu::input(sf::Event &ev)
 	{
 		rect.setOutlineThickness(15);
 	}
+	
 
 
     if(ev.type == sf::Event::MouseMoved)

@@ -72,6 +72,8 @@ bool CreatorStage::init()
 
 void CreatorStage::input(sf::Event &event)
 {
+	start_button.rect.setOutlineThickness(8);
+	save_button.rect.setOutlineThickness(8);
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Escape)
@@ -119,7 +121,9 @@ void CreatorStage::input(sf::Event &event)
 
 bool CreatorStage::update(float dt)
 {
-    if(fade_in)
+
+	
+	if(fade_in)
     {
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
@@ -145,6 +149,8 @@ bool CreatorStage::update(float dt)
     for(int i=0; i<4; ++i)
         partbuttons[i].update(dt);
 
+
+	
     //std::cout<<"fade_in "<<fade_in<<std::endl;
     //std::cout<<"fade_out "<<fade_out<<std::endl;
     return true;
