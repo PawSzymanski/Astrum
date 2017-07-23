@@ -1,3 +1,8 @@
+/*
+*
+*
+* Pawe³ Szymañski
+*/
 #include "MenuStage.h"
 #include "ResourceManager.h"
 
@@ -149,9 +154,9 @@ void MenuStage::input(sf::Event & event)
 	auto &resources_manager = ResourcesManager::getInstanceRef();
 	std::cout << actionCode << std::endl;
 	
-	//startButton.rect.setOutlineThickness(8);
-	//optionsButton.rect.setOutlineThickness(8);
-	//exitButton.rect.setOutlineThickness(8);
+	startButton.rect.setOutlineThickness(8);
+	optionsButton.rect.setOutlineThickness(8);
+	exitButton.rect.setOutlineThickness(8);
 	showBar();
 
 	if (startButton.input(event))

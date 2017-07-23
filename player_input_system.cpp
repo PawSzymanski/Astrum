@@ -101,7 +101,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		ConfigParser parser2;
 	
 		
-		//PART INFO LOAD engine maybe legs
+		//PART INFO LOAD engine maybe legs or anything else
 		pathToPart.clear();
 		pathToPart.insert(pathToPart.size(), "resources/parts/");
 		pathToPart.insert(pathToPart.size(), typeOfShip);
