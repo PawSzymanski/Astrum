@@ -126,11 +126,9 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		transForce.rotate(partDegree);
 		engineForce = transForce * engineForce;
 		
-		partEn.assign<Rotation>(partDegree);
+
 		partEn.assign<AttachToPlayerPoint>(sf::Vector2f(partPosX, partPosY));
-		partEn.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
-		partEn.assign<Transform>(sf::Vector2f(0, 0), 0);
-		partEn.assign<LinearVelocity>(sf::Vector2f(0, 0));
+
 
 		std::cout<<std::endl;
 		if (partVert.substr(0, 12) != "landing_legs")
@@ -149,7 +147,15 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			std::cout << "legs loaded" << std::endl;
 
 			partEn.assign<isLegs>();
+            partEn.assign<isSlave>(playerEn);
+            phisics.createPolygon(partEn,sf::Vector2f(0,0),sf::Vector2f(0,0), partDegree, 1, partVert);
+            continue;
 		}
+
+        partEn.assign<Rotation>(partDegree);
+        partEn.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
+        partEn.assign<Transform>(sf::Vector2f(0, 0), 0);
+        partEn.assign<LinearVelocity>(sf::Vector2f(0, 0));
 	}
 }
 
