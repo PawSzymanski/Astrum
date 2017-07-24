@@ -2,7 +2,7 @@
 
 
 
-Container::Container()
+Container::Container() : textureNumber(0)
 {
 }
 
@@ -29,6 +29,13 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
     std::cout << " size :"  <<normals[0].size() << std::endl;
 }
 
+void Container::addTexture(sf::Texture texture, std::string vertexName)
+{
+	textures.push_back(texture);
+	textureIndexesMap.insert(std::pair<std::string, int>(vertexName, textureNumber));
+	++textureNumber;
+}
+
 sf::VertexArray & Container::getPoly(const std::string &name)
 {
 
@@ -50,6 +57,17 @@ std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
     }
 
     return normals.at(indexes[name]);
+}
+
+sf::Texture & Container::getTexture(std::string texture)
+{
+	if (textureIndexesMap.find(texture) == indexes.end())
+	{
+		std::cout << "zla nazwa textury: " << texture << std::endl;
+		assert(false);
+	}
+	return textures[textureIndexesMap[texture]];
+	
 }
 
 Container::~Container()

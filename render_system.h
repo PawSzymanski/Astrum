@@ -4,6 +4,8 @@
 class render_system : public entityx::System<render_system>
 {
 	sf::RenderWindow &win;
+	sf::Texture engineTexture;
+	
 public:
 	render_system(sf::RenderWindow &window);
 

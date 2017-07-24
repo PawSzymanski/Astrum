@@ -74,6 +74,7 @@ void CreatorStage::input(sf::Event &event)
 {
 	start_button.rect.setOutlineThickness(8);
 	save_button.rect.setOutlineThickness(8);
+
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Escape)

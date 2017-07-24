@@ -31,6 +31,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			transEngH = en2.component<Transform>();
 			rotEngH = en2.component<Rotation>();
 			attachPointH = en2.component<AttachToPlayerPoint>();
+			rotEngH = en2.component<Rotation>();
 
 			transEngH->trans = transEngH->defaultTrans;
 
@@ -43,6 +44,8 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 
 			transEngH->trans.translate(posH->pos + attachPointH->point);
 			transEngH->trans.rotate(rotH->degree + rotEngH->degree);
+			//update
+
 			//parts functions///////////////////////////////////////////////////////////////////////////
 			
 			enginePart(en1, en2, ev, attachPointH, rotMatrix);

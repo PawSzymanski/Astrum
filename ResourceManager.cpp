@@ -48,7 +48,7 @@ void ResourcesManager::loadContainer()
         "platform.cfg"
     };
 
-    ConfigParser parser;
+    ConfigParser parser ,parserVer;
 
     for(auto & filename: filenames)
     {
@@ -90,6 +90,22 @@ void ResourcesManager::loadContainer()
 
         vertCont.addPoly(v_array, vec_size, name);
     }
+	//loading texstures to container
+	std::string texturePath("resources/graphics/"), textureName, vertexAssigned;
+
+
+	parser.load("resources/graphics/info.cfg");
+	parserVer.load("resources/graphics/info.cfg");
+	parser.setSection("name");
+	parserVer.setSection("vertexAssigned");
+	while (!parserVer.EndOfSection())
+	{
+		textureName = parser.getString();
+		sf::Texture t;
+		t.loadFromFile(texturePath + textureName);
+		textureCont.addTexture(t, parserVer.getString());
+	}
+
 }
 
 ResourcesManager* ResourcesManager::getInstance()

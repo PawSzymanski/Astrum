@@ -1,10 +1,14 @@
 #include "render_system.h"
-
+#include "ResourceManager.h"
 
 
 render_system::render_system(sf::RenderWindow &window) : win(window)
 {
-
+	//if (!engineTexture.loadFromFile("resources/graphics/engine1.png"))
+	{
+	//	std::cout << "NIE £ADUJE OBRAZKA" << std::endl;
+	}
+	//renderStates.texture(&engineTexture);
 }
 
 void render_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
@@ -15,12 +19,33 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	Transform::Handle trans;
 	VertexArray::Handle vArray;
 	Joint::Handle joint;
-	
 	//std::cout << "render gameplpay, entity size: " << en.size() << std::endl;
 
 	for (auto entity : en.entities_with_components(vArray, trans))
 	{
-		win.draw(vArray->vert, trans->trans);
+		if (entity.has_component<isEngine>())
+		{
+
+			trans = entity.component<Transform>();
+			//sf::BlendMode noBlending = sf::BlendNone;
+			sf::RenderStates renderStates;
+			auto texture = ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine");
+
+			renderStates.texture = &texture;
+			renderStates.transform = trans->trans;
+			
+			vArray->vert[0].texCoords = sf::Vector2f(0, 0);
+			vArray->vert[1].texCoords = sf::Vector2f(0, 20);
+			vArray->vert[2].texCoords = sf::Vector2f(20, 20);
+			vArray->vert[3].texCoords = sf::Vector2f(20, 0);
+
+			win.draw(vArray->vert, renderStates);
+		}
+		else
+		{
+			win.draw(vArray->vert, trans->trans);
+		}
+
 	}
 
 	for (auto entity : en.entities_with_components(circ, pos, line, trans))

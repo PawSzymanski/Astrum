@@ -33,6 +33,7 @@ public:
 	std::string levelInfo;
 	std::string shipInfo;
 	Container vertCont;
+	Container textureCont;
     sf::Font font;
 	sf::RenderWindow window;
 	MenuStage menu_stage;
