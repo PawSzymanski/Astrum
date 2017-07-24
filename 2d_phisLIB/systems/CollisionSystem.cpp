@@ -58,71 +58,87 @@ void CollisionSystem::ResolveCollision(Manifold &m, entityx::EventManager & ev, 
 	for(int i=0; i<m.contactsCount ; ++i)
     {
 		 
-	sf::Vector2f contact1 = m.contacts[i] - posH1->pos,
-		contact2 = m.contacts[i] - posH2->pos;
+        sf::Vector2f contact1 = m.contacts[i] - posH1->pos,
+            contact2 = m.contacts[i] - posH2->pos;
 
-	sf::Vector2f relativeVel = velH2->vel + crossSV(angvelH2->radians(), contact2) -
-		velH1->vel - crossSV(angvelH1->radians(), contact1);
+        sf::Vector2f relativeVel = velH2->vel + crossSV(angvelH2->radians(), contact2) -
+            velH1->vel - crossSV(angvelH1->radians(), contact1);
 
 
-	float contactVel = dot(relativeVel, m.normal);
+        float contactVel = dot(relativeVel, m.normal);
 
-	if (contactVel > 0)
-		return;
-	
-	float relVelLeng = vecLenghtSq(relativeVel);
-	float gravityLeng = vecLenghtSq(gravity) * dt;
+        if (contactVel > 0)
+            return;
 
-	if (relVelLeng < gravityLeng + EPSILON )
-	{
-		restitution = 0.f;
-	}
-	float velLengh1 = vecLenghtSq(velH1->vel),
-		velLenght2 =  vecLenghtSq(velH2->vel);
+        float relVelLeng = vecLenghtSq(relativeVel);
+        float gravityLeng = vecLenghtSq(gravity) * dt;
 
-	if (abs_f(crossVV(m.normal, gravity) < EPSILON && dot(m.normal, gravity) < 0) && velLenght2 < gravityLeng + EPSILON)
-	{
-		isRestH1->isIt = true;
-	}
-	
-	if (abs_f(crossVV(m.normal, gravity) < EPSILON && dot(m.normal, gravity) < 0) && velLengh1 < EPSILON + gravityLeng)
-	{
-		isRestH2->isIt = true;
-	}
+        if (relVelLeng < gravityLeng + EPSILON )
+        {
+            restitution = 0.f;
+        }
+        float velLengh1 = vecLenghtSq(velH1->vel),
+            velLenght2 =  vecLenghtSq(velH2->vel);
 
-	float contact1XNormal = crossVV(contact1, m.normal);
-	float contact2XNormal = crossVV(contact2, m.normal);
-	float invMassSum = massH1->invMass + massH2->invMass + sqr(contact1XNormal) *inertH1->invI + sqr(contact2XNormal) *inertH2->invI;
+        if (abs_f(crossVV(m.normal, gravity) < EPSILON && dot(m.normal, gravity) < 0) && velLenght2 < gravityLeng + EPSILON)
+        {
+            isRestH1->isIt = true;
+        }
 
-	float force = -(1.0f + restitution) * contactVel;
-	force /= invMassSum;
+        if (abs_f(crossVV(m.normal, gravity) < EPSILON && dot(m.normal, gravity) < 0) && velLengh1 < EPSILON + gravityLeng)
+        {
+            isRestH2->isIt = true;
+        }
 
-	m.force =  m.normal * force;
-	//friction 
+        float contact1XNormal = crossVV(contact1, m.normal);
+        float contact2XNormal = crossVV(contact2, m.normal);
+        float invMassSum = massH1->invMass + massH2->invMass + sqr(contact1XNormal) *inertH1->invI + sqr(contact2XNormal) *inertH2->invI;
 
-	sf::Vector2f t =( relativeVel - ( m.normal * dot(relativeVel, m.normal)));
-	t= vecNormalize(t);
-	//std::cout << "friction: " << t.x <<" "<<t.y<< std::endl;
+        float force = -(1.0f + restitution) * contactVel;
+        force /= invMassSum;
 
-	float jt = -dot(relativeVel, t);
+        m.force =  m.normal * force;
+        //friction
 
-	jt /= invMassSum;
+        sf::Vector2f t =( relativeVel - ( m.normal * dot(relativeVel, m.normal)));
+        t= vecNormalize(t);
+        //std::cout << "friction: " << t.x <<" "<<t.y<< std::endl;
 
-	if (!equal(jt, 0.0f))
-	{
-		sf::Vector2f frictionImpulse;
+        float jt = -dot(relativeVel, t);
 
-		if (abs_f(jt) < force * 0.7)
-			frictionImpulse = t *jt;
-		else
-			frictionImpulse = t * -force * 0.5f;
+        jt /= invMassSum;
 
-		if (vecLenghtSq(frictionImpulse) > 0.001f)
-		m.force += frictionImpulse;
-	}
-	m.force /= static_cast<float>(m.contactsCount);
-	ev.emit<ApplyForceEvent>(contact2, m.force, m.en2);
-	ev.emit<ApplyForceEvent>(contact1, -m.force, m.en1);
+        if (!equal(jt, 0.0f))
+        {
+            sf::Vector2f frictionImpulse;
+
+            if (abs_f(jt) < force * 0.7)
+                frictionImpulse = t *jt;
+            else
+                frictionImpulse = t * -force * 0.5f;
+
+            if (vecLenghtSq(frictionImpulse) > 0.001f)
+            m.force += frictionImpulse;
+        }
+        m.force /= static_cast<float>(m.contactsCount);
+
+        entityx::Entity temp_en1 = m.en1;
+        entityx::Entity temp_en2 = m.en2;
+
+        if(m.en2.has_component<isSlave>())
+        {
+            isSlave::Handle slave = m.en2.component<isSlave>();
+            temp_en2 = slave->master;
+            std::cout<<"SLAVEEEEEEE"<<std::endl;
+        }
+        if(m.en1.has_component<isSlave>())
+        {
+            isSlave::Handle slave = m.en2.component<isSlave>();
+            temp_en1 = slave->master;
+            std::cout<<"SLAVEEEEEEE"<<std::endl;
+        }
+        ev.emit<ApplyForceEvent>(contact2, m.force, temp_en2);
+        ev.emit<ApplyForceEvent>(contact1, -m.force, temp_en1);
 	}
 }
 
@@ -168,7 +184,7 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 		}
 		IsResting::Handle isRestingH = ens[i].component<IsResting>();
         Mass::Handle mass = ens[i].component<Mass>();
-		if (!isRestingH->isIt)
+        if (!isRestingH->isIt && !ens[i].has_component<isSlave>())
            ev.emit<ApplyForceEvent>(sf::Vector2f(0, 0), gravity * mass->mass * static_cast<float>(dt), ens[i]); //GRAWITEJSZYN
 
 		isRestingH->isIt = false;

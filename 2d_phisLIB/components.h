@@ -191,4 +191,11 @@ struct isPlatform : entityx::Component<isPlatform>
 {
 };
 
+struct isSlave : entityx::Component<isSlave>
+{
+    isSlave(entityx::Entity master)
+        :master(master){}
+    entityx::Entity master;
+};
+
 
