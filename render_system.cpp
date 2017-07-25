@@ -37,9 +37,9 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			renderStates.transform = trans->trans;
 			
 			vArray->vert[0].texCoords = sf::Vector2f(0, 0);
-			vArray->vert[1].texCoords = sf::Vector2f(30, 0);
-			vArray->vert[2].texCoords = sf::Vector2f(30, 20);
-			vArray->vert[3].texCoords = sf::Vector2f(0, 20);
+			vArray->vert[1].texCoords = sf::Vector2f(31, 0);
+			vArray->vert[2].texCoords = sf::Vector2f(31, 24);
+			vArray->vert[3].texCoords = sf::Vector2f(0, 24);
 
 			win.draw(vArray->vert, renderStates);
 		}
