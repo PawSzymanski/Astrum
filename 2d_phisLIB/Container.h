@@ -21,6 +21,7 @@ public:
 	void addTexture(sf::Texture texture, std::string vertexName);
     sf::VertexArray & getPoly(const std::string& name);
     std::vector <sf::Vector2f> & getNormals(const std::string& name);
+    bool isTexture( std::string texture);
 	sf::Texture & getTexture(std::string texture);
 
 	~Container();

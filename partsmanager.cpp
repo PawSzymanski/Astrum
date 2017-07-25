@@ -53,6 +53,16 @@ void PartsManager::init()
             new_part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(new_part.name));
             new_part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(new_part.name));
 
+            std::cout<<"textures size: "<<ResourcesManager::getInstanceRef().vertCont.textures.size()<<std::endl;
+
+            std::cout<<new_part.name<< " is texture = ";
+            if(new_part.name == "small_engine" ||new_part.name == "large_engine")
+                {new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
+                std::cout<<"true"<<std::endl;}
+            else
+                {new_part.texture = nullptr;
+                std::cout<<"false"<<std::endl;}
+
             new_part.trans = sf::Transform();
             new_part.trans.translate(npos);
             new_part.trans.rotate(new_part.rot);
@@ -85,7 +95,16 @@ void PartsManager::add_part(const std::string &name)
 
     sf::VertexArray &temp = ResourcesManager::getInstanceRef().vertCont.getPoly(name);
     std::vector <sf::Vector2f> &temp_normals = ResourcesManager::getInstanceRef().vertCont.getNormals(name);
-    parts.push_back(Part(name, temp, temp_normals));
+
+    Part new_part(name, temp, temp_normals);
+
+    if(ResourcesManager::getInstanceRef().vertCont.isTexture(new_part.name))
+        new_part.texture = &(ResourcesManager::getInstanceRef().vertCont.getTexture(new_part.name));
+    else
+        new_part.texture = nullptr;
+
+    parts.push_back(new_part);
+
     latch_part =  &(parts.at( parts.size() -1 ));
 }
 
@@ -257,7 +276,19 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
             sf::Vertex(p.trans * sf::Vector2f(0,0.4f), sf::Color::White)
         };
 
-        target.draw(*(p.v_array), p.trans);
+        sf::RenderStates renderStates;
+
+        renderStates.texture = p.texture;
+        renderStates.transform = p.trans;
+        if(p.texture != nullptr)
+            std::cout<<"jest TEXTURAAA"<<std::endl;
+
+        p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
+        p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
+        p.v_array[0][2].texCoords = sf::Vector2f(31, 24);
+        p.v_array[0][3].texCoords = sf::Vector2f(0, 24);
+
+        target.draw(*(p.v_array), renderStates);
         target.draw(line,2,sf::Lines);
 
         sf::Text key;

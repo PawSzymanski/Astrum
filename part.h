@@ -19,7 +19,7 @@ struct Part
         :name(s), v_array(&v), normals(&normals), trans(sf::Transform()), pos(sf::Vector2f(0,0)), key("A"), rot(0.0f) {}
 
     Part(const Part & other)
-        :name(other.name), v_array(other.v_array), normals(other.normals),
+        :name(other.name), v_array(other.v_array), texture(other.texture), normals(other.normals),
           trans(other.trans), pos(other.pos), key(other.key), rot(other.rot){}
 
     Part & operator =(Part && other){
@@ -34,6 +34,7 @@ struct Part
 
     std::string name;
     sf::VertexArray * v_array;
+    sf::Texture * texture;
     std::vector< sf::Vector2f > * normals;
     sf::Transform trans;
     sf::Vector2f pos;

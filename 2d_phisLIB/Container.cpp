@@ -59,9 +59,14 @@ std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
     return normals.at(indexes[name]);
 }
 
+bool Container::isTexture(std::string texture)
+{
+    return (textureIndexesMap.find(texture) != textureIndexesMap.end());
+}
+
 sf::Texture & Container::getTexture(std::string texture)
 {
-	if (textureIndexesMap.find(texture) == indexes.end())
+    if (textureIndexesMap.find(texture) == textureIndexesMap.end())
 	{
 		std::cout << "zla nazwa textury: " << texture << std::endl;
 		assert(false);
