@@ -23,6 +23,8 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 
 	for (auto entity : en.entities_with_components(vArray, trans))
 	{
+
+		//TUTAJ SIE ZMIENI JAK WSZYSTKIE ENTITY BEDA MIA£Y TEXTURY NARAZI BEDZIE TAK
 		if (entity.has_component<isEngine>())
 		{
 
@@ -35,9 +37,9 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			renderStates.transform = trans->trans;
 			
 			vArray->vert[0].texCoords = sf::Vector2f(0, 0);
-			vArray->vert[1].texCoords = sf::Vector2f(0, 20);
-			vArray->vert[2].texCoords = sf::Vector2f(20, 20);
-			vArray->vert[3].texCoords = sf::Vector2f(20, 0);
+			vArray->vert[1].texCoords = sf::Vector2f(30, 0);
+			vArray->vert[2].texCoords = sf::Vector2f(30, 20);
+			vArray->vert[3].texCoords = sf::Vector2f(0, 20);
 
 			win.draw(vArray->vert, renderStates);
 		}
