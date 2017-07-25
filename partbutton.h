@@ -18,6 +18,7 @@ class PartButton : public sf::Drawable
 
     bool has_mouse;
     sf::VertexArray * v_array;
+    sf::Texture *texture;
     float rot;
 
     std::string part_name;
