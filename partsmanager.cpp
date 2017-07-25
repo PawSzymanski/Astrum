@@ -98,10 +98,13 @@ void PartsManager::add_part(const std::string &name)
 
     Part new_part(name, temp, temp_normals);
 
-    if(ResourcesManager::getInstanceRef().vertCont.isTexture(new_part.name))
-        new_part.texture = &(ResourcesManager::getInstanceRef().vertCont.getTexture(new_part.name));
+    std::cout<<new_part.name<< " is texture = ";
+    if(new_part.name == "small_engine" ||new_part.name == "large_engine")
+        {new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
+        std::cout<<"true"<<std::endl;}
     else
-        new_part.texture = nullptr;
+        {new_part.texture = nullptr;
+        std::cout<<"false"<<std::endl;}
 
     parts.push_back(new_part);
 
@@ -280,8 +283,7 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
         renderStates.texture = p.texture;
         renderStates.transform = p.trans;
-        if(p.texture != nullptr)
-            std::cout<<"jest TEXTURAAA"<<std::endl;
+
 
         p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
         p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
