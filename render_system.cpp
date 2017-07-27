@@ -27,7 +27,6 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		//TUTAJ SIE ZMIENI JAK WSZYSTKIE ENTITY BEDA MIA£Y TEXTURY NARAZI BEDZIE TAK
 		if (entity.has_component<isEngine>())
 		{
-
 			trans = entity.component<Transform>();
 			//sf::BlendMode noBlending = sf::BlendNone;
 			sf::RenderStates renderStates;
@@ -36,11 +35,6 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			renderStates.texture = &texture;
 			renderStates.transform = trans->trans;
 			
-			vArray->vert[0].texCoords = sf::Vector2f(0, 0);
-			vArray->vert[1].texCoords = sf::Vector2f(31, 0);
-			vArray->vert[2].texCoords = sf::Vector2f(31, 24);
-			vArray->vert[3].texCoords = sf::Vector2f(0, 24);
-
 			win.draw(vArray->vert, renderStates);
 		}
 		else

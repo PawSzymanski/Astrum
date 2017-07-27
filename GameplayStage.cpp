@@ -31,14 +31,11 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<render_system>(window);
 
-	
-
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
     fps_text.setFont(ResourcesManager::getInstanceRef().font);
     fps_text.setPosition(sf::Vector2f(60,20));
     fps_text.setString("NULL");
-
 
     return true;
 }

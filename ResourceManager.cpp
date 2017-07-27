@@ -106,6 +106,7 @@ void ResourcesManager::loadContainer()
 		textureCont.addTexture(t, parserVer.getString());
 	}
 
+
 }
 
 ResourcesManager* ResourcesManager::getInstance()
