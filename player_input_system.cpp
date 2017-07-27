@@ -56,8 +56,10 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	}
 	std::cout << shipInfo << std::endl;
 	parser.setSection("body_info");
-	std::string typeOfShip, shipColor;
 	
+	std::string typeOfShip, shipColor;
+	float actualEngineForce;
+
 	while (!parser.EndOfSection())
 	{
 		typeOfShip = parser.getString();
@@ -93,7 +95,8 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	
 	while (!parser.EndOfSection())
 	{
-		typeOfShip = parser.getString();
+		
+		typeOfShip = parser.getString();//type of part
 		partPosX = parser.getFloat();
 		partPosY = parser.getFloat();
 		partDegree = parser.getFloat();
@@ -120,7 +123,11 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 		auto partEn = en.create();
 		
-		sf::Vector2f engineForce = sf::Vector2f(0, -0.2);
+		parser2.setSection("engineForce");
+		actualEngineForce = parser2.getFloat();
+		std::cout << " ENGINE FORCE :" << actualEngineForce << std::endl;
+
+		sf::Vector2f engineForce = sf::Vector2f(0, -actualEngineForce);
 		
 		sf::Transform transForce;
 		transForce.rotate(partDegree);
@@ -160,7 +167,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		
 		VertexArray::Handle vArray;
 		vArray = partEn.component<VertexArray>();
-		std::cout << " AAAAAAAAAAAAAAAAA" << std::endl;
 		int imX , imY;
 		for (int i = 0; i < 4; ++i)
 		{
