@@ -13,7 +13,8 @@ struct ApplyForceEvent
 
 struct CollisionEvent
 {
-    CollisionEvent(entityx::Entity en1, entityx::Entity en2)
-        :en1(en1), en2(en2){}
+    CollisionEvent(entityx::Entity en1, entityx::Entity en2, float relVel)
+        :en1(en1), en2(en2), relVel(relVel){}
     entityx::Entity en1, en2;
+    float relVel;
 };

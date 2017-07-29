@@ -45,7 +45,7 @@ sf::VertexArray & Container::getPoly(const std::string &name)
         assert(false);
     }
 
-    return vertexArrays.at(indexes[name]);
+    return vertexArrays[indexes[name]];
 }
 
 std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)

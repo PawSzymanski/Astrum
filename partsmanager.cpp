@@ -284,11 +284,13 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
         renderStates.texture = p.texture;
         renderStates.transform = p.trans;
 
-
-        p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
-        p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
-        p.v_array[0][2].texCoords = sf::Vector2f(31, 24);
-        p.v_array[0][3].texCoords = sf::Vector2f(0, 24);
+        std::cout<<std::endl<<"texCoords:"<<std::endl;
+        for(int i=0; i<4;++i)
+        std::cout<<p.v_array[0][0].texCoords.x<<"   "<<p.v_array[0][0].texCoords.y<<std::endl;
+//        p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
+//        p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
+//        p.v_array[0][2].texCoords = sf::Vector2f(31, 24);
+//        p.v_array[0][3].texCoords = sf::Vector2f(0, 24);
 
         target.draw(*(p.v_array), renderStates);
         target.draw(line,2,sf::Lines);

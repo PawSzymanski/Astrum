@@ -160,20 +160,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
         partEn.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
         partEn.assign<Transform>(sf::Vector2f(0, 0), 0);
         partEn.assign<LinearVelocity>(sf::Vector2f(0, 0));
-
-		//loading imige vertexes
-		parser3.load("resources/graphics/info.cfg");
-		parser3.setSection("imageVertexes");
-		
-		VertexArray::Handle vArray;
-		vArray = partEn.component<VertexArray>();
-		int imX , imY;
-		for (int i = 0; i < 4; ++i)
-		{
-			imX = parser3.getFloat();
-			imY = parser3.getFloat();
-			vArray->vert[i].texCoords = sf::Vector2f(imX, imY);
-		}
 	}
 }
 

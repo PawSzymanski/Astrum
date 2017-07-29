@@ -16,4 +16,5 @@ struct Manifold
 	uint8_t contactsCount;
 	sf::Vector2f contacts[2];
 	sf::Vector2f force;
+    float relVel;
 };

@@ -34,6 +34,7 @@ void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font, std::s
 
     auto & resource = ResourcesManager::getInstanceRef();
     v_array = &(resource.vertCont.getPoly(name));
+
     if(part_name == "small_engine" || part_name == "large_engine")
         texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
     else
@@ -95,14 +96,14 @@ void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
     sf::RenderStates united_states;
 
 
-        v_array[0][0].texCoords = sf::Vector2f(0, 0);
-        v_array[0][1].texCoords = sf::Vector2f(31, 0);
-        v_array[0][2].texCoords = sf::Vector2f(31, 24);
-        v_array[0][3].texCoords = sf::Vector2f(0, 24);
+    //v_array[0][0].texCoords = sf::Vector2f(0, 0);
+    //v_array[0][1].texCoords = sf::Vector2f(31, 0);
+    //v_array[0][2].texCoords = sf::Vector2f(31, 24);
+    //v_array[0][3].texCoords = sf::Vector2f(0, 24);
 
-        united_states.texture = texture;
-        united_states.transform = trans;
-        target.draw(*v_array, states);
+    united_states.texture = texture;
+    united_states.transform = trans;
+    target.draw(*v_array, united_states);
 
 
     target.draw(rect);

@@ -64,13 +64,14 @@ void CollisionSystem::ResolveCollision(Manifold &m, entityx::EventManager & ev, 
         sf::Vector2f relativeVel = velH2->vel + crossSV(angvelH2->radians(), contact2) -
             velH1->vel - crossSV(angvelH1->radians(), contact1);
 
-
         float contactVel = dot(relativeVel, m.normal);
 
         if (contactVel > 0)
             return;
 
         float relVelLeng = vecLenghtSq(relativeVel);
+        m.relVel = relVelLeng;
+
         float gravityLeng = vecLenghtSq(gravity) * dt;
 
         if (relVelLeng < gravityLeng + EPSILON )
@@ -175,10 +176,11 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 
 			if (!m.contactsCount)
 				continue;
-
-            ev.emit<CollisionEvent>(ens[i], ens[j]);
 		
 			ResolveCollision(m,ev,dt);
+
+            //std::cout<<"rel_vel: "<<m.relVel<<std::endl;
+            ev.emit<CollisionEvent>(ens[i], ens[j], m.relVel);
 					
 			PositionalCorrection(m);
 		}

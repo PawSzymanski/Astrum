@@ -5,6 +5,7 @@
 #include "engine_system.h"
 #include "player_input_system.h"
 #include "render_system.h"
+#include "destructionsystem.h"
 
 
 class GameplayStage : public GameStage

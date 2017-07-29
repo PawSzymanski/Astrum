@@ -45,14 +45,16 @@ void ResourcesManager::loadContainer()
         "crane.cfg",
         "wall.cfg",
         "potato.cfg",
-        "platform.cfg"
+        "platform.cfg",
+        "small_engine_fire.cfg"
     };
 
-    ConfigParser parser ,parserVer;
+    ConfigParser parser;
 
     for(auto & filename: filenames)
     {
         std::vector <sf::Vector2f> vert_vec;
+        std::vector <sf::Vector2f> image_vec;
         std::string name;
         parser.load(dir+filename);
         parser.setSection("name");
@@ -66,6 +68,19 @@ void ResourcesManager::loadContainer()
             v.y = parser.getFloat();
             std::cout<<v.x<<" "<<v.y<<std::endl;
             vert_vec.push_back(v);
+        }
+
+        if(parser.setSection("texCoords"))
+        {
+            std::cout<<"JEST TEXCOORDS"<<std::endl;
+            while (!parser.EndOfSection())
+            {
+                sf::Vector2f v;
+                v.x = parser.getFloat();
+                v.y = parser.getFloat();
+                std::cout<<v.x<<" "<<v.y<<std::endl;
+                image_vec.push_back(v);
+            }
         }
 
         sf::Color color;
@@ -86,6 +101,8 @@ void ResourcesManager::loadContainer()
         {
             v_array[i].position = vert_vec[i];
             v_array[i].color = color;
+            if(i<image_vec.size())
+                v_array[i].texCoords = image_vec[i];
         }
 
         vertCont.addPoly(v_array, vec_size, name);
@@ -95,17 +112,15 @@ void ResourcesManager::loadContainer()
 
 
 	parser.load("resources/graphics/info.cfg");
-	parserVer.load("resources/graphics/info.cfg");
 	parser.setSection("name");
-	parserVer.setSection("vertexAssigned");
-	while (!parserVer.EndOfSection())
+    while (!parser.EndOfSection())
 	{
 		textureName = parser.getString();
+        std::string partName = parser.getString();
 		sf::Texture t;
 		t.loadFromFile(texturePath + textureName);
-		textureCont.addTexture(t, parserVer.getString());
+        textureCont.addTexture(t, partName);
 	}
-
 
 }
 
