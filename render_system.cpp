@@ -19,6 +19,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	Transform::Handle trans;
 	VertexArray::Handle vArray;
 	Joint::Handle joint;
+    AdditionalAnim::Handle anim;
 	//std::cout << "render gameplpay, entity size: " << en.size() << std::endl;
 
 	for (auto entity : en.entities_with_components(vArray, trans))
@@ -43,6 +44,14 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		}
 
 	}
+
+    for(auto entity : en.entities_with_components(trans, anim))
+    {
+        sf::RenderStates states;
+        states.texture = anim->texture;
+        states.transform = trans->trans;
+        win.draw(anim->v_array, states);
+    }
 
 	for (auto entity : en.entities_with_components(circ, pos, line, trans))
 	{

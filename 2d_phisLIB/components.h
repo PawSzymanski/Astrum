@@ -198,4 +198,14 @@ struct isSlave : entityx::Component<isSlave>
     entityx::Entity master;
 };
 
+struct AdditionalAnim : entityx::Component<AdditionalAnim>
+{
+     AdditionalAnim(sf::Texture * tex, sf::VertexArray & v_array, float fps)
+        :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false){}
+    sf::Texture * texture;
+    sf::VertexArray & v_array;
+    int frame_x, frame_y;
+    float fps;
+    bool animate;
+};
 

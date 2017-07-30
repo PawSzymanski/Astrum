@@ -1,3 +1,10 @@
+/*
+ *  destructionsystem.h
+ *
+ *  Created: 2017-07-29
+ *   Author: Patryk Wojtanowski
+ */
+
 #ifndef DESTRUCTIONSYSTEM_H
 #define DESTRUCTIONSYSTEM_H
 
@@ -7,6 +14,10 @@
 
 class DestructionSystem : public entityx::System<DestructionSystem>, public entityx::Receiver<DestructionSystem>
 {
+    AdditionalAnim::Handle boom_anim;
+    entityx::Entity player;
+    sf::Clock clock;
+    sf::Time time;
 
 public:
     DestructionSystem(entityx::EntityX &ex);

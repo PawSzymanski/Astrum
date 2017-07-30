@@ -46,7 +46,8 @@ void ResourcesManager::loadContainer()
         "wall.cfg",
         "potato.cfg",
         "platform.cfg",
-        "small_engine_fire.cfg"
+        "small_engine_fire.cfg",
+        "explosion.cfg"
     };
 
     ConfigParser parser;
@@ -83,9 +84,11 @@ void ResourcesManager::loadContainer()
             }
         }
 
+        bool has_color = false;
         sf::Color color;
         if(parser.setSection("color"))
         {
+            has_color = true;
             std::string c = parser.getString();
             if(sf_colors.find(c) == sf_colors.end())
             {
@@ -100,7 +103,8 @@ void ResourcesManager::loadContainer()
         for(int i=0; i<vec_size; ++i)
         {
             v_array[i].position = vert_vec[i];
-            v_array[i].color = color;
+            if(has_color)
+                v_array[i].color = color;
             if(i<image_vec.size())
                 v_array[i].texCoords = image_vec[i];
         }
