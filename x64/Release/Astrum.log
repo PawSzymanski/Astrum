@@ -1,24 +1,27 @@
-﻿  render_system.cpp
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)'
+﻿  destructionsystem.cpp
+destructionsystem.cpp(34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+destructionsystem.cpp(35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+destructionsystem.cpp(36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+destructionsystem.cpp(37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty,sf::VertexArray&,float>(entityx::Entity::Id,_Ty &&,sf::VertexArray &,float &&)' being compiled
           with
           [
-              Derived=Line
+              Derived=AdditionalAnim,
+              C=AdditionalAnim,
+              _Ty=sf::Texture *
           ]
-  render_system.cpp(58): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
+  destructionsystem.cpp(59): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<AdditionalAnim,sf::Texture*,sf::VertexArray&,float>(sf::Texture *&&,sf::VertexArray &,float &&)' being compiled
           with
           [
-              Derived=Line
+              Derived=AdditionalAnim
           ]
-  render_system.cpp(58): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
-          with
-          [
-              Derived=Line
-          ]
+  gameoverstage.cpp
   Generating code
-  73 of 4383 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    14 functions had inline decision re-evaluated but remain unchanged
+  381 of 4670 functions ( 8.2%) were compiled, the rest were copied from previous compilation.
+    291 functions were new in current compilation
+    742 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
