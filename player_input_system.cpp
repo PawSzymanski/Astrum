@@ -138,16 +138,22 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 
 		std::cout<<std::endl;
-		if (partVert.substr(0, 12) != "landing_legs")
+        if (partVert == "crane")
+        {
+            partEn.assign<isCrane>();
+
+            partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+        }
+        else if (partVert == "small_engine" || partVert == "large_engine")
 		{
 			std::cout << "engine loaded" << std::endl;
 			partEn.assign<isEngine>();
 
 			partEn.assign<ForcePoint>(engineForce);
 
-			partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+            partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 		}
-		else {
+        else{
 			std::cout << "legs loaded" << std::endl;
 
 			partEn.assign<isLegs>();

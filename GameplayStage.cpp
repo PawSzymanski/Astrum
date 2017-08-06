@@ -31,6 +31,7 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
 	(*ex_ptr).systems.add<render_system>(window);
     (*ex_ptr).systems.add<DestructionSystem>(*ex_ptr);
+    (*ex_ptr).systems.add<CraneSystem>(*ex_ptr);
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
@@ -49,7 +50,7 @@ bool GameplayStage::update(float dt)
 	(*phisics_ptr).update(dt);
 	(*ex_ptr).systems.update<engine_system>(dt);
     (*ex_ptr).systems.update<DestructionSystem>(dt);
-	
+    (*ex_ptr).systems.update<CraneSystem>(dt);
 	
 	return true;
 }
