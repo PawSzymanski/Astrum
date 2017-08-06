@@ -81,11 +81,6 @@ void engine_system::receive(const ApplyForceEvent & ev)
 	LinearVelocity::Handle velH;
 	entityx::Entity en = ev.en;
 	velH = en.component<LinearVelocity>();
-	//std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
-	
-	//if (vecLenght(velH->vel) > 0.5)
-	//	std::cout << " lenghhhhhh: " << vecLenght(velH->vel) << std::endl;
-	//if (vecLenght(vecLenght))
 }
 
 

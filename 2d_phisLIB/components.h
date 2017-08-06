@@ -177,7 +177,7 @@ struct KeyAssigned : entityx::Component<KeyAssigned>
 	{}
 	sf::Keyboard::Key key;
 };
-
+//
 struct isPlayer : entityx::Component<isPlayer>
 {
 };
@@ -190,7 +190,7 @@ struct isEngine : entityx::Component<isLegs>
 struct isPlatform : entityx::Component<isPlatform>
 {
 };
-
+//
 struct isSlave : entityx::Component<isSlave>
 {
     isSlave(entityx::Entity master)

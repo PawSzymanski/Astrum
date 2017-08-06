@@ -44,9 +44,19 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 		auto poly = en.create();
 		
+		//assigning component type
+		if (typeOfElement == "platform")
+		{
+			poly.assign<isPlatform>();
+			std::cout << "PLATFORM LOADED" << std::endl;
+		}
+		else if (typeOfElement == "wall")
+		{
+			 std::cout << " WALL LOADED" << std::endl;
+		}
+
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
-	
 	}
 
 	//SHIP

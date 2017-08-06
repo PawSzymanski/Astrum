@@ -6,6 +6,7 @@
 #include "player_input_system.h"
 #include "render_system.h"
 #include "destructionsystem.h"
+#include "platform_manager.h"
 
 
 class GameplayStage : public GameStage
