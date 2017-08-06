@@ -180,8 +180,8 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 			ResolveCollision(m,ev,dt);
 
             //std::cout<<"rel_vel: "<<m.relVel<<std::endl;
-            ev.emit<CollisionEvent>(ens[i], ens[j], m.relVel);
-					
+			ev.emit<CollisionEvent>(ens[i], ens[j], m.relVel);
+			
 			PositionalCorrection(m);
 		}
 		IsResting::Handle isRestingH = ens[i].component<IsResting>();
