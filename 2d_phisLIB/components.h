@@ -222,3 +222,12 @@ struct AdditionalAnim : entityx::Component<AdditionalAnim>
     bool animate;
 };
 
+struct isCrane :entityx::Component<isCrane>
+{
+    isCrane()
+        :extended(false), atached(false), block(false){}
+    bool extended;
+    bool atached;
+    bool block;
+};
+

@@ -6,9 +6,9 @@
 #include "player_input_system.h"
 #include "render_system.h"
 #include "destructionsystem.h"
+#include "cranesystem.h"
 #include "platform_manager.h"
 #include "animations_system.h"
-
 
 class GameplayStage : public GameStage
 {

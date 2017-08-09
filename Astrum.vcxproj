@@ -166,6 +166,7 @@
     <ClCompile Include="configcreator.cpp" />
     <ClCompile Include="configparser.cpp" />
     <ClCompile Include="Conversion.cpp" />
+    <ClCompile Include="cranesystem.cpp" />
     <ClCompile Include="creatorstage.cpp" />
     <ClCompile Include="destructionsystem.cpp" />
     <ClCompile Include="dirreader.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="configcreator.h" />
     <ClInclude Include="configparser.h" />
     <ClInclude Include="Conversion.h" />
+    <ClInclude Include="cranesystem.h" />
     <ClInclude Include="creatorstage.h" />
     <ClInclude Include="destructionsystem.h" />
     <ClInclude Include="dirreader.h" />

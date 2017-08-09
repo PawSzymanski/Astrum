@@ -129,6 +129,9 @@
     <ClCompile Include="animations_system.cpp">
       <Filter>Source Files\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="cranesystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -253,6 +256,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animations_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cranesystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
