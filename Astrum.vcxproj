@@ -161,6 +161,7 @@
     <ClCompile Include="2d_phisLIB\systems\jointsystem.cpp" />
     <ClCompile Include="2d_phisLIB\systems\MouseDragSystem.cpp" />
     <ClCompile Include="2d_phisLIB\systems\MovementSystem.cpp" />
+    <ClCompile Include="animations_system.cpp" />
     <ClCompile Include="ButtonMenu.cpp" />
     <ClCompile Include="configcreator.cpp" />
     <ClCompile Include="configparser.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="2d_phisLIB\systems\jointsystem.h" />
     <ClInclude Include="2d_phisLIB\systems\MouseDragSystem.h" />
     <ClInclude Include="2d_phisLIB\systems\MovementSystem.h" />
+    <ClInclude Include="animations_system.h" />
     <ClInclude Include="ButtonMenu.h" />
     <ClInclude Include="configcreator.h" />
     <ClInclude Include="configparser.h" />

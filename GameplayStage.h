@@ -7,6 +7,7 @@
 #include "render_system.h"
 #include "destructionsystem.h"
 #include "platform_manager.h"
+#include "animations_system.h"
 
 
 class GameplayStage : public GameStage

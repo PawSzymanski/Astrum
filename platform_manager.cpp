@@ -38,8 +38,6 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 	else 
 	{
 	}
-
-	
 }
 
 void platform_manager::receive(const CollisionEvent & ev)

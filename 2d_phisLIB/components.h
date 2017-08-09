@@ -200,10 +200,23 @@ struct isSlave : entityx::Component<isSlave>
 
 struct AdditionalAnim : entityx::Component<AdditionalAnim>
 {
-     AdditionalAnim(sf::Texture * tex, sf::VertexArray & v_array, float fps)
-        :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false){}
-    sf::Texture * texture;
+     AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps)
+		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name)
+	 {	 
+		 clock.restart();
+	 }
+	 AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps, sf::Transform trans)
+		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name), transMatrix(trans)
+	 {
+		 clock.restart();
+	 }
+	sf::Time time;
+	sf::Clock clock;
+	sf::Texture * texture;
     sf::VertexArray & v_array;
+	sf::Transform transMatrix;
+	std::string nameOfAnim; //name in info file in "resources" folder
+
     int frame_x, frame_y;
     float fps;
     bool animate;

@@ -2,8 +2,17 @@
 
 
 
-Container::Container() : textureNumber(0)
+Container::Container() : textureNumber(0), animationNumber(0)
 {
+}
+
+void Container::addAnimation(std::string name, sf::Vector2f frameSize, float speed)
+{
+	textureIndexesMap.insert(std::pair<std::string, int>(name, animationNumber));
+	animationFrameSize.push_back(frameSize);
+	animationSpeed.push_back(speed);
+
+	++animationNumber;
 }
 
 void Container::addPoly(sf::VertexArray & v, int size, std::string name)
@@ -73,6 +82,17 @@ sf::Texture & Container::getTexture(std::string texture)
 	}
 	return textures[textureIndexesMap[texture]];
 	
+}
+
+
+sf::Vector2f Container::getAnimationFrameSize(std::string texture)
+{
+	return animationFrameSize[animationIndexesMap[texture]];
+}
+
+float Container::getAnimationSpeed(sf::String texture)
+{
+	return animationSpeed[animationIndexesMap[texture]];
 }
 
 Container::~Container()

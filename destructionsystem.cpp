@@ -9,14 +9,13 @@
 #include "ResourceManager.h"
 
 DestructionSystem::DestructionSystem(entityx::EntityX &ex)
-    :time(sf::Time::Zero)
 {
     ex.events.subscribe<CollisionEvent>(*this);
 }
 
 void DestructionSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, double dt)
 {
-    time += clock.restart();
+   /* time += clock.restart();
     if(!boom_anim.valid())
         return;
 
@@ -37,7 +36,7 @@ void DestructionSystem::update(entityx::EntityManager &en, entityx::EventManager
             array[3].texCoords = sf::Vector2f(boom_anim->frame_x*100 + 100,boom_anim->frame_y*100);
             std::cout<<"ANIM"<<std::endl;
         }
-    }
+    }*/
 }
 
 void DestructionSystem::receive(const CollisionEvent &ev)
@@ -56,9 +55,13 @@ void DestructionSystem::receive(const CollisionEvent &ev)
         return;
 
     auto & resource = ResourcesManager::getInstanceRef();
-    boom_anim = player.assign<AdditionalAnim>(&(resource.textureCont.getTexture("explosion")), resource.vertCont.getPoly("explosion"), 20.0f);
-    boom_anim->animate = true;
-    clock.restart();
-    time = sf::Time::Zero;
+    boom_anim = player.assign<AdditionalAnim>("explosion",&(resource.textureCont.getTexture("explosion")), resource.vertCont.getPoly("explosion"), 20.0f);
+    
+	boom_anim->animate = true;
+	
+	std::cout << "clock restart " << std::endl;
+	
+	boom_anim->clock.restart();
+	boom_anim->time = sf::Time::Zero;
     std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
 }

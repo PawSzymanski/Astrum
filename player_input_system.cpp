@@ -26,22 +26,16 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	float xPos, yPos, xVel, yVel, rot, mass;
 
 	parser.setSection("world");
+
 	while (!parser.EndOfSection())
 	{
 		typeOfElement = parser.getString();
-
 		xPos = parser.getFloat();
-
 		yPos = parser.getFloat();
-
 		xVel = parser.getFloat();
-
 		yVel = parser.getFloat();
-
 		rot = parser.getFloat();
-
 		mass = parser.getFloat();
-
 		auto poly = en.create();
 		
 		//assigning component type
@@ -58,6 +52,11 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}
+
+
+
+
+
 
 	//SHIP
 	if (!parser.load(shipInfo))
@@ -87,15 +86,17 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	{	
 		shipColor = parser.getString();
 	}
-	
-	
+		
 	auto playerEn = en.create();
 	playerEn.assign<isPlayer>();
 	phisics.createPolygon(playerEn, sf::Vector2f(2, 8),
 		sf::Vector2f(0, 0), 0, 1, typeOfShip);
 	
 
-	
+
+
+
+
 	//PARTS
 	parser.setSection("parts_info");
 	std::string partName, partKey, pathToPart, partColor, partVert;
@@ -105,15 +106,13 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	
 	while (!parser.EndOfSection())
 	{
-		
 		typeOfShip = parser.getString();//type of part
 		partPosX = parser.getFloat();
 		partPosY = parser.getFloat();
 		partDegree = parser.getFloat();
 		partKey = parser.getString();
 		ConfigParser parser2;
-	
-		
+
 		//PART INFO LOAD engine maybe legs or anything else
 		pathToPart.clear();
 		pathToPart.insert(pathToPart.size(), "resources/parts/");

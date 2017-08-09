@@ -16,8 +16,6 @@ class DestructionSystem : public entityx::System<DestructionSystem>, public enti
 {
     AdditionalAnim::Handle boom_anim;
     entityx::Entity player;
-    sf::Clock clock;
-    sf::Time time;
 
 public:
     DestructionSystem(entityx::EntityX &ex);

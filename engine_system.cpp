@@ -48,7 +48,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 
 			//parts functions///////////////////////////////////////////////////////////////////////////
 			
-			enginePart(en1, en2, ev, attachPointH, rotMatrix);
+			enginePart(en, en1, en2, ev, attachPointH, rotMatrix);
 
 			//end;/////////////////////////////////////////////////////////////////////////////////////////
 			attachPointH->point = rotMatrix.getInverse() * attachPointH->point;
@@ -56,7 +56,8 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	}
 }
 
-void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
+void engine_system::enginePart(entityx::EntityManager & en ,entityx::Entity enPlayer, entityx::Entity enPart, 
+	entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
 {
 	if (!enPart.has_component<isEngine>())
 	{
@@ -64,15 +65,25 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 	}
 	KeyAssigned::Handle keyH;
 	ForcePoint::Handle pointH;
+	AdditionalAnim::Handle animH;
 	pointH = enPart.component<ForcePoint>();
 	keyH = enPart.component<KeyAssigned>();
 
 	pointH->force = rotMatrix * pointH->force;
 
+	
 	if (sf::Keyboard::isKeyPressed(keyH->key))
 	{
 		ev.emit<ApplyForceEvent>(attachPointH->point, pointH->force, enPlayer);
+		//auto fireEn = en.create();
+		//en.assign<Transform>();
+		//en.assign<AdditionalAnim>();
 	}
+	else if (enPart.has_component<AdditionalAnim>())
+	{
+		animH->animate = false;
+	}
+
 	pointH->force = rotMatrix.getInverse() * pointH->force;
 }
 
