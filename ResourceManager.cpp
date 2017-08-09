@@ -47,7 +47,8 @@ void ResourcesManager::loadContainer()
         "potato.cfg",
         "platform.cfg",
         "small_engine_fire.cfg",
-        "explosion.cfg"
+        "explosion.cfg",
+		"fire.cfg"
     };
 
     ConfigParser parser;

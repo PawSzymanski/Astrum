@@ -28,7 +28,7 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 			{
 				animationH->time = sf::Time::Zero;
 				std::string nameOfAnim = animationH->nameOfAnim;
-				sf::Vector2f & framesSize = ResourcesManager::getInstanceRef().textureCont.getAnimationFrameSize(nameOfAnim);
+				sf::Vector2f framesSize = ResourcesManager::getInstanceRef().textureCont.getAnimationFrameSize(nameOfAnim);
 				int amountFramesX = (*animationH->texture).getSize().x / framesSize.x;
 				int amountFramesY = (*animationH->texture).getSize().y / framesSize.y;
 

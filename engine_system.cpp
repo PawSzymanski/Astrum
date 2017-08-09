@@ -80,14 +80,13 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 		
 		if (!enPart.has_component<AdditionalAnim>())
 		{
-			enPart.assign<AdditionalAnim>("fire", &(resource.textureCont.getTexture("fire")), resource.vertCont.getPoly("fire"), 10.0f, sf::Vector2f(0, 1));	
+			enPart.assign<AdditionalAnim>("fire", &(resource.textureCont.getTexture("fire")), resource.vertCont.getPoly("fire"), 10.0f, sf::Vector2f(0, 0.18));	
 		}
 		else
 		{
 			animH = enPart.component<AdditionalAnim>();
 			animH->animate = true;
 		}
-
 	}
 	else if (enPart.has_component<AdditionalAnim>())
 	{
