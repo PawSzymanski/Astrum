@@ -53,8 +53,12 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 
     if(player.has_component<AdditionalAnim>())
         return;
+	Transform::Handle transH;
+
+	transH = player.component<Transform>();
 
     auto & resource = ResourcesManager::getInstanceRef();
+
     boom_anim = player.assign<AdditionalAnim>("explosion",&(resource.textureCont.getTexture("explosion")), resource.vertCont.getPoly("explosion"), 20.0f);
     
 	boom_anim->animate = true;

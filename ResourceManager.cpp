@@ -114,12 +114,12 @@ void ResourcesManager::loadContainer()
 	//loading texstures to container
 	std::string texturePath("resources/graphics/"), textureName, vertexAssigned;
 
-
 	parser.load("resources/graphics/image_info.cfg");
 	parser.setSection("name");
     while (!parser.EndOfSection())
 	{
 		textureName = parser.getString();
+		std::cout << " texture: " << textureName << " loaded " << std::endl;
         std::string partName = parser.getString();
 		sf::Texture t;
 		t.loadFromFile(texturePath + textureName);
@@ -130,12 +130,14 @@ void ResourcesManager::loadContainer()
 	{
 		float framesSpeed;
 		std::string textureName = parser.getString();
+		std::cout << " anim: " << textureName << " loaded " << std::endl;
 		sf::Vector2f frameSize;
 		//x
 		frameSize.x = parser.getFloat();
 		//y
+		std::cout << " X: " << frameSize.x << " loaded " << std::endl;
 		frameSize.y = parser.getFloat();
-		
+		std::cout << " Y: " << frameSize.y << " loaded " << std::endl;
 		framesSpeed = parser.getFloat();
 
 		textureCont.addAnimation(textureName, frameSize, framesSpeed);

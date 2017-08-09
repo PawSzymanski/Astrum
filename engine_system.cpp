@@ -1,5 +1,5 @@
 #include "engine_system.h"
-
+#include "ResourceManager.h"
 
 
 engine_system::engine_system(entityx::EventManager &ev)
@@ -23,7 +23,6 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	{
 		for (auto en2 : en.entities_with_components(verH, transEngH, attachPointH))
 		{
-
 			rotH = en1.component<Rotation>();
 			posH = en1.component<Position>();
 
@@ -48,7 +47,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 
 			//parts functions///////////////////////////////////////////////////////////////////////////
 			
-			enginePart(en, en1, en2, ev, attachPointH, rotMatrix);
+			enginePart(en1, en2, ev, attachPointH, rotMatrix);
 
 			//end;/////////////////////////////////////////////////////////////////////////////////////////
 			attachPointH->point = rotMatrix.getInverse() * attachPointH->point;
@@ -56,7 +55,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	}
 }
 
-void engine_system::enginePart(entityx::EntityManager & en ,entityx::Entity enPlayer, entityx::Entity enPart, 
+void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart, 
 	entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
 {
 	if (!enPart.has_component<isEngine>())
@@ -66,6 +65,7 @@ void engine_system::enginePart(entityx::EntityManager & en ,entityx::Entity enPl
 	KeyAssigned::Handle keyH;
 	ForcePoint::Handle pointH;
 	AdditionalAnim::Handle animH;
+	
 	pointH = enPart.component<ForcePoint>();
 	keyH = enPart.component<KeyAssigned>();
 
@@ -74,15 +74,28 @@ void engine_system::enginePart(entityx::EntityManager & en ,entityx::Entity enPl
 	
 	if (sf::Keyboard::isKeyPressed(keyH->key))
 	{
+		auto & resource = ResourcesManager::getInstanceRef();
 		ev.emit<ApplyForceEvent>(attachPointH->point, pointH->force, enPlayer);
-		//auto fireEn = en.create();
-		//en.assign<Transform>();
-		//en.assign<AdditionalAnim>();
+		
+		
+		if (!enPart.has_component<AdditionalAnim>())
+		{
+			enPart.assign<AdditionalAnim>("fire", &(resource.textureCont.getTexture("fire")), resource.vertCont.getPoly("fire"), 10.0f, sf::Vector2f(0, 1));	
+		}
+		else
+		{
+			animH = enPart.component<AdditionalAnim>();
+			animH->animate = true;
+		}
+
 	}
 	else if (enPart.has_component<AdditionalAnim>())
 	{
-		animH->animate = false;
+		enPart.remove<AdditionalAnim>();
 	}
+
+
+
 
 	pointH->force = rotMatrix.getInverse() * pointH->force;
 }

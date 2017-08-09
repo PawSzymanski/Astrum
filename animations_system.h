@@ -4,6 +4,7 @@
 
 class animations_system : public entityx::System<animations_system>
 {
+	
 public:
 	animations_system();
 

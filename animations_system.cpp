@@ -28,8 +28,7 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 			{
 				animationH->time = sf::Time::Zero;
 				std::string nameOfAnim = animationH->nameOfAnim;
-				auto & framesSize = ResourcesManager::getInstanceRef().textureCont.getAnimationFrameSize(nameOfAnim);
-	
+				sf::Vector2f & framesSize = ResourcesManager::getInstanceRef().textureCont.getAnimationFrameSize(nameOfAnim);
 				int amountFramesX = (*animationH->texture).getSize().x / framesSize.x;
 				int amountFramesY = (*animationH->texture).getSize().y / framesSize.y;
 
@@ -43,20 +42,21 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 				array[1].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x, animationH->frame_y * framesSize.y + framesSize.y);
 				array[2].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y + framesSize.y);
 				array[3].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y);
-				std::cout << "ANIM" << std::endl;
+				std::cout << (*animationH->texture).getSize().x << " " << framesSize.x << std::endl;
+				std::cout << "ANIM " << nameOfAnim <<  std::endl;
 			}
 		}
 		else
 		{
 			//niepotrzebny kod?
-			sf::VertexArray & array = animationH->v_array;
-			array[0].texCoords = sf::Vector2f(0, 0);
-			array[1].texCoords = sf::Vector2f(0, 0);
-			array[2].texCoords = sf::Vector2f(0, 0);
-			array[3].texCoords = sf::Vector2f(0, 0);
+			//sf::VertexArray & array = animationH->v_array;
+			///array[0].texCoords = sf::Vector2f(0, 0);
+			////array[1].texCoords = sf::Vector2f(0, 0);
+			//array[2].texCoords = sf::Vector2f(0, 0);
+			//array[3].texCoords = sf::Vector2f(0, 0);
 
 			//or this 
-			ent.remove<AdditionalAnim>();
+			//ent.remove<AdditionalAnim>();
 		}
 	}
 }

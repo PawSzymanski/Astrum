@@ -50,6 +50,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
         sf::RenderStates states;
         states.texture = anim->texture;
         states.transform = trans->trans;
+		states.transform.translate(anim->transVector);
         win.draw(anim->v_array, states);
     }
 

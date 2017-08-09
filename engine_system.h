@@ -3,9 +3,10 @@
 
 class engine_system : public entityx::System<engine_system>, public entityx::Receiver<engine_system>
 {
+	bool boolHelp;
 	sf::Transform matrix;
 
-	void enginePart(entityx::EntityManager & en, entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix);
+	void enginePart(entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix);
 public:
 	engine_system(entityx::EventManager &ev);
 

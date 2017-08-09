@@ -202,11 +202,11 @@ struct AdditionalAnim : entityx::Component<AdditionalAnim>
 {
      AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps)
 		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name)
-	 {	 
+	 {
 		 clock.restart();
 	 }
-	 AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps, sf::Transform trans)
-		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name), transMatrix(trans)
+	 AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps, sf::Vector2f trans)
+		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name), transVector(trans)
 	 {
 		 clock.restart();
 	 }
@@ -214,8 +214,9 @@ struct AdditionalAnim : entityx::Component<AdditionalAnim>
 	sf::Clock clock;
 	sf::Texture * texture;
     sf::VertexArray & v_array;
-	sf::Transform transMatrix;
+	sf::Vector2f transVector;
 	std::string nameOfAnim; //name in info file in "resources" folder
+	
 
     int frame_x, frame_y;
     float fps;
