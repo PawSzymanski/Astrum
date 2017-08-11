@@ -59,13 +59,15 @@ void Phisics_2D::createPolygon(entityx::Entity en, sf::Vector2f pos,sf::Vector2f
     en.assign<MOfInertia>(mass*4);//musimy tu odaæ przy tworzeniu funkcji
     en.assign<Friction>(0.7);
     en.assign<VertexArray>(cont.getPoly(polyName), cont.getNormals(polyName));
+    en.assign<PolyName>(polyName);
     en.assign<Type>(Type::POLYGON);
     en.assign<IsResting>();
 }
 
-void Phisics_2D::createJoint(entityx::Entity en1, entityx::Entity en2, sf::Vector2f pos1, sf::Vector2f pos2, float lenght)
+entityx::Entity Phisics_2D::createJoint(entityx::Entity en1, entityx::Entity en2, sf::Vector2f pos1, sf::Vector2f pos2, float lenght)
 {
     entityx::Entity en = ex.entities.create();
     en.assign<Joint>(en1,en2,pos1,pos2,lenght);
     en.assign<Line>(sf::Vector2f(0,0), sf::Vector2f(0,0), sf::Color::Yellow);
+    return en;
 }

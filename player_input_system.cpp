@@ -48,6 +48,10 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		{
 			 std::cout << " WALL LOADED" << std::endl;
 		}
+        else if (typeOfElement == "bomb")
+        {
+            poly.assign< Hookable > ();
+        }
 
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
@@ -144,7 +148,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		
 
 		partEn.assign<AttachToPlayerPoint>(sf::Vector2f(partPosX, partPosY));
-
+        partEn.assign<PolyName>(partVert);
 
 		std::cout<<std::endl;
         if (partVert == "crane")

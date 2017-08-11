@@ -48,7 +48,9 @@ void ResourcesManager::loadContainer()
         "platform.cfg",
         "small_engine_fire.cfg",
         "explosion.cfg",
-		"fire.cfg"
+        "fire.cfg",
+        "hook.cfg",
+        "bomb.cfg"
     };
 
     ConfigParser parser;
@@ -120,8 +122,9 @@ void ResourcesManager::loadContainer()
     while (!parser.EndOfSection())
 	{
 		textureName = parser.getString();
-		std::cout << " texture: " << textureName << " loaded " << std::endl;
+        std::cout << std::endl<<" texture: " << textureName << " loaded " << std::endl;
         std::string partName = parser.getString();
+        std::cout<<"partName: "<<partName<<std::endl;
 		sf::Texture t;
 		t.loadFromFile(texturePath + textureName);
         textureCont.addTexture(t, partName);
@@ -131,14 +134,14 @@ void ResourcesManager::loadContainer()
 	{
 		float framesSpeed;
 		std::string textureName = parser.getString();
-		std::cout << " anim: " << textureName << " loaded " << std::endl;
+        //std::cout << " anim: " << textureName << " loaded " << std::endl;
 		sf::Vector2f frameSize;
 		//x
 		frameSize.x = parser.getFloat();
 		//y
-		std::cout << " X: " << frameSize.x << " loaded " << std::endl;
+        //std::cout << " X: " << frameSize.x << " loaded " << std::endl;
 		frameSize.y = parser.getFloat();
-		std::cout << " Y: " << frameSize.y << " loaded " << std::endl;
+        //std::cout << " Y: " << frameSize.y << " loaded " << std::endl;
 		framesSpeed = parser.getFloat();
 
 		textureCont.addAnimation(textureName, frameSize, framesSpeed);

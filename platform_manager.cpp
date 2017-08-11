@@ -19,11 +19,11 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 		if (clock.getElapsedTime().asMilliseconds() < 50)
 		{
 			time += clock.getElapsedTime();
-			std::cout << clock.getElapsedTime().asMilliseconds() << "    " << time.asMilliseconds() << std::endl;
+            //std::cout << clock.getElapsedTime().asMilliseconds() << "    " << time.asMilliseconds() << std::endl;
 
 			if (time.asSeconds() > 3)
 			{
-				std::cout << "here i am" << std::endl;
+                //std::cout << "here i am" << std::endl;
 
 				system("pause");
 			}

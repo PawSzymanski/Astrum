@@ -130,13 +130,13 @@ void CollisionSystem::ResolveCollision(Manifold &m, entityx::EventManager & ev, 
         {
             isSlave::Handle slave = m.en2.component<isSlave>();
             temp_en2 = slave->master;
-            std::cout<<"SLAVEEEEEEE"<<std::endl;
+            //std::cout<<"SLAVEEEEEEE"<<std::endl;
         }
         if(m.en1.has_component<isSlave>())
         {
             isSlave::Handle slave = m.en2.component<isSlave>();
             temp_en1 = slave->master;
-            std::cout<<"SLAVEEEEEEE"<<std::endl;
+            //std::cout<<"SLAVEEEEEEE"<<std::endl;
         }
         ev.emit<ApplyForceEvent>(contact2, m.force, temp_en2);
         ev.emit<ApplyForceEvent>(contact1, -m.force, temp_en1);
@@ -178,18 +178,18 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 				continue;
 		
 			ResolveCollision(m,ev,dt);
+            PositionalCorrection(m);
 
             //std::cout<<"rel_vel: "<<m.relVel<<std::endl;
-			ev.emit<CollisionEvent>(ens[i], ens[j], m.relVel);
-			
-			PositionalCorrection(m);
+
+            ev.emit<CollisionEvent>(ens[i], ens[j], m.relVel, m.contacts[0]);
 		}
-		IsResting::Handle isRestingH = ens[i].component<IsResting>();
+        IsResting::Handle isRestingH = ens[i].component<IsResting>();
         Mass::Handle mass = ens[i].component<Mass>();
         if (!isRestingH->isIt && !ens[i].has_component<isSlave>())
            ev.emit<ApplyForceEvent>(sf::Vector2f(0, 0), gravity * mass->mass * static_cast<float>(dt), ens[i]); //GRAWITEJSZYN
 
-		isRestingH->isIt = false;
+        isRestingH->isIt = false;
 	}
 }
 

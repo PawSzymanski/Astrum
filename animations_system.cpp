@@ -42,8 +42,8 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 				array[1].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x, animationH->frame_y * framesSize.y + framesSize.y);
 				array[2].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y + framesSize.y);
 				array[3].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y);
-				std::cout << (*animationH->texture).getSize().x << " " << framesSize.x << std::endl;
-				std::cout << "ANIM " << nameOfAnim <<  std::endl;
+                //std::cout << (*animationH->texture).getSize().x << " " << framesSize.x << std::endl;
+                //std::cout << "ANIM " << nameOfAnim <<  std::endl;
 			}
 		}
 		else

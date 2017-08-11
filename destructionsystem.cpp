@@ -63,9 +63,9 @@ void DestructionSystem::receive(const CollisionEvent &ev)
     
 	boom_anim->animate = true;
 	
-	std::cout << "clock restart " << std::endl;
+    //std::cout << "clock restart " << std::endl;
 	
 	boom_anim->clock.restart();
 	boom_anim->time = sf::Time::Zero;
-    std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
+    //std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
 }

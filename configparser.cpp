@@ -88,7 +88,7 @@ float ConfigParser::getFloat()
 
 std::string ConfigParser::getString()
 {
-	std::cout << dane[section][line][word];
+    //std::cout << dane[section][line][word];
     std::string s = dane[section][line][word];
     next();
     return s;

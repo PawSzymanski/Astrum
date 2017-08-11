@@ -20,24 +20,24 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	VertexArray::Handle vArray;
 	Joint::Handle joint;
     AdditionalAnim::Handle anim;
+    PolyName::Handle nameHandle;
 	//std::cout << "render gameplpay, entity size: " << en.size() << std::endl;
 
-	for (auto entity : en.entities_with_components(vArray, trans))
+    for (auto entity : en.entities_with_components(vArray, trans, nameHandle))
 	{
 
-		//TUTAJ SIE ZMIENI JAK WSZYSTKIE ENTITY BEDA MIA£Y TEXTURY NARAZI BEDZIE TAK
-		if (entity.has_component<isEngine>())
+        if (ResourcesManager::getInstanceRef().textureCont.isTexture(nameHandle->name))
 		{
 			trans = entity.component<Transform>();
 			//sf::BlendMode noBlending = sf::BlendNone;
 			sf::RenderStates renderStates;
-			auto texture = ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine");
+            auto &texture = ResourcesManager::getInstanceRef().textureCont.getTexture(nameHandle->name);
 
 			renderStates.texture = &texture;
 			renderStates.transform = trans->trans;
 			
 			win.draw(vArray->vert, renderStates);
-		}
+        }
 		else
 		{
 			win.draw(vArray->vert, trans->trans);

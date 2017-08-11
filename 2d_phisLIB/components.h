@@ -71,7 +71,7 @@ struct Line : public entityx::Component<Line>
 	sf::VertexArray line;
 };
 
-struct Transform : entityx::Component<Transform>
+struct Transform : public entityx::Component<Transform>
 {
 	Transform(sf::Vector2f pos, float rot) {
 		trans.rotate(rot);
@@ -82,21 +82,21 @@ struct Transform : entityx::Component<Transform>
 	sf::Transform trans, defaultTrans;
 };
 
-struct LinearForce : entityx::Component<LinearForce> 
+struct LinearForce : public entityx::Component<LinearForce>
 {
 	LinearForce() : force(sf::Vector2f(0.0, 0.0)) 
 	{}
 	sf::Vector2f force;
 };
 
-struct AngularForce : entityx::Component<AngularForce>
+struct AngularForce : public entityx::Component<AngularForce>
 {
 	AngularForce() : force(0.0f)
 	{}
 	float force;					// force in radians!!!
 };
 
-struct MOfInertia : entityx::Component<MOfInertia>
+struct MOfInertia : public entityx::Component<MOfInertia>
 {
 	MOfInertia(float i)
 		:I(i)
@@ -111,13 +111,13 @@ struct MOfInertia : entityx::Component<MOfInertia>
 	float invI;
 };
 
-struct Friction : entityx::Component<Friction>
+struct Friction : public entityx::Component<Friction>
 {
 	Friction(float fr1): fr(fr1) {}
 	float fr;
 };
 
-struct VertexArray : entityx::Component<VertexArray>
+struct VertexArray : public entityx::Component<VertexArray>
 {
 	VertexArray(sf::VertexArray & v, std::vector <sf::Vector2f> &n)
 		:vert(v), normals(n) {
@@ -127,7 +127,7 @@ struct VertexArray : entityx::Component<VertexArray>
 	std::vector <sf::Vector2f> & normals;
 };
 
-struct Type : entityx::Component<Type>
+struct Type : public entityx::Component<Type>
 {
 	Type(int type) : type(type){}
 	int type;
@@ -137,14 +137,14 @@ struct Type : entityx::Component<Type>
 	};
 };
 
-struct IsResting : entityx::Component<IsResting>
+struct IsResting : public entityx::Component<IsResting>
 {
 	IsResting() : isIt(false)
 	{}
 		bool isIt;
 };
 
-struct Joint :entityx::Component<Joint>
+struct Joint :public entityx::Component<Joint>
 {
     Joint(entityx::Entity en, entityx::Entity en1, sf::Vector2f pos, sf::Vector2f pos1, float lenght)
         :pos(pos), pos1(pos1), en(en), en1(en1), lenght(lenght){}
@@ -156,21 +156,21 @@ struct Joint :entityx::Component<Joint>
     float lenght;
 };
 
-struct ForcePoint : entityx::Component<ForcePoint>
+struct ForcePoint : public entityx::Component<ForcePoint>
 {
 	ForcePoint( sf::Vector2f force) : force(force)
 	{}
 	sf::Vector2f force;
 };
 
-struct AttachToPlayerPoint : entityx::Component<AttachToPlayerPoint>
+struct AttachToPlayerPoint : public entityx::Component<AttachToPlayerPoint>
 {
 	AttachToPlayerPoint(sf::Vector2f point) : point(point)
 	{}
 	sf::Vector2f point;
 };
 
-struct KeyAssigned : entityx::Component<KeyAssigned>
+struct KeyAssigned : public entityx::Component<KeyAssigned>
 {
 	// = sf::Keyboard::Key::B;
 	KeyAssigned(sf::Keyboard::Key k) : key (k)
@@ -178,27 +178,27 @@ struct KeyAssigned : entityx::Component<KeyAssigned>
 	sf::Keyboard::Key key;
 };
 //
-struct isPlayer : entityx::Component<isPlayer>
+struct isPlayer : public entityx::Component<isPlayer>
 {
 };
-struct isLegs : entityx::Component<isLegs>
+struct isLegs : public entityx::Component<isLegs>
 {
 };
-struct isEngine : entityx::Component<isLegs>
+struct isEngine : public entityx::Component<isLegs>
 {
 };
-struct isPlatform : entityx::Component<isPlatform>
+struct isPlatform : public entityx::Component<isPlatform>
 {
 };
 //
-struct isSlave : entityx::Component<isSlave>
+struct isSlave : public entityx::Component<isSlave>
 {
     isSlave(entityx::Entity master)
         :master(master){}
     entityx::Entity master;
 };
 
-struct AdditionalAnim : entityx::Component<AdditionalAnim>
+struct AdditionalAnim : public entityx::Component<AdditionalAnim>
 {
      AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps)
 		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name)
@@ -223,12 +223,29 @@ struct AdditionalAnim : entityx::Component<AdditionalAnim>
     bool animate;
 };
 
-struct isCrane :entityx::Component<isCrane>
+struct isCrane :public entityx::Component<isCrane>
 {
     isCrane()
-        :extended(false), atached(false), block(false){}
-    bool extended;
+        :atached(false), block(false){}
+    entityx::Entity hook;
+    entityx::Entity joint;
     bool atached;
     bool block;
 };
 
+struct isHook :public entityx::Component<isHook>
+{
+    entityx::Entity joint;
+    entityx::Entity crane;
+    sf::Vector2f attachPoint;
+};
+
+struct Hookable :public entityx::Component<Hookable>
+{};
+
+struct PolyName :public entityx::Component<PolyName>
+{
+    PolyName(std::string name)
+        :name(name){}
+    std::string name;
+};
