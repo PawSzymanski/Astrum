@@ -1,7 +1,7 @@
 #include "GameplayStage.h"
 #include "ResourceManager.h"
 
-GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 9.8), vertCont(cont)
+GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 3.0/*   9.8   */), vertCont(cont)
 {
 	display_fps_time = sf::Time::Zero;
 }

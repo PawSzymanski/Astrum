@@ -25,7 +25,7 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 			{
                 //std::cout << "here i am" << std::endl;
 
-				system("pause");
+			//	system("pause");
 			}
 		}
 		else

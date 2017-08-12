@@ -25,26 +25,11 @@
     <Filter Include="Source Files\gameplay">
       <UniqueIdentifier>{1581f4f1-fc97-4ecc-a6fc-b7d12ee46a11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\z_rest">
+      <UniqueIdentifier>{38cd6219-50a4-437d-9c62-41c04c76192a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="roundrect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dirreader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lvlbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="partbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="2d_phisLIB\Container.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="2d_phisLIB\AutisticCmath.cpp">
       <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
@@ -90,35 +75,14 @@
     <ClCompile Include="player_input_system.cpp">
       <Filter>Source Files\gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="render_system.cpp">
       <Filter>Source Files\gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="configcreator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="configparser.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuStage.cpp">
       <Filter>Source Files\stages</Filter>
     </ClCompile>
-    <ClCompile Include="partsmanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\stages</Filter>
-    </ClCompile>
-    <ClCompile Include="keyassigner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Conversion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gameoverstage.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="destructionsystem.cpp">
       <Filter>Source Files\gameplay</Filter>
@@ -130,7 +94,46 @@
       <Filter>Source Files\gameplay</Filter>
     </ClCompile>
     <ClCompile Include="cranesystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonMenu.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="configcreator.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="configparser.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="2d_phisLIB\Container.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="Conversion.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="gameoverstage.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="dirreader.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="keyassigner.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="lvlbutton.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="partbutton.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="partsmanager.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="roundrect.cpp">
+      <Filter>Source Files\z_rest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

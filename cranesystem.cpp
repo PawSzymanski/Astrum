@@ -105,6 +105,5 @@ void CraneSystem::receive(const CollisionEvent &ev)
         return;
 
     //std::cout<<"contact: ["<<ev.contact.x<<","<<ev.contact.y<<"]"<<std::endl;
-
     c_ev = new CollisionEvent(ev);
 }
