@@ -189,6 +189,9 @@ struct isEngine : public entityx::Component<isLegs>
 };
 struct isPlatform : public entityx::Component<isPlatform>
 {
+	isPlatform() : isPassed(false)
+	{}
+		bool isPassed;
 };
 //
 struct isSlave : public entityx::Component<isSlave>

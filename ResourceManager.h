@@ -30,6 +30,7 @@ public:
 	static void deleteInstance();
 
 public:
+	bool areAllPlatfIncluded;
 	std::string levelInfo;
 	std::string shipInfo;
 	Container vertCont;

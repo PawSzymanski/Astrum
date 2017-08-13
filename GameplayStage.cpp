@@ -34,12 +34,14 @@ bool GameplayStage::init()
     (*ex_ptr).systems.add<CraneSystem>(*ex_ptr, *phisics_ptr);
 	(*ex_ptr).systems.add<platform_manager>((*ex_ptr).events);
 	(*ex_ptr).systems.add<animations_system>();
+	(*ex_ptr).systems.add<release_gameplay_system>();
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
     fps_text.setFont(ResourcesManager::getInstanceRef().font);
     fps_text.setPosition(sf::Vector2f(60,20));
     fps_text.setString("NULL");
+
 
     return true;
 }
@@ -55,6 +57,11 @@ bool GameplayStage::update(float dt)
     (*ex_ptr).systems.update<CraneSystem>(dt);
 	(*ex_ptr).systems.update<platform_manager>(dt);
 	(*ex_ptr).systems.update<animations_system>(dt);
+
+	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded)
+	{
+		std::cout << "ALL PLATFORMS PASSED" << std::endl;;
+	}
 
     //std::cout << "." << std::endl;
 	
@@ -87,9 +94,11 @@ void GameplayStage::render(sf::RenderWindow &window)
 
 void GameplayStage::release()
 {
+	//if()
+	//(*ex_ptr).systems.update<release_gameplay_system>(0.1);
     fps_text = sf::Text();
 	ex_ptr.reset();
-	phisics_ptr.reset();
+	phisics_ptr.reset();	
 }
 
 void GameplayStage::input(sf::Event & event)

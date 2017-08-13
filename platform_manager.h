@@ -6,6 +6,7 @@ class platform_manager : public entityx::System<platform_manager>, public entity
 	bool isPlatColliding;
 	sf::Clock clock;
 	sf::Time time;
+	std::unique_ptr<CollisionEvent> evTemp_ptr;
 public:
 	platform_manager(entityx::EventManager &ev);
 	~platform_manager();
