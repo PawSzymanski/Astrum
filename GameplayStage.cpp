@@ -34,7 +34,6 @@ bool GameplayStage::init()
     (*ex_ptr).systems.add<CraneSystem>(*ex_ptr, *phisics_ptr);
 	(*ex_ptr).systems.add<platform_manager>((*ex_ptr).events);
 	(*ex_ptr).systems.add<animations_system>();
-	(*ex_ptr).systems.add<release_gameplay_system>();
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
@@ -94,8 +93,6 @@ void GameplayStage::render(sf::RenderWindow &window)
 
 void GameplayStage::release()
 {
-	//if()
-	//(*ex_ptr).systems.update<release_gameplay_system>(0.1);
     fps_text = sf::Text();
 	ex_ptr.reset();
 	phisics_ptr.reset();	

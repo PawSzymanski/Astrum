@@ -184,7 +184,6 @@
     <ClCompile Include="partsmanager.cpp" />
     <ClCompile Include="platform_manager.cpp" />
     <ClCompile Include="player_input_system.cpp" />
-    <ClCompile Include="release_gameplay_system.cpp" />
     <ClCompile Include="render_system.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="roundrect.cpp" />
@@ -236,7 +235,6 @@
     <ClInclude Include="partsmanager.h" />
     <ClInclude Include="platform_manager.h" />
     <ClInclude Include="player_input_system.h" />
-    <ClInclude Include="release_gameplay_system.h" />
     <ClInclude Include="render_system.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="roundrect.h" />

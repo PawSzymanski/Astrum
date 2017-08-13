@@ -9,7 +9,6 @@
 #include "cranesystem.h"
 #include "platform_manager.h"
 #include "animations_system.h"
-#include "release_gameplay_system.h"
 
 class GameplayStage : public GameStage
 {
@@ -26,13 +25,11 @@ private:
 	float dtime;
 	void updateCamera();
 	sf::Vector2f gravity;
-	//Phisics_2D phisics;
 	Container &vertCont;
 	std::unique_ptr<entityx::EntityX> ex_ptr;
 	std::unique_ptr<Phisics_2D> phisics_ptr;
 
     sf::Text fps_text;
-	//entityx::EntityX ex;
 public:
 
 	virtual bool init() override;

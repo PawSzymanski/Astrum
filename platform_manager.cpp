@@ -61,9 +61,6 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 	else 
 	{
 	}
-
-	///////////////////////////
-	isPlatColliding = false;
 }
 
 void platform_manager::receive(const CollisionEvent & ev)
