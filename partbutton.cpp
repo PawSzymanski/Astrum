@@ -80,8 +80,6 @@ const std::string &PartButton::getName() const
 
 void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-
-
     sf::Transform trans;
     trans.translate(pos+ sf::Vector2f(30,30));
     trans.scale(30,30);
@@ -95,7 +93,6 @@ void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
     //std::cout<<(*v_array)[0].position.x<<std::endl;
     sf::RenderStates united_states;
 
-
     //v_array[0][0].texCoords = sf::Vector2f(0, 0);
     //v_array[0][1].texCoords = sf::Vector2f(31, 0);
     //v_array[0][2].texCoords = sf::Vector2f(31, 24);
@@ -105,10 +102,8 @@ void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
     united_states.transform = trans;
     target.draw(*v_array, united_states);
 
-
     target.draw(rect);
     target.draw(text);
-
 }
 
 void PartButton::release()

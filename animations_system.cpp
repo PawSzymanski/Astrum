@@ -6,7 +6,6 @@
 *  Author: Pawe³ Szymañski
 */
 
-
 animations_system::animations_system()
 {
 }

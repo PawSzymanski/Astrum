@@ -18,8 +18,11 @@ class CreatorStage : public GameStage
 {
     PartButton bodybuttons[3];
     PartButton partbuttons[4];
+	PartButton garageButtons[4];
+
     ButtonMenu start_button;
     ButtonMenu save_button;
+
     sf::Text esc_text;
     sf::RectangleShape mask_rect;
 

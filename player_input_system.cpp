@@ -73,16 +73,17 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	std::string typeOfShip, shipColor;
 	float actualEngineForce;
 
-	while (!parser.EndOfSection())
+	while (!parser.EndOfLine())
 	{
 		typeOfShip = parser.getString();
 	}
-	
+
 	if (typeOfShip.size() == 0)
 	{
 		auto &stage = ResourcesManager::getInstanceRef();
 		std::cout << "WYBIERZ JAKIS STATEK" << std::endl;
-		stage.creator_stage.set();	
+		stage.creator_stage.set();
+		return;
 	}
 	parser.setSection("color");
 	

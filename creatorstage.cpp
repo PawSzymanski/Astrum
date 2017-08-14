@@ -35,8 +35,10 @@ bool CreatorStage::init()
 
     std::string bodynames[3] = { "Mk. I" , "Mk. II", "Mk. III" };
     std::string partnames[4] = { "large eng.", "small eng.", "langing legs", "crane" };
+	std::string garageNames[4] = { "1 garage", "2 garage" ,"3 garage" ,"4 garage" };
     int bodyposition = 500;
     int partposition = 200;
+	int garagePositionY = 130;
     auto &container = ResourcesManager::getInstanceRef().vertCont;
     std::string bodys[3] ={
         "TRIANGLE_BODY",
@@ -61,6 +63,11 @@ bool CreatorStage::init()
         partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, parts[i]);
         partposition += 120;
     }
+	for (int i = 0; i < 4; ++i)
+	{
+		garageButtons[i].init(sf::Vector2f(100, garagePositionY), garageNames[i], resource.font, bodys[3]);
+		garagePositionY += 110;
+	}
 
     start_button.init(resource.font,32, sf::Vector2f(150,670),sf::Color::White, "START", sf::Vector2f(40,15));
     save_button.init(resource.font,32, sf::Vector2f(150,600),sf::Color::White, "SAVE", sf::Vector2f(40,15));
@@ -94,9 +101,55 @@ void CreatorStage::input(sf::Event &event)
             fade_in = false;
         }
     }
+	// loading things to garage
+	for (int i = 0; i < 4; ++i)
+	{
+		if (garageButtons[i].input(event))
+		{
+			std::cout << i + 1 << "  =  numer statku!!!!!!!!!!" << std::endl;
+			std::string & str = (ResourcesManager::getInstanceRef().shipInfo);
+			
+			str = "resources/levelData/ship_" + std::to_string(i + 1) + ".cfg";
+			//FUNKCJE Z TEGO TRZEBA ZROBIC W PART MENAGERZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			ConfigParser pars;
+			pars.load(str);
+			pars.setSection("body_info");
+			manager.set_body(pars.getString());
 
+			manager.parts.clear();
+			Part part;
+			pars.setSection("parts_info");
+			while (!pars.EndOfSection())
+			{
+				std::cout << "loaded!!!!" << std::endl;
+				part.name.clear();
+				part.name = pars.getString();
+				part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(part.name));
+				part.texture = &(ResourcesManager::getInstanceRef().vertCont.getTexture(part.name));
+				part.pos.x = 200*pars.getFloat()+650;
+				part.pos.y = 200*pars.getFloat()+500;
+				part.rot = pars.getFloat();
+				part.key = pars.getString();
+				sf::Transform trans;
+
+				part.trans ={	1,0,0,
+								0,1,0,
+								0,0,1 };
+				
+				part.trans.translate(part.pos);
+				part.trans.rotate(part.rot);
+				
+				part.trans.scale(sf::Vector2f(200, 200));
+				
+				part.normals =& (ResourcesManager::getInstanceRef().vertCont.getNormals(part.name));
+
+				manager.parts.push_back(part);
+			}
+		}
+	}
+	//
     for(int i=0; i<3; ++i)
-        if(bodybuttons[i].input(event))
+        if(bodybuttons[i].input(event) && manager.parts.size() < 1)
            manager.set_body(bodybuttons[i].getName());
     for(int i=0; i<4; ++i)
         if(partbuttons[i].input(event))
@@ -107,7 +160,7 @@ void CreatorStage::input(sf::Event &event)
         if(!manager.is_body_set())
             return;
 
-        manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
+     // manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
         next = &(ResourcesManager::getInstanceRef().gameplay_stage);
         fade_out = true;
         fade_in = false;
@@ -129,7 +182,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer -= dt/2;
+        timer -= dt;
         fade_in = (timer >=0);
     }
 
@@ -138,7 +191,7 @@ bool CreatorStage::update(float dt)
         sf::Color col = mask_rect.getFillColor();
         col.a = timer * 255.0f;
         mask_rect.setFillColor(col);
-        timer += dt/2;
+        timer += dt;
         fade_out = (timer < 1.f);
     }
 
@@ -149,9 +202,9 @@ bool CreatorStage::update(float dt)
         bodybuttons[i].update(dt);
     for(int i=0; i<4; ++i)
         partbuttons[i].update(dt);
+	for (int i = 0; i<4; ++i)
+		garageButtons[i].update(dt);
 
-
-	
     //std::cout<<"fade_in "<<fade_in<<std::endl;
     //std::cout<<"fade_out "<<fade_out<<std::endl;
     return true;
@@ -166,7 +219,8 @@ void CreatorStage::render(sf::RenderWindow &window)
         window.draw(bodybuttons[i]);
     for(int i=0; i<4; ++i)
         window.draw(partbuttons[i]);
-
+	for (int i = 0; i < 4; ++i)
+		window.draw(garageButtons[i]);
 
     window.draw(start_button);
     window.draw(save_button);
@@ -181,6 +235,8 @@ void CreatorStage::release()
         bodybuttons[i].release();
     for(int i=0; i<4; ++i)
         partbuttons[i].release();
+	for (int i = 0; i < 4; ++i)
+		garageButtons[i].release();
 
     start_button.release();
     save_button.release();

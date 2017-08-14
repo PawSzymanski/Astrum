@@ -80,9 +80,9 @@ bool PartsManager::is_body_set()
 
 void PartsManager::set_body(const std::string &name)
 {
-    if(parts.size() > 0)
-        return;
-
+   // if(parts.size() > 0)
+   //     return;
+	//std::cout << "poszlo" << std::endl;
     current_body_name = name;
     current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(name));
     current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(name));
@@ -270,9 +270,11 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if(current_body)
         target.draw(*current_body, body_trans);
-
+	int liczba = 0;
     for(auto &p: parts)
     {
+		//std::cout << " number of parts : " << liczba++ << std::endl;
+		//system("pause");
         sf::Vertex line[2]
         {
             sf::Vertex(p.trans * sf::Vector2f(0,0), sf::Color::White),
@@ -284,9 +286,10 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
         renderStates.texture = p.texture;
         renderStates.transform = p.trans;
 
-        std::cout<<std::endl<<"texCoords:"<<std::endl;
-        for(int i=0; i<4;++i)
-        std::cout<<p.v_array[0][0].texCoords.x<<"   "<<p.v_array[0][0].texCoords.y<<std::endl;
+       // std::cout<<"texCoords:"<< (p.pos.x)<<" " << (p.pos.y) << std::endl;
+    
+		// for(int i=0; i<4;++i)
+       // std::cout<<p.v_array[0][0].texCoords.x<<"   "<<p.v_array[0][0].texCoords.y<<std::endl;
 //        p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
 //        p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
 //        p.v_array[0][2].texCoords = sf::Vector2f(31, 24);

@@ -15,28 +15,6 @@ DestructionSystem::DestructionSystem(entityx::EntityX &ex)
 
 void DestructionSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, double dt)
 {
-   /* time += clock.restart();
-    if(!boom_anim.valid())
-        return;
-
-    if(boom_anim->animate)
-    {
-        if(time.asSeconds() > (1.0f/boom_anim->fps))
-        {
-            time = sf::Time::Zero;
-            ++(boom_anim->frame_x);
-            boom_anim->frame_y = (boom_anim->frame_x >=9)? (boom_anim->frame_y+1) :boom_anim->frame_y;
-            boom_anim->frame_y = (boom_anim->frame_y >=9)? 0 : boom_anim->frame_y;
-            boom_anim->frame_x = (boom_anim->frame_x >=9)? 0 : boom_anim->frame_x;
-
-            sf::VertexArray & array = boom_anim->v_array;
-            array[0].texCoords = sf::Vector2f(boom_anim->frame_x*100,boom_anim->frame_y*100);
-            array[1].texCoords = sf::Vector2f(boom_anim->frame_x*100,boom_anim->frame_y*100 + 100);
-            array[2].texCoords = sf::Vector2f(boom_anim->frame_x*100 + 100,boom_anim->frame_y*100 + 100);
-            array[3].texCoords = sf::Vector2f(boom_anim->frame_x*100 + 100,boom_anim->frame_y*100);
-            std::cout<<"ANIM"<<std::endl;
-        }
-    }*/
 }
 
 void DestructionSystem::receive(const CollisionEvent &ev)

@@ -111,9 +111,6 @@
     <ClCompile Include="Conversion.cpp">
       <Filter>Source Files\z_rest</Filter>
     </ClCompile>
-    <ClCompile Include="gameoverstage.cpp">
-      <Filter>Source Files\z_rest</Filter>
-    </ClCompile>
     <ClCompile Include="dirreader.cpp">
       <Filter>Source Files\z_rest</Filter>
     </ClCompile>
@@ -134,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="roundrect.cpp">
       <Filter>Source Files\z_rest</Filter>
+    </ClCompile>
+    <ClCompile Include="gameoverstage.cpp">
+      <Filter>Source Files\stages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

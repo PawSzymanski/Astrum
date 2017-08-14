@@ -21,12 +21,12 @@ class PartsManager : public sf::Drawable
     sf::VertexArray * current_body;
     std::vector <sf::Vector2f> * current_normals;
     std::string current_body_name;
-    sf::Transform body_trans;
+    
 
-    Part * latch_part;
+   
     bool good_place;
 
-    std::vector <Part> parts;
+   
 
     sf::Vector2f mouse_pos;
 
@@ -36,6 +36,9 @@ private:
     Part * findClicked();
 
 public:
+	std::vector <Part> parts;
+	Part * latch_part;
+	sf::Transform body_trans;
     PartsManager();
 
     void init();
