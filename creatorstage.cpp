@@ -113,12 +113,16 @@ void CreatorStage::input(sf::Event &event)
 			//FUNKCJE Z TEGO TRZEBA ZROBIC W PART MENAGERZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			ConfigParser pars;
 			pars.load(str);
-			pars.setSection("body_info");
+			if (!pars.setSection("body_info"))
+				break;
 			manager.set_body(pars.getString());
 
 			manager.parts.clear();
+
 			Part part;
-			pars.setSection("parts_info");
+			if(!pars.setSection("parts_info"))
+				break;
+
 			while (!pars.EndOfSection())
 			{
 				std::cout << "loaded!!!!" << std::endl;

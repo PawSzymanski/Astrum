@@ -51,6 +51,7 @@ sf::VertexArray & Container::getPoly(const std::string &name)
     if(indexes.find(name) == indexes.end())
     {
         std::cout <<"zla nazwa: "<<name<<std::endl;
+		return vertexArrays[indexes["small_engine"]];
         assert(false);
     }
 
@@ -78,6 +79,7 @@ sf::Texture & Container::getTexture(std::string texture)
     if (textureIndexesMap.find(texture) == textureIndexesMap.end())
 	{
 		std::cout << "zla nazwa textury: " << texture << std::endl;
+		return textures[textureIndexesMap["small_engine"]];
 		assert(false);
 	}
 	return textures[textureIndexesMap[texture]];
