@@ -129,7 +129,7 @@ void CreatorStage::input(sf::Event &event)
 				part.name.clear();
 				part.name = pars.getString();
 				part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(part.name));
-				part.texture = &(ResourcesManager::getInstanceRef().vertCont.getTexture(part.name));
+				part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(part.name));
 				part.pos.x = 200*pars.getFloat()+650;
 				part.pos.y = 200*pars.getFloat()+500;
 				part.rot = pars.getFloat();
