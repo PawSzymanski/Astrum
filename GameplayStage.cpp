@@ -42,7 +42,6 @@ bool GameplayStage::init()
     fps_text.setPosition(sf::Vector2f(60,20));
     fps_text.setString("NULL");
 
-
     return true;
 }
 
@@ -51,6 +50,7 @@ bool GameplayStage::update(float dt)
 	dtime = dt;
 	
 	updateCamera();
+
 	(*phisics_ptr).update(dt);
 	(*ex_ptr).systems.update<engine_system>(dt);
     (*ex_ptr).systems.update<DestructionSystem>(dt);
@@ -61,7 +61,7 @@ bool GameplayStage::update(float dt)
 
 	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded)
 	{
-		std::cout << "ALL PLATFORMS PASSED" << std::endl;;
+		std::cout << "ALL PLATFORMS PASSED" << std::endl;
 	}
 
     //std::cout << "." << std::endl;

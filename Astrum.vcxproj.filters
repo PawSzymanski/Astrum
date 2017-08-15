@@ -135,6 +135,9 @@
     <ClCompile Include="gameoverstage.cpp">
       <Filter>Source Files\stages</Filter>
     </ClCompile>
+    <ClCompile Include="cargosystem.cpp">
+      <Filter>Source Files\stages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -262,6 +265,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cranesystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cargosystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

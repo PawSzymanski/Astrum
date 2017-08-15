@@ -174,13 +174,10 @@ void CreatorStage::input(sf::Event &event)
         manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
 
     manager.input(event);
-
 }
 
 bool CreatorStage::update(float dt)
 {
-
-	
 	if(fade_in)
     {
         sf::Color col = mask_rect.getFillColor();

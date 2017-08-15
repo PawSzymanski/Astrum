@@ -163,6 +163,7 @@
     <ClCompile Include="2d_phisLIB\systems\MovementSystem.cpp" />
     <ClCompile Include="animations_system.cpp" />
     <ClCompile Include="ButtonMenu.cpp" />
+    <ClCompile Include="cargosystem.cpp" />
     <ClCompile Include="configcreator.cpp" />
     <ClCompile Include="configparser.cpp" />
     <ClCompile Include="Conversion.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="2d_phisLIB\systems\MovementSystem.h" />
     <ClInclude Include="animations_system.h" />
     <ClInclude Include="ButtonMenu.h" />
+    <ClInclude Include="cargosystem.h" />
     <ClInclude Include="configcreator.h" />
     <ClInclude Include="configparser.h" />
     <ClInclude Include="Conversion.h" />

@@ -2,10 +2,7 @@
 
 Phisics_2D::Phisics_2D(entityx::EntityX &ex, Container &cont, sf::Vector2f &gravity)
     :ex(ex), cont(cont), gravity(gravity)
-{
-
-
-}
+{}
 
 void Phisics_2D::init()
 {
