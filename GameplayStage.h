@@ -9,6 +9,7 @@
 #include "cranesystem.h"
 #include "platform_manager.h"
 #include "animations_system.h"
+#include "cargosystem.h"
 
 class GameplayStage : public GameStage
 {
