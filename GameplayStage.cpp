@@ -34,6 +34,7 @@ bool GameplayStage::init()
     (*ex_ptr).systems.add<CraneSystem>(*ex_ptr, *phisics_ptr);
 	(*ex_ptr).systems.add<platform_manager>((*ex_ptr).events);
 	(*ex_ptr).systems.add<animations_system>();
+    (*ex_ptr).systems.add<CargoSystem>();
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
@@ -56,6 +57,7 @@ bool GameplayStage::update(float dt)
     (*ex_ptr).systems.update<CraneSystem>(dt);
 	(*ex_ptr).systems.update<platform_manager>(dt);
 	(*ex_ptr).systems.update<animations_system>(dt);
+    (*ex_ptr).systems.update<CargoSystem>(dt);
 
 	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded)
 	{

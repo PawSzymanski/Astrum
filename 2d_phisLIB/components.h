@@ -252,3 +252,20 @@ struct PolyName :public entityx::Component<PolyName>
         :name(name){}
     std::string name;
 };
+
+struct Cargo : public entityx::Component<Cargo>
+{
+    Cargo(int id)
+        :id(id){}
+    int id;
+};
+
+struct CargoSpace : public entityx::Component<CargoSpace>
+{
+    CargoSpace(sf::Vector2f dim, int id)
+        :dim(dim), id(id), time(sf::Time::Zero), checked(false){}
+    sf::Vector2f dim;
+    int id;
+    sf::Time time;
+    bool checked;
+};
