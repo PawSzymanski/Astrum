@@ -88,6 +88,48 @@ void PartsManager::set_body(const std::string &name)
     current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(name));
 }
 
+void PartsManager::loadPartFromFile(std::string dir)
+{
+	ConfigParser pars;
+	pars.load(dir);
+	if (!pars.setSection("body_info"))
+		return;
+	set_body(pars.getString());
+
+	parts.clear();
+
+	Part part;
+	if (!pars.setSection("parts_info"))
+		return;
+
+	while (!pars.EndOfSection())
+	{
+		std::cout << "loaded!!!!" << std::endl;
+		part.name.clear();
+		part.name = pars.getString();
+		part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(part.name));
+		part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(part.name));
+		part.pos.x = 200 * pars.getFloat() + 650;
+		part.pos.y = 200 * pars.getFloat() + 500;
+		part.rot = pars.getFloat();
+		part.key = pars.getString();
+		sf::Transform trans;
+
+		part.trans = {	1,0,0,
+						0,1,0,
+						0,0,1 };
+
+		part.trans.translate(part.pos);
+		part.trans.rotate(part.rot);
+
+		part.trans.scale(sf::Vector2f(200, 200));
+
+		part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(part.name));
+
+		parts.push_back(part);
+	}
+}
+
 void PartsManager::add_part(const std::string &name)
 {
     if(latch_part)

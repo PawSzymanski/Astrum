@@ -15,7 +15,7 @@
 class LvlSetStage :public GameStage
 {
     LvlButton button[3];
-    bool slide_in, slide_out;
+    bool slide_in, slide_out, slide_out_to_menu;
     GameStage * next_stage;
     sf::Text esc_text;
     float timer;

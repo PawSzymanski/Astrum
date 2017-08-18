@@ -110,45 +110,9 @@ void CreatorStage::input(sf::Event &event)
 			std::string & str = (ResourcesManager::getInstanceRef().shipInfo);
 			
 			str = "resources/levelData/ship_" + std::to_string(i + 1) + ".cfg";
-			//FUNKCJE Z TEGO TRZEBA ZROBIC W PART MENAGERZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			ConfigParser pars;
-			pars.load(str);
-			if (!pars.setSection("body_info"))
-				break;
-			manager.set_body(pars.getString());
-
-			manager.parts.clear();
-
-			Part part;
-			if(!pars.setSection("parts_info"))
-				break;
-
-			while (!pars.EndOfSection())
-			{
-				std::cout << "loaded!!!!" << std::endl;
-				part.name.clear();
-				part.name = pars.getString();
-				part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(part.name));
-				part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(part.name));
-				part.pos.x = 200*pars.getFloat()+650;
-				part.pos.y = 200*pars.getFloat()+500;
-				part.rot = pars.getFloat();
-				part.key = pars.getString();
-				sf::Transform trans;
-
-				part.trans ={	1,0,0,
-								0,1,0,
-								0,0,1 };
-				
-				part.trans.translate(part.pos);
-				part.trans.rotate(part.rot);
-				
-				part.trans.scale(sf::Vector2f(200, 200));
-				
-				part.normals =& (ResourcesManager::getInstanceRef().vertCont.getNormals(part.name));
-
-				manager.parts.push_back(part);
-			}
+			
+			manager.loadPartFromFile(str);
+			
 		}
 	}
 	//

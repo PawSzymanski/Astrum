@@ -1,49 +1,11 @@
-﻿  PHISICS_2D.cpp
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,sf::Vector2f&>(entityx::Entity::Id,sf::Vector2f &)' being compiled
-          with
-          [
-              Derived=Position,
-              C=Position
-          ]
-  2d_phisLIB\PHISICS_2D.cpp(28): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Position,sf::Vector2f&>(sf::Vector2f &)' being compiled
-          with
-          [
-              Derived=Position
-          ]
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty>(entityx::Entity::Id,_Ty &&)' being compiled
-          with
-          [
-              Derived=Rotation,
-              C=Rotation,
-              _Ty=int
-          ]
-  2d_phisLIB\PHISICS_2D.cpp(29): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Rotation,int>(int &&)' being compiled
-          with
-          [
-              Derived=Rotation
-          ]
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,sf::Vector2f&,_Ty>(entityx::Entity::Id,sf::Vector2f &,_Ty &&)' being compiled
-          with
-          [
-              Derived=Transform,
-              C=Transform,
-              _Ty=double
-          ]
-  2d_phisLIB\PHISICS_2D.cpp(34): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Transform,sf::Vector2f&,double>(sf::Vector2f &,double &&)' being compiled
-          with
-          [
-              Derived=Transform
-          ]
-  GameplayStage.cpp
-GameplayStage.cpp(78): warning C4305: 'initializing': truncation from 'double' to 'float'
+﻿  lvlsetstage.cpp
+lvlsetstage.cpp(97): warning C4244: '=': conversion from 'float' to 'sf::Uint8', possible loss of data
+lvlsetstage.cpp(120): warning C4244: '=': conversion from 'float' to 'sf::Uint8', possible loss of data
+lvlsetstage.cpp(144): warning C4244: '=': conversion from 'float' to 'sf::Uint8', possible loss of data
   Generating code
-  81 of 5502 functions ( 1.5%) were compiled, the rest were copied from previous compilation.
+  81 of 5503 functions ( 1.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    18 functions had inline decision re-evaluated but remain unchanged
+    17 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

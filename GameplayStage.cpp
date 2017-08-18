@@ -63,7 +63,6 @@ bool GameplayStage::update(float dt)
 	{
 		std::cout << "ALL PLATFORMS PASSED" << std::endl;
 	}
-
     //std::cout << "." << std::endl;
 	
 	return true;

@@ -7,7 +7,12 @@
 #include "creatorstage.h"
 #include "2d_phisLIB/Container.h"
 #include "configparser.h"
-
+/*
+*We keep here data that can be transefed 
+* or visible to any class or function in whole code.
+*
+*
+*/
 class ResourcesManager
 {
 private:
@@ -41,10 +46,5 @@ public:
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
-	ExitStage exit_stage;
-
-	
-	
-	
-	
+	ExitStage exit_stage;	
 };

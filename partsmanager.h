@@ -18,15 +18,16 @@
 
 class PartsManager : public sf::Drawable
 {
-    sf::VertexArray * current_body;
+	friend class CreatorStage;
+    
+	sf::VertexArray * current_body;
     std::vector <sf::Vector2f> * current_normals;
     std::string current_body_name;
-    
-
+	std::vector <Part> parts;
+	Part * latch_part;
+	sf::Transform body_trans;
    
     bool good_place;
-
-   
 
     sf::Vector2f mouse_pos;
 
@@ -36,14 +37,13 @@ private:
     Part * findClicked();
 
 public:
-	std::vector <Part> parts;
-	Part * latch_part;
-	sf::Transform body_trans;
+	
     PartsManager();
 
     void init();
     bool is_body_set();
     void set_body(const std::string &name);
+	void loadPartFromFile(std::string dir);
     void add_part(const std::string &name);
     void saveShip(const std::string &dir);
     void input(sf::Event ev);

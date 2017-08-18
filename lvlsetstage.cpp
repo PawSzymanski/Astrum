@@ -58,7 +58,7 @@ void LvlSetStage::input(sf::Event &event)
         if(event.key.code == sf::Keyboard::Escape)
         {
             next_stage = &(ResourcesManager::getInstanceRef().menu_stage);
-            slide_out = true;
+            slide_out_to_menu = true;
         }
         else if( event.key.code == sf::Keyboard::Left)
         {
@@ -138,8 +138,32 @@ bool LvlSetStage::update(float dt)
 
         slide_out = !in_pos;
     }
+	if (slide_out_to_menu)
+	{
+		sf::Color col = esc_text.getFillColor();
+		col.a = (timer * 255.0f < 0.0f) ? 0 : timer*255.0f;
+		esc_text.setFillColor(col);
+		timer = ((timer - dt / 2) < 0.0f) ? 0 : (timer - dt / 2);
 
-    if(next_stage && !slide_out)
+		float pos_x[3] = { -700,-950,-1200 };
+		bool in_pos = true;
+		for (int i = 0; i<3; ++i)
+		{
+			sf::Vector2f pos = button[i].getPosition();
+			float dp = pos.x - pos_x[i];
+			//std::cout << "DP: " << dp << std::endl;
+
+			if (dp < 2600)
+			{
+				button[i].setPosition(pos - sf::Vector2f(-dp / 50, 0));
+				in_pos = false;
+			}
+		}
+
+		slide_out_to_menu = !in_pos;
+	}
+
+    if(next_stage && !slide_out && !slide_out_to_menu)
         next_stage->set();
 
     return true;

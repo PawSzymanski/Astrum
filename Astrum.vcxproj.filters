@@ -136,7 +136,7 @@
       <Filter>Source Files\stages</Filter>
     </ClCompile>
     <ClCompile Include="cargosystem.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
