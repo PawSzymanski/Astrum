@@ -10,6 +10,7 @@
 #include "platform_manager.h"
 #include "animations_system.h"
 #include "cargosystem.h"
+#include "game_over_system.h"
 
 class GameplayStage : public GameStage
 {

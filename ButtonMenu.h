@@ -4,8 +4,9 @@
 
 class ButtonMenu : public sf::Drawable
 {
-    bool has_mouse;
+   
 public:
+	bool has_mouse;
 	int number, lenght;
 	sf::Text text;
 	RoundRect rect;

@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 
 
-
 struct Position : public entityx::Component<Position>
 {
     Position(const sf::Vector2f & pos)
@@ -181,10 +180,8 @@ struct KeyAssigned : public entityx::Component<KeyAssigned>
 struct isPlayer : public entityx::Component<isPlayer>
 {
 };
-struct isLegs : public entityx::Component<isLegs>
-{
-};
-struct isEngine : public entityx::Component<isLegs>
+
+struct isEngine : public entityx::Component<isEngine>
 {
 };
 struct isPlatform : public entityx::Component<isPlatform>
@@ -204,16 +201,18 @@ struct isSlave : public entityx::Component<isSlave>
 struct AdditionalAnim : public entityx::Component<AdditionalAnim>
 {
      AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps)
-		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name)
+		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), 
+		 time(sf::Time::Zero), nameOfAnim(name), wholeTime(sf::Time::Zero), isGameOver(false)
 	 {
 		 clock.restart();
 	 }
 	 AdditionalAnim(std::string name, sf::Texture * tex, sf::VertexArray & v_array, float fps, sf::Vector2f trans)
-		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero), nameOfAnim(name), transVector(trans)
+		 :texture(tex), v_array(v_array), frame_x(0), frame_y(0), fps(fps), animate(false), time(sf::Time::Zero),
+		 nameOfAnim(name), transVector(trans), wholeTime(sf::Time::Zero), isGameOver(false)
 	 {
 		 clock.restart();
 	 }
-	sf::Time time;
+	sf::Time time, wholeTime;
 	sf::Clock clock;
 	sf::Texture * texture;
     sf::VertexArray & v_array;
@@ -223,7 +222,7 @@ struct AdditionalAnim : public entityx::Component<AdditionalAnim>
 
     int frame_x, frame_y;
     float fps;
-    bool animate;
+    bool animate, isGameOver;
 };
 
 struct isCrane :public entityx::Component<isCrane>
@@ -269,3 +268,5 @@ struct CargoSpace : public entityx::Component<CargoSpace>
     sf::Time time;
     bool checked;
 };
+
+

@@ -45,5 +45,10 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 	
 	boom_anim->clock.restart();
 	boom_anim->time = sf::Time::Zero;
+	boom_anim->wholeTime = sf::Time::Zero;
+	boom_anim->isGameOver = true;
+
+
+	ResourcesManager::getInstanceRef().isGameOver = true;
     //std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
 }

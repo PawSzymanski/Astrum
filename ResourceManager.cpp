@@ -2,7 +2,7 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), areAllPlatfIncluded(false)
+ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), areAllPlatfIncluded(true)
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
@@ -15,6 +15,10 @@ ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("reso
     font.loadFromFile("resources/sansation.ttf");
 
     loadContainer();
+	//game over buttons initialisation
+	GOButton[0].init(font, 40, sf::Vector2f(8.75, 4), sf::Color::White, "Again", sf::Vector2f(0, 0));
+	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Next", sf::Vector2f(0.0, 0.0));
+	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Exit", sf::Vector2f(0.0, 0));
 }
 
 ResourcesManager::~ResourcesManager()
@@ -50,7 +54,8 @@ void ResourcesManager::loadContainer()
         "explosion.cfg",
         "fire.cfg",
         "hook.cfg",
-        "bomb.cfg"
+        "bomb.cfg",
+		"faded_screen.cfg"
     };
 
     ConfigParser parser;

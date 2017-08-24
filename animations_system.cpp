@@ -16,6 +16,7 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 	for (auto ent : en.entities_with_components<AdditionalAnim>())
 	{
 		animationH = ent.component<AdditionalAnim>();
+		animationH->wholeTime += animationH->clock.getElapsedTime();
 		animationH->time += animationH->clock.restart();
 		
 		if(!animationH.valid()) //do we need it ?
@@ -26,6 +27,7 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 			if (animationH->time.asSeconds() > (1.0f / animationH->fps))
 			{
 				animationH->time = sf::Time::Zero;
+				
 				std::string nameOfAnim = animationH->nameOfAnim;
 				sf::Vector2f framesSize = ResourcesManager::getInstanceRef().textureCont.getAnimationFrameSize(nameOfAnim);
 				int amountFramesX = (*animationH->texture).getSize().x / framesSize.x;
@@ -42,7 +44,8 @@ void animations_system::update(entityx::EntityManager & en, entityx::EventManage
 				array[2].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y + framesSize.y);
 				array[3].texCoords = sf::Vector2f(animationH->frame_x * framesSize.x + framesSize.x, animationH->frame_y * framesSize.y);
                 //std::cout << (*animationH->texture).getSize().x << " " << framesSize.x << std::endl;
-                //std::cout << "ANIM " << nameOfAnim <<  std::endl;
+                
+				std::cout << "ANIM " << nameOfAnim <<  std::endl;
 			}
 		}
 		else

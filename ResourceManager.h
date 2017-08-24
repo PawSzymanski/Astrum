@@ -35,7 +35,7 @@ public:
 	static void deleteInstance();
 
 public:
-	bool areAllPlatfIncluded;
+	bool areAllPlatfIncluded, isGameOver;
 	std::string levelInfo;
 	std::string shipInfo;
 	Container vertCont;
@@ -46,5 +46,6 @@ public:
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
-	ExitStage exit_stage;	
+	ExitStage exit_stage;
+	ButtonMenu GOButton[3];
 };

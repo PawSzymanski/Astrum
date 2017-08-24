@@ -35,6 +35,8 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<platform_manager>((*ex_ptr).events);
 	(*ex_ptr).systems.add<animations_system>();
     (*ex_ptr).systems.add<CargoSystem>();
+	(*ex_ptr).systems.add<game_over_system>();
+
 
     fps_text.setCharacterSize(18);
     fps_text.setFillColor(sf::Color::Black);
@@ -52,18 +54,15 @@ bool GameplayStage::update(float dt)
 	updateCamera();
 
 	(*phisics_ptr).update(dt);
+
+	(*ex_ptr).systems.update<game_over_system>(dt);
+
 	(*ex_ptr).systems.update<engine_system>(dt);
     (*ex_ptr).systems.update<DestructionSystem>(dt);
     (*ex_ptr).systems.update<CraneSystem>(dt);
 	(*ex_ptr).systems.update<platform_manager>(dt);
 	(*ex_ptr).systems.update<animations_system>(dt);
     (*ex_ptr).systems.update<CargoSystem>(dt);
-
-	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded)
-	{
-		std::cout << "ALL PLATFORMS PASSED" << std::endl;
-	}
-    //std::cout << "." << std::endl;
 	
 	return true;
 }

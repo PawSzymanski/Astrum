@@ -177,7 +177,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
         else{
 			std::cout << "legs loaded" << std::endl;
 
-			partEn.assign<isLegs>();
+			//partEn.assign<isLegs>();
             partEn.assign<isSlave>(playerEn);
             phisics.createPolygon(partEn,sf::Vector2f(0,0),sf::Vector2f(0,0), partDegree, 1, partVert);
             continue;

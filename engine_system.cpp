@@ -17,7 +17,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	
 	AttachToPlayerPoint::Handle attachPointH;
 	Transform::Handle transEngH, transPlayerH;
-	isLegs::Handle legsH;
+	//isLegs::Handle legsH;
 
 	for (auto en1 : en.entities_with_components(posH, playerH, rotH))
 	{
