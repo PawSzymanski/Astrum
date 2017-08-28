@@ -20,22 +20,23 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 		if (!cargoSpaceH->checked)
 			return;
 	}
-	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded || (ResourcesManager::getInstanceRef().isGameOver))
+	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded == true || (ResourcesManager::getInstanceRef().isGameOver == true))
 	{
-			if (!newEntity1.valid())
-				newEntity1 = en.create();
-		
-		newEntity1.assign<VertexArray>(ResourcesManager::getInstanceRef().vertCont.getPoly("faded_screen"), 
-		ResourcesManager::getInstanceRef().vertCont.getNormals("faded_screen"));
-		newEntity1.assign<PolyName>("faded_screen3"); // just for render to let know what texture 
-		newEntity1.assign<Transform>(sf::Vector2f(0,0), 0);
-		VertexArray::Handle txtToRender = newEntity1.component<VertexArray>();
+		if (!newEntity1.valid())
+		{
+			newEntity1 = en.create();
+
+			newEntity1.assign<VertexArray>(ResourcesManager::getInstanceRef().vertCont.getPoly("faded_screen"),
+				ResourcesManager::getInstanceRef().vertCont.getNormals("faded_screen"));
+			newEntity1.assign<PolyName>("faded_screen3"); // just for render to let know what texture 
+			newEntity1.assign<Transform>(sf::Vector2f(0, 0), 0);
+			VertexArray::Handle txtToRender = newEntity1.component<VertexArray>();
+		}
 		sf::Event sfEvent;
 		ResourcesManager::getInstanceRef().window.pollEvent(sfEvent);
 
-		for (auto & button : ResourcesManager::getInstanceRef().GOButton)
+		for (auto &button : ResourcesManager::getInstanceRef().GOButton)
 		{
-			//button.rect.setPosition(position);
 			button.rect.corner_radius = 0.2;
 			button.rect.size = sf::Vector2f(1.5, 0.3);
 			button.rect.setOrigin(0.65, 0.05);
@@ -57,21 +58,31 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			}
 			if (button.has_mouse == true)
 			{
+				
 				button.rect.setOutlineThickness(0.15);
-				if (sfEvent.type == sf::Event::MouseButtonReleased)
+				
+				
+				if (ResourcesManager::getInstanceRef().isMouseButtonReleased)
 				{
 					if (button.text.getString() == "Next")
 					{ 
-						ResourcesManager::getInstanceRef().menu_stage.set();
+						ResourcesManager::getInstanceRef().isGameOver = false;
+						newEntity1.destroy();
 					}
 					else if (button.text.getString() == "Exit")
 					{
-						std::cout << " EEEEEEEE" << std::endl;
-						ResourcesManager::getInstanceRef().menu_stage.set();
+						ResourcesManager::getInstanceRef().lvl_set_stage.set();
+						ResourcesManager::getInstanceRef().isGameOver = false;
+						newEntity1.destroy();
 					}
 					else if (button.text.getString() == "Again")
 					{
-						ResourcesManager::getInstanceRef().menu_stage.set();
+						ResourcesManager::getInstanceRef().isGameOver = false;
+						ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
+					//	ResourcesManager::getInstanceRef().gameplay_stage.release();
+					//	ResourcesManager::getInstanceRef().gameplay_stage.init();
+						
+						newEntity1.destroy();
 					}
 				}
 			}	
@@ -81,10 +92,9 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 	for (auto e : en.entities_with_components(additH))
 	{
 		additH = e.component<AdditionalAnim>();
-		std::cout << "timeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee: " << additH->wholeTime.asMilliseconds() << std::endl;
 		if (additH->wholeTime.asSeconds() > 4 && additH->nameOfAnim == "explosion")
 		{
-			additH->animate = false;
+			e.remove<AdditionalAnim>();
 		}
 	}
 }

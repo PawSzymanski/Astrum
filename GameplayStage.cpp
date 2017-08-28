@@ -25,6 +25,8 @@ bool GameplayStage::init()
 	auto &window = ResourcesManager::getInstanceRef().window;
 	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 
+	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
+
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.update<player_input_system>(dtime);
 
@@ -69,6 +71,7 @@ bool GameplayStage::update(float dt)
 
 void GameplayStage::render(sf::RenderWindow &window)
 {
+	//FPS clock
 	static sf::Clock fps_clock, display_fps_clock;;
 
     std::stringstream ss;
@@ -83,7 +86,11 @@ void GameplayStage::render(sf::RenderWindow &window)
 		ss << fps_f;
 		fps_text.setString(ss.str());
 	}
+	//
+
+
 	window.setView(camera);
+	//draw gameplay
 	(*ex_ptr).systems.update<render_system>(dtime);
 
     window.setView(window.getDefaultView());
@@ -103,5 +110,13 @@ void GameplayStage::input(sf::Event & event)
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 	{
 		ResourcesManager::getInstanceRef().lvl_set_stage.set();
+	}
+	if (event.type == sf::Event::MouseButtonReleased)
+	{
+		ResourcesManager::getInstanceRef().isMouseButtonReleased = true;
+	}
+	else
+	{
+		ResourcesManager::getInstanceRef().isMouseButtonReleased = false;
 	}
 }

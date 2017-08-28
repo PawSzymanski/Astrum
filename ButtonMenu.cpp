@@ -49,6 +49,7 @@ bool ButtonMenu::input(sf::Event &ev)
     {
         has_mouse = (ev.mouseMove.x > rect.getPosition().x - 80 && ev.mouseMove.x < rect.getPosition().x + 80 &&
                 ev.mouseMove.y > rect.getPosition().y - 20 && ev.mouseMove.y < rect.getPosition().y + 40);
+		
     }
     else if(ev.type == sf::Event::MouseButtonReleased && has_mouse)
         return true;

@@ -2,7 +2,8 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), areAllPlatfIncluded(true)
+ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
+										areAllPlatfIncluded(false), isMouseButtonReleased(false)
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
@@ -17,8 +18,8 @@ ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("reso
     loadContainer();
 	//game over buttons initialisation
 	GOButton[0].init(font, 40, sf::Vector2f(8.75, 4), sf::Color::White, "Again", sf::Vector2f(0, 0));
-	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Next", sf::Vector2f(0.0, 0.0));
-	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Exit", sf::Vector2f(0.0, 0));
+	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Next", sf::Vector2f(0, 0));
+	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Exit", sf::Vector2f(0, 0));
 }
 
 ResourcesManager::~ResourcesManager()

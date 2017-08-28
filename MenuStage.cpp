@@ -35,7 +35,7 @@ bool MenuStage::init()
 
 void MenuStage::slidingRight(float dt)
 {
-	if (startButton.rect.getPosition().x > 0)
+	if (startButton.rect.getPosition().x > -100)
 	{
 		buttonSpeed += 30;
 		startButton.rect.setPosition(startButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
@@ -215,7 +215,7 @@ void MenuStage::input(sf::Event & event)
 			isSliding = 1;
 		}
 	}
-	if (event.type == sf::Event::MouseButtonReleased)
+	if (event.type == sf::Event::MouseButtonReleased && (startButton.input(event) || optionsButton.input(event)) || exitButton.input(event))
 	{
 		if (event.key.code == sf::Mouse::Left)
 		{
