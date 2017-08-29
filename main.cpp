@@ -1,16 +1,24 @@
 #include "LibsAndDeclarations.h"
+
+#include <memory>
+
 #include "ResourceManager.h"
 #include "sstream"
+
 
 void input();
 bool update();
 void render();
+
+std::shared_ptr<sf::Event> foo;
+
 
 int main()
 {
     auto &resource_manager = ResourcesManager::getInstanceRef();
 
     resource_manager.menu_stage.set();
+	
 
     while(resource_manager.window.isOpen())
     {
@@ -32,14 +40,21 @@ int main()
 void input()
 {
     auto & resource = ResourcesManager::getInstanceRef();
-    sf::Event ev;
-    while(resource.window.pollEvent(ev))
+
+	foo = std::make_shared<sf::Event>();
+	//NAprawic ten event
+	resource.mainEvent = foo;
+
+
+
+    while(resource.window.pollEvent(*foo))
     {
-        if(ev.type == sf::Event::Closed)
+        if(foo->type == sf::Event::Closed)
             resource.exit_stage.set();
 
-        GameStage::stage_input(ev);
+        GameStage::stage_input(*foo);
     }
+
 }
 
 bool update()

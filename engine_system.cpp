@@ -92,10 +92,6 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 	{
 		enPart.remove<AdditionalAnim>();
 	}
-
-
-
-
 	pointH->force = rotMatrix.getInverse() * pointH->force;
 }
 

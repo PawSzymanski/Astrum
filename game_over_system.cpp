@@ -10,7 +10,8 @@ game_over_system::game_over_system() :doEnd(false), licznik(0)
 void game_over_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
 	CargoSpace::Handle cargoSpaceH;
-	if(ResourcesManager::getInstanceRef().isGameOver)
+	if(ResourcesManager::getInstanceRef().isGameOver ||
+		(ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::KeyPressed && ResourcesManager::getInstanceRef().mainEvent->key.code == sf::Keyboard::Escape))
 	{
 		
 	}
@@ -20,7 +21,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 		if (!cargoSpaceH->checked)
 			return;
 	}
-	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded == true || (ResourcesManager::getInstanceRef().isGameOver == true))
+	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded == true || ResourcesManager::getInstanceRef().isGameOver == true)
 	{
 		if (!newEntity1.valid())
 		{
@@ -32,8 +33,6 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			newEntity1.assign<Transform>(sf::Vector2f(0, 0), 0);
 			VertexArray::Handle txtToRender = newEntity1.component<VertexArray>();
 		}
-		sf::Event sfEvent;
-		ResourcesManager::getInstanceRef().window.pollEvent(sfEvent);
 
 		for (auto &button : ResourcesManager::getInstanceRef().GOButton)
 		{
@@ -44,44 +43,46 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			button.rect.setOutlineColor(sf::Color::White);
 			button.rect.setOutlineThickness(0.1);
 
-			if (sfEvent.type == sf::Event::MouseMoved && 
-				sfEvent.mouseMove.x  > button.rect.getPosition().x * 78 -80 &&
-				button.rect.getPosition().x * 78 + 80 > sfEvent.mouseMove.x &&
-				sfEvent.mouseMove.y  > button.rect.getPosition().y * 76 -20 &&
-				button.rect.getPosition().y * 76 + 40 > sfEvent.mouseMove.y)
+			if (ResourcesManager::getInstanceRef().mainEvent && 
+				ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::MouseMoved &&
+				ResourcesManager::getInstanceRef().mainEvent->mouseMove.x  > button.rect.getPosition().x * 78 -80 &&
+				button.rect.getPosition().x * 78 + 80 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.x &&
+				ResourcesManager::getInstanceRef().mainEvent->mouseMove.y  > button.rect.getPosition().y * 76 -20 &&
+				button.rect.getPosition().y * 76 + 40 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.y)
 			{
 				button.has_mouse = true;
 			}
-			else if (sfEvent.type == sf::Event::MouseMoved)
+			else if (ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::MouseMoved)
 			{
 				button.has_mouse = false;
 			}
 			if (button.has_mouse == true)
-			{
-				
+			{		
 				button.rect.setOutlineThickness(0.15);
-				
-				
+					
 				if (ResourcesManager::getInstanceRef().isMouseButtonReleased)
 				{
-					if (button.text.getString() == "Next")
+					if (button.text.getString() == "Back")
 					{ 
+						ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
 						ResourcesManager::getInstanceRef().isGameOver = false;
+						
 						newEntity1.destroy();
 					}
 					else if (button.text.getString() == "Exit")
 					{
-						ResourcesManager::getInstanceRef().lvl_set_stage.set();
-						ResourcesManager::getInstanceRef().isGameOver = false;
-						newEntity1.destroy();
-					}
-					else if (button.text.getString() == "Again")
-					{
+						ResourcesManager::getInstanceRef().menu_stage.set();
 						ResourcesManager::getInstanceRef().isGameOver = false;
 						ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
-					//	ResourcesManager::getInstanceRef().gameplay_stage.release();
-					//	ResourcesManager::getInstanceRef().gameplay_stage.init();
-						
+
+						newEntity1.destroy();
+					}
+					else if (button.text.getString() == "Next")
+					{
+						ResourcesManager::getInstanceRef().lvl_set_stage.set();
+						ResourcesManager::getInstanceRef().isGameOver = false;
+						ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
+				
 						newEntity1.destroy();
 					}
 				}

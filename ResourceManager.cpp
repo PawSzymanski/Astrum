@@ -17,7 +17,7 @@ ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("reso
 
     loadContainer();
 	//game over buttons initialisation
-	GOButton[0].init(font, 40, sf::Vector2f(8.75, 4), sf::Color::White, "Again", sf::Vector2f(0, 0));
+	GOButton[0].init(font, 40, sf::Vector2f(8.75, 4), sf::Color::White, "Back", sf::Vector2f(0, 0));
 	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Next", sf::Vector2f(0, 0));
 	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Exit", sf::Vector2f(0, 0));
 }

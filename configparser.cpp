@@ -112,7 +112,7 @@ std::vector<std::vector<std::string> > &ConfigParser::getData()
 std::vector<std::string> ConfigParser::getSections()
 {
     std::vector <std::string> sections;
-    for( auto p: dane)
+    for(auto p : dane)
         sections.push_back(p.first);
 
     return sections;

@@ -47,5 +47,6 @@ public:
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
 	ExitStage exit_stage;
+	std::shared_ptr<sf::Event> mainEvent;
 	ButtonMenu GOButton[3];
 };

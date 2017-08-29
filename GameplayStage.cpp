@@ -107,10 +107,6 @@ void GameplayStage::release()
 
 void GameplayStage::input(sf::Event & event)
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-	{
-		ResourcesManager::getInstanceRef().lvl_set_stage.set();
-	}
 	if (event.type == sf::Event::MouseButtonReleased)
 	{
 		ResourcesManager::getInstanceRef().isMouseButtonReleased = true;
