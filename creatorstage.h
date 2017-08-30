@@ -17,7 +17,7 @@
 class CreatorStage : public GameStage
 {
     PartButton bodybuttons[3];
-    PartButton partbuttons[4];
+    PartButton partbuttons[5];
 	PartButton garageButtons[4];
 
     ButtonMenu start_button;

@@ -2,13 +2,15 @@
 #include "ResourceManager.h"
 
 
-engine_system::engine_system(entityx::EventManager &ev)
+engine_system::engine_system(entityx::EventManager &ev, Phisics_2D &phs) : phisics(phs)
 {
 	ev.subscribe<ApplyForceEvent>(*this);
 }
 
 void engine_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
+	
+
 	isPlayer::Handle playerH;
 	VertexArray::Handle verH;
 	//Line::Handle lineH;
@@ -48,9 +50,10 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			//parts functions///////////////////////////////////////////////////////////////////////////
 			
 			enginePart(en1, en2, ev, attachPointH, rotMatrix);
+			gunPart(en, en1, en2, ev, attachPointH, rotMatrix);
 
 			//end;/////////////////////////////////////////////////////////////////////////////////////////
-			attachPointH->point = rotMatrix.getInverse() * attachPointH->point;
+			attachPointH->point = rotMatrix.getInverse() * attachPointH->point;		
 		}
 	}
 }
@@ -71,12 +74,10 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 
 	pointH->force = rotMatrix * pointH->force;
 
-	
 	if (sf::Keyboard::isKeyPressed(keyH->key))
 	{
 		auto & resource = ResourcesManager::getInstanceRef();
 		ev.emit<ApplyForceEvent>(attachPointH->point, pointH->force, enPlayer);
-		
 		
 		if (!enPart.has_component<AdditionalAnim>())
 		{
@@ -94,6 +95,45 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 	}
 	pointH->force = rotMatrix.getInverse() * pointH->force;
 }
+
+void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev,
+	AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
+{
+	if (!enPart.has_component<isGun>())
+	{
+		return;
+	}
+
+	
+	KeyAssigned::Handle keyH;
+	keyH = enPart.component<KeyAssigned>();
+
+	Position::Handle posH;
+	posH = enPlayer.component<Position>();
+	
+	isBullet::Handle bulletH;
+
+	
+
+	if (bulletTime.asMilliseconds() > 80 && sf::Keyboard::isKeyPressed(keyH->key))
+	{
+		auto bulletEn = en.create();
+		bulletTime = sf::Time::Zero;
+		phisics.createPolygon(bulletEn, posH->pos + attachPointH->point,
+			rotMatrix * sf::Vector2f(0, -10), 0, 0.01, "bullet");
+		bulletEn.assign<isBullet>();
+	}
+	for (auto bullets : en.entities_with_components(bulletH))
+	{
+		bulletH->livingTime += bulletClock.getElapsedTime();
+		if (bulletH->livingTime.asSeconds() > 6)
+		{
+			bullets.destroy();
+		}
+	}
+	bulletTime += bulletClock.restart();
+}
+
 
 void engine_system::receive(const ApplyForceEvent & ev)
 {

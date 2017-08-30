@@ -34,22 +34,24 @@ bool CreatorStage::init()
     timer = 1.0f;
 
     std::string bodynames[3] = { "Mk. I" , "Mk. II", "Mk. III" };
-    std::string partnames[4] = { "large eng.", "small eng.", "langing legs", "crane" };
+    std::string partnames[5] = { "large eng.", "small eng.", "langing legs", "crane", "gun" };
 	std::string garageNames[4] = { "1 garage", "2 garage" ,"3 garage" ,"4 garage" };
     int bodyposition = 500;
-    int partposition = 200;
+    int partposition = 150;
 	int garagePositionY = 130;
     auto &container = ResourcesManager::getInstanceRef().vertCont;
-    std::string bodys[3] ={
+    std::string bodys[3] = {
         "TRIANGLE_BODY",
         "LONG_BODY",
-        "COBRA_BODY"};
+        "COBRA_BODY"
+	};
 
-    std::string parts[4] ={
-        "large_engine",
-        "small_engine",
-        "landing_legs",
-        "crane"
+	std::string parts[5] = {
+		"large_engine",
+		"small_engine",
+		"landing_legs",
+		"crane",
+		"gun"
     };
 
     for(int i=0; i<3; ++i)
@@ -58,7 +60,7 @@ bool CreatorStage::init()
         bodyposition += 120;
     }
 
-    for(int i=0; i<4; ++i)
+    for(int i=0; i<5; ++i)
     {
         partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, parts[i]);
         partposition += 120;
@@ -106,7 +108,7 @@ void CreatorStage::input(sf::Event &event)
 	{
 		if (garageButtons[i].input(event))
 		{
-			std::cout << i + 1 << "  =  numer statku!!!!!!!!!!" << std::endl;
+			std::cout << i + 1 << "  =  numer statku!" << std::endl;
 			std::string & str = (ResourcesManager::getInstanceRef().shipInfo);
 			
 			str = "resources/levelData/ship_" + std::to_string(i + 1) + ".cfg";
@@ -119,7 +121,7 @@ void CreatorStage::input(sf::Event &event)
     for(int i=0; i<3; ++i)
         if(bodybuttons[i].input(event) && manager.parts.size() < 1)
            manager.set_body(bodybuttons[i].getName());
-    for(int i=0; i<4; ++i)
+    for(int i=0; i<5; ++i)
         if(partbuttons[i].input(event))
            manager.add_part(partbuttons[i].getName());
 
@@ -128,7 +130,7 @@ void CreatorStage::input(sf::Event &event)
         if(!manager.is_body_set())
             return;
 
-     // manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
+      manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
         next = &(ResourcesManager::getInstanceRef().gameplay_stage);
         fade_out = true;
         fade_in = false;
@@ -165,7 +167,7 @@ bool CreatorStage::update(float dt)
 
     for(int i=0; i<3; ++i)
         bodybuttons[i].update(dt);
-    for(int i=0; i<4; ++i)
+    for(int i=0; i<5; ++i)
         partbuttons[i].update(dt);
 	for (int i = 0; i<4; ++i)
 		garageButtons[i].update(dt);
@@ -182,7 +184,7 @@ void CreatorStage::render(sf::RenderWindow &window)
 
     for(int i=0; i<3; ++i)
         window.draw(bodybuttons[i]);
-    for(int i=0; i<4; ++i)
+    for(int i=0; i<5; ++i)
         window.draw(partbuttons[i]);
 	for (int i = 0; i < 4; ++i)
 		window.draw(garageButtons[i]);
@@ -198,7 +200,7 @@ void CreatorStage::release()
     next = nullptr;
     for(int i=0; i<3; ++i)
         bodybuttons[i].release();
-    for(int i=0; i<4; ++i)
+    for(int i=0; i<5; ++i)
         partbuttons[i].release();
 	for (int i = 0; i < 4; ++i)
 		garageButtons[i].release();

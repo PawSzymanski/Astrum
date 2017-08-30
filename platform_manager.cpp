@@ -28,7 +28,7 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 
 			if (time.asSeconds() > 1)
 			{
-				std::cout << "da " << std::endl;
+				std::cout << "PASSED " << std::endl;
 				platH->isPassed = true;
 			}
 		}

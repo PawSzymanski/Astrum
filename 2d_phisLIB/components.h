@@ -178,12 +178,21 @@ struct KeyAssigned : public entityx::Component<KeyAssigned>
 };
 //
 struct isPlayer : public entityx::Component<isPlayer>
-{
-};
+{};
 
 struct isEngine : public entityx::Component<isEngine>
+{};
+
+struct isGun : public entityx::Component<isGun>
+{};
+
+struct isBullet : public entityx::Component<isBullet>
 {
+	isBullet() :livingTime(sf::Time::Zero)
+	{};
+	sf::Time livingTime;
 };
+
 struct isPlatform : public entityx::Component<isPlatform>
 {
 	isPlatform() : isPassed(false)

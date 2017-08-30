@@ -20,6 +20,7 @@ void CraneSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
     isCrane::Handle crane;
     KeyAssigned::Handle key;
     AttachToPlayerPoint::Handle point;
+	CargoSpace::Handle cargoSpaceH;
 
     if(c_ev)
     {
@@ -93,6 +94,9 @@ void CraneSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
         else
             crane->block = false;
     }
+
+
+
 }
 
 void CraneSystem::receive(const CollisionEvent &ev)

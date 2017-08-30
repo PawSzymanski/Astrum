@@ -64,11 +64,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}
 
-
-
-
-
-
 	//SHIP
 	if (!parser.load(shipInfo))
 	{
@@ -174,7 +169,15 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
             partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 		}
-        else{
+		else if (partVert == "gun")
+		{
+			std::cout << "gun loaded" << std::endl;
+
+			partEn.assign<isGun>();
+
+			partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
+		}
+        else {
 			std::cout << "legs loaded" << std::endl;
 
 			//partEn.assign<isLegs>();

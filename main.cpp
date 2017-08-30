@@ -45,8 +45,6 @@ void input()
 	//NAprawic ten event
 	resource.mainEvent = foo;
 
-
-
     while(resource.window.pollEvent(*foo))
     {
         if(foo->type == sf::Event::Closed)

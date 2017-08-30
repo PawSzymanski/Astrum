@@ -21,6 +21,12 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 {
     auto en1 = ev.en1;
     auto en2 = ev.en2;
+
+	if (en1.has_component<isBullet>() || en2.has_component<isBullet>())
+	{
+		return;
+	}
+
     bool en1_is_player = en1.has_component<isPlayer>(),
          en2_is_player = en2.has_component<isPlayer>();
 

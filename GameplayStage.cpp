@@ -1,7 +1,7 @@
 #include "GameplayStage.h"
 #include "ResourceManager.h"
 
-GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 3.0/*   9.8   */), vertCont(cont)
+GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 2.0f/*   9.8   */), vertCont(cont)
 {
 	display_fps_time = sf::Time::Zero;
 }
@@ -30,7 +30,7 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.update<player_input_system>(dtime);
 
-	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events);
+	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events, *phisics_ptr);
 	(*ex_ptr).systems.add<render_system>(window);
     (*ex_ptr).systems.add<DestructionSystem>(*ex_ptr);
     (*ex_ptr).systems.add<CraneSystem>(*ex_ptr, *phisics_ptr);

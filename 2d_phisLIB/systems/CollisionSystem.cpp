@@ -46,7 +46,7 @@ void CollisionSystem::ResolveCollision(Manifold &m, entityx::EventManager & ev, 
 	isRestH1->isIt = false;
 	isRestH2->isIt = false;
 
-	float restitution = 0.5f;
+	float restitution = 0.2f; //	!	!	!	!	!	!	!	!	!	!	!	!											!	!	!	!	RESTITUTION HERE
 	
 	if (equal(massH1->invMass + massH2->invMass, 0))
 	{

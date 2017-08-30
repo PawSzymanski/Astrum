@@ -3,7 +3,8 @@
 ResourcesManager* ResourcesManager::instance = nullptr;
 
 ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
-										areAllPlatfIncluded(false), isMouseButtonReleased(false)
+										areAllPlatfIncluded(false), isMouseButtonReleased(false), 
+										areAllCargoSpaceIncluded(false), isGameOver(false)
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
@@ -56,7 +57,9 @@ void ResourcesManager::loadContainer()
         "fire.cfg",
         "hook.cfg",
         "bomb.cfg",
-		"faded_screen.cfg"
+		"faded_screen.cfg",
+		"gun.cfg",
+		"bullet.cfg"
     };
 
     ConfigParser parser;
