@@ -38,6 +38,14 @@ bool ButtonMenu::input(sf::Event &ev)
 
    // std::cout<<"hasmouse "<< has_mouse<<std::endl;
   //  rect.setOutlineThickness((has_mouse)? 15 : 8);
+	if (lock)
+	{
+		rect.setOutlineColor(sf::Color::Cyan);
+		
+		return false;
+	}
+
+
 	if (has_mouse)
 	{
 		rect.setOutlineThickness(15);

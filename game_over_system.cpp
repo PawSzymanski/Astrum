@@ -12,27 +12,39 @@ void game_over_system::release()
 	ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = false;
 	ResourcesManager::getInstanceRef().isGameOver = false;
 
+	for (auto &button : ResourcesManager::getInstanceRef().GOButton)
+	{
+		button.lock = false;
+	}
+	ResourcesManager::getInstanceRef().isPauseTime = false;
+
 	newEntity1.destroy();
 }
 
 void game_over_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
 	auto &resource = ResourcesManager::getInstanceRef();
-
-	if (time.asSeconds() > 1 && (ResourcesManager::getInstanceRef().isGameOver == true &&
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		std::cout << "BUTTON OUT" << std::endl;
-		release();
-		time = sf::Time::Zero;
+		resource.isPauseTime = true;
 	}
 
-	if (( resource.areAllPlatfIncluded == true &&
-		ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded == true) ||
-		resource.isGameOver == true )
+	if ( ( resource.areAllPlatfIncluded == true &&
+				resource.areAllCargoSpaceIncluded == true) ||
+					resource.isGameOver == true || 
+						resource.isPauseTime == true)
 	{
-		std::cout << "BUTTON IN" << std::endl;
+		if ((resource.areAllPlatfIncluded == true &&
+				resource.areAllCargoSpaceIncluded == true) || 
+					!resource.isPauseTime)
+		{
+			resource.GOButton[0].lock = true;
+		}
+		resource.isGameOver = true;
+
 		ResourcesManager::getInstanceRef().isGameOver = true;
+		
 		if (!newEntity1.valid())
 		{
 			clock.restart();
@@ -44,10 +56,12 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			newEntity1.assign<Transform>(sf::Vector2f(0, 0), 0);
 			VertexArray::Handle txtToRender = newEntity1.component<VertexArray>();
 		}
+		
 		time += clock.restart();
+		
 		for (auto &button : ResourcesManager::getInstanceRef().GOButton)
 		{
-			std::cout << "BUTTON DRAW" << std::endl;
+			//std::cout << "BUTTON DRAW" << std::endl;
 
 			button.rect.corner_radius = 0.2;
 			button.rect.size = sf::Vector2f(1.5, 0.3);
@@ -55,6 +69,12 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			button.rect.setFillColor(sf::Color(0, 0, 0, 0));
 			button.rect.setOutlineColor(sf::Color::White);
 			button.rect.setOutlineThickness(0.1);
+			//	
+			if (button.lock)
+			{
+				button.rect.setFillColor(sf::Color(200,200,200,255));
+				continue;
+			}
 
 			if (ResourcesManager::getInstanceRef().mainEvent &&
 				ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::MouseMoved &&
@@ -92,10 +112,6 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 				}
 			}
 		}
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		resource.isGameOver = true;
 	}
 	
 	AdditionalAnim::Handle additH;

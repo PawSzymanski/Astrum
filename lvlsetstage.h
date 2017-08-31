@@ -14,13 +14,14 @@
 
 class LvlSetStage :public GameStage
 {
-    LvlButton button[3];
+    LvlButton button[4];
     bool slide_in, slide_out, slide_out_to_menu;
     GameStage * next_stage;
     sf::Text esc_text;
-    float timer;
+    float timer, speed;
     std::string ships[3];
-    std::string levels[3];
+    std::string levels[4];
+	int numberOfLevels;
 
 public:
     LvlSetStage();

@@ -103,8 +103,6 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 	{
 		return;
 	}
-
-	
 	KeyAssigned::Handle keyH;
 	keyH = enPart.component<KeyAssigned>();
 
@@ -112,8 +110,6 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 	posH = enPlayer.component<Position>();
 	
 	isBullet::Handle bulletH;
-
-	
 
 	if (bulletTime.asMilliseconds() > 80 && sf::Keyboard::isKeyPressed(keyH->key))
 	{
