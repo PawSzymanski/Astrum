@@ -97,13 +97,13 @@ void LvlSetStage::input(sf::Event &event)
 
 bool LvlSetStage::update(float dt)
 {
-	std::cout << "X: " << button[0].getPosition().x <<"slide_in: "<< slide_in << "slide_out: "<< slide_out << "slide_out_to_menu: "<< slide_out_to_menu<< std::endl;
+	//std::cout << "X: " << button[0].getPosition().x <<"slide_in: "<< slide_in << "slide_out: "<< slide_out << "slide_out_to_menu: "<< slide_out_to_menu<< std::endl;
 
     if(slide_in)
     {
 		speed -= 0.4;
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < numberOfLevels; ++i)
 		{
 			button[i].setPosition(button[i].getPosition() - sf::Vector2f(speed, 0));
 		}
@@ -117,7 +117,7 @@ bool LvlSetStage::update(float dt)
     {
 		speed += 0.4;
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < numberOfLevels; ++i)
 		{
 			button[i].setPosition(button[i].getPosition() - sf::Vector2f(speed, 0));
 		}
@@ -131,7 +131,7 @@ bool LvlSetStage::update(float dt)
 	{
 		speed -= 1;
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < numberOfLevels; ++i)
 		{
 			button[i].setPosition(button[i].getPosition() - sf::Vector2f(speed, 0));
 		}

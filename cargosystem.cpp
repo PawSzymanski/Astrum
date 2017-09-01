@@ -47,6 +47,13 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
 	for (auto en1 : en.entities_with_components(cargo_space))
 	{
 		if (!cargo_space->checked)
+		{
 			ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = false;
+			break;
+		}
+		else
+		{
+			ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = true;
+		}
 	}
 }

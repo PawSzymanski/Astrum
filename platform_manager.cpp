@@ -16,9 +16,16 @@ platform_manager::~platform_manager()
 
 void platform_manager::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
-	
-	
-	if (isPlatColliding) 
+	int n = 0;
+	for (auto ent : en.entities_with_components<isPlatform>())
+	{
+		++n;
+	}
+	if (n == 0)
+	{
+		ResourcesManager::getInstanceRef().areAllPlatfIncluded = true;
+	}
+	else if (isPlatColliding) 
 	{
 		isPlatform::Handle platH = (*evTemp_ptr).en1.has_component<isPlatform>() ? (*evTemp_ptr).en1.component<isPlatform>() : (*evTemp_ptr).en2.component<isPlatform>();
 		if (clock.getElapsedTime().asMilliseconds() < 50)

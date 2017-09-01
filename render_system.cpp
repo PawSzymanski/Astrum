@@ -70,19 +70,17 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		win.draw(line->line);
 	}
 
-	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded || ResourcesManager::getInstanceRef().isGameOver)
+	if ((ResourcesManager::getInstanceRef().areAllPlatfIncluded && ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded)
+		|| ResourcesManager::getInstanceRef().isGameOver)
 	{
 		int i = 0;
 		for (auto & button : ResourcesManager::getInstanceRef().GOButton)
 		{
-
 			sf::RenderStates states, states2;
-
 			
 			states2.transform.translate(sf::Vector2f(8.15, 3.9 + i));
 			states2.transform.scale(sf::Vector2f(0.01, 0.01));
 			
-
 			win.draw(button.rect, states);
 			win.draw(button.text, states2);
 			++i;

@@ -30,11 +30,14 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 		resource.isPauseTime = true;
 	}
 
-	if ( ( resource.areAllPlatfIncluded == true &&
-				resource.areAllCargoSpaceIncluded == true) ||
+	std::cout << resource.areAllPlatfIncluded << resource.areAllCargoSpaceIncluded << std::endl;
+
+	if ( ( resource.areAllPlatfIncluded == true && resource.areAllCargoSpaceIncluded == true ) ||
 					resource.isGameOver == true || 
 						resource.isPauseTime == true)
 	{
+		std::cout << "DRAW MENU" << std::endl;
+
 		if ((resource.areAllPlatfIncluded == true &&
 				resource.areAllCargoSpaceIncluded == true) || 
 					!resource.isPauseTime)
@@ -55,7 +58,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			newEntity1.assign<PolyName>("faded_screen3"); // just for render to let know what texture 
 			newEntity1.assign<Transform>(sf::Vector2f(0, 0), 0);
 			VertexArray::Handle txtToRender = newEntity1.component<VertexArray>();
-		}
+		 }
 		
 		time += clock.restart();
 		
@@ -113,6 +116,8 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 			}
 		}
 	}
+	else
+	{ }
 	
 	AdditionalAnim::Handle additH;
 	for (auto e : en.entities_with_components(additH))
