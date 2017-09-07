@@ -50,7 +50,7 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 			//parts functions///////////////////////////////////////////////////////////////////////////
 			
 			enginePart(en1, en2, ev, attachPointH, rotMatrix);
-			gunPart(en, en1, en2, ev, attachPointH, rotMatrix);
+			gunPart(en, en1, en2, ev, attachPointH, rotMatrix, rotEngH->degree);
 
 			//end;/////////////////////////////////////////////////////////////////////////////////////////
 			attachPointH->point = rotMatrix.getInverse() * attachPointH->point;		
@@ -97,7 +97,7 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 }
 
 void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev,
-	AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
+	AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix, float degreeOfGun)
 {
 	if (!enPart.has_component<isGun>())
 	{
@@ -111,12 +111,15 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 	
 	isBullet::Handle bulletH;
 
+	sf::Transform rotTransformGun;
+	rotTransformGun.rotate(degreeOfGun);
+
 	if (bulletTime.asMilliseconds() > 80 && sf::Keyboard::isKeyPressed(keyH->key))
 	{
 		auto bulletEn = en.create();
 		bulletTime = sf::Time::Zero;
 		phisics.createPolygon(bulletEn, posH->pos + attachPointH->point,
-			rotMatrix * sf::Vector2f(0, -10), 0, 0.01, "bullet");
+			rotTransformGun * rotMatrix * sf::Vector2f(0, -10), 0, 0.01, "bullet");
 		bulletEn.assign<isBullet>();
 	}
 	for (auto bullets : en.entities_with_components(bulletH))

@@ -31,7 +31,7 @@ bool LvlSetStage::init()
 
     button[0].init(sf::Vector2f(1450,600/2), 1, "ship repair", resource.font);
     button[1].init(sf::Vector2f(1650,600/2), 2, "supply run", resource.font);
-    button[2].init(sf::Vector2f(1850,600/2), 3, "bomb drop", resource.font);
+    button[2].init(sf::Vector2f(1850,600/2), 3, "shooting adept", resource.font);
 	button[3].init(sf::Vector2f(2050,600/2), 4, "bomb drop 2", resource.font);
 
     slide_in = true;

@@ -11,7 +11,7 @@ class engine_system : public entityx::System<engine_system>, public entityx::Rec
 
 	void enginePart(entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix);
 	void gunPart(entityx::EntityManager & en, entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev,
-				AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix);
+				AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix, float);
 public:
 	engine_system(entityx::EventManager &ev, Phisics_2D &phs);
 
