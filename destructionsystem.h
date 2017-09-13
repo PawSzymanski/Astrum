@@ -15,7 +15,7 @@
 class DestructionSystem : public entityx::System<DestructionSystem>, public entityx::Receiver<DestructionSystem>
 {
     AdditionalAnim::Handle boom_anim;
-    entityx::Entity player;
+    entityx::Entity player, bullet;
 
 public:
     DestructionSystem(entityx::EntityX &ex);

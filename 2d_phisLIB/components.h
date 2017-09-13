@@ -187,7 +187,11 @@ struct isGun : public entityx::Component<isGun>
 {};
 
 struct isEnemyCam : public entityx::Component<isEnemyCam>
-{};
+{
+	isEnemyCam() : isActive(true)
+	{}
+	bool isActive;
+};
 
 struct isBullet : public entityx::Component<isBullet>
 {

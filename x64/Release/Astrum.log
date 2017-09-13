@@ -1,56 +1,34 @@
-﻿  destructionsystem.cpp
+﻿  player_input_system.cpp
 C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,const char(&)[10],_Ty,sf::VertexArray&,float>(entityx::Entity::Id,const char (&)[10],_Ty &&,sf::VertexArray &,float &&)' being compiled
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,>(entityx::Entity::Id)' being compiled
           with
           [
-              Derived=AdditionalAnim,
-              C=AdditionalAnim,
-              _Ty=sf::Texture *
+              Derived=isPlatform,
+              C=isPlatform
           ]
-  destructionsystem.cpp(59): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<AdditionalAnim,const char(&)[10],sf::Texture*,sf::VertexArray&,float>(const char (&)[10],sf::Texture *&&,sf::VertexArray &,float &&)' being compiled
+  player_input_system.cpp(46): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isPlatform,>(void)' being compiled
           with
           [
-              Derived=AdditionalAnim
+              Derived=isPlatform
           ]
-  enemy_system.cpp
-enemy_system.cpp(5): warning C4305: 'argument': truncation from 'double' to 'float'
-enemy_system.cpp(32): warning C4305: 'argument': truncation from 'double' to 'float'
-enemy_system.cpp(41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)'
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty,int>(entityx::Entity::Id,_Ty &&,int &&)' being compiled
           with
           [
-              Derived=isPlayer
+              Derived=Transform,
+              C=Transform,
+              _Ty=sf::Vector2<float>
           ]
-  enemy_system.cpp(22): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
+  player_input_system.cpp(207): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Transform,sf::Vector2<float>,int>(sf::Vector2<float> &&,int &&)' being compiled
           with
           [
-              Derived=isPlayer
-          ]
-  enemy_system.cpp(22): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
-          with
-          [
-              Derived=isPlayer
-          ]
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty>(entityx::Entity::Id,_Ty &&)' being compiled
-          with
-          [
-              Derived=isBullet,
-              C=isBullet,
-              _Ty=bool
-          ]
-  enemy_system.cpp(62): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isBullet,bool>(bool &&)' being compiled
-          with
-          [
-              Derived=isBullet
+              Derived=Transform
           ]
   Generating code
-  87 of 5785 functions ( 1.5%) were compiled, the rest were copied from previous compilation.
+  85 of 5876 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    21 functions had inline decision re-evaluated but remain unchanged
+    19 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

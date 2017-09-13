@@ -129,6 +129,10 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 		{
 			bullets.destroy();
 		}
+		else if (bulletH->livingTime.asSeconds() > 1.5 && bulletH->isEnemy)
+		{
+			bullets.destroy();
+		}
 	}
 	bulletTime += bulletClock.restart();
 }

@@ -65,6 +65,19 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		{
 			poly.assign<isEnemyCam>();
 			poly.assign<Position>(sf::Vector2f(xPos, yPos));
+
+			
+
+			phisics.createPolygon(poly, sf::Vector2f(xPos, yPos),
+				sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
+			
+			VertexArray::Handle H = poly.component<VertexArray>();
+
+			H->vert[0].color = sf::Color::Red;
+			H->vert[1].color = sf::Color::Red;
+			H->vert[2].color = sf::Color::Red;
+			H->vert[3].color = sf::Color::Red;
+			continue;
 		}
 
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 

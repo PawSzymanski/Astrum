@@ -30,6 +30,7 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.update<player_input_system>(dtime);
 
+
 	(*ex_ptr).systems.add<engine_system>((*ex_ptr).events, *phisics_ptr);
 	(*ex_ptr).systems.add<render_system>(window);
     (*ex_ptr).systems.add<DestructionSystem>(*ex_ptr);
@@ -38,7 +39,7 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<animations_system>();
     (*ex_ptr).systems.add<CargoSystem>();
 	(*ex_ptr).systems.add<game_over_system>();
-	(*ex_ptr).systems.add<enemy_system>(*phisics_ptr);
+	(*ex_ptr).systems.add<enemy_system>((*ex_ptr),*phisics_ptr);
 
 
     fps_text.setCharacterSize(18);
@@ -104,7 +105,7 @@ void GameplayStage::release()
 {
     fps_text = sf::Text();
 	ex_ptr.reset();
-	phisics_ptr.reset();	
+	phisics_ptr.reset();
 }
 
 void GameplayStage::input(sf::Event & event)

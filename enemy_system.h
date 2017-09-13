@@ -2,7 +2,7 @@
 #include "LibsAndDeclarations.h"
 
 
-class enemy_system : public entityx::System<enemy_system>
+class enemy_system : public entityx::System<enemy_system>, public entityx::Receiver<enemy_system>
 {
 	bool dir;
 	sf::Vector2f detectionSpace ;
@@ -10,8 +10,9 @@ class enemy_system : public entityx::System<enemy_system>
 	sf::Clock bulletClock;
 	sf::Time bulletTime;
 public:
-	enemy_system(Phisics_2D &);
+	enemy_system(entityx::EntityX &ex, Phisics_2D &);
 	void update(entityx::EntityManager & en, entityx::EventManager & ev, double dt);
+	void receive(const CollisionEvent & ev);
 	~enemy_system();
 };
 
