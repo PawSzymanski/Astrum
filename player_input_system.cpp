@@ -25,6 +25,8 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	std::string typeOfElement, pathToShip = "resources/parts/";
 	float xPos, yPos, xVel, yVel, rot, mass;
 
+	//LOADING WORLD ELEMENTS
+
 	parser.setSection("world");
 
 	while (!parser.EndOfSection())
@@ -59,12 +61,17 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
             poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), 1);
             continue;
         }
+		else if (typeOfElement == "shooting_camera")
+		{
+			poly.assign<isEnemyCam>();
+			poly.assign<Position>(sf::Vector2f(xPos, yPos));
+		}
 
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}
 
-	//SHIP
+	//LOADING SHIP ELEMENTS
 	if (!parser.load(shipInfo))
 	{
 		assert(false);
@@ -99,10 +106,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	phisics.createPolygon(playerEn, sf::Vector2f(2, 8),
 		sf::Vector2f(0, 0), 0, 1, typeOfShip);
 	
-
-
-
-
 
 	//PARTS
 	parser.setSection("parts_info");

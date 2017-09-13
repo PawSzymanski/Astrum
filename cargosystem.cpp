@@ -23,7 +23,11 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
     {
         entityx::Entity cargo;
         for(auto entity1 : en.entities_with_components(cargoH))
-            if(cargoH->id == cargo_space->id) { cargo = entity1; break; }
+            if(cargoH->id == cargo_space->id) 
+			{ 
+				cargo = entity1; 
+				break; 
+			}
 
         Position::Handle cargo_posH = cargo.component<Position>();
         sf::Vector2f cargo_pos = cargo_posH->pos;

@@ -2,7 +2,7 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_1.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
+ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_3.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
 										areAllPlatfIncluded(false), isMouseButtonReleased(false), 
 										areAllCargoSpaceIncluded(false), isGameOver(false), isPauseTime(false)
 {
@@ -62,7 +62,8 @@ void ResourcesManager::loadContainer()
         "bomb.cfg",
 		"faded_screen.cfg",
 		"gun.cfg",
-		"bullet.cfg"
+		"bullet.cfg",
+		"shooting_camera.cfg"
     };
 
     ConfigParser parser;

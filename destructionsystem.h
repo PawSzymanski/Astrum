@@ -23,6 +23,8 @@ public:
     void update(entityx::EntityManager & en, entityx::EventManager & ev, double dt);
 
     void receive(const CollisionEvent & ev);
+
+	void boomAnimation(entityx::Entity player);
 };
 
 #endif // DESTRUCTIONSYSTEM_H

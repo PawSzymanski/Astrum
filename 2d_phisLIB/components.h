@@ -186,10 +186,14 @@ struct isEngine : public entityx::Component<isEngine>
 struct isGun : public entityx::Component<isGun>
 {};
 
+struct isEnemyCam : public entityx::Component<isEnemyCam>
+{};
+
 struct isBullet : public entityx::Component<isBullet>
 {
-	isBullet() :livingTime(sf::Time::Zero)
+	isBullet(bool isEnemy) :livingTime(sf::Time::Zero), isEnemy(isEnemy)
 	{};
+	bool isEnemy;
 	sf::Time livingTime;
 };
 

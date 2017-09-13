@@ -119,13 +119,13 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 		auto bulletEn = en.create();
 		bulletTime = sf::Time::Zero;
 		phisics.createPolygon(bulletEn, posH->pos + attachPointH->point,
-			rotTransformGun * rotMatrix * sf::Vector2f(0, -10), 0, 0.01, "bullet");
-		bulletEn.assign<isBullet>();
+			rotTransformGun * rotMatrix * sf::Vector2f(0, -14), 0, 0.01, "bullet");
+		bulletEn.assign<isBullet>(false);
 	}
 	for (auto bullets : en.entities_with_components(bulletH))
 	{
 		bulletH->livingTime += bulletClock.getElapsedTime();
-		if (bulletH->livingTime.asSeconds() > 6)
+		if (bulletH->livingTime.asSeconds() > 4)
 		{
 			bullets.destroy();
 		}

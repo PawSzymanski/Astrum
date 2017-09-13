@@ -38,6 +38,7 @@ bool GameplayStage::init()
 	(*ex_ptr).systems.add<animations_system>();
     (*ex_ptr).systems.add<CargoSystem>();
 	(*ex_ptr).systems.add<game_over_system>();
+	(*ex_ptr).systems.add<enemy_system>(*phisics_ptr);
 
 
     fps_text.setCharacterSize(18);
@@ -65,7 +66,8 @@ bool GameplayStage::update(float dt)
 	(*ex_ptr).systems.update<platform_manager>(dt);
 	(*ex_ptr).systems.update<animations_system>(dt);
     (*ex_ptr).systems.update<CargoSystem>(dt);
-	
+	(*ex_ptr).systems.update<enemy_system>(dt);
+
 	return true;
 }
 

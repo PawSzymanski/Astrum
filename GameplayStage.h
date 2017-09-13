@@ -11,6 +11,7 @@
 #include "animations_system.h"
 #include "cargosystem.h"
 #include "game_over_system.h"
+#include "enemy_system.h"
 
 class GameplayStage : public GameStage
 {

@@ -36,9 +36,6 @@
     <ClCompile Include="2d_phisLIB\systems\CollisionSystem.cpp">
       <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
-    <ClCompile Include="2d_phisLIB\systems\ForcesSystem.cpp">
-      <Filter>Source Files\phisics_2d</Filter>
-    </ClCompile>
     <ClCompile Include="2d_phisLIB\isCollidingFuns.cpp">
       <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
@@ -140,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="game_over_system.cpp">
       <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_system.cpp">
+      <Filter>Source Files\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="2d_phisLIB\systems\ForcesSystem.cpp">
+      <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +277,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_over_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

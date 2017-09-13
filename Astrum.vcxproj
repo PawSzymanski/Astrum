@@ -171,6 +171,7 @@
     <ClCompile Include="creatorstage.cpp" />
     <ClCompile Include="destructionsystem.cpp" />
     <ClCompile Include="dirreader.cpp" />
+    <ClCompile Include="enemy_system.cpp" />
     <ClCompile Include="engine_system.cpp" />
     <ClCompile Include="ExitStage.cpp" />
     <ClCompile Include="gameoverstage.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="creatorstage.h" />
     <ClInclude Include="destructionsystem.h" />
     <ClInclude Include="dirreader.h" />
+    <ClInclude Include="enemy_system.h" />
     <ClInclude Include="engine_system.h" />
     <ClInclude Include="ExitStage.h" />
     <ClInclude Include="gameoverstage.h" />

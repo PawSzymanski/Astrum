@@ -24,6 +24,10 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 
 	if (en1.has_component<isBullet>() || en2.has_component<isBullet>())
 	{
+		if (en1.has_component<isPlayer>() || en2.has_component<isPlayer>())
+		{
+
+		}
 		return;
 	}
 
@@ -37,18 +41,27 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 
     if(player.has_component<AdditionalAnim>())
         return;
+
+	boomAnimation(player);
+
+    //std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
+}
+
+
+//activate animation, and ends game
+void DestructionSystem::boomAnimation(entityx::Entity player) {
 	Transform::Handle transH;
 
 	transH = player.component<Transform>();
 
-    auto & resource = ResourcesManager::getInstanceRef();
+	auto & resource = ResourcesManager::getInstanceRef();
 
-    boom_anim = player.assign<AdditionalAnim>("explosion",&(resource.textureCont.getTexture("explosion")), resource.vertCont.getPoly("explosion"), 20.0f);
-    
+	boom_anim = player.assign<AdditionalAnim>("explosion", &(resource.textureCont.getTexture("explosion")), resource.vertCont.getPoly("explosion"), 20.0f);
+
 	boom_anim->animate = true;
-	
-    //std::cout << "clock restart " << std::endl;
-	
+
+	//std::cout << "clock restart " << std::endl;
+
 	boom_anim->clock.restart();
 	boom_anim->time = sf::Time::Zero;
 	boom_anim->wholeTime = sf::Time::Zero;
@@ -56,5 +69,4 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 
 
 	ResourcesManager::getInstanceRef().isGameOver = true;
-    //std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
 }
