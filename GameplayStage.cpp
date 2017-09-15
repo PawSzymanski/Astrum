@@ -40,6 +40,7 @@ bool GameplayStage::init()
     (*ex_ptr).systems.add<CargoSystem>();
 	(*ex_ptr).systems.add<game_over_system>();
 	(*ex_ptr).systems.add<enemy_system>((*ex_ptr),*phisics_ptr);
+	(*ex_ptr).systems.add<sliding_doors_system>();
 
 
     fps_text.setCharacterSize(18);
@@ -68,6 +69,7 @@ bool GameplayStage::update(float dt)
 	(*ex_ptr).systems.update<animations_system>(dt);
     (*ex_ptr).systems.update<CargoSystem>(dt);
 	(*ex_ptr).systems.update<enemy_system>(dt);
+	(*ex_ptr).systems.update<sliding_doors_system>(dt);
 
 	return true;
 }
@@ -90,8 +92,6 @@ void GameplayStage::render(sf::RenderWindow &window)
 		fps_text.setString(ss.str());
 	}
 	//
-
-
 	window.setView(camera);
 	//draw gameplay
 	(*ex_ptr).systems.update<render_system>(dtime);

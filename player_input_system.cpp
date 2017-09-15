@@ -43,7 +43,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		//assigning component type
 		if (typeOfElement == "platform")
 		{
-			poly.assign<isPlatform>();
+			poly.assign<isPlatform>(parser.getFloat());
 			std::cout << "PLATFORM LOADED" << std::endl;
 		}
 		else if (typeOfElement == "wall")
@@ -64,9 +64,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		else if (typeOfElement == "shooting_camera")
 		{
 			poly.assign<isEnemyCam>();
-			poly.assign<Position>(sf::Vector2f(xPos, yPos));
-
-			
 
 			phisics.createPolygon(poly, sf::Vector2f(xPos, yPos),
 				sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
@@ -79,7 +76,15 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			H->vert[3].color = sf::Color::Red;
 			continue;
 		}
-
+		else if (typeOfElement == "sliding_doors")
+		{
+			poly.assign<isSlidingDoors>();
+			isSlidingDoors::Handle door = poly.component<isSlidingDoors>();
+			while ( !parser.EndOfLine() )
+			{
+				door->add(parser.getString(), parser.getFloat());
+			}
+		}
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}

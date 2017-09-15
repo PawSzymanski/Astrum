@@ -192,6 +192,23 @@ struct isEnemyCam : public entityx::Component<isEnemyCam>
 	{}
 	bool isActive;
 };
+struct isSlidingDoors : public entityx::Component<isSlidingDoors>
+{
+	isSlidingDoors() : isOpen(false)
+	{
+
+	}
+	bool isOpen;
+	std::vector<std::string> opener;
+	std::vector<int> id;
+
+	void add(std::string op, int i)
+	{
+		opener.push_back(op);
+		id.push_back(i);
+	}
+};
+
 
 struct isBullet : public entityx::Component<isBullet>
 {
@@ -203,9 +220,10 @@ struct isBullet : public entityx::Component<isBullet>
 
 struct isPlatform : public entityx::Component<isPlatform>
 {
-	isPlatform() : isPassed(false)
+	isPlatform(int id) : isPassed(false), id(id)
 	{}
 		bool isPassed;
+		int id;
 };
 //
 struct isSlave : public entityx::Component<isSlave>

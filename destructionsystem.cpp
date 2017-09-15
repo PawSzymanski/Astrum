@@ -30,7 +30,7 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 	{
 		
 
-		if (en1.has_component<isPlayer>() || en2.has_component<isPlayer>())
+		if ((en1.has_component<isPlayer>() || en2.has_component<isPlayer>()) && ev.relVel > 100)
 		{
 			bool en1_is_bullet = en1.has_component<isBullet>(),
 				en2_is_bullet = en2.has_component<isBullet>();

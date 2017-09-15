@@ -29,7 +29,7 @@ void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & e
 		posPlaH = newEnt.component<Position>();
 		rotCamH = ent.component<Rotation>();
 	
-		if (vecLenghtSq(detectionSpace) < 1 && dir)
+		if (vecLenghtSq(detectionSpace) < 1.1 && dir)
 		{
 			detectionSpace -= sf::Vector2f(0 ,0.4);		
 		}

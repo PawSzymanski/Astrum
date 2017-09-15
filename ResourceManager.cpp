@@ -63,7 +63,8 @@ void ResourcesManager::loadContainer()
 		"faded_screen.cfg",
 		"gun.cfg",
 		"bullet.cfg",
-		"shooting_camera.cfg"
+		"shooting_camera.cfg",
+		"sliding_doors.cfg"
     };
 
     ConfigParser parser;
