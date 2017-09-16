@@ -137,14 +137,12 @@ void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlaye
 	bulletTime += bulletClock.restart();
 }
 
-
 void engine_system::receive(const ApplyForceEvent & ev)
 {
 	LinearVelocity::Handle velH;
 	entityx::Entity en = ev.en;
 	velH = en.component<LinearVelocity>();
 }
-
 
 engine_system::~engine_system()
 {

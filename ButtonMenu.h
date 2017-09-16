@@ -10,7 +10,7 @@ public:
 	int number, lenght;
 	sf::Text text;
 	RoundRect rect;
-
+	sf::Vector2f positionOnScreen;
     ButtonMenu();
 	ButtonMenu(int);
 	~ButtonMenu();

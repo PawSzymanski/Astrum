@@ -35,7 +35,8 @@ public:
 	static void deleteInstance();
 
 public:
-	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime;
+	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime, isMovingCameraOn;
+	sf::View camera;
 	std::string levelInfo;
 	std::string shipInfo;
 	Container vertCont;

@@ -47,6 +47,11 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
         else
             cargo_space->time = sf::Time::Zero;
     }
+
+
+
+
+
 	ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = true;
 	for (auto en1 : en.entities_with_components(cargo_space))
 	{

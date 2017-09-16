@@ -8,7 +8,7 @@
 #include "lvlsetstage.h"
 #include "ResourceManager.h"
 
-LvlSetStage::LvlSetStage()
+LvlSetStage::LvlSetStage() : wasLastXMouse(false)
 {
 
 }
@@ -25,7 +25,7 @@ bool LvlSetStage::init()
 
 	speed = 30.0;
 
-	numberOfLevels = 4; //SET NUMBER OF LEVELS IF ANY ADDED
+	numberOfLevels = 5; //SET NUMBER OF LEVELS IF ANY ADDED
 
     auto & resource = ResourcesManager::getInstanceRef();
 
@@ -33,6 +33,7 @@ bool LvlSetStage::init()
     button[1].init(sf::Vector2f(1650,600/2), 2, "supply run", resource.font);
     button[2].init(sf::Vector2f(1850,600/2), 3, "shooting adept", resource.font);
 	button[3].init(sf::Vector2f(2050,600/2), 4, "bomb drop 2", resource.font);
+	button[4].init(sf::Vector2f(2250, 600 / 2), 5, "first real case", resource.font);
 
     slide_in = true;
     slide_out = false;
@@ -51,6 +52,7 @@ bool LvlSetStage::init()
     levels[1] = "resources/levelData/level_2.cfg";
     levels[2] = "resources/levelData/level_3.cfg";
 	levels[3] = "resources/levelData/level_4.cfg";
+	levels[4] = "resources/levelData/level_5.cfg";
 
     return true;
 }
@@ -58,6 +60,39 @@ bool LvlSetStage::init()
 void LvlSetStage::input(sf::Event &event)
 {
     static int high_nr = 0;
+
+	if (event.type == sf::Event::MouseMoved)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			std::cout << event.mouseMove.x << std::endl;
+			float xMove = event.mouseMove.x;
+			if (!wasLastXMouse)
+			{
+				lastXMouse = event.mouseMove.x;
+				wasLastXMouse = true;
+			}
+			else
+			{
+				int boolHelper = 1;
+				if ((button[numberOfLevels - 1].getPosition().x < 500 && lastXMouse - event.mouseMove.x >0) || 
+					(button[0].getPosition().x > 1000 && lastXMouse - event.mouseMove.x <0))
+				{
+					boolHelper = -1;
+				}
+
+				wasLastXMouse = false;
+				for (int i = 0; i < numberOfLevels; ++i)
+				{
+					button[i].setPosition(button[i].getPosition() - sf::Vector2f((lastXMouse - event.mouseMove.x)*2* boolHelper, 0));
+				}
+			}
+		}
+	}
+	else
+	{
+		wasLastXMouse = false;
+	}
 
     if(event.type == sf::Event::KeyPressed)
     {

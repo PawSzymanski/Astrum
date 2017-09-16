@@ -22,6 +22,8 @@ void ButtonMenu::init(sf::Font &font, int chSize, sf::Vector2f position, sf::Col
 	text.setString(string);
 	text.setOrigin(origin);
 	lenght = text.getCharacterSize()/3 * string.length();
+	positionOnScreen = position;
+
 
     rect.setPosition(position);
 	rect.corner_radius = 10;
@@ -44,15 +46,10 @@ bool ButtonMenu::input(sf::Event &ev)
 		
 		return false;
 	}
-
-
 	if (has_mouse)
 	{
 		rect.setOutlineThickness(15);
 	}
-	
-
-
     if(ev.type == sf::Event::MouseMoved)
     {
         has_mouse = (ev.mouseMove.x > rect.getPosition().x - 80 && ev.mouseMove.x < rect.getPosition().x + 80 &&

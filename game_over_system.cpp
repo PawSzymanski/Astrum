@@ -29,7 +29,6 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 	{
 		resource.isPauseTime = true;
 	}
-
 	std::cout << resource.areAllPlatfIncluded << resource.areAllCargoSpaceIncluded << std::endl;
 
 	if ( ( resource.areAllPlatfIncluded == true && resource.areAllCargoSpaceIncluded == true ) ||
@@ -61,17 +60,21 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 		 }
 		
 		time += clock.restart();
-		
+		int buttPos = -1;
+		//game over MENU case
 		for (auto &button : ResourcesManager::getInstanceRef().GOButton)
 		{
 			//std::cout << "BUTTON DRAW" << std::endl;
-
+			
 			button.rect.corner_radius = 0.2;
 			button.rect.size = sf::Vector2f(1.5, 0.3);
 			button.rect.setOrigin(0.65, 0.05);
 			button.rect.setFillColor(sf::Color(0, 0, 0, 0));
 			button.rect.setOutlineColor(sf::Color::White);
 			button.rect.setOutlineThickness(0.1);
+			button.rect.setPosition(sf::Vector2f(resource.camera.getCenter().x, resource.camera.getCenter().y + buttPos));
+			button.text.setPosition(sf::Vector2f(resource.camera.getCenter().x, resource.camera.getCenter().y + buttPos));
+			++buttPos;
 			//	
 			if (button.lock)
 			{
@@ -79,12 +82,14 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 				continue;
 			}
 
+			std::cout << " xy: " << (button.rect.getPosition().x) << std::endl;
+
 			if (ResourcesManager::getInstanceRef().mainEvent &&
 				ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::MouseMoved &&
-				ResourcesManager::getInstanceRef().mainEvent->mouseMove.x > button.rect.getPosition().x * 78 - 80 &&
-				button.rect.getPosition().x * 78 + 80 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.x &&
-				ResourcesManager::getInstanceRef().mainEvent->mouseMove.y > button.rect.getPosition().y * 76 - 20 &&
-				button.rect.getPosition().y * 76 + 40 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.y)
+				ResourcesManager::getInstanceRef().mainEvent->mouseMove.x > (button.positionOnScreen.x) * 78 - 80 &&
+				(button.positionOnScreen.x) * 78 + 80 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.x &&
+				ResourcesManager::getInstanceRef().mainEvent->mouseMove.y > button.positionOnScreen.y * 76 - 20 &&
+				button.positionOnScreen.y * 76 + 40 > ResourcesManager::getInstanceRef().mainEvent->mouseMove.y)
 			{
 				button.has_mouse = true;
 			}

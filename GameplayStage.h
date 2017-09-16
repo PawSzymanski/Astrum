@@ -14,6 +14,9 @@
 #include "enemy_system.h"
 #include "sliding_doors_system.h"
 
+#define CAMERA_CONST_X 3
+#define CAMERA_CONST_Y 1.5
+
 class GameplayStage : public GameStage
 {
 public:
@@ -25,8 +28,7 @@ public:
 private:
 	
 	sf::Time display_fps_time;
-	sf::View camera;
-	float dtime;
+	float cameraX, cameraY, dtime;
 	void updateCamera();
 	sf::Vector2f gravity;
 	Container &vertCont;

@@ -88,6 +88,8 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}
+	parser.setSection("camera");
+	ResourcesManager::getInstanceRef().isMovingCameraOn = parser.getFloat();
 
 	//LOADING SHIP ELEMENTS
 	if (!parser.load(shipInfo))

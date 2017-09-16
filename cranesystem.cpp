@@ -94,9 +94,6 @@ void CraneSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
         else
             crane->block = false;
     }
-
-
-
 }
 
 void CraneSystem::receive(const CollisionEvent &ev)

@@ -23,13 +23,8 @@ void DestructionSystem::receive(const CollisionEvent &ev)
     auto en2 = ev.en2;
 	isBullet::Handle bulletH;
 
-	
-
-
 	if (en1.has_component<isBullet>() || en2.has_component<isBullet>())
 	{
-		
-
 		if ((en1.has_component<isPlayer>() || en2.has_component<isPlayer>()) && ev.relVel > 100)
 		{
 			bool en1_is_bullet = en1.has_component<isBullet>(),
@@ -51,7 +46,6 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 		}
 		return;
 	}
-
     bool en1_is_player = en1.has_component<isPlayer>(),
          en2_is_player = en2.has_component<isPlayer>();
 
@@ -64,7 +58,6 @@ void DestructionSystem::receive(const CollisionEvent &ev)
 
     //std::cout<<"destruction system receive: "<<ev.relVel<<std::endl;
 }
-
 
 //activate animation, and ends game
 void DestructionSystem::boomAnimation(entityx::Entity player) {

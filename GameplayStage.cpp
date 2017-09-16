@@ -1,7 +1,7 @@
 #include "GameplayStage.h"
 #include "ResourceManager.h"
 
-GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 2.0f/*   9.8   */), vertCont(cont)
+GameplayStage::GameplayStage(Container &cont) : gravity(0.0f, 2.0f/*   9.8   */), vertCont(cont), cameraX(0), cameraY(0)
 {
 	display_fps_time = sf::Time::Zero;
 }
@@ -13,17 +13,50 @@ GameplayStage::~GameplayStage()
 
 void GameplayStage::updateCamera()
 {
-	//camera.reset(sf::FloatRect(0, 0, 17.5, 10));
+	auto &resource = ResourcesManager::getInstanceRef();
+
+	if (!ResourcesManager::getInstanceRef().isMovingCameraOn)
+	{
+		resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));
+		return;
+	}
+	//move camera if needed
+	for (auto en : (*ex_ptr).entities.entities_with_components<isPlayer>())
+	{
+		sf::FloatRect fRect;
+		Position::Handle pos = en.component<Position>();
+		//std::cout << "player.x :  " << pos->pos.x << "cam x : " << camera.getCenter().x << std::endl;
+		if (resource.camera.getCenter().x - pos->pos.x > CAMERA_CONST_X)
+		{
+			resource.camera.move(sf::Vector2f((pos->pos.x + CAMERA_CONST_X - resource.camera.getCenter().x) ,0));
+			//std::cout << "in" << std::endl;
+		}
+		else if (resource.camera.getCenter().x - pos->pos.x < -CAMERA_CONST_X)
+		{
+			resource.camera.move(sf::Vector2f((pos->pos.x - resource.camera.getCenter().x - CAMERA_CONST_X), 0));
+		}
+		else if (resource.camera.getCenter().y - pos->pos.y > CAMERA_CONST_Y)
+		{
+			resource.camera.move(sf::Vector2f(0,(pos->pos.y + CAMERA_CONST_Y - resource.camera.getCenter().y)));
+			//std::cout << "in" << std::endl;
+		}
+		else if (resource.camera.getCenter().y - pos->pos.y < -CAMERA_CONST_Y)
+		{
+			resource.camera.move(sf::Vector2f(0, (pos->pos.y - resource.camera.getCenter().y - CAMERA_CONST_Y)));
+		}
+	}
 }
 
 bool GameplayStage::init()
 {
+	
 	ex_ptr = std::make_unique<entityx::EntityX>();
 	phisics_ptr = std::make_unique<Phisics_2D>((*ex_ptr), vertCont, gravity);
 	(*phisics_ptr).init();
 
 	auto &window = ResourcesManager::getInstanceRef().window;
-	camera.reset(sf::FloatRect(0, 0, 17.5, 10));
+	auto &resource = ResourcesManager::getInstanceRef();
+	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));
 
 	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
 
@@ -73,7 +106,7 @@ bool GameplayStage::update(float dt)
 
 	return true;
 }
-
+//void fps_clock
 void GameplayStage::render(sf::RenderWindow &window)
 {
 	//FPS clock
@@ -92,7 +125,7 @@ void GameplayStage::render(sf::RenderWindow &window)
 		fps_text.setString(ss.str());
 	}
 	//
-	window.setView(camera);
+	window.setView(ResourcesManager::getInstanceRef().camera);
 	//draw gameplay
 	(*ex_ptr).systems.update<render_system>(dtime);
 

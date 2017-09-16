@@ -78,7 +78,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		{
 			sf::RenderStates states, states2;
 			
-			states2.transform.translate(sf::Vector2f(8.15, 3.9 + i));
+			states2.transform.translate(button.text.getPosition() - button.text.getOrigin());//sf::Vector2f(8.15, 3.9 + i));
 			states2.transform.scale(sf::Vector2f(0.01, 0.01));
 			
 			win.draw(button.rect, states);

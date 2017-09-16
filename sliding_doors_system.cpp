@@ -17,7 +17,7 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 		{
 			for (int i = 0; i < doorsH->opener.size(); ++i)
 			{
-				//you can add more things taht can be passed (one if one thing)
+				//you can add more things that can be passed (one if one thing)
 				if (doorsH->opener[i] == "platform")
 				{
 					isPlatform::Handle platH;
