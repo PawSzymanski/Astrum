@@ -15,9 +15,10 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 	{
 		if (!doorsH->isOpen)
 		{
+			std::cout << "not all doors open" << std::endl;
 			for (int i = 0; i < doorsH->opener.size(); ++i)
 			{
-				//you can add more things that can be passed (one if one thing)
+				//you can add more things that can be passed (one "if" one thing)
 				if (doorsH->opener[i] == "platform")
 				{
 					isPlatform::Handle platH;
@@ -28,7 +29,7 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 							if (!platH->isPassed)
 							{
 								doorsH->isOpen = false;
-								return;
+								break;
 							}
 							else
 							{
@@ -47,7 +48,7 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 							if (!cargoH->checked)
 							{
 								doorsH->isOpen = false;
-								return;
+								break;
 							}
 							else
 							{
@@ -56,7 +57,6 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 						}
 					}
 				}
-
 			}
 		}
 		//if good open
@@ -71,13 +71,14 @@ void sliding_doors_system::openDoors(entityx::Entity ent)
 {
 	Position::Handle posH = ent.component<Position>();
 	Rotation::Handle rotH = ent.component<Rotation>();
-	if (dist < 2.5)
+	isSlidingDoors::Handle doorsH= ent.component<isSlidingDoors>();
+	if (doorsH->distance < 3)
 	{
 		sf::Transform trans;
 		trans.rotate(rotH->degree);
 
 		posH->pos += trans * sf::Vector2f(0.1, 0);
-		this->dist += 0.1;
+		doorsH->distance += 0.1;
 	}
 }
 

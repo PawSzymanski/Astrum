@@ -1,6 +1,153 @@
-﻿  ButtonMenu.cpp
+﻿  PHISICS_2D.cpp
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,sf::Vector2f&>(entityx::Entity::Id,sf::Vector2f &)' being compiled
+          with
+          [
+              Derived=Position,
+              C=Position
+          ]
+  2d_phisLIB\PHISICS_2D.cpp(28): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Position,sf::Vector2f&>(sf::Vector2f &)' being compiled
+          with
+          [
+              Derived=Position
+          ]
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty>(entityx::Entity::Id,_Ty &&)' being compiled
+          with
+          [
+              Derived=Rotation,
+              C=Rotation,
+              _Ty=int
+          ]
+  2d_phisLIB\PHISICS_2D.cpp(29): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Rotation,int>(int &&)' being compiled
+          with
+          [
+              Derived=Rotation
+          ]
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,sf::Vector2f&,_Ty>(entityx::Entity::Id,sf::Vector2f &,_Ty &&)' being compiled
+          with
+          [
+              Derived=Transform,
+              C=Transform,
+              _Ty=double
+          ]
+  2d_phisLIB\PHISICS_2D.cpp(34): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Transform,sf::Vector2f&,double>(sf::Vector2f &,double &&)' being compiled
+          with
+          [
+              Derived=Transform
+          ]
+  isCollidingFuns.cpp
+2d_phisLIB\isCollidingFuns.cpp(40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  CollisionSystem.cpp
+2d_phisLIB\systems\CollisionSystem.cpp(180): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Type,LinearForce>::Iterator entityx::EntityManager::UnpackingView<Derived,Type,LinearForce>::end(void)'
+          with
+          [
+              Derived=Position
+          ]
+  2d_phisLIB\systems\CollisionSystem.cpp(156): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Type,LinearForce>::Iterator entityx::EntityManager::UnpackingView<Derived,Type,LinearForce>::end(void)' being compiled
+          with
+          [
+              Derived=Position
+          ]
+  2d_phisLIB\systems\CollisionSystem.cpp(156): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Type,LinearForce>' being compiled
+          with
+          [
+              Derived=Position
+          ]
+  ForcesSystem.cpp
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,AngularVelocity,LinearForce,AngularForce,MOfInertia,Mass>::Iterator entityx::EntityManager::UnpackingView<Derived,AngularVelocity,LinearForce,AngularForce,MOfInertia,Mass>::end(void)'
+          with
+          [
+              Derived=LinearVelocity
+          ]
+  2d_phisLIB\systems\ForcesSystem.cpp(24): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,AngularVelocity,LinearForce,AngularForce,MOfInertia,Mass>::Iterator entityx::EntityManager::UnpackingView<Derived,AngularVelocity,LinearForce,AngularForce,MOfInertia,Mass>::end(void)' being compiled
+          with
+          [
+              Derived=LinearVelocity
+          ]
+  2d_phisLIB\systems\ForcesSystem.cpp(24): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,AngularVelocity,LinearForce,AngularForce,MOfInertia,Mass>' being compiled
+          with
+          [
+              Derived=LinearVelocity
+          ]
+  MouseDragSystem.cpp
+2d_phisLIB\systems\MouseDragSystem.cpp(55): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Transform,Rotation>::Iterator entityx::EntityManager::UnpackingView<Derived,Transform,Rotation>::end(void)'
+          with
+          [
+              Derived=VertexArray
+          ]
+  2d_phisLIB\systems\MouseDragSystem.cpp(49): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Transform,Rotation>::Iterator entityx::EntityManager::UnpackingView<Derived,Transform,Rotation>::end(void)' being compiled
+          with
+          [
+              Derived=VertexArray
+          ]
+  2d_phisLIB\systems\MouseDragSystem.cpp(49): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Transform,Rotation>' being compiled
+          with
+          [
+              Derived=VertexArray
+          ]
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,_Ty,_Ty,const sf::Color&>(entityx::Entity::Id,_Ty &&,_Ty &&,const sf::Color &)' being compiled
+          with
+          [
+              Derived=Line,
+              C=Line,
+              _Ty=sf::Vector2<float>
+          ]
+  2d_phisLIB\systems\MouseDragSystem.cpp(41): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<Line,sf::Vector2<float>,sf::Vector2<float>,const sf::Color&>(sf::Vector2<float> &&,sf::Vector2<float> &&,const sf::Color &)' being compiled
+          with
+          [
+              Derived=Line
+          ]
+  MovementSystem.cpp
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Rotation,LinearVelocity,AngularVelocity,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,LinearVelocity,AngularVelocity,Transform>::end(void)'
+          with
+          [
+              Derived=Position
+          ]
+  2d_phisLIB\systems\MovementSystem.cpp(21): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,LinearVelocity,AngularVelocity,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,LinearVelocity,AngularVelocity,Transform>::end(void)' being compiled
+          with
+          [
+              Derived=Position
+          ]
+  2d_phisLIB\systems\MovementSystem.cpp(21): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,LinearVelocity,AngularVelocity,Transform>' being compiled
+          with
+          [
+              Derived=Position
+          ]
+  jointsystem.cpp
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Line>::Iterator entityx::EntityManager::UnpackingView<Derived,Line>::end(void)'
+          with
+          [
+              Derived=Joint
+          ]
+  2d_phisLIB\systems\jointsystem.cpp(70): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Line>::Iterator entityx::EntityManager::UnpackingView<Derived,Line>::end(void)' being compiled
+          with
+          [
+              Derived=Joint
+          ]
+  2d_phisLIB\systems\jointsystem.cpp(70): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Line>' being compiled
+          with
+          [
+              Derived=Joint
+          ]
+  ButtonMenu.cpp
 ButtonMenu.cpp(24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 ButtonMenu.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Conversion.cpp
+  ExitStage.cpp
+ExitStage.cpp(33): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+  GameStage.cpp
   GameplayStage.cpp
 GameplayStage.cpp(40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 GameplayStage.cpp(45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
@@ -34,22 +181,52 @@ ResourceManager.cpp(120): warning C4018: '<': signed/unsigned mismatch
 animations_system.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 animations_system.cpp(34): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   cargosystem.cpp
-cargosystem.cpp(41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+cargosystem.cpp(44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
   C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)'
           with
           [
               Derived=CargoSpace
           ]
-  cargosystem.cpp(56): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
+  cargosystem.cpp(59): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
           with
           [
               Derived=CargoSpace
           ]
-  cargosystem.cpp(56): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
+  cargosystem.cpp(59): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
           with
           [
               Derived=CargoSpace
+          ]
+  cranesystem.cpp
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,KeyAssigned,AttachToPlayerPoint>::Iterator entityx::EntityManager::UnpackingView<Derived,KeyAssigned,AttachToPlayerPoint>::end(void)'
+          with
+          [
+              Derived=isCrane
+          ]
+  cranesystem.cpp(54): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,KeyAssigned,AttachToPlayerPoint>::Iterator entityx::EntityManager::UnpackingView<Derived,KeyAssigned,AttachToPlayerPoint>::end(void)' being compiled
+          with
+          [
+              Derived=isCrane
+          ]
+  cranesystem.cpp(54): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,KeyAssigned,AttachToPlayerPoint>' being compiled
+          with
+          [
+              Derived=isCrane
+          ]
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,>(entityx::Entity::Id)' being compiled
+          with
+          [
+              Derived=isHook,
+              C=isHook
+          ]
+  cranesystem.cpp(85): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isHook,>(void)' being compiled
+          with
+          [
+              Derived=isHook
           ]
   creatorstage.cpp
 creatorstage.cpp(59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -107,6 +284,7 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
           [
               Derived=isBullet
           ]
+  Compiling...
   engine_system.cpp
 engine_system.cpp(84): warning C4305: 'argument': truncation from 'double' to 'float'
 engine_system.cpp(122): warning C4305: 'argument': truncation from 'double' to 'float'
@@ -190,6 +368,9 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
           [
               Derived=Transform
           ]
+  keyassigner.cpp
+  lvlbutton.cpp
+lvlbutton.cpp(43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   lvlsetstage.cpp
 lvlsetstage.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 lvlsetstage.cpp(87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -262,10 +443,30 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
           [
               Derived=Line
           ]
+  roundrect.cpp
+  sliding_doors_system.cpp
+sliding_doors_system.cpp(81): warning C4305: 'argument': truncation from 'double' to 'float'
+sliding_doors_system.cpp(82): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)'
+          with
+          [
+              Derived=CargoSpace
+          ]
+  sliding_doors_system.cpp(44): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived>::Iterator entityx::EntityManager::UnpackingView<Derived>::end(void)' being compiled
+          with
+          [
+              Derived=CargoSpace
+          ]
+  sliding_doors_system.cpp(44): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived>' being compiled
+          with
+          [
+              Derived=CargoSpace
+          ]
   Generating code
-  117 of 6064 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
+  94 of 6064 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    28 functions had inline decision re-evaluated but remain unchanged
+    21 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

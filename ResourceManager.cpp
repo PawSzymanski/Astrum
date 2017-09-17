@@ -2,7 +2,7 @@
 
 ResourcesManager* ResourcesManager::instance = nullptr;
 
-ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_3.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
+ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_4.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
 										areAllPlatfIncluded(false), isMouseButtonReleased(false), 
 										areAllCargoSpaceIncluded(false), isGameOver(false), isPauseTime(false)
 {

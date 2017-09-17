@@ -29,7 +29,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 	{
 		resource.isPauseTime = true;
 	}
-	std::cout << resource.areAllPlatfIncluded << resource.areAllCargoSpaceIncluded << std::endl;
+	//std::cout << resource.areAllPlatfIncluded << resource.areAllCargoSpaceIncluded << std::endl;
 
 	if ( ( resource.areAllPlatfIncluded == true && resource.areAllCargoSpaceIncluded == true ) ||
 					resource.isGameOver == true || 

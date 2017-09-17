@@ -194,11 +194,12 @@ struct isEnemyCam : public entityx::Component<isEnemyCam>
 };
 struct isSlidingDoors : public entityx::Component<isSlidingDoors>
 {
-	isSlidingDoors() : isOpen(false)
+	isSlidingDoors() : isOpen(false), distance(0)
 	{
 
 	}
 	bool isOpen;
+	float distance;
 	std::vector<std::string> opener;
 	std::vector<int> id;
 

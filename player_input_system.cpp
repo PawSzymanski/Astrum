@@ -58,7 +58,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
         else if ( typeOfElement == "cargo_space")
         {
             poly.assign<Position>(sf::Vector2f(xPos, yPos));
-            poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), 1);
+			poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), 1 );//nie wiem o co chodzi ale dzia³a tylko "1" parser.getFloat() to b³¹d :c
             continue;
         }
 		else if (typeOfElement == "shooting_camera")
