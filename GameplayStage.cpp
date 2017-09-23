@@ -130,6 +130,7 @@ void GameplayStage::render(sf::RenderWindow &window)
 	(*ex_ptr).systems.update<render_system>(dtime);
 
     window.setView(window.getDefaultView());
+	//draw fps
 	window.draw(fps_text);
 	
 }

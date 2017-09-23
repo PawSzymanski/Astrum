@@ -25,6 +25,7 @@ bool MenuStage::init()
 	startButton.rect.setOutlineThickness(12);
 	optionsButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Options", sf::Vector2f(60, 20));
 	exitButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Exit", sf::Vector2f(30, 20));
+	multiButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Multi", sf::Vector2f(35, 20));
 	
 	if (isSliding == 2)
 	{
@@ -38,12 +39,17 @@ void MenuStage::slidingRight(float dt)
 	if (startButton.rect.getPosition().x > -100)
 	{
 		buttonSpeed += 30;
-		startButton.rect.setPosition(startButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
-		startButton.text.setPosition(startButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
-		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
-		optionsButton.text.setPosition(optionsButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2);
-		exitButton.rect.setPosition(exitButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
-		exitButton.text.setPosition(exitButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+		startButton.rect.setPosition(startButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 6.9);
+		startButton.text.setPosition(startButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 6.9);
+
+		multiButton.rect.setPosition(optionsButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 21);
+		multiButton.text.setPosition(optionsButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 21);
+
+		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 21);
+		optionsButton.text.setPosition(optionsButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 21);
+
+		exitButton.rect.setPosition(exitButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
+		exitButton.text.setPosition(exitButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
 		std::cout << " x:" <<startButton.rect.getPosition().x << std::endl;
 	}
 	else {
@@ -56,12 +62,18 @@ void MenuStage::slidingLeft(float dt)
 	if (startButton.rect.getPosition().x < windowSize.x / 2)
 	{
 		buttonSpeed -= 30;
-		startButton.rect.setPosition(startButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
-		startButton.text.setPosition(startButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 10);
-		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2);
-		optionsButton.text.setPosition(optionsButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2);
-		exitButton.rect.setPosition(exitButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
-		exitButton.text.setPosition(exitButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 10);
+
+		startButton.rect.setPosition(startButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 6.9);
+		startButton.text.setPosition(startButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 6.9);
+		
+		multiButton.rect.setPosition(optionsButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 21);
+		multiButton.text.setPosition(optionsButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 - windowSize.y / 21);
+
+		optionsButton.rect.setPosition(optionsButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 21);
+		optionsButton.text.setPosition(optionsButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 21);
+
+		exitButton.rect.setPosition(exitButton.rect.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
+		exitButton.text.setPosition(exitButton.text.getPosition().x + buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
 	}
 	else {
 		isSliding = 0;
@@ -94,9 +106,14 @@ bool MenuStage::update(float dt)
 		else if (actionCode == 1)
 		{
 			this->isSliding = 2;
-			resources_manager.gameplay_stage.set();
+			resources_manager.login_stage.set();
 		}
 		else if (actionCode == 2)
+		{
+			this->isSliding = 2;
+			resources_manager.gameplay_stage.set();
+		}
+		else if (actionCode == 3)
 		{
 			this->isSliding = 2;
 			resources_manager.exit_stage.set();
@@ -104,12 +121,14 @@ bool MenuStage::update(float dt)
 	}
 	else
 	{
-		startButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 10);
-		startButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 10);
-		optionsButton.text.setPosition(windowSize.x / 2, windowSize.y / 2);
-		optionsButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2);
-		exitButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 10);
-		exitButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 10);
+		startButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 6.9);
+		startButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 6.9);
+		multiButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 21);
+		multiButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 - windowSize.y / 21);
+		optionsButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 21);
+		optionsButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 21);
+		exitButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 6.9);
+		exitButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 6.9);
 	}
 	return true;
 }
@@ -122,6 +141,9 @@ void MenuStage::render(sf::RenderWindow &window)
 	window.draw(startButton.text);
 	window.draw(startButton.rect);
 
+	window.draw(multiButton.text);
+	window.draw(multiButton.rect);
+
 	window.draw(optionsButton.text);
 	window.draw(optionsButton.rect);
 
@@ -133,6 +155,7 @@ void MenuStage::render(sf::RenderWindow &window)
 void MenuStage::release()
 {
     startButton.text = sf::Text();
+	multiButton.text = sf::Text();
     optionsButton.text = sf::Text();
     exitButton.text = sf::Text();
 }
@@ -147,9 +170,13 @@ void MenuStage::showBar()
 	}
 	else if (actionCode == 1)
 	{
-		optionsButton.rect.setOutlineThickness(12);
+		multiButton.rect.setOutlineThickness(12);
 	}
 	else if (actionCode == 2)
+	{
+		optionsButton.rect.setOutlineThickness(12);
+	}
+	else if (actionCode == 3)
 	{
 		exitButton.rect.setOutlineThickness(12);
 	}
@@ -161,6 +188,7 @@ void MenuStage::input(sf::Event & event)
 	auto &resources_manager = ResourcesManager::getInstanceRef();
 	
 	startButton.rect.setOutlineThickness(8);
+	multiButton.rect.setOutlineThickness(8);
 	optionsButton.rect.setOutlineThickness(8);
 	exitButton.rect.setOutlineThickness(8);
 	showBar();
@@ -170,14 +198,19 @@ void MenuStage::input(sf::Event & event)
 		actionCode = 0;
 		showBar();
 	}
-	else if (optionsButton.input(event))
+	else if (multiButton.input(event))
 	{
 		actionCode = 1;
 		showBar();
 	}
-	else if (exitButton.input(event))
+	else if (optionsButton.input(event))
 	{
 		actionCode = 2;
+		showBar();
+	}
+	else if (exitButton.input(event))
+	{
+		actionCode = 3;
 		showBar();
 	}
 
@@ -202,7 +235,7 @@ void MenuStage::input(sf::Event & event)
 		}
 		else if (event.key.code == sf::Keyboard::Down)
 		{
-			if (actionCode != 2)
+			if (actionCode != 3)
 				++actionCode;
 			else
 			actionCode = 0;
@@ -215,7 +248,7 @@ void MenuStage::input(sf::Event & event)
 			isSliding = 1;
 		}
 	}
-	if (event.type == sf::Event::MouseButtonReleased && (startButton.input(event) || optionsButton.input(event)) || exitButton.input(event))
+	if (event.type == sf::Event::MouseButtonReleased && (startButton.input(event) || multiButton.input(event) ||  optionsButton.input(event) || exitButton.input(event) ))
 	{
 		if (event.key.code == sf::Mouse::Left)
 		{

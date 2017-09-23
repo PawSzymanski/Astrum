@@ -44,6 +44,7 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 			time = sf::Time::Zero;
 		}
 		int i = 0, amountOfPlatforms = 0;
+
 		for (auto ent : en.entities_with_components<isPlatform>())
 		{
 			++amountOfPlatforms;

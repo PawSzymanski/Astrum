@@ -20,7 +20,8 @@ private:
 	sf::Font font;
 	ButtonMenu startButton,
 		optionsButton,
-		exitButton;
+		exitButton,
+		multiButton;
 	sf::Vector2u windowSize;
 
 

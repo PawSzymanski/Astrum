@@ -80,10 +80,14 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		{
 			poly.assign<isSlidingDoors>();
 			isSlidingDoors::Handle door = poly.component<isSlidingDoors>();
+			std::string s;
+			float f;
 			while ( !parser.EndOfLine() )
 			{
-				door->add(parser.getString(), parser.getFloat());
+				s = parser.getString();
+				f = parser.getFloat();
 			}
+			door->add(s,f);
 		}
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);

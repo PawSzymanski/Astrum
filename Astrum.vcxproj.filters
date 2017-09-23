@@ -147,6 +147,15 @@
     <ClCompile Include="sliding_doors_system.cpp">
       <Filter>Source Files\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="login_stage.cpp">
+      <Filter>Source Files\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="multiplayer_stage.cpp">
+      <Filter>Source Files\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="serwer_stage.cpp">
+      <Filter>Source Files\stages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -286,6 +295,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sliding_doors_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="multiplayer_stage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="login_stage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serwer_stage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

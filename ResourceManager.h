@@ -5,6 +5,9 @@
 #include "ExitStage.h"
 #include "lvlsetstage.h"
 #include "creatorstage.h"
+#include "login_stage.h"
+#include "serwer_stage.h"
+#include "multiplayer_stage.h"
 #include "2d_phisLIB/Container.h"
 #include "configparser.h"
 /*
@@ -43,11 +46,16 @@ public:
 	Container textureCont;
     sf::Font font;
 	sf::RenderWindow window;
+	//stages
 	MenuStage menu_stage;
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
 	ExitStage exit_stage;
+	login_stage login_stage;
+	multiplayer_stage multi_stage;
+	serwer_stage serwer_stage;
+	//
 	std::shared_ptr<sf::Event> mainEvent;
 	ButtonMenu GOButton[3];
 };

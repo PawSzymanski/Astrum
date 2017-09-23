@@ -5,7 +5,8 @@ class Conversion
 
 public:
 	
-	std::map <std::string, sf::Keyboard::Key> string_to_sf_key = { { "A",sf::Keyboard::A },{ "B",sf::Keyboard::B },{ "C",sf::Keyboard::C },{ "D",sf::Keyboard::D },
+	std::map <std::string, sf::Keyboard::Key> string_to_sf_key = { 
+	{ "A",sf::Keyboard::A },{ "B",sf::Keyboard::B },{ "C",sf::Keyboard::C },{ "D",sf::Keyboard::D },
 	{ "E",sf::Keyboard::E },{ "F",sf::Keyboard::F },{ "G",sf::Keyboard::G },{ "G",sf::Keyboard::H },
 	{ "G",sf::Keyboard::I },{ "J",sf::Keyboard::J },{ "K",sf::Keyboard::K },{ "L",sf::Keyboard::L },
 	{ "M",sf::Keyboard::M },{ "N",sf::Keyboard::N },{ "O",sf::Keyboard::O },{ "P",sf::Keyboard::P },
