@@ -161,8 +161,6 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 
 	for(int i=0; i<entitiesCount; ++i)
 	{
-
-
 		for (int j=i+1; j<entitiesCount; ++j)
 		{			
 			Manifold m(ens[i],ens[j]);

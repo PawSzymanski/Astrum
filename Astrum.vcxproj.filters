@@ -19,14 +19,17 @@
     <Filter Include="Source Files\phisics_2d">
       <UniqueIdentifier>{e1105e1b-596e-457c-be02-daacf5b89872}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\stages">
-      <UniqueIdentifier>{6ad8af1c-abc3-4171-a456-043e6b0921cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\gameplay">
-      <UniqueIdentifier>{1581f4f1-fc97-4ecc-a6fc-b7d12ee46a11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\z_rest">
       <UniqueIdentifier>{38cd6219-50a4-437d-9c62-41c04c76192a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gameplay- single">
+      <UniqueIdentifier>{1581f4f1-fc97-4ecc-a6fc-b7d12ee46a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\multiplayer">
+      <UniqueIdentifier>{76ae4705-934b-4af5-8466-c7648dd23555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stages - single">
+      <UniqueIdentifier>{6ad8af1c-abc3-4171-a456-043e6b0921cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,46 +55,46 @@
       <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
     <ClCompile Include="ExitStage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="GameplayStage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="lvlsetstage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="creatorstage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="GameStage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="engine_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="player_input_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="render_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="MenuStage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="destructionsystem.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="platform_manager.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="animations_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="cranesystem.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="ButtonMenu.cpp">
       <Filter>Source Files\z_rest</Filter>
@@ -130,31 +133,37 @@
       <Filter>Source Files\z_rest</Filter>
     </ClCompile>
     <ClCompile Include="gameoverstage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\stages - single</Filter>
     </ClCompile>
     <ClCompile Include="cargosystem.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="game_over_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="enemy_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="2d_phisLIB\systems\ForcesSystem.cpp">
       <Filter>Source Files\phisics_2d</Filter>
     </ClCompile>
     <ClCompile Include="sliding_doors_system.cpp">
-      <Filter>Source Files\gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="login_stage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\gameplay- single</Filter>
     </ClCompile>
     <ClCompile Include="multiplayer_stage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\multiplayer</Filter>
     </ClCompile>
     <ClCompile Include="serwer_stage.cpp">
-      <Filter>Source Files\stages</Filter>
+      <Filter>Source Files\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="login_stage.cpp">
+      <Filter>Source Files\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="creatorstageMulti.cpp">
+      <Filter>Source Files\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="partsmanagerMulti.cpp">
+      <Filter>Source Files\multiplayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +313,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="serwer_stage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creatorstageMulti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="partsmanagerMulti.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

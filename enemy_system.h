@@ -12,6 +12,7 @@ class enemy_system : public entityx::System<enemy_system>, public entityx::Recei
 public:
 	enemy_system(entityx::EntityX &ex, Phisics_2D &);
 	void update(entityx::EntityManager & en, entityx::EventManager & ev, double dt);
+	void cameraDesrtoy(const CollisionEvent & ev);
 	void receive(const CollisionEvent & ev);
 	~enemy_system();
 };

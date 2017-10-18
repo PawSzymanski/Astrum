@@ -10,15 +10,21 @@ bool login_stage::init()
 {
 	auto& resource = ResourcesManager::getInstanceRef();
 
-	loginStr = "Login: ";
+	loginShowStr = "Login: ";
 	loginTxt.setFont(resource.font);
-	loginTxt.setString(loginStr);
+	loginTxt.setString(loginShowStr);
 	loginTxt.setPosition(sf::Vector2f(resource.window.getSize().x / 2 - resource.window.getSize().x / 11, resource.window.getSize().y / 2 - resource.window.getSize().y /15));
 	
 	passShowStr = "Password: ";
 	passTxt.setFont(resource.font);
 	passTxt.setString(passShowStr);
 	passTxt.setPosition(sf::Vector2f(resource.window.getSize().x / 2 - resource.window.getSize().x /11 , resource.window.getSize().y / 2 + resource.window.getSize().y / 15));
+
+	ipShowStr = "Ip: 192.168.0.1";
+	ipStr = "192.168.0.1";
+	ipTxt.setFont(resource.font);
+	ipTxt.setString(ipShowStr);
+	ipTxt.setPosition(sf::Vector2f(resource.window.getSize().x / 2 - resource.window.getSize().x / 11, resource.window.getSize().y / 2 + 4*resource.window.getSize().y / 15));
 
 	return true;
 }
@@ -33,15 +39,21 @@ void login_stage::boldTxt()
 {
 	loginTxt.setScale(sf::Vector2f(1, 1));
 	passTxt.setScale(sf::Vector2f(1, 1));
+	ipTxt.setScale(sf::Vector2f(1, 1));
 	if (actionCode == 0)
 	{
 		loginTxt.setScale(sf::Vector2f(1.3, 1.3));
-		std::cout << "0" << std::endl;
+		//std::cout << "0" << std::endl;
 	}
 	else if (actionCode == 1)
 	{
-		std::cout << "1" << std::endl;
+		//std::cout << "1" << std::endl;
 		passTxt.setScale(sf::Vector2f(1.3, 1.3));
+	}
+	else if (actionCode == 2)
+	{
+		//std::cout << "2" << std::endl;
+		ipTxt.setScale(sf::Vector2f(1.3, 1.3));
 	}
 }
 
@@ -51,40 +63,32 @@ void login_stage::keyArregement(sf::Event & event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		//std::cout << "key pr1" << std::endl;
-		if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down)
+		if (event.key.code == sf::Keyboard::Up)
 		{
-			std::cout << "key pr" << std::endl;
-			if (actionCode == 0)
-			{
-				actionCode = 1;
-			}
-			else if (actionCode == 1)
-			{
+			if (actionCode != 0)
+				--actionCode;
+			else
+				actionCode = 2;
+		}
+		else if (event.key.code == sf::Keyboard::Down)
+		{
+			if (actionCode != 2)
+				++actionCode;
+			else
 				actionCode = 0;
-			}
-			/*switch (actionCode)
-			{
-			case 0:
-			
-				actionCode = 1;
-			break;
-			case 1:
-			
-				actionCode = 0;
-			break;
-			default:
-				break;
-			}*/
 		}
 		else if (event.key.code == sf::Keyboard::Return)
 		{
-			if (!actionCode)
+			if (actionCode < 2)
 			{
-				actionCode = 1;
+				++actionCode;
 			}
 			else
 			{
-				connect();
+				if (!connect())
+				{
+					
+				}
 			}
 		}
 		else if (event.key.code == sf::Keyboard::Escape)
@@ -95,62 +99,77 @@ void login_stage::keyArregement(sf::Event & event)
 }
 bool login_stage::connect()
 {
-	/*try {
-		sql::Driver *driver;
-		sql::Connection *con;
-		sql::Statement *stmt;
-		sql::ResultSet *res;
-		sql::PreparedStatement *pstmt;
+	auto & resource = ResourcesManager::getInstanceRef();
+	sf::UdpSocket socket;
+	
+	sf::UdpSocket::Status status;
+	
+	//client
+	int port1 = 556;
 
-		/* Create a connection 
-		driver = get_driver_instance();
-		con = driver->connect("tcp://127.0.0.1:3306", "lele", "");
-		/* Connect to the MySQL test database 
-		system("pause");
-		con->setSchema("firstsql");
+	//std::cout << "socket: ";
 
-		stmt = con->createStatement();
-		stmt->execute("DROP TABLE IF EXISTS firstsql");
+	//std::cin >> port1;
+	socket.bind(port1);
+	// Send a message to 192.168.?.? on port 556 || ?55002?
+	std::string message = "1;" + sf::IpAddress::getLocalAddress().toString() + ";" + loginStr + ";" + passStr + ";"; // WPISANY JEST ADRES LOKALNY NIE GLOBALNY !!!!
+	
+	std::string ip = ipStr;
+	resource.ip = ip;
+	std::cout << "Sending..." << std::endl;
 
-		delete stmt;
-
-		/* '?' is the supported placeholder syntax */
-		//pstmt = con->prepareStatement("INSERT INTO position(id) VALUES (?)");
-		//for (int i = 1; i <= 10; i++) {
-		//	pstmt->setInt(1, i);
-		//	pstmt->executeUpdate();
-		//}
-		//delete pstmt;
-
-		/* Select in ascending order 
-		//pstmt->add_country();
-		pstmt = con->prepareStatement("SELECT xDim FROM position ");
-		res = pstmt->executeQuery();
-
-		/* Fetch in reverse = descending order! 
-		res->afterLast();
-
-		delete res;
-
-		delete pstmt;
-		delete con;
-
+	if (socket.send(message.c_str(), message.size() + 1, ip, port1) == 0)
+	{
+		std::cout << "sent " << std::endl;
 	}
-	catch (sql::SQLException &e) {
-		std::cout << "# ERR: SQLException in " << __FILE__;
-		std::cout << "(" << __FUNCTION__ << ") on line "
-			<< __LINE__ << std::endl;
-		std::cout << "# ERR: " << e.what();
-		std::cout << " (MySQL error code: " << e.getErrorCode();
-		std::cout << ", SQLState: " << e.getSQLState() <<
-			" )" << std::endl;
+	else
+	{
+		std::cout << "not sent (connection problem)" << std::endl;
 		return false;
 	}
-	*/
+	
+	// Receive an answer (most likely from 192.168.1.50, but could be anyone else)
+	resource.buffer = { 0 };
+	char buffer[1024];
+	std::size_t received = 0;
+	sf::IpAddress sender, ipHelper;
 
-	ResourcesManager::getInstanceRef().multi_stage.set();
+	unsigned short port;
+	// recive message
+	socket.setBlocking(false);
+
+	sf::Time time = sf::Time::Zero;
+	sf::Clock clk;
+	clk.restart();
+	while (socket.receive(buffer, sizeof(buffer), received, sender, port) != sf::Socket::Done || sender.toString() == "0.0.0.0" )
+	{
+		if (time.asSeconds() > 2)
+		{
+			socket.setBlocking(true);
+			return false;
+		}
+		time += clk.restart();
+	}
+	//
+	resource.buffer = buffer;
+	if (resource.buffer.find(ipHelper.getLocalAddress().toString()) != std::string::npos)
+	{
+		socket.setBlocking(true);
+		return false;
+	}
+	socket.setBlocking(true);
+
+	std::cout << sender.toString() << " said: " << resource.buffer << std::endl;
+
+	if (resource.buffer == "0" || resource.buffer.size() < 2)
+	{
+		return false;
+	}
+
+	ResourcesManager::getInstanceRef().creator_stage_multi.set();
 	return true;
 }
+
 void login_stage::textArregement(sf::Event & event)
 {
 	auto& resource = ResourcesManager::getInstanceRef();
@@ -164,14 +183,16 @@ void login_stage::textArregement(sf::Event & event)
 			{
 				if (event.text.unicode == 8 && loginStr.size() > 7) // 8 - backspace code  7- minimal lenght
 				{
+					loginShowStr.pop_back();
 					loginStr.pop_back();
 				}
 				else if (loginStr.size() < 25 && event.text.unicode > 32) // ascii > 32 whitespaces
 				{
 					loginStr.push_back(static_cast<char>(event.text.unicode));
+					loginShowStr.push_back(static_cast<char>(event.text.unicode));
 				}
 
-				loginTxt.setString(loginStr);
+				loginTxt.setString(loginShowStr);
 			}
 			else if (actionCode == 1)
 			{
@@ -186,6 +207,20 @@ void login_stage::textArregement(sf::Event & event)
 					passShowStr.push_back('*');
 				}
 				passTxt.setString(passShowStr);
+			}
+			else if (actionCode == 2)
+			{
+				if (event.text.unicode == 8 && ipShowStr.size() > 4) //8 - backspace code 10 minimal lenght
+				{
+					ipShowStr.pop_back();
+					ipStr.pop_back();
+				}
+				else if (ipStr.size() < 30 && event.text.unicode > 32)// ascii > 32 whitespaces
+				{
+					ipStr.push_back(static_cast<char>(event.text.unicode));
+					ipShowStr.push_back(static_cast<char>(event.text.unicode));
+				}
+				ipTxt.setString(ipShowStr);
 			}
 		}
 	}
@@ -202,13 +237,17 @@ void login_stage::render(sf::RenderWindow & window)
 	//
 	window.clear(sf::Color::Black);
 	//
-
 	window.draw(loginTxt);
 	window.draw(passTxt);
+	window.draw(ipTxt);
 }
 
 void login_stage::release()
 {
+	loginStr = std::string();
+	passStr = std::string();
+	loginShowStr = std::string();
+	passShowStr = std::string();
 }
 
 

@@ -4,15 +4,15 @@
  *  Created: 2017-07-09
  *   Author: Patryk Wojtanowski modified by Pawe³ Szymañski
  */
-#include "partsmanager.h"
+#include "partsmanagerMulti.h"
 #include "ResourceManager.h"
 
-PartsManager::PartsManager()
+PartsManagerMulti::PartsManagerMulti()
 {
 
 }
 
-void PartsManager::init()
+void PartsManagerMulti::init()
 {
     latch_part = nullptr;
     mouse_pos = sf::Vector2f(0,0);
@@ -73,22 +73,19 @@ void PartsManager::init()
     }
 }
 
-bool PartsManager::is_body_set()
+bool PartsManagerMulti::is_body_set()
 {
     return (current_body);
 }
 
-void PartsManager::set_body(const std::string &name)
+void PartsManagerMulti::set_body(const std::string &name)
 {
-   // if(parts.size() > 0)
-   //     return;
-	//std::cout << "poszlo" << std::endl;
     current_body_name = name;
     current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(name));
     current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(name));
 }
 
-void PartsManager::loadPartFromFile(std::string dir)
+void PartsManagerMulti::loadPartFromFile(std::string dir)
 {
 	ConfigParser pars;
 	pars.load(dir);
@@ -130,7 +127,7 @@ void PartsManager::loadPartFromFile(std::string dir)
 	}
 }
 
-void PartsManager::add_part(const std::string &name)
+void PartsManagerMulti::add_part(const std::string &name)
 {
     if(latch_part)
         return;
@@ -141,7 +138,7 @@ void PartsManager::add_part(const std::string &name)
     Part new_part(name, temp, temp_normals);
 
     std::cout<<new_part.name<< " is texture = ";
-    if(new_part.name == "small_engine" ||new_part.name == "large_engine")
+    if(new_part.name == "small_engine" || new_part.name == "large_engine")
         {new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
         std::cout<<"true"<<std::endl;}
     else
@@ -153,40 +150,47 @@ void PartsManager::add_part(const std::string &name)
     latch_part =  &(parts.at( parts.size() -1 ));
 }
 
-void PartsManager::saveShip(const std::string &dir)
+//Saving ship to buffer in ResourceManager 
+void PartsManagerMulti::saveShip(const std::string &dir)
 {
-    std::vector < std::vector <std::string> > body_data, parts_data;
-    ConfigCreator creator;
-
-    body_data.resize(1);
+	//how data looks like:
+	//@parts?eg;name;posx;posy;rot;Id;...@body_info;nameOfBody;
+	auto & resource = ResourcesManager::getInstanceRef();
+	std::vector < std::vector <std::string> > body_data, parts_data;
+	ConfigCreator creator;
+	
+	 body_data.resize(1);
     body_data.at(0).push_back(current_body_name);
+	creator.addSection("body_info", body_data);
 
-    creator.addSection("body_info", body_data);
-
+	//save
+	resource.buffer += ";@body_info;" + current_body_name + ";@parts;";
+	int PartId = 0;
     for( Part & part: parts)
     {
         std::stringstream posx, posy, rot;
         sf::Vector2f pos = body_trans.getInverse() * part.pos;
         posx<<pos.x;
         posy<<pos.y;
-        rot<<part.rot;
-        std::vector < std::string > temp = {
-            part.name,
-            posx.str(),
-            posy.str(),
-            rot.str(),
-            part.key
-        };
-
-        parts_data.push_back(temp);
+		rot << part.rot;
+		std::vector < std::string > temp = {
+			part.name,
+			posx.str(),
+			posy.str(),
+			rot.str(),
+			part.key
+		};
+		parts_data.push_back(temp);
+		//save part to resource
+		resource.buffer += part.name + ";" + posx.str() + ";" + posy.str() + ";" + rot.str() + ";" + std::to_string(PartId) + ";";
+		++PartId;
     }
-
-    creator.addSection("parts_info", parts_data);
-    creator.setDir(dir);
-    creator.create();
+	creator.addSection("parts_info", parts_data);
+	creator.setDir(dir);
+	creator.create();
 }
 
-Part *PartsManager::findClicked()
+Part *PartsManagerMulti::findClicked()
 {
     for(auto & part: parts)
     {
@@ -204,15 +208,13 @@ Part *PartsManager::findClicked()
             float dist = dot(normal,vert_to_point);
             best_distance = (dist > best_distance)? dist: best_distance;
         }
-
         if(best_distance < 0.0f)
             return &part;
     }
-
     return nullptr;
 }
 
-void PartsManager::input(sf::Event ev)
+void PartsManagerMulti::input(sf::Event ev)
 {
     if(ev.type == sf::Event::MouseMoved)
     {
@@ -308,7 +310,7 @@ void PartsManager::input(sf::Event ev)
 
 }
 
-void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void PartsManagerMulti::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if(current_body)
         target.draw(*current_body, body_trans);
@@ -322,20 +324,10 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
             sf::Vertex(p.trans * sf::Vector2f(0,0), sf::Color::White),
             sf::Vertex(p.trans * sf::Vector2f(0,0.4f), sf::Color::White)
         };
-
         sf::RenderStates renderStates;
 
         renderStates.texture = p.texture;
         renderStates.transform = p.trans;
-
-       // std::cout<<"texCoords:"<< (p.pos.x)<<" " << (p.pos.y) << std::endl;
-    
-		// for(int i=0; i<4;++i)
-       // std::cout<<p.v_array[0][0].texCoords.x<<"   "<<p.v_array[0][0].texCoords.y<<std::endl;
-//        p.v_array[0][0].texCoords = sf::Vector2f(0, 0);
-//        p.v_array[0][1].texCoords = sf::Vector2f(31, 0);
-//        p.v_array[0][2].texCoords = sf::Vector2f(31, 24);
-//        p.v_array[0][3].texCoords = sf::Vector2f(0, 24);
 
         target.draw(*(p.v_array), renderStates);
         target.draw(line,2,sf::Lines);
@@ -352,7 +344,7 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(assigner);
 }
 
-void PartsManager::release()
+void PartsManagerMulti::release()
 {
     current_body = nullptr;
     current_normals = nullptr;

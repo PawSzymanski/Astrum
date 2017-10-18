@@ -5,6 +5,7 @@
 #include "ExitStage.h"
 #include "lvlsetstage.h"
 #include "creatorstage.h"
+#include "creatorstageMulti.h"
 #include "login_stage.h"
 #include "serwer_stage.h"
 #include "multiplayer_stage.h"
@@ -42,6 +43,7 @@ public:
 	sf::View camera;
 	std::string levelInfo;
 	std::string shipInfo;
+
 	Container vertCont;
 	Container textureCont;
     sf::Font font;
@@ -52,10 +54,17 @@ public:
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
 	ExitStage exit_stage;
+	//multi
 	login_stage login_stage;
+	CreatorStageMulti creator_stage_multi;
 	multiplayer_stage multi_stage;
 	serwer_stage serwer_stage;
+
 	//
 	std::shared_ptr<sf::Event> mainEvent;
 	ButtonMenu GOButton[3];
+
+	// multi
+
+	std::string buffer, ip;
 };

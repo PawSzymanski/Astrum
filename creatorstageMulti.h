@@ -5,16 +5,15 @@
  *   Author: Patryk Wojtanowski
  */
 
-#ifndef CREATORSTAGE_H
-#define CREATORSTAGE_H
+#pragma once
 
 #include "LibsAndDeclarations.h"
 #include "GameStage.h"
 #include "partbutton.h"
 #include "ButtonMenu.h"
-#include "partsmanager.h"
+#include "partsmanagerMulti.h"
 
-class CreatorStage : public GameStage
+class CreatorStageMulti : public GameStage
 {
     PartButton bodybuttons[3];
     PartButton partbuttons[5];
@@ -31,10 +30,14 @@ class CreatorStage : public GameStage
 
     GameStage * next;
 
-    PartsManager manager ;
+    PartsManagerMulti manager;
 
 public:
-    CreatorStage();
+    CreatorStageMulti();
+
+	bool sendMessageToSerwer();
+
+	bool reciveMessageFromSerwer();
 
     virtual bool init() override;
     virtual void input(sf::Event &event) override;
@@ -43,4 +46,4 @@ public:
     virtual void release() override;
 };
 
-#endif // CREATORSTAGE_H
+

@@ -5,8 +5,7 @@
  *   Author: Patryk Wojtanowski modified by Pawe³ Szymañski
  */
 
-#ifndef PARTSMANAGER_H
-#define PARTSMANAGER_H
+#pragma once
 
 #include "LibsAndDeclarations.h"
 #include <vector>
@@ -16,9 +15,9 @@
 #include "part.h"
 #include "keyassigner.h"
 
-class PartsManager : public sf::Drawable
+class PartsManagerMulti : public sf::Drawable
 {
-	friend class CreatorStage;
+	friend class CreatorStageMulti;
     
 	sf::VertexArray * current_body;
     std::vector <sf::Vector2f> * current_normals;
@@ -38,17 +37,15 @@ private:
 
 public:
 	
-    PartsManager();
+    PartsManagerMulti();
 
     void init();
     bool is_body_set();
     void set_body(const std::string &name);
 	void loadPartFromFile(std::string dir);
     void add_part(const std::string &name);
-    void saveShip(const std::string &dir);
+	void saveShip(const std::string &dir);
     void input(sf::Event ev);
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void release();
 };
-
-#endif // PARTSMANAGER_H

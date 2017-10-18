@@ -2,6 +2,7 @@
 #include "LibsAndDeclarations.h"
 #include "GameStage.h"
 #include "mysql_connection.h"
+#include <SFML\Network.hpp>
 
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
@@ -14,9 +15,11 @@ class login_stage : public GameStage
 
 	//std::string loginN, passN;
 	int actionCode;
-	std::string loginStr;
-	std::string passStr, passShowStr;
-	sf::Text loginTxt, passTxt;
+	std::string loginStr, loginShowStr,
+		passStr, passShowStr,
+		ipStr, ipShowStr;
+	 
+	sf::Text loginTxt, passTxt, ipTxt;
 
 public:
 	login_stage();

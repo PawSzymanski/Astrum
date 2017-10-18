@@ -70,19 +70,19 @@ void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & e
 	}
 }
 
-void enemy_system::receive(const CollisionEvent &ev)
+void enemy_system::cameraDesrtoy(const CollisionEvent &ev)
 {
-	
-	if ( (ev.en1.has_component<isBullet>() || ev.en2.has_component<isBullet>()) &&
-		 (ev.en1.has_component<isEnemyCam>() || ev.en2.has_component<isEnemyCam>()) )
+
+	if ((ev.en1.has_component<isBullet>() || ev.en2.has_component<isBullet>()) &&
+		(ev.en1.has_component<isEnemyCam>() || ev.en2.has_component<isEnemyCam>()))
 	{
 		bool en1IsBullet = ev.en1.has_component<isBullet>(),
-			 en2IsBullet = ev.en2.has_component<isBullet>();
+			en2IsBullet = ev.en2.has_component<isBullet>();
 
 		entityx::Entity bullet = en1IsBullet ? ev.en1 : ev.en2;
-		
+
 		isBullet::Handle isBulH = bullet.component<isBullet>();
-		
+
 		if (isBulH->isEnemy)
 			return;
 
@@ -94,7 +94,7 @@ void enemy_system::receive(const CollisionEvent &ev)
 		VertexArray::Handle verH = cameraEnt.component<VertexArray>();
 		isEnemyCam::Handle CamH = cameraEnt.component<isEnemyCam>();
 		std::cout << "Camera destroyed" << std::endl;
-	
+
 		CamH->isActive = false;
 		verH->vert[0].color = sf::Color::Green;
 		verH->vert[1].color = sf::Color::Green;
@@ -102,6 +102,12 @@ void enemy_system::receive(const CollisionEvent &ev)
 		verH->vert[3].color = sf::Color::Green;
 	}
 
+}
+
+
+void enemy_system::receive(const CollisionEvent &ev)
+{
+	cameraDesrtoy(ev);
 }
 
 enemy_system::~enemy_system()

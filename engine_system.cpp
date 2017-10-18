@@ -9,8 +9,6 @@ engine_system::engine_system(entityx::EventManager &ev, Phisics_2D &phs) : phisi
 
 void engine_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
-	
-
 	isPlayer::Handle playerH;
 	VertexArray::Handle verH;
 	//Line::Handle lineH;
