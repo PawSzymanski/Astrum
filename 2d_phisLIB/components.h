@@ -178,7 +178,14 @@ struct KeyAssigned : public entityx::Component<KeyAssigned>
 };
 //
 struct isPlayer : public entityx::Component<isPlayer>
-{};
+{
+	isPlayer() : ID(0)
+	{}
+	isPlayer(unsigned int i) : ID(i)
+	{}
+
+	unsigned int ID;
+};
 
 struct isEngine : public entityx::Component<isEngine>
 {};
@@ -305,4 +312,20 @@ struct CargoSpace : public entityx::Component<CargoSpace>
     bool checked;
 };
 
+struct partId : public entityx::Component<partId>
+{
+	partId(int i) : id(i)
+	{
 
+	}
+	int id;
+};
+//if we add this component to 2 or more entities with the same id's 2d_phisics will cause that they will not collide (make up an id)
+struct DontCollideWith : public entityx::Component<DontCollideWith>
+{
+	DontCollideWith(unsigned int i) 
+	{
+		id.push_back(i);
+	}
+	std::vector<unsigned int> id;
+};

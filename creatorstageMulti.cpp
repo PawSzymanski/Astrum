@@ -18,14 +18,13 @@ bool CreatorStageMulti::sendMessageToSerwer()
 {
 	sf::UdpSocket socket;
 	sf::UdpSocket::Status status;
-	unsigned short port1 = 556;
+	unsigned short port = 52542;
 
-	socket.bind(port1);
 	std::cout << "Sending..." << std::endl;
 
 	std::cout << ResourcesManager::getInstanceRef().buffer << std::endl;
 
-	if (socket.send(ResourcesManager::getInstanceRef().buffer.c_str(), ResourcesManager::getInstanceRef().buffer.size() + 1, ResourcesManager::getInstanceRef().ip, port1) == 0)
+	if (socket.send(ResourcesManager::getInstanceRef().buffer.c_str(), ResourcesManager::getInstanceRef().buffer.size() + 1, ResourcesManager::getInstanceRef().ip, port) == 0)
 	{
 		std::cout << "sent " << std::endl;
 	}
@@ -43,9 +42,9 @@ bool CreatorStageMulti::reciveMessageFromSerwer()
 	auto & resource = ResourcesManager::getInstanceRef();
 	resource.buffer = { 0 };
 	sf::UdpSocket socket;
-	std::size_t received = 0;
-	unsigned short port1 = 556;
-	socket.bind(556);
+	std::size_t received;
+	std::cout << "port to bind:" << resource.portRec << std::endl;
+	socket.bind(resource.portRec);
 	//socket.setBlocking(false);
 	sf::IpAddress sender;
 	sf::Time time = sf::Time::Zero;
@@ -53,19 +52,22 @@ bool CreatorStageMulti::reciveMessageFromSerwer()
 	clk.restart();
 	char buffer[1024];
 	std::cout << "waiting for serwer message..." << std::endl;
-	socket.receive(buffer, sizeof(buffer), received, sender, port1);
-	/*while (socket.receive(buffer, sizeof(buffer), received, sender, port1) != sf::Socket::Done || sender.toString() == "0.0.0.0")
+	unsigned short port = resource.portRec; // because of reference of method socket.receive(... , &port)
+	while (socket.receive(buffer, sizeof(buffer), received, sender, port) != sf::Socket::Done || sender.toString() == "0.0.0.0")
 	{
 		if (time.asSeconds() > 4)
 		{
 			std::cout << "no serwer message:"<<buffer  << std::endl;
+			socket.unbind();
 			return false;
 		}
 		time += clk.restart();
-	}*/
+	}
+	socket.unbind();
 	resource.buffer = buffer;
 	std::cout << std::endl;
 	std::cout << resource.buffer << std::endl;
+	
 	return true;
 }
 
@@ -155,7 +157,7 @@ void CreatorStageMulti::input(sf::Event &event)
             if(!manager.is_body_set())
                 return;
 
-            manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
+            manager.saveShip( ResourcesManager::getInstanceRef().shipInfoMulti);
 			if (sendMessageToSerwer() && reciveMessageFromSerwer())
 			{
 				next = &(ResourcesManager::getInstanceRef().multi_stage);
@@ -169,7 +171,7 @@ void CreatorStageMulti::input(sf::Event &event)
 	{
 		if (garageButtons[i].input(event))
 		{
-			std::string & str = (ResourcesManager::getInstanceRef().shipInfo);
+			std::string & str = (ResourcesManager::getInstanceRef().shipInfoMulti);
 			
 			str = "resources/levelData/ship_" + std::to_string(i + 1) + ".cfg";
 			
@@ -189,7 +191,7 @@ void CreatorStageMulti::input(sf::Event &event)
         if(!manager.is_body_set())
             return;
 
-      manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
+      manager.saveShip(ResourcesManager::getInstanceRef().shipInfoMulti);
 
 	  if (sendMessageToSerwer() && reciveMessageFromSerwer())
 	  {
@@ -200,7 +202,7 @@ void CreatorStageMulti::input(sf::Event &event)
     }
 
     if(save_button.input(event))
-        manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
+        manager.saveShip( ResourcesManager::getInstanceRef().shipInfoMulti);
 
     manager.input(event);
 }

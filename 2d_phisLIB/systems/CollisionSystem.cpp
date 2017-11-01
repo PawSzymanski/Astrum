@@ -26,7 +26,8 @@ void CollisionSystem::PositionalCorrection(Manifold &m)
     bool not_flip = (d1 > d2 || massH2->invMass == 0) && (massH1->invMass != 0);
     Position::Handle targetPos = not_flip? posH1 : posH2;
     Mass::Handle targetMass = not_flip? massH1 : massH2;
-	
+
+
     sf::Vector2f correction = (m.normal* 1.0f * m.penetration) ;// (massH1->invMass + massH2->invMass);
     targetPos->pos -=  (-1.0f + (2.0f * not_flip)) *correction * (1.0f * (targetMass->invMass != 0));
 }
@@ -158,11 +159,32 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 		ens[entitiesCount] = en;
 		++entitiesCount;
 	}
-
+	DontCollideWith::Handle dontC1H, dontC2H;
 	for(int i=0; i<entitiesCount; ++i)
 	{
 		for (int j=i+1; j<entitiesCount; ++j)
-		{			
+		{	
+			if (ens[i].has_component<DontCollideWith>() && ens[j].has_component<DontCollideWith>())
+			{
+				dontC1H = ens[i].component<DontCollideWith>(),
+				dontC2H = ens[j].component<DontCollideWith>();
+				bool doContinue = false;
+				for(auto first : dontC1H->id)
+					for (auto second : dontC2H->id)
+					{
+						if (first == second)
+						{
+							doContinue = true;
+							break;
+						}
+					}
+				if (doContinue)
+				{
+					continue;
+				}
+			}
+
+
 			Manifold m(ens[i],ens[j]);
 
 			typeH1 = ens[i].component<Type>();

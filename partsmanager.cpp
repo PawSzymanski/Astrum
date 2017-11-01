@@ -49,6 +49,7 @@ void PartsManager::init()
             new_part.pos = npos;
             new_part.rot = parser.getFloat();
             new_part.key = parser.getString();
+			new_part.partId = parser.getFloat();//<- id part
 
             new_part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(new_part.name));
             new_part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(new_part.name));
@@ -68,6 +69,7 @@ void PartsManager::init()
             new_part.trans.rotate(new_part.rot);
             new_part.trans.scale(200,200);
 
+			//ResourcesManager::getInstanceRef().
             parts.push_back(new_part);
         }
     }
@@ -113,6 +115,7 @@ void PartsManager::loadPartFromFile(std::string dir)
 		part.pos.y = 200 * pars.getFloat() + 500;
 		part.rot = pars.getFloat();
 		part.key = pars.getString();
+		pars.getFloat(); //<-id part
 		sf::Transform trans;
 
 		part.trans = {	1,0,0,
@@ -162,7 +165,7 @@ void PartsManager::saveShip(const std::string &dir)
     body_data.at(0).push_back(current_body_name);
 
     creator.addSection("body_info", body_data);
-
+	int partID = 0;
     for( Part & part: parts)
     {
         std::stringstream posx, posy, rot;
@@ -175,10 +178,12 @@ void PartsManager::saveShip(const std::string &dir)
             posx.str(),
             posy.str(),
             rot.str(),
-            part.key
+            part.key,
+			std::to_string(partID)
         };
 
         parts_data.push_back(temp);
+		++partID;
     }
 
     creator.addSection("parts_info", parts_data);

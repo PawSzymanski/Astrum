@@ -49,6 +49,8 @@ void PartsManagerMulti::init()
             new_part.pos = npos;
             new_part.rot = parser.getFloat();
             new_part.key = parser.getString();
+			new_part.partId = parser.getFloat(); //last update
+
 
             new_part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(new_part.name));
             new_part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(new_part.name));
@@ -147,7 +149,7 @@ void PartsManagerMulti::add_part(const std::string &name)
 
     parts.push_back(new_part);
 
-    latch_part =  &(parts.at( parts.size() -1 ));
+    latch_part = &(parts.at( parts.size() -1 ));
 }
 
 //Saving ship to buffer in ResourceManager 
@@ -159,7 +161,7 @@ void PartsManagerMulti::saveShip(const std::string &dir)
 	std::vector < std::vector <std::string> > body_data, parts_data;
 	ConfigCreator creator;
 	
-	 body_data.resize(1);
+	body_data.resize(1);
     body_data.at(0).push_back(current_body_name);
 	creator.addSection("body_info", body_data);
 
@@ -178,7 +180,8 @@ void PartsManagerMulti::saveShip(const std::string &dir)
 			posx.str(),
 			posy.str(),
 			rot.str(),
-			part.key
+			part.key,
+			std::to_string(PartId)
 		};
 		parts_data.push_back(temp);
 		//save part to resource
@@ -307,7 +310,6 @@ void PartsManagerMulti::input(sf::Event ev)
             latch_part->trans.rotate(latch_part->rot);
         }
     }
-
 }
 
 void PartsManagerMulti::draw(sf::RenderTarget &target, sf::RenderStates states) const

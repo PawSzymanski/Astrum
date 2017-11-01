@@ -42,7 +42,9 @@ public:
 	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime, isMovingCameraOn;
 	sf::View camera;
 	std::string levelInfo;
-	std::string shipInfo;
+	std::string shipInfo, shipInfoMulti;
+	std::string decodeOneLineDel(std::string & array);
+	std::string decodeOneLineRead(std::string  array);
 
 	Container vertCont;
 	Container textureCont;
@@ -65,6 +67,6 @@ public:
 	ButtonMenu GOButton[3];
 
 	// multi
-
+	unsigned short portRec;
 	std::string buffer, ip;
 };

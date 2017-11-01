@@ -4,18 +4,20 @@
 #include <entityx/entityx.h>
 #include <SFML/Graphics.hpp>
 
+//#include "part.h"
+
 class Container
 {
 public:
 	Container();
 	int textureNumber, animationNumber;
-
+	//
 	std::vector<sf::VertexArray> vertexArrays;
 	std::vector<std::vector<sf::Vector2f>> normals;
 	std::vector<sf::Texture> textures;
 	std::vector<sf::Vector2f> animationFrameSize;
 	std::vector<float> animationSpeed;
-
+	//
     std::map <std::string, int> indexes;
 	std::map <std::string, int> textureIndexesMap;
 	std::map <std::string, int> animationIndexesMap;

@@ -3,6 +3,7 @@
 ResourcesManager* ResourcesManager::instance = nullptr;
 
 ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("resources/levelData/level_4.cfg"), shipInfo("resources/levelData/ship_1.cfg"), 
+										shipInfoMulti("resources/levelData/multi_ship_1.cfg"),
 										areAllPlatfIncluded(false), isMouseButtonReleased(false), 
 										areAllCargoSpaceIncluded(false), isGameOver(false), isPauseTime(false)
 {
@@ -178,3 +179,31 @@ void ResourcesManager::deleteInstance()
 {
 	delete instance;
 }
+
+std::string ResourcesManager::decodeOneLineDel(std::string &array)
+{
+	int i = 0;
+	std::string message;
+	while (array[0] != ';' && !array.empty() &&i < array.size())
+	{
+		message.push_back(array[0]);
+		array.erase(0, 1);
+		++i;
+	}
+	array.erase(0, 1);
+	return message;
+}
+//decodes first part of buffer 
+std::string ResourcesManager::decodeOneLineRead(std::string arr)
+{
+	int i = 0;
+	std::string message;
+	std::cout << arr << std::endl;
+	while (!arr.empty() && arr[i] != ';' && i < arr.size())
+	{
+		message.push_back(arr[i]);
+		++i;
+	}
+	return message;
+}
+

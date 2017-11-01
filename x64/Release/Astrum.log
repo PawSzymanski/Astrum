@@ -1,14 +1,13 @@
-﻿  creatorstageMulti.cpp
-creatorstageMulti.cpp(20): warning C4101: 'status': unreferenced local variable
-creatorstageMulti.cpp(117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-creatorstageMulti.cpp(123): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-creatorstageMulti.cpp(128): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-creatorstageMulti.cpp(213): warning C4244: '=': conversion from 'float' to 'sf::Uint8', possible loss of data
-creatorstageMulti.cpp(222): warning C4244: '=': conversion from 'float' to 'sf::Uint8', possible loss of data
+﻿  ResourceManager.cpp
+ResourceManager.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
+ResourceManager.cpp(23): warning C4305: 'argument': truncation from 'double' to 'float'
+ResourceManager.cpp(24): warning C4305: 'argument': truncation from 'double' to 'float'
+ResourceManager.cpp(119): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+ResourceManager.cpp(121): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  101 of 6184 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+  107 of 6467 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    42 functions had inline decision re-evaluated but remain unchanged
+    37 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.exe
-  Astrum.vcxproj -> C:\Users\lele\documents\visual studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
+  Astrum.vcxproj -> C:\Users\lele\Documents\Visual Studio 2015\Projects\Astrum\x64\Release\Astrum.exe
+  Astrum.vcxproj -> C:\Users\lele\Documents\Visual Studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)

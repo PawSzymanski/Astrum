@@ -44,6 +44,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		if (typeOfElement == "platform")
 		{
 			poly.assign<isPlatform>(parser.getFloat());
+			poly.assign<DontCollideWith>(1);
 			std::cout << "PLATFORM LOADED" << std::endl;
 		}
 		else if (typeOfElement == "wall")
@@ -127,12 +128,14 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		
 	auto playerEn = en.create();
 	playerEn.assign<isPlayer>();
+	playerEn.assign<DontCollideWith>(1);
 	phisics.createPolygon(playerEn, sf::Vector2f(2, 8),
 		sf::Vector2f(0, 0), 0, 1, typeOfShip);
 	
 
 	//PARTS
 	parser.setSection("parts_info");
+	unsigned int partID;
 	std::string partName, partKey, pathToPart, partColor, partVert;
 	Conversion conversion;
 	float partPosX, partPosY, partDegree;
@@ -145,6 +148,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		partPosY = parser.getFloat();
 		partDegree = parser.getFloat();
 		partKey = parser.getString();
+		partID = parser.getFloat();
 		ConfigParser parser2;
 
 		//PART INFO LOAD engine maybe legs or anything else
@@ -207,12 +211,11 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
         else {
 			std::cout << "legs loaded" << std::endl;
 
-			//partEn.assign<isLegs>();
             partEn.assign<isSlave>(playerEn);
             phisics.createPolygon(partEn,sf::Vector2f(0,0),sf::Vector2f(0,0), partDegree, 1, partVert);
             continue;
 		}
-
+		partEn.assign<partId>(partID);
         partEn.assign<Rotation>(partDegree);
         partEn.assign<VertexArray>(container.getPoly(partVert), container.getNormals(partVert));
         partEn.assign<Transform>(sf::Vector2f(0, 0), 0);

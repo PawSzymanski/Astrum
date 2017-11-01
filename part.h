@@ -32,6 +32,7 @@ struct Part
         return *this;
     }
 
+	unsigned int partId;
     std::string name;
     sf::VertexArray * v_array;
     sf::Texture * texture;

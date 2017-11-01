@@ -105,26 +105,38 @@ bool login_stage::connect()
 	sf::UdpSocket::Status status;
 	
 	//client
-	int port1 = 556;
+	int portSend = 52542;
 
 	//std::cout << "socket: ";
 
 	//std::cin >> port1;
-	socket.bind(port1);
+	
 	// Send a message to 192.168.?.? on port 556 || ?55002?
-	std::string message = "1;" + sf::IpAddress::getLocalAddress().toString() + ";" + loginStr + ";" + passStr + ";"; // WPISANY JEST ADRES LOKALNY NIE GLOBALNY !!!!
+	
+	//rand the port
+	srand(time(NULL));
+	do
+	{
+		resource.portRec = rand() % 40000 + 5000;
+	} while (socket.bind(resource.portRec) != sf::UdpSocket::Status::Done);
+	std::cout << "portbinded:" << resource.portRec << std::endl;
+
+	std::string message = "1;" + std::to_string(resource.portRec) + ";" + sf::IpAddress::getLocalAddress().toString() + ";" + loginStr + ";" + passStr + ";"; // WPISANY JEST ADRES LOKALNY NIE GLOBALNY !!!!
 	
 	std::string ip = ipStr;
 	resource.ip = ip;
 	std::cout << "Sending..." << std::endl;
 
-	if (socket.send(message.c_str(), message.size() + 1, ip, port1) == 0)
+	std::cout << message << std::endl;
+
+	if (socket.send(message.c_str(), message.size() + 1, ip, portSend) == 0)
 	{
 		std::cout << "sent " << std::endl;
 	}
 	else
 	{
 		std::cout << "not sent (connection problem)" << std::endl;
+		socket.unbind();
 		return false;
 	}
 	
@@ -134,30 +146,28 @@ bool login_stage::connect()
 	std::size_t received = 0;
 	sf::IpAddress sender, ipHelper;
 
-	unsigned short port;
 	// recive message
 	socket.setBlocking(false);
 
 	sf::Time time = sf::Time::Zero;
 	sf::Clock clk;
 	clk.restart();
+
+	std::cout << "waiting... port:" << socket.getLocalPort() << " "<<resource.portRec <<std::endl;
+	unsigned short port = resource.portRec;
 	while (socket.receive(buffer, sizeof(buffer), received, sender, port) != sf::Socket::Done || sender.toString() == "0.0.0.0" )
 	{
 		if (time.asSeconds() > 2)
 		{
-			socket.setBlocking(true);
+			socket.unbind();
 			return false;
 		}
 		time += clk.restart();
 	}
+	std::cout << "port to bindee:" << resource.portRec << std::endl;
+	socket.unbind();
 	//
 	resource.buffer = buffer;
-	if (resource.buffer.find(ipHelper.getLocalAddress().toString()) != std::string::npos)
-	{
-		socket.setBlocking(true);
-		return false;
-	}
-	socket.setBlocking(true);
 
 	std::cout << sender.toString() << " said: " << resource.buffer << std::endl;
 
@@ -167,6 +177,7 @@ bool login_stage::connect()
 	}
 
 	ResourcesManager::getInstanceRef().creator_stage_multi.set();
+	std::cout << "port to bindee:" << resource.portRec << std::endl;
 	return true;
 }
 
@@ -181,7 +192,7 @@ void login_stage::textArregement(sf::Event & event)
 			//std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
 			if (actionCode == 0)
 			{
-				if (event.text.unicode == 8 && loginStr.size() > 7) // 8 - backspace code  7- minimal lenght
+				if (event.text.unicode == 8 && loginShowStr.size() > 7) // 8 - backspace code  7- minimal lenght
 				{
 					loginShowStr.pop_back();
 					loginStr.pop_back();

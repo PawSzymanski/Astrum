@@ -185,6 +185,7 @@
     <ClCompile Include="GameStage.cpp" />
     <ClCompile Include="game_over_system.cpp" />
     <ClCompile Include="keyassigner.cpp" />
+    <ClCompile Include="LoadingThingsToMultiStage.cpp" />
     <ClCompile Include="login_stage.cpp" />
     <ClCompile Include="lvlbutton.cpp" />
     <ClCompile Include="lvlsetstage.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="game_over_system.h" />
     <ClInclude Include="keyassigner.h" />
     <ClInclude Include="LibsAndDeclarations.h" />
+    <ClInclude Include="LoadingThingsToMultiStage.h" />
     <ClInclude Include="login_stage.h" />
     <ClInclude Include="lvlbutton.h" />
     <ClInclude Include="lvlsetstage.h" />

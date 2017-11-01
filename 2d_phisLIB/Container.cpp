@@ -65,7 +65,6 @@ std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
         std::cout <<"zla nazwa: "<<name<<std::endl;
         assert(false);
     }
-
     return normals.at(indexes[name]);
 }
 
