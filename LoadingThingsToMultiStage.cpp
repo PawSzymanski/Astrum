@@ -120,8 +120,8 @@ void LoadingThingsToMultiStage::update(entityx::EntityManager & en, entityx::Eve
 
 	auto playerEn = en.create();
 	playerEn.assign<isPlayer>();
-	//playerEn.assign<DontCollideWith>(1);
-	phisics.createPolygon(playerEn, sf::Vector2f(2, 8),
+	playerEn.assign<DontCollideWith>(1);
+	phisics.createPolygon(playerEn, sf::Vector2f(4, 8),
 		sf::Vector2f(0, 0), 0, 1, typeOfShip);
 
 	//PARTS

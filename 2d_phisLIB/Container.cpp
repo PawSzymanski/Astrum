@@ -33,7 +33,6 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 		side /= lenght;
 		n.push_back(side);
 	}
-
 	normals.push_back(n);
     std::cout << " size :"  <<normals[0].size() << std::endl;
 }
@@ -47,15 +46,13 @@ void Container::addTexture(sf::Texture texture, std::string vertexName)
 
 sf::VertexArray & Container::getPoly(const std::string &name)
 {
-
     if(indexes.find(name) == indexes.end())
     {
         std::cout <<"zla nazwa: "<<name<<std::endl;
 		return vertexArrays[indexes["small_engine"]];
         assert(false);
     }
-
-    return vertexArrays[indexes[name]];
+	return vertexArrays[indexes[name]];
 }
 
 std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
@@ -82,9 +79,7 @@ sf::Texture & Container::getTexture(std::string texture)
 		assert(false);
 	}
 	return textures[textureIndexesMap[texture]];
-	
 }
-
 
 sf::Vector2f Container::getAnimationFrameSize(std::string texture)
 {

@@ -120,8 +120,10 @@ bool login_stage::connect()
 		resource.portRec = rand() % 40000 + 5000;
 	} while (socket.bind(resource.portRec) != sf::UdpSocket::Status::Done);
 	std::cout << "portbinded:" << resource.portRec << std::endl;
-
-	std::string message = "1;" + std::to_string(resource.portRec) + ";" + sf::IpAddress::getLocalAddress().toString() + ";" + loginStr + ";" + passStr + ";"; // WPISANY JEST ADRES LOKALNY NIE GLOBALNY !!!!
+							
+	std::string message = 
+		"5555;1;" //5555 is acsess code 
+		+ std::to_string(resource.portRec) + ";" + sf::IpAddress::getLocalAddress().toString() + ";" + loginStr + ";" + passStr + ";"; // WPISANY JEST ADRES LOKALNY NIE GLOBALNY !!!!
 	
 	std::string ip = ipStr;
 	resource.ip = ip;
@@ -171,7 +173,7 @@ bool login_stage::connect()
 
 	std::cout << sender.toString() << " said: " << resource.buffer << std::endl;
 
-	if (resource.buffer == "0" || resource.buffer.size() < 2)
+	if (resource.buffer[0] == '0' || resource.buffer.size() < 2)
 	{
 		return false;
 	}

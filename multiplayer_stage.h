@@ -26,7 +26,7 @@ class multiplayer_stage : public GameStage
 	
 	sf::Time inputSendTime;
 	sf::Clock inputSendClock;
-
+	unsigned int thisPlayerId;
 	struct PlayersInfo
 	{
 		unsigned int iD;
@@ -37,6 +37,7 @@ class multiplayer_stage : public GameStage
 	};
 
 	std::vector<PlayersInfo> players;
+	sf::UdpSocket socket;
 public:
 	multiplayer_stage();
 

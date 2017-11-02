@@ -143,7 +143,10 @@ void CreatorStageMulti::input(sf::Event &event)
 {
 	start_button.rect.setOutlineThickness(8);
 	save_button.rect.setOutlineThickness(8);
-
+	if ("5555" != ResourcesManager::getInstanceRef().decodeOneLineRead(ResourcesManager::getInstanceRef().buffer))
+	{
+		ResourcesManager::getInstanceRef().buffer = "5555;"+ ResourcesManager::getInstanceRef().buffer;
+	}
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Escape)

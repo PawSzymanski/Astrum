@@ -182,13 +182,11 @@ void ResourcesManager::deleteInstance()
 
 std::string ResourcesManager::decodeOneLineDel(std::string &array)
 {
-	int i = 0;
 	std::string message;
-	while (array[0] != ';' && !array.empty() &&i < array.size())
+	while (array[0] != ';' && !array.empty())
 	{
 		message.push_back(array[0]);
 		array.erase(0, 1);
-		++i;
 	}
 	array.erase(0, 1);
 	return message;
@@ -198,8 +196,7 @@ std::string ResourcesManager::decodeOneLineRead(std::string arr)
 {
 	int i = 0;
 	std::string message;
-	std::cout << arr << std::endl;
-	while (!arr.empty() && arr[i] != ';' && i < arr.size())
+	while (!arr.empty() && arr[i] != ';')
 	{
 		message.push_back(arr[i]);
 		++i;
