@@ -16,6 +16,9 @@
 
 class CreatorStage : public GameStage
 {
+	bool fade_in, fade_out;
+	float timer;
+
     PartButton bodybuttons[3];
     PartButton partbuttons[5];
 	PartButton garageButtons[4];
@@ -24,15 +27,11 @@ class CreatorStage : public GameStage
     ButtonMenu save_button;
 
     sf::Text esc_text;
-    sf::RectangleShape mask_rect;
-
-    bool fade_in, fade_out;
-    float timer;
+	sf::RectangleShape mask_rect;
 
     GameStage * next;
 
-    PartsManager manager ;
-
+    PartsManager manager;
 public:
     CreatorStage();
 

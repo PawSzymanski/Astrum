@@ -17,20 +17,27 @@
 
 class ConfigParser
 {
+	bool eol, eos;
+	unsigned int line, word;
+	std::string section;
+	std::string file_dir;
     std::map<std::string, std::vector<std::vector<std::string> > > dane;
-    std::string section;
-    std::string file_dir;
-    unsigned int line, word;
-    bool eol, eos;
+
+
+
 
 public:
     ConfigParser();
+
     bool load(std::string dir);
     bool setSection(std::string s);
+	bool EndOfLine();
+	bool EndOfSection();
+
     float getFloat();
+
     std::string getString();
-    bool EndOfLine();
-    bool EndOfSection();
+
     std::vector< std::vector <std::string> > & getData();
     std::vector< std::string > getSections();
 

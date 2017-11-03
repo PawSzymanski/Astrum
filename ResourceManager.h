@@ -50,23 +50,24 @@ public:
 	Container textureCont;
     sf::Font font;
 	sf::RenderWindow window;
-	//stages
+	
+	std::shared_ptr<sf::Event> mainEvent;
+	ButtonMenu GOButton[3];
+
+	//Offline sages
 	MenuStage menu_stage;
     LvlSetStage lvl_set_stage;
 	GameplayStage gameplay_stage;
     CreatorStage creator_stage;
 	ExitStage exit_stage;
-	//multi
+
+////////////////////////////////////////////////////////////////////////////////////////////
+	//Multiplayer zone:
 	login_stage login_stage;
 	CreatorStageMulti creator_stage_multi;
 	multiplayer_stage multi_stage;
 	serwer_stage serwer_stage;
-
-	//
-	std::shared_ptr<sf::Event> mainEvent;
-	ButtonMenu GOButton[3];
-
-	// multi
+	
 	unsigned short portRec;
 	std::string buffer, ip;
 };

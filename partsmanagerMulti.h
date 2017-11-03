@@ -38,9 +38,9 @@ private:
 public:
 	
     PartsManagerMulti();
+	bool is_body_set();
 
     void init();
-    bool is_body_set();
     void set_body(const std::string &name);
 	void loadPartFromFile(std::string dir);
     void add_part(const std::string &name);

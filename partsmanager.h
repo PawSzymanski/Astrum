@@ -39,16 +39,17 @@ private:
 public:
 	
     PartsManager();
+	bool is_body_set();
 
     void init();
-    bool is_body_set();
     void set_body(const std::string &name);
 	void loadPartFromFile(std::string dir);
     void add_part(const std::string &name);
     void saveShip(const std::string &dir);
     void input(sf::Event ev);
+	void release();
+
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-    void release();
 };
 
 #endif // PARTSMANAGER_H

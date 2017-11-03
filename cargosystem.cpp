@@ -30,12 +30,10 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
 			}
 
         Position::Handle cargo_posH = cargo.component<Position>();
-		std::cout << "cargo X: " << cargo_posH->pos.x << "Y: " << cargo_posH->pos.y << std::endl;
+	
         sf::Vector2f cargo_pos = cargo_posH->pos;
         sf::Vector2f space_pos = pos->pos;
         sf::Vector2f dim = cargo_space->dim + pos->pos;
-		std::cout << std::endl;
-		//std::cout << cargo_pos.x << " " << cargo_pos.y <<" :: " << dim.x <<" "<< dim.y <<" :: "<< space_pos.x << " " << space_pos.y <<std::endl;
 
         if(cargo_pos.x > space_pos.x && cargo_pos.x < dim.x &&
                 cargo_pos.y > space_pos.y && cargo_pos.y < dim.y)

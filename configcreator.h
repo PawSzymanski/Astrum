@@ -16,8 +16,9 @@
 
 class ConfigCreator
 {
+	std::string dir;
     std::map<std::string, std::vector<std::vector<std::string> > > dane;
-    std::string dir;
+
 
 
 public:

@@ -33,14 +33,16 @@ struct Part
     }
 
 	unsigned int partId;
-    std::string name;
+	float rot;
+    std::string name, key;
+
+	std::vector< sf::Vector2f > * normals;
+	sf::Vector2f pos;
+
     sf::VertexArray * v_array;
     sf::Texture * texture;
-    std::vector< sf::Vector2f > * normals;
+   
     sf::Transform trans;
-    sf::Vector2f pos;
-    std::string key;
-    float rot;
 };
 
 #endif // PART_H

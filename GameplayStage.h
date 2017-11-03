@@ -26,14 +26,14 @@ public:
 	virtual ~GameplayStage();
 
 private:
-	
-	sf::Time display_fps_time;
 	float cameraX, cameraY, dtime;
-	void updateCamera();
+
 	sf::Vector2f gravity;
-	Container &vertCont;
+	sf::Time display_fps_time;
 	std::unique_ptr<entityx::EntityX> ex_ptr;
 	std::unique_ptr<Phisics_2D> phisics_ptr;
+
+	Container &vertCont;
 
     sf::Text fps_text;
 public:
@@ -43,4 +43,8 @@ public:
     virtual void render(sf::RenderWindow &window) override;
 	virtual void release() override;
     virtual void input(sf::Event &event) override;
+
+private:
+
+	void updateCamera();
 };

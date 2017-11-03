@@ -24,15 +24,17 @@ class login_stage : public GameStage
 public:
 	login_stage();
 
+	bool connect();
+
 	virtual bool init() override;
 	virtual void input(sf::Event &event) override;
-	void boldTxt();
-	void keyArregement(sf::Event & event);
-	bool connect();
-	void textArregement(sf::Event & event);
 	virtual bool update(float dt) override;
 	virtual void render(sf::RenderWindow &window) override;
 	virtual void release() override;
+	
+	void boldTxt();
+	void keyArregement(sf::Event & event);
+	void textArregement(sf::Event & event);
 
 	~login_stage();
 };

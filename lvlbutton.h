@@ -13,24 +13,27 @@
 
 class LvlButton : public sf::Drawable
 {
+	bool has_mouse;
+	bool clicked;
+
     sf::Text num, text;
     RoundRect rect;
-    sf::Vector2f pos;
-
-    bool has_mouse;
-    bool clicked;
+	sf::Vector2f pos;
 public:
     bool highlighted;
 
 public:
     LvlButton();
 
+	bool input(sf::Event & ev);
+
     void init(sf::Vector2f pos, int num, std::string text, sf::Font & font);
-    bool input(sf::Event & ev);
     void setPosition(const sf::Vector2f& pos);
-    sf::Vector2f getPosition();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    void release();
+	void release();
+   
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+	sf::Vector2f getPosition();
 };
 
 #endif // LVLBUTTON_H

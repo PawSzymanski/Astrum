@@ -21,12 +21,7 @@
 
 class multiplayer_stage : public GameStage
 {
-	std::unique_ptr<entityx::EntityX> ex_ptr;
-	std::unique_ptr<Phisics_2D> phisics_ptr;
-	
-	sf::Time inputSendTime;
-	sf::Clock inputSendClock;
-	unsigned int thisPlayerId;
+	/////////////////////////////
 	struct PlayersInfo
 	{
 		unsigned int iD;
@@ -35,21 +30,35 @@ class multiplayer_stage : public GameStage
 		entityx::Entity entity;
 		std::string bodyname;
 	};
+	//////////////////////////////
+	std::unique_ptr<entityx::EntityX> ex_ptr;
+	std::unique_ptr<Phisics_2D> phisics_ptr;
+	
+	unsigned int thisPlayerId;
 
+	sf::Time inputSendTime;
+	sf::Clock inputSendClock;
+	sf::Clock clock;
+	sf::Time time;
+	
 	std::vector<PlayersInfo> players;
+	
 	sf::UdpSocket socket;
 public:
 	multiplayer_stage();
 
-	virtual bool init() override;
-	virtual void input(sf::Event &event) override;
 	bool sendMessage();
 	bool reciveMessage();
 	bool addPlayer();
 	bool setPositonOfPlayer();
+
+	virtual bool init() override;
+	virtual void input(sf::Event &event) override;
 	virtual bool update(float dt) override;
 	virtual void render(sf::RenderWindow &window) override;
 	virtual void release() override;
+
+	void updatePartsActions();
 
 	~multiplayer_stage();
 };

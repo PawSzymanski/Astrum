@@ -23,9 +23,6 @@ private:
 		exitButton,
 		multiButton;
 	sf::Vector2u windowSize;
-
-
-
 public:
 	virtual bool init() override;
 	virtual bool update(float dt) override;

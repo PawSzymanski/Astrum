@@ -15,6 +15,9 @@
 
 class CreatorStageMulti : public GameStage
 {
+	bool fade_in, fade_out;
+	float timer;
+
     PartButton bodybuttons[3];
     PartButton partbuttons[5];
 	PartButton garageButtons[4];
@@ -24,9 +27,6 @@ class CreatorStageMulti : public GameStage
 
     sf::Text esc_text;
     sf::RectangleShape mask_rect;
-
-    bool fade_in, fade_out;
-    float timer;
 
     GameStage * next;
 

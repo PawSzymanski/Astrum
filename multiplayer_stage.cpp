@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 
 
-multiplayer_stage::multiplayer_stage()
+multiplayer_stage::multiplayer_stage() :time(sf::Time::Zero)
 {
 }
 
@@ -11,12 +11,15 @@ bool multiplayer_stage::init()
 	auto &resource = ResourcesManager::getInstanceRef();
 
 	unsigned short  portt = resource.portRec;
+
+	std::cout << "port to bind:" << portt << std::endl;
 	socket.bind(portt);
+	system("pause");
 
 	ex_ptr = std::make_unique<entityx::EntityX>();
 	phisics_ptr = std::make_unique<Phisics_2D>((*ex_ptr), resource.vertCont, sf::Vector2f(0.0, 0.0));
 	(*phisics_ptr).init();
-
+	
 	auto &window = ResourcesManager::getInstanceRef().window;
 
 	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));
@@ -42,30 +45,14 @@ bool multiplayer_stage::init()
 
 void multiplayer_stage::input(sf::Event & event)
 {
-	auto & resource = ResourcesManager::getInstanceRef();
+	
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Escape)
 		{
 			ResourcesManager::getInstanceRef().login_stage.set();
 		}
-		partId::Handle partIdH;
-		KeyAssigned::Handle keyH;
-		//how data looks like:
-		//part id;bool/flag;
-		resource.buffer = resource.buffer + "#2;";//action code of buffers
-		for (auto partEn : (*ex_ptr).entities.entities_with_components(partIdH, keyH))
-		{
-			if (sf::Keyboard::isKeyPressed(keyH->key))
-			{
-				resource.buffer = resource.buffer + std::to_string(partIdH->id) + ";" + "1;";
-			}
-			else
-			{
-				resource.buffer = resource.buffer + std::to_string(partIdH->id) + ";" + "0;";
-			}
-		}
-		resource.buffer = resource.buffer + ";";
+		
 	}
 	
 }
@@ -80,9 +67,9 @@ bool multiplayer_stage::sendMessage()
 	sf::UdpSocket::Status status;
 	unsigned short port = 52542;
 
-	std::cout << "Sending..." << std::endl;
+	//std::cout << "Sending..." << std::endl;
 
-	std::cout << ResourcesManager::getInstanceRef().buffer << std::endl;
+	//std::cout << ResourcesManager::getInstanceRef().buffer << std::endl;
 
 	if (socket1.send(ResourcesManager::getInstanceRef().buffer.c_str(), ResourcesManager::getInstanceRef().buffer.size() + 1, ResourcesManager::getInstanceRef().ip, port) == 0)
 	{
@@ -93,7 +80,7 @@ bool multiplayer_stage::sendMessage()
 		std::cout << "not sent (connection problem)" << std::endl;
 		return false;
 	}
-	system("pause");
+	//system("pause");
 	return true;
 }
 
@@ -103,13 +90,12 @@ bool multiplayer_stage::reciveMessage()
 
 	char buffer[1024] = {0};
 
-	
 	std::size_t received;
 	sf::Clock clk;
 	
-	sf::IpAddress sender = "192.168.1.8";
+	sf::IpAddress sender ;
 
-	std::cout << "port to bind:" << resource.portRec << std::endl;
+	//std::cout << "port to bind:" << resource.portRec << std::endl;
 	
 	unsigned short port = resource.portRec;// because of reference of method socket.receive(... , &port)
 	
@@ -117,27 +103,48 @@ bool multiplayer_stage::reciveMessage()
 	
 	//std::cout << "waiting for serwer message..." << std::endl;
 	
-
+	sf::Socket::Status mStatus= socket.receive(buffer, sizeof(buffer), received, sender, port);
 	sf::Time time = sf::Time::Zero;
 	clk.restart();
-	if(socket.receive(buffer, sizeof(buffer), received, sender, port) != sf::Socket::Done || sender.toString() == "0.0.0.0" || "5555"!=resource.decodeOneLineRead(buffer))
+	if( mStatus  != sf::Socket::Done || sender.toString() == "0.0.0.0" || "5555"!=resource.decodeOneLineRead(buffer))
 	{
 		//if (time.asMilliseconds() > 50)
-			std::cout << "no serwer message:" << buffer << "sender:"<< sender <<std::endl;
+			std::cout << "no serwer message:" << buffer << "sender:"<< sender <<"Status:" << mStatus << std::endl;
 		//	sendMessage();
 		//	time = sf::Time::Zero;
 		//time += clk.restart();
 	}
 	else 
 	{
-		std::cout << "early message received:" << buffer <<"size:" << received << std::endl;
+		//std::cout << "early message received:" << buffer <<"size:" << received << std::endl;
 		resource.buffer = buffer;
 	}
-	socket.unbind();
 	
 	//std::cout << std::endl;
 	//std::cout << resource.buffer << std::endl;
 	return true;
+}
+void multiplayer_stage::updatePartsActions()
+{ 
+	auto & resource = ResourcesManager::getInstanceRef();
+	partId::Handle partIdH;
+	KeyAssigned::Handle keyH;
+	//how data looks like:
+	//part id;bool/flag;
+
+	resource.buffer = resource.buffer + "#2;";//action code of buffers
+	for (auto partEn : (*ex_ptr).entities.entities_with_components(partIdH, keyH))
+	{
+		if (sf::Keyboard::isKeyPressed(keyH->key))
+		{
+			resource.buffer = resource.buffer + std::to_string(partIdH->id) + ";" + "1;";
+		}
+		else
+		{
+			resource.buffer = resource.buffer + std::to_string(partIdH->id) + ";" + "0;";
+		}
+	}
+	resource.buffer = resource.buffer + ";";
 }
 
 bool multiplayer_stage::addPlayer()
@@ -145,55 +152,80 @@ bool multiplayer_stage::addPlayer()
 	auto & resource = ResourcesManager::getInstanceRef();
 	PlayersInfo newPlayer;
 	auto playerEn = (*ex_ptr).entities.create();
-	std::cout << "add pl1:" << resource.buffer << std::endl;
-	while ("" != resource.decodeOneLineRead(resource.buffer))
+	//std::cout << "add pl1:" << resource.buffer << std::endl;
+	while ( "" != resource.decodeOneLineRead(resource.buffer))
 	{
+		isPlayer::Handle playerH;
+		for (auto entityPl : (*ex_ptr).entities.entities_with_components(playerH))
+		{
+			std::cout << "playersID:" << playerH->ID << std::endl;
+			if (playerH->ID == 0)
+			{
+				playerH->ID = thisPlayerId;
+			}
+		}
+
 		if (players.empty())
 		{
 			newPlayer.entity = playerEn;
+
 			newPlayer.iD = stoi(resource.decodeOneLineDel(resource.buffer));
 			newPlayer.bodyname = resource.decodeOneLineDel(resource.buffer);
 			newPlayer.pos.x = stof(resource.decodeOneLineDel(resource.buffer));
 			newPlayer.pos.y = stof(resource.decodeOneLineDel(resource.buffer));
 			newPlayer.rot = stof(resource.decodeOneLineDel(resource.buffer));
-			//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
-
-			playerEn.assign<isPlayer>(newPlayer.iD);
-			playerEn.assign<DontCollideWith>(1);
-			(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
-			std::cout << "add pl2:" << resource.buffer << std::endl;
 			players.push_back(newPlayer);
-		}
-		else
-		for (auto p : players)
-		{
-			if (p.iD == stoi(resource.decodeOneLineRead(resource.buffer)) || stoi(resource.decodeOneLineRead(resource.buffer)) == thisPlayerId)
+			//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
+			std::cout << "empty" << std::endl;
+			std::cout << newPlayer.iD <<":::"<< thisPlayerId << " " << newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
+			if (newPlayer.iD != thisPlayerId)
 			{
-				//delete that part of buffer
-				for (int i = 0; i < 5; ++i)
-					resource.decodeOneLineDel(resource.buffer);
-
-				continue;
-			}
-			else
-			{
-				newPlayer.entity = playerEn;
-				newPlayer.iD = stoi(resource.decodeOneLineDel(resource.buffer));
-				newPlayer.bodyname = resource.decodeOneLineDel(resource.buffer);
-				newPlayer.pos.x = stof(resource.decodeOneLineDel(resource.buffer));
-				newPlayer.pos.y = stof(resource.decodeOneLineDel(resource.buffer));
-				newPlayer.rot = stof(resource.decodeOneLineDel(resource.buffer));
-				//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
-
+				std::cout << "entity add" << std::endl;
 				playerEn.assign<isPlayer>(newPlayer.iD);
 				playerEn.assign<DontCollideWith>(1);
 				(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
-				std::cout << "add pl2:" << resource.buffer << std::endl;
-				players.push_back(newPlayer);
+			}
+			//std::cout << "add pl2:" << resource.buffer << std::endl;
+			
+		}
+		else
+		{
+			for (auto p : players)
+			{
+				if (p.iD == stoi(resource.decodeOneLineRead(resource.buffer)))
+				{
+					//delete that part of buffer
+					for (int i = 0; i < 5; ++i)
+						resource.decodeOneLineDel(resource.buffer);
+
+					continue;
+				}
+				else
+				{
+					newPlayer.entity = playerEn;
+					newPlayer.iD = stoi(resource.decodeOneLineDel(resource.buffer));
+					newPlayer.bodyname = resource.decodeOneLineDel(resource.buffer);
+					newPlayer.pos.x = stof(resource.decodeOneLineDel(resource.buffer));
+					newPlayer.pos.y = stof(resource.decodeOneLineDel(resource.buffer));
+					newPlayer.rot = stof(resource.decodeOneLineDel(resource.buffer));
+					players.push_back(newPlayer);
+					//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
+					std::cout << newPlayer.iD << " " << newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
+					if (newPlayer.iD != thisPlayerId)
+					{
+						std::cout << "entity add" << std::endl;
+						playerEn.assign<isPlayer>(newPlayer.iD);
+						playerEn.assign<DontCollideWith>(1);
+						(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
+					}
+					//std::cout << "add pl2:" << resource.buffer << std::endl;
+					
+				}
 			}
 		}
 
-		std::cout << "player added" << std::endl;
+		std::cout << "player added" <<players[players.size()-1].iD <<std::endl;
+		system("pause");
 	}
 	resource.decodeOneLineRead(resource.buffer); //delete ";;"
 	return true;
@@ -215,11 +247,16 @@ bool multiplayer_stage::setPositonOfPlayer()
 		Position::Handle posH;
 		Rotation::Handle rotH;
 		isPlayer::Handle isPlayerH;
-
+		for (auto en : (*ex_ptr).entities.entities_with_components<>(isPlayerH))
+		{
+			std::cout << isPlayerH->ID << ":::::" << iDSent << std::endl;
+		}
 		for (auto en : (*ex_ptr).entities.entities_with_components<>(posH, rotH, isPlayerH))
 		{
+			std::cout << isPlayerH->ID <<" "<< iDSent << std::endl;
 			if (isPlayerH->ID == iDSent)
 			{
+				std::cout << "pos set:" << iDSent << std::endl;
 				posH->pos = posSent;
 				rotH->degree = rotSent;
 			}
@@ -231,29 +268,35 @@ bool multiplayer_stage::setPositonOfPlayer()
 
 bool multiplayer_stage::update(float dt)
 {
-	sendMessage();
-	reciveMessage();
-	//case
-	auto & resource = ResourcesManager::getInstanceRef();
-	int session; 
-
-	std::string serwerPass;
-	std::cout <<"recived:" <<resource.buffer << std::endl;
-	system("pause");
-	if (resource.decodeOneLineRead(resource.buffer) == "5555")
+	time += clock.restart();
+	dt = 0.4;
+	if (time.asSeconds() >= dt)
 	{
-		serwerPass = resource.decodeOneLineDel(resource.buffer);
-		session = stoi(resource.decodeOneLineDel(resource.buffer));
-		thisPlayerId = stoi(resource.decodeOneLineDel(resource.buffer));
+		updatePartsActions();
+		
+		sendMessage();
+		reciveMessage();
+		//case
+		auto & resource = ResourcesManager::getInstanceRef();
+		int session;
 
-			std::cout <<"buffer:" <<resource.buffer << "thisPlayerId:"<< thisPlayerId <<std::endl;
-			system("pause");
+		std::string serwerPass;
+		std::cout <<"recived:" <<resource.buffer << std::endl;
+		//system("pause");
+		if (resource.decodeOneLineRead(resource.buffer) == "5555")
+		{
+			serwerPass = resource.decodeOneLineDel(resource.buffer);
+			session = stoi(resource.decodeOneLineDel(resource.buffer));
+			thisPlayerId = stoi(resource.decodeOneLineDel(resource.buffer));
+
+			//std::cout <<"buffer:" <<resource.buffer << "thisPlayerId:"<< thisPlayerId <<std::endl;
+			//system("pause");
 
 			std::string actionCode = "NULL";//resource.decodeOneLineDel(resource.buffer);
 
 			while (actionCode != "")
 			{
-				std::cout << "in while:" << resource.buffer << std::endl;
+				//std::cout << "in while:" << resource.buffer << std::endl;
 				actionCode = resource.decodeOneLineDel(resource.buffer);
 
 				if (actionCode == "#1")
@@ -273,11 +316,14 @@ bool multiplayer_stage::update(float dt)
 
 				}
 			}
-	resource.buffer = serwerPass + ";" + std::to_string(session) + ";" + std::to_string(thisPlayerId) + ";" + resource.buffer;
+			resource.buffer = serwerPass + ";" + std::to_string(session) + ";" + std::to_string(thisPlayerId) + ";" + resource.buffer;
+		}
+		
+		(*phisics_ptr).update(dt);
+
+		////////////////////////
+		time -= sf::seconds(dt);
 	}
-	
-	(*phisics_ptr).update(dt);
-	
 	//(*ex_ptr).systems.update<engine_system>(dt);
 	//(*ex_ptr).systems.update<DestructionSystem>(dt);
 	//(*ex_ptr).systems.update<CraneSystem>(dt);
@@ -303,6 +349,7 @@ void multiplayer_stage::render(sf::RenderWindow & window)
 void multiplayer_stage::release()
 {
 	socket.unbind();
+	std::cout << "release unbind" << std::endl;
 }
 
 
