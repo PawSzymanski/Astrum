@@ -39,6 +39,7 @@ bool multiplayer_stage::init()
 	(*ex_ptr).systems.add<game_over_system>();
 	(*ex_ptr).systems.add<enemy_system>((*ex_ptr), *phisics_ptr);
 	(*ex_ptr).systems.add<sliding_doors_system>();
+	sendMessage();
 	std::cout << " init" << std::endl;
 	return true;
 }
@@ -102,11 +103,15 @@ bool multiplayer_stage::reciveMessage()
 	socket.setBlocking(false);
 	
 	//std::cout << "waiting for serwer message..." << std::endl;
-	
-	sf::Socket::Status mStatus= socket.receive(buffer, sizeof(buffer), received, sender, port);
+	sf::Socket::Status mStatus;
+	while ("5555" != resource.decodeOneLineRead(buffer))
+	{
+		mStatus = socket.receive(buffer, sizeof(buffer), received, sender, port);
+
+	}
 	sf::Time time = sf::Time::Zero;
 	clk.restart();
-	if( mStatus  != sf::Socket::Done || sender.toString() == "0.0.0.0" || "5555"!=resource.decodeOneLineRead(buffer))
+	if(mStatus  != sf::Socket::Done || sender.toString() == "0.0.0.0" || "5555"!=resource.decodeOneLineRead(buffer))
 	{
 		//if (time.asMilliseconds() > 50)
 			std::cout << "no serwer message:" << buffer << "sender:"<< sender <<"Status:" << mStatus << std::endl;
@@ -121,7 +126,7 @@ bool multiplayer_stage::reciveMessage()
 	}
 	
 	//std::cout << std::endl;
-	//std::cout << resource.buffer << std::endl;
+	std::cout << resource.buffer << std::endl;
 	return true;
 }
 void multiplayer_stage::updatePartsActions()
@@ -152,7 +157,7 @@ bool multiplayer_stage::addPlayer()
 	auto & resource = ResourcesManager::getInstanceRef();
 	PlayersInfo newPlayer;
 	auto playerEn = (*ex_ptr).entities.create();
-	//std::cout << "add pl1:" << resource.buffer << std::endl;
+	std::cout << "add pl1:" << resource.buffer << std::endl;
 	while ( "" != resource.decodeOneLineRead(resource.buffer))
 	{
 		isPlayer::Handle playerH;
@@ -218,13 +223,13 @@ bool multiplayer_stage::addPlayer()
 						playerEn.assign<DontCollideWith>(1);
 						(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
 					}
-					//std::cout << "add pl2:" << resource.buffer << std::endl;
+					std::cout << "add pl2:" << resource.buffer << std::endl;
 					
 				}
 			}
 		}
 
-		std::cout << "player added" <<players[players.size()-1].iD <<std::endl;
+		std::cout << "player added" <<players[0].iD <<" "<< players[1].iD <<std::endl;
 		system("pause");
 	}
 	resource.decodeOneLineRead(resource.buffer); //delete ";;"
@@ -247,18 +252,24 @@ bool multiplayer_stage::setPositonOfPlayer()
 		Position::Handle posH;
 		Rotation::Handle rotH;
 		isPlayer::Handle isPlayerH;
+		Transform::Handle transH;
 		for (auto en : (*ex_ptr).entities.entities_with_components<>(isPlayerH))
 		{
-			std::cout << isPlayerH->ID << ":::::" << iDSent << std::endl;
+			//std::cout << isPlayerH->ID << ":::::" << iDSent << std::endl;
 		}
-		for (auto en : (*ex_ptr).entities.entities_with_components<>(posH, rotH, isPlayerH))
+		for (auto en : (*ex_ptr).entities.entities_with_components<>(posH, rotH, isPlayerH, transH))
 		{
-			std::cout << isPlayerH->ID <<" "<< iDSent << std::endl;
+			//std::cout << isPlayerH->ID <<" "<< iDSent << std::endl;
 			if (isPlayerH->ID == iDSent)
 			{
-				std::cout << "pos set:" << iDSent << std::endl;
+				//std::cout << "pos set:" << posH->pos.x << " " << posH->pos.y << std::endl;
 				posH->pos = posSent;
 				rotH->degree = rotSent;
+				transH->trans  ={	1,0,0,
+									0,1,0,
+									0,0,1 };
+				transH->trans.translate(posSent);
+				transH->trans.rotate(rotSent);
 			}
 		}
 	}
@@ -269,19 +280,17 @@ bool multiplayer_stage::setPositonOfPlayer()
 bool multiplayer_stage::update(float dt)
 {
 	time += clock.restart();
-	dt = 0.4;
+	dt = 0.1;
+	
 	if (time.asSeconds() >= dt)
 	{
-		updatePartsActions();
-		
-		sendMessage();
 		reciveMessage();
 		//case
 		auto & resource = ResourcesManager::getInstanceRef();
 		int session;
 
 		std::string serwerPass;
-		std::cout <<"recived:" <<resource.buffer << std::endl;
+		//std::cout <<"recived:" <<resource.buffer << std::endl;
 		//system("pause");
 		if (resource.decodeOneLineRead(resource.buffer) == "5555")
 		{
@@ -293,25 +302,25 @@ bool multiplayer_stage::update(float dt)
 			//system("pause");
 
 			std::string actionCode = "NULL";//resource.decodeOneLineDel(resource.buffer);
-
+			
 			while (actionCode != "")
 			{
 				//std::cout << "in while:" << resource.buffer << std::endl;
 				actionCode = resource.decodeOneLineDel(resource.buffer);
-
-				if (actionCode == "#1")
+				//std::cout << "action Code:" << actionCode << std::endl;
+				if (actionCode == "$1")
 				{
 					addPlayer();
 				}
-				else if (actionCode == "#2")
+				else if (actionCode == "$2")
 				{
 					setPositonOfPlayer();
 				}
-				else if (actionCode == "#3")
+				else if (actionCode == "$3")
 				{
 
 				}
-				else if (actionCode == "#4")
+				else if (actionCode == "$4")
 				{
 
 				}
@@ -319,11 +328,13 @@ bool multiplayer_stage::update(float dt)
 			resource.buffer = serwerPass + ";" + std::to_string(session) + ";" + std::to_string(thisPlayerId) + ";" + resource.buffer;
 		}
 		
-		(*phisics_ptr).update(dt);
-
+		//(*phisics_ptr).update(dt);
+		updatePartsActions();
+		sendMessage();
 		////////////////////////
 		time -= sf::seconds(dt);
 	}
+	
 	//(*ex_ptr).systems.update<engine_system>(dt);
 	//(*ex_ptr).systems.update<DestructionSystem>(dt);
 	//(*ex_ptr).systems.update<CraneSystem>(dt);
@@ -335,6 +346,8 @@ bool multiplayer_stage::update(float dt)
 	//(*ex_ptr).systems.update<sliding_doors_system>(dt);
 
 	//std::cout << "update" << std::endl;
+
+	//system("pause");
 	return true;
 }
 

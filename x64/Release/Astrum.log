@@ -1,18 +1,18 @@
 ﻿  multiplayer_stage.cpp
-multiplayer_stage.cpp(67): warning C4101: 'status': unreferenced local variable
-multiplayer_stage.cpp(272): warning C4305: '=': truncation from 'double' to 'float'
+multiplayer_stage.cpp(68): warning C4101: 'status': unreferenced local variable
+multiplayer_stage.cpp(283): warning C4305: '=': truncation from 'double' to 'float'
 C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer>::end(void)'
+  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::end(void)'
           with
           [
               Derived=Position
           ]
-  multiplayer_stage.cpp(254): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer>::end(void)' being compiled
+  multiplayer_stage.cpp(260): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::end(void)' being compiled
           with
           [
               Derived=Position
           ]
-  multiplayer_stage.cpp(254): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer>' being compiled
+  multiplayer_stage.cpp(260): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>' being compiled
           with
           [
               Derived=Position
@@ -25,15 +25,15 @@ C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx
               Derived=isPlayer,
               C=isPlayer
           ]
-  multiplayer_stage.cpp(184): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isPlayer,unsigned int&>(unsigned int &)' being compiled
+  multiplayer_stage.cpp(189): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isPlayer,unsigned int&>(unsigned int &)' being compiled
           with
           [
               Derived=isPlayer
           ]
   Generating code
-  112 of 6484 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+  110 of 6487 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    26 functions had inline decision re-evaluated but remain unchanged
+    25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Astrum.vcxproj -> C:\Users\lele\Documents\Visual Studio 2015\Projects\Astrum\x64\Release\Astrum.exe
   Astrum.vcxproj -> C:\Users\lele\Documents\Visual Studio 2015\Projects\Astrum\x64\Release\Astrum.pdb (Full PDB)
