@@ -4,11 +4,6 @@
 #include "mysql_connection.h"
 #include <SFML\Network.hpp>
 
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
 
 class login_stage : public GameStage
 {

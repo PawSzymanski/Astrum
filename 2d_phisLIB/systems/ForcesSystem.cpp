@@ -35,7 +35,7 @@ void ForcesSystem::receive(const ApplyForceEvent & ev)
 	entityx::Entity en = ev.en;
 	LinearForce::Handle LinForceH = en.component<LinearForce>();
 	AngularForce::Handle AngForceH = en.component<AngularForce>();
-
+	//std::cout << "PHS2D: " << ev.force.x << " " << ev.force.y << std::endl;
 	LinForceH->force += ev.force;
 	AngForceH->force += CROSS(ev.point, ev.force);
 }

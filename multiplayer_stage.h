@@ -19,7 +19,7 @@
 
 
 
-class multiplayer_stage : public GameStage
+class multiplayer_stage : public GameStage,  public entityx::Receiver<multiplayer_stage>
 {
 	/////////////////////////////
 	struct PlayersInfo
@@ -50,12 +50,13 @@ public:
 	bool sendMessage();
 	bool reciveMessage();
 	bool addPlayer();
-	bool setPositonOfPlayer();
+	bool setPositonOfPlayers();
 
 	virtual bool init() override;
 	virtual void input(sf::Event &event) override;
 	virtual bool update(float dt) override;
 	virtual void render(sf::RenderWindow &window) override;
+	void receive(const ApplyForceEvent & ev);
 	virtual void release() override;
 
 	void updatePartsActions();

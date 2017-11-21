@@ -7,8 +7,11 @@ struct ApplyForceEvent
 {
 	ApplyForceEvent(sf::Vector2f point, sf::Vector2f force, entityx::Entity en)
 		:point(point), force(force), en(en) {}
-	sf::Vector2f point, force;
+	ApplyForceEvent(sf::Vector2f point, sf::Vector2f force, sf::Vector2f posAftCorr,entityx::Entity en)
+		:point(point), force(force), en(en), posAftCorr(posAftCorr) {}
+	sf::Vector2f point, force, posAftCorr;
 	entityx::Entity en;
+	sf::Vector2f correction;
 };
 
 struct CollisionEvent

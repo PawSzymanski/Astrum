@@ -139,8 +139,12 @@ void CollisionSystem::ResolveCollision(Manifold &m, entityx::EventManager & ev, 
             temp_en1 = slave->master;
             //std::cout<<"SLAVEEEEEEE"<<std::endl;
         }
-        ev.emit<ApplyForceEvent>(contact2, m.force, temp_en2);
-        ev.emit<ApplyForceEvent>(contact1, -m.force, temp_en1);
+
+		Position::Handle posHh1 = temp_en2.component<Position>();
+
+        ev.emit<ApplyForceEvent>(contact2, m.force, posHh1->pos, temp_en2);
+		posHh1 = temp_en2.component<Position>();
+        ev.emit<ApplyForceEvent>(contact1, -m.force, posHh1->pos, temp_en1);
 	}
 }
 
@@ -183,8 +187,6 @@ void CollisionSystem::update(entityx::EntityManager & en, entityx::EventManager 
 					continue;
 				}
 			}
-
-
 			Manifold m(ens[i],ens[j]);
 
 			typeH1 = ens[i].component<Type>();

@@ -1,37 +1,5 @@
-﻿  multiplayer_stage.cpp
-multiplayer_stage.cpp(68): warning C4101: 'status': unreferenced local variable
-multiplayer_stage.cpp(283): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): warning C4267: 'argument': conversion from 'size_t' to 'entityx::uint32_t', possible loss of data
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(478): note: while compiling class template member function 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::end(void)'
-          with
-          [
-              Derived=Position
-          ]
-  multiplayer_stage.cpp(260): note: see reference to function template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::Iterator entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>::end(void)' being compiled
-          with
-          [
-              Derived=Position
-          ]
-  multiplayer_stage.cpp(260): note: see reference to class template instantiation 'entityx::EntityManager::UnpackingView<Derived,Rotation,isPlayer,Transform>' being compiled
-          with
-          [
-              Derived=Position
-          ]
-C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(582): warning C4291: 'void *operator new(std::size_t,void *) throw()': no matching operator delete found; memory will not be freed if initialization throws an exception
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_new.h(86): note: see declaration of 'operator new'
-  C:\Users\lele\Documents\Visual Studio 2015\Projects\ENTITY\entityx-1.1.2\entityx/Entity.h(866): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::EntityManager::assign<C,unsigned int&>(entityx::Entity::Id,unsigned int &)' being compiled
-          with
-          [
-              Derived=isPlayer,
-              C=isPlayer
-          ]
-  multiplayer_stage.cpp(189): note: see reference to function template instantiation 'entityx::ComponentHandle<Derived,entityx::EntityManager> entityx::Entity::assign<isPlayer,unsigned int&>(unsigned int &)' being compiled
-          with
-          [
-              Derived=isPlayer
-          ]
-  Generating code
-  110 of 6487 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+﻿  Generating code
+  113 of 6589 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

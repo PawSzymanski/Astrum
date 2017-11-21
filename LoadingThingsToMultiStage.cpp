@@ -146,6 +146,7 @@ void LoadingThingsToMultiStage::update(entityx::EntityManager & en, entityx::Eve
 		pathToPart.insert(pathToPart.size(), "resources/parts/");
 		pathToPart.insert(pathToPart.size(), typeOfShip);
 		pathToPart.insert(pathToPart.size(), ".cfg");
+
 		if (!parser2.load(pathToPart))
 		{
 			assert(false);
