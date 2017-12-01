@@ -185,16 +185,15 @@ bool multiplayer_stage::addPlayer()
 			players.push_back(newPlayer);
 			//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
 			std::cout << "empty" << std::endl;
-			std::cout << newPlayer.iD <<":::"<< thisPlayerId << " " << newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
+			std::cout << "new->" << newPlayer.iD << "::thid->" << thisPlayerId << " " << newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
 			if (newPlayer.iD != thisPlayerId)
 			{
 				std::cout << "entity add" << std::endl;
 				playerEn.assign<isPlayer>(newPlayer.iD);
-				playerEn.assign<DontCollideWith>(1);
+				playerEn.assign<DontCollideWith>(2);
 				(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
 			}
-			//std::cout << "add pl2:" << resource.buffer << std::endl;
-			
+			std::cout << "add pl2:" << resource.buffer << std::endl;
 		}
 		else
 		{
@@ -218,16 +217,16 @@ bool multiplayer_stage::addPlayer()
 					newPlayer.rot = stof(resource.decodeOneLineDel(resource.buffer));
 					players.push_back(newPlayer);
 					//resource.decodeOneLineDel(resource.buffer); //because of ";;" at the end of string
-					std::cout << newPlayer.iD << " " << newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
+					std::cout <<"new->"<< newPlayer.iD << "::thid->" << thisPlayerId <<" "<< newPlayer.bodyname << " " << newPlayer.pos.x << " " << newPlayer.pos.y << " " << newPlayer.rot << std::endl;
 					if (newPlayer.iD != thisPlayerId)
 					{
 						std::cout << "entity add" << std::endl;
 						playerEn.assign<isPlayer>(newPlayer.iD);
-						playerEn.assign<DontCollideWith>(1);
+						playerEn.assign<DontCollideWith>(2);
 						(*phisics_ptr).createPolygon(playerEn, newPlayer.pos, sf::Vector2f(0, 0), newPlayer.rot, 1, newPlayer.bodyname);
 					}
 					std::cout << "add pl2:" << resource.buffer << std::endl;
-					
+						
 				}
 			}
 		}

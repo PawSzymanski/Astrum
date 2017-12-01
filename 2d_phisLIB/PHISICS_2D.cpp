@@ -55,7 +55,7 @@ void Phisics_2D::createPolygon(entityx::Entity en, sf::Vector2f pos,sf::Vector2f
     en.assign<Mass>(mass);
     en.assign<MOfInertia>(mass*4);//musimy tu odaæ przy tworzeniu funkcji
     en.assign<Friction>(0.7);
-    en.assign<VertexArray>(cont.getPoly(polyName), cont.getNormals(polyName));
+-    en.assign<VertexArray>(cont.getPoly(polyName), cont.getNormals(polyName));
     en.assign<PolyName>(polyName);
     en.assign<Type>(Type::POLYGON);
     en.assign<IsResting>();

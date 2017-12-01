@@ -34,6 +34,7 @@ void LoadingThingsToMultiStage::update(entityx::EntityManager & en, entityx::Eve
 		mass = parser.getFloat();
 		auto poly = en.create();
 
+		poly.assign<DontCollideWith>(2);//lests set "2" as a deafult number to not collide witch enviroment
 		//assigning component type
 		if (typeOfElement == "platform")
 		{
