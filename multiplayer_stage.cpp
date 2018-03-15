@@ -287,7 +287,7 @@ bool multiplayer_stage::setPositonOfPlayers()
 bool multiplayer_stage::update(float dt)
 {
 	time += clock.restart();
-	dt = 0.05;
+	
 	
 	if (time.asSeconds() >= dt)
 	{
@@ -322,6 +322,7 @@ bool multiplayer_stage::update(float dt)
 				else if (actionCode == "$2")
 				{
 					setPositonOfPlayers();
+					dt = 0.02;
 				}
 				else if (actionCode == "$3")
 				{
@@ -329,7 +330,11 @@ bool multiplayer_stage::update(float dt)
 				}
 				else if (actionCode == "$4")
 				{
-
+					
+				}
+				else
+				{
+					dt = 0.5f;
 				}
 			}
 
