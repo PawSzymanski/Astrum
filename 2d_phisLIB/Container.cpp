@@ -78,6 +78,7 @@ sf::Texture & Container::getTexture(std::string texture)
 		return textures[textureIndexesMap["small_engine"]];
 		assert(false);
 	}
+	std::cout << "return: " << texture << std::endl;
 	return textures[textureIndexesMap[texture]];
 }
 

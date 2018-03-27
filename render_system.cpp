@@ -21,7 +21,21 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 	Joint::Handle joint;
     AdditionalAnim::Handle anim;
     PolyName::Handle nameHandle;
+	backgroundTexture::Handle backgroundTH;
 	//std::cout << "render gameplpay, entity size: " << en.size() << std::endl;
+	
+	//first render background
+	for (auto entity : en.entities_with_components(backgroundTH))
+	{
+		sf::Sprite sprite;
+		sprite.setTexture(*backgroundTH->texture);
+		sprite.setPosition(backgroundTH->pos);
+		sprite.setScale(backgroundTH->scale);
+		sprite.setRotation(backgroundTH->rotation);
+		
+		win.draw(sprite);
+	}
+
 
     for (auto entity : en.entities_with_components(vArray, trans, nameHandle))
 	{

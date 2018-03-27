@@ -27,97 +27,98 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	float xPos, yPos, xVel, yVel, rot, mass, xScale, yScale;
 
 	//LOADING TESXTURES TO WORLD
-	parser.setSection("texture");
-	while (!parser.EndOfSection())
+	if (parser.setSection("textures"))
 	{
-		typeOfElement = parser.getString();
+		while (!parser.EndOfSection())
+		{
+			typeOfElement = parser.getString();
 
-		std::cout << typeOfElement << std::endl;
+			xPos = parser.getFloat();
+			yPos = parser.getFloat();
+			xScale = parser.getFloat();
+			yScale = parser.getFloat();
+			rot = parser.getFloat();
 
-		xPos = parser.getFloat();
-		yPos = parser.getFloat();
-		xScale = parser.getFloat();
-		yScale = parser.getFloat();
-		rot = parser.getFloat();
+			auto textureEn = en.create();
+			textureEn.assign<backgroundTexture>(typeOfElement, xPos, yPos, xScale, yScale, rot);
+			backgroundTexture::Handle backTH = textureEn.component<backgroundTexture>();
 
-		auto textureEn = en.create();
-		textureEn.assign<backgroundTexture>(typeOfElement,xPos, yPos, xScale, yScale, rot);
-		backgroundTexture::Handle backTH = textureEn.component<backgroundTexture>();
-
-		*backTH->texture = ResourcesManager::getInstanceRef().textureCont.getTexture(typeOfElement);
+			backTH->texture = &ResourcesManager::getInstanceRef().textureCont.getTexture(typeOfElement);
+			std::cout << "TEXTURE LOADED" + typeOfElement << std::endl;
+		}
 	}
-
 	//LOADING WORLD ELEMENTS
 
-	parser.setSection("world");
-
-	while (!parser.EndOfSection())
+	if (parser.setSection("world"))
 	{
-		typeOfElement = parser.getString();
-		std::cout << typeOfElement << std::endl;
-		xPos = parser.getFloat();
-		yPos = parser.getFloat();
-		xVel = parser.getFloat();
-		yVel = parser.getFloat();
-		rot = parser.getFloat();
-		mass = parser.getFloat();
-		auto poly = en.create();
-		
-		//assigning component type
-		if (typeOfElement == "platform")
+		while (!parser.EndOfSection())
 		{
-			poly.assign<isPlatform>(parser.getFloat());
-			
-			std::cout << "PLATFORM LOADED" << std::endl;
-		}
-		else if (typeOfElement == "wall")
-		{
-			 std::cout << "WALL LOADED" << std::endl;
-		}
-        else if (typeOfElement == "bomb")
-        {
-			idWorldPart = parser.getFloat();
-            poly.assign< Hookable > ();
-            poly.assign< Cargo > (idWorldPart);
-        }
-        else if ( typeOfElement == "cargo_space")
-        {
-			idWorldPart = parser.getFloat();
-            poly.assign<Position>(sf::Vector2f(xPos, yPos));
-			poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), idWorldPart);
-            continue;
-        }
-		else if (typeOfElement == "shooting_camera")
-		{
-			poly.assign<isEnemyCam>();
+			typeOfElement = parser.getString();
+			std::cout << typeOfElement << std::endl;
+			xPos = parser.getFloat();
+			yPos = parser.getFloat();
+			xVel = parser.getFloat();
+			yVel = parser.getFloat();
+			rot = parser.getFloat();
+			mass = parser.getFloat();
+			auto poly = en.create();
+
+			//assigning component type
+			if (typeOfElement == "platform")
+			{
+				poly.assign<isPlatform>(parser.getFloat());
+
+				std::cout << "PLATFORM LOADED" << std::endl;
+			}
+			else if (typeOfElement == "wall")
+			{
+				std::cout << "WALL LOADED" << std::endl;
+			}
+			else if (typeOfElement == "bomb")
+			{
+				idWorldPart = parser.getFloat();
+				poly.assign< Hookable >();
+				poly.assign< Cargo >(idWorldPart);
+			}
+			else if (typeOfElement == "cargo_space")
+			{
+				idWorldPart = parser.getFloat();
+				poly.assign<Position>(sf::Vector2f(xPos, yPos));
+				poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), idWorldPart);
+				continue;
+			}
+			else if (typeOfElement == "shooting_camera")
+			{
+				poly.assign<isEnemyCam>();
+
+				phisics.createPolygon(poly, sf::Vector2f(xPos, yPos),
+					sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
+
+				VertexArray::Handle H = poly.component<VertexArray>();
+
+				H->vert[0].color = sf::Color::Red;
+				H->vert[1].color = sf::Color::Red;
+				H->vert[2].color = sf::Color::Red;
+				H->vert[3].color = sf::Color::Red;
+				continue;
+			}
+			else if (typeOfElement == "sliding_doors")
+			{
+				poly.assign<isSlidingDoors>();
+				isSlidingDoors::Handle door = poly.component<isSlidingDoors>();
+				std::string s;
+				float f;
+				while (!parser.EndOfLine())
+				{
+					s = parser.getString();
+					f = parser.getFloat();
+				}
+				door->add(s, f);
+			}
 
 			phisics.createPolygon(poly, sf::Vector2f(xPos, yPos),
 				sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
-			
-			VertexArray::Handle H = poly.component<VertexArray>();
-
-			H->vert[0].color = sf::Color::Red;
-			H->vert[1].color = sf::Color::Red;
-			H->vert[2].color = sf::Color::Red;
-			H->vert[3].color = sf::Color::Red;
-			continue;
 		}
-		else if (typeOfElement == "sliding_doors")
-		{
-			poly.assign<isSlidingDoors>();
-			isSlidingDoors::Handle door = poly.component<isSlidingDoors>();
-			std::string s;
-			float f;
-			while ( !parser.EndOfLine() )
-			{
-				s = parser.getString();
-				f = parser.getFloat();
-			}
-			door->add(s,f);
-		}
-		
-		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
-			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}
 	parser.setSection("camera");
 	ResourcesManager::getInstanceRef().isMovingCameraOn = parser.getFloat();
