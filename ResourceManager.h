@@ -38,7 +38,6 @@ public:
 	static ResourcesManager& getInstanceRef();
 	static void deleteInstance();
 
-public:
 	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime, isMovingCameraOn;
 	sf::View camera;
 	std::string levelInfo;

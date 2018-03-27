@@ -118,11 +118,11 @@ struct Friction : public entityx::Component<Friction>
 
 struct VertexArray : public entityx::Component<VertexArray>
 {
-	VertexArray(sf::VertexArray & v, std::vector <sf::Vector2f> &n)
+	VertexArray(sf::VertexArray v, std::vector <sf::Vector2f> &n)
 		:vert(v), normals(n) {
 		std::cout << "component check: " << normals.size() << std::endl;
 	}
-	sf::VertexArray & vert;
+	sf::VertexArray vert;
 	std::vector <sf::Vector2f> & normals;
 };
 
@@ -298,8 +298,10 @@ struct PolyName :public entityx::Component<PolyName>
 struct Cargo : public entityx::Component<Cargo>
 {
     Cargo(int id)
-        :id(id){}
-    int id;
+        :id(id),isChecked(false) {}
+	bool isChecked;
+	int id;
+
 };
 
 struct CargoSpace : public entityx::Component<CargoSpace>
@@ -328,4 +330,18 @@ struct DontCollideWith : public entityx::Component<DontCollideWith>
 		id.push_back(i);
 	}
 	std::vector<unsigned int> id;
+};
+
+struct backgroundTexture : public entityx::Component<backgroundTexture>
+{
+	backgroundTexture(std:: string text, float x, float y, float xScale, float yScale, float rot) : textureName(text), pos(sf::Vector2f(x,y)), 
+																									scale(sf::Vector2f(xScale, yScale)), rotation(rot)
+	{
+		
+	}
+	float rotation;
+	std::string textureName;
+	sf::Vector2f pos;
+	sf::Vector2f scale;
+	sf::Texture *texture;
 };

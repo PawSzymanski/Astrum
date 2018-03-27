@@ -1,0 +1,1 @@
+ADD to Resource manager, when new file

@@ -9,6 +9,8 @@ engine_system::engine_system(entityx::EventManager &ev, Phisics_2D &phs) : phisi
 
 void engine_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
+	
+
 	isPlayer::Handle playerH;
 	VertexArray::Handle verH;
 	//Line::Handle lineH;
@@ -59,8 +61,12 @@ void engine_system::update(entityx::EntityManager & en, entityx::EventManager & 
 void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart, 
 	entityx::EventManager & ev, AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix)
 {
-	if (!enPart.has_component<isEngine>())
+	if (!enPart.has_component<isEngine>() || ResourcesManager::getInstanceRef().isGameOver)
 	{
+		if (enPart.has_component<AdditionalAnim>())
+		{
+			enPart.remove<AdditionalAnim>();
+		}
 		return;
 	}
 	KeyAssigned::Handle keyH;
@@ -97,7 +103,7 @@ void engine_system::enginePart(entityx::Entity enPlayer, entityx::Entity enPart,
 void engine_system::gunPart(entityx::EntityManager & en, entityx::Entity enPlayer, entityx::Entity enPart, entityx::EventManager & ev,
 	AttachToPlayerPoint::Handle attachPointH, sf::Transform rotMatrix, float degreeOfGun)
 {
-	if (!enPart.has_component<isGun>())
+	if (!enPart.has_component<isGun>() || ResourcesManager::getInstanceRef().isGameOver)
 	{
 		return;
 	}

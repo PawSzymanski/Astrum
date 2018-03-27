@@ -23,7 +23,29 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		assert(false);
 	}
 	std::string typeOfElement, pathToShip = "resources/parts/";
-	float xPos, yPos, xVel, yVel, rot, mass;
+	int idWorldPart;
+	float xPos, yPos, xVel, yVel, rot, mass, xScale, yScale;
+
+	//LOADING TESXTURES TO WORLD
+	parser.setSection("texture");
+	while (!parser.EndOfSection())
+	{
+		typeOfElement = parser.getString();
+
+		std::cout << typeOfElement << std::endl;
+
+		xPos = parser.getFloat();
+		yPos = parser.getFloat();
+		xScale = parser.getFloat();
+		yScale = parser.getFloat();
+		rot = parser.getFloat();
+
+		auto textureEn = en.create();
+		textureEn.assign<backgroundTexture>(typeOfElement,xPos, yPos, xScale, yScale, rot);
+		backgroundTexture::Handle backTH = textureEn.component<backgroundTexture>();
+
+		*backTH->texture = ResourcesManager::getInstanceRef().textureCont.getTexture(typeOfElement);
+	}
 
 	//LOADING WORLD ELEMENTS
 
@@ -32,6 +54,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	while (!parser.EndOfSection())
 	{
 		typeOfElement = parser.getString();
+		std::cout << typeOfElement << std::endl;
 		xPos = parser.getFloat();
 		yPos = parser.getFloat();
 		xVel = parser.getFloat();
@@ -44,22 +67,24 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		if (typeOfElement == "platform")
 		{
 			poly.assign<isPlatform>(parser.getFloat());
-			poly.assign<DontCollideWith>(1);
+			
 			std::cout << "PLATFORM LOADED" << std::endl;
 		}
 		else if (typeOfElement == "wall")
 		{
-			 std::cout << " WALL LOADED" << std::endl;
+			 std::cout << "WALL LOADED" << std::endl;
 		}
         else if (typeOfElement == "bomb")
         {
+			idWorldPart = parser.getFloat();
             poly.assign< Hookable > ();
-            poly.assign< Cargo > (1);
+            poly.assign< Cargo > (idWorldPart);
         }
         else if ( typeOfElement == "cargo_space")
         {
+			idWorldPart = parser.getFloat();
             poly.assign<Position>(sf::Vector2f(xPos, yPos));
-			poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), 1 );//nie wiem o co chodzi ale dzia³a tylko "1" parser.getFloat() to b³¹d :c
+			poly.assign<CargoSpace>(sf::Vector2f(xVel, yVel), idWorldPart);
             continue;
         }
 		else if (typeOfElement == "shooting_camera")
@@ -90,6 +115,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			}
 			door->add(s,f);
 		}
+		
 		phisics.createPolygon(poly, sf::Vector2f(xPos, yPos), 
 			sf::Vector2f(xVel, yVel), rot, mass, typeOfElement);
 	}

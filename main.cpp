@@ -12,7 +12,6 @@ void render();
 
 std::shared_ptr<sf::Event> foo;
 
-
 int main()
 {
     auto &resource_manager = ResourcesManager::getInstanceRef();
@@ -42,7 +41,6 @@ void input()
     auto & resource = ResourcesManager::getInstanceRef();
 
 	foo = std::make_shared<sf::Event>();
-	//NAprawic ten event
 	resource.mainEvent = foo;
 
     while(resource.window.pollEvent(*foo))
@@ -90,6 +88,6 @@ void render()
 
     resource.window.clear(sf::Color::Blue);
     GameStage::stage_render(resource.window);
-   // resource.window.draw(fps);
+    resource.window.draw(fps);
     resource.window.display();
 }

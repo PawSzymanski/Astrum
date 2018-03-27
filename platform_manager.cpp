@@ -28,6 +28,7 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 	else if (isPlatColliding) 
 	{
 		isPlatform::Handle platH = (*evTemp_ptr).en1.has_component<isPlatform>() ? (*evTemp_ptr).en1.component<isPlatform>() : (*evTemp_ptr).en2.component<isPlatform>();
+		VertexArray::Handle platVerH = (*evTemp_ptr).en1.has_component<isPlatform>() ? (*evTemp_ptr).en1.component<VertexArray>() : (*evTemp_ptr).en2.component<VertexArray>();
 		if (clock.getElapsedTime().asMilliseconds() < 50)
 		{
 			time += clock.getElapsedTime();
@@ -35,8 +36,16 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 
 			if (time.asSeconds() > 1)
 			{
-				std::cout << "PASSED " << std::endl;
+				
 				platH->isPassed = true;
+				
+				int verCount = platVerH->vert.getVertexCount();
+				
+				for (int i =0; i < verCount; ++i )
+				{
+					platVerH->vert[i].color = sf::Color::Green;
+				}
+				std::cout << "PASSED " << verCount << std::endl;
 			}
 		}
 		else
@@ -63,6 +72,8 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 				ResourcesManager::getInstanceRef().areAllPlatfIncluded = true;
 			}
 		}
+
+
 		isPlatColliding = false;
 		clock.restart();
 	}

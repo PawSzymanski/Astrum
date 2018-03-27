@@ -65,7 +65,8 @@ void ResourcesManager::loadContainer()
 		"gun.cfg",
 		"bullet.cfg",
 		"shooting_camera.cfg",
-		"sliding_doors.cfg"
+		"sliding_doors.cfg",
+		"square.cfg"
     };
 
     ConfigParser parser;
@@ -75,11 +76,14 @@ void ResourcesManager::loadContainer()
         std::vector <sf::Vector2f> vert_vec;
         std::vector <sf::Vector2f> image_vec;
         std::string name;
+
         parser.load(dir+filename);
         parser.setSection("name");
         name = parser.getString();
+
         std::cout<<"NAME: "<<name<<std::endl;
         parser.setSection("vertex");
+
         while(!parser.EndOfSection())
         {
             sf::Vector2f v;
@@ -91,7 +95,6 @@ void ResourcesManager::loadContainer()
 
         if(parser.setSection("texCoords"))
         {
-            std::cout<<"JEST TEXCOORDS"<<std::endl;
             while (!parser.EndOfSection())
             {
                 sf::Vector2f v;

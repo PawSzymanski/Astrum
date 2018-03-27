@@ -185,7 +185,7 @@ bool LvlSetStage::update(float dt)
 
 void LvlSetStage::render(sf::RenderWindow &window)
 {
-    window.clear(sf::Color::Black);
+    window.clear(sf::Color(30, 30, 30, 255));
     for(int i=0; i<numberOfLevels; ++i)
         window.draw(button[i]);
     window.draw(esc_text);

@@ -172,14 +172,12 @@ bool CreatorStage::update(float dt)
 	for (int i = 0; i<4; ++i)
 		garageButtons[i].update(dt);
 
-    //std::cout<<"fade_in "<<fade_in<<std::endl;
-    //std::cout<<"fade_out "<<fade_out<<std::endl;
     return true;
 }
 
 void CreatorStage::render(sf::RenderWindow &window)
 {
-    window.clear(sf::Color::Black);
+    window.clear(sf::Color(30, 30, 30, 255));
     window.draw(esc_text);
 
     for(int i=0; i<3; ++i)

@@ -35,7 +35,7 @@ void GameplayStage::updateCamera()
 		{
 			resource.camera.move(sf::Vector2f((pos->pos.x - resource.camera.getCenter().x - CAMERA_CONST_X), 0));
 		}
-		else if (resource.camera.getCenter().y - pos->pos.y > CAMERA_CONST_Y)
+		if (resource.camera.getCenter().y - pos->pos.y > CAMERA_CONST_Y)
 		{
 			resource.camera.move(sf::Vector2f(0,(pos->pos.y + CAMERA_CONST_Y - resource.camera.getCenter().y)));
 			//std::cout << "in" << std::endl;
@@ -56,7 +56,8 @@ bool GameplayStage::init()
 
 	auto &window = ResourcesManager::getInstanceRef().window;
 	auto &resource = ResourcesManager::getInstanceRef();
-	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));
+
+	resource.camera.reset(sf::FloatRect(0, 0, 2*17.5, 2*10));										//camera 
 
 	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
 

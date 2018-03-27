@@ -25,7 +25,6 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 
     for (auto entity : en.entities_with_components(vArray, trans, nameHandle))
 	{
-
         if (ResourcesManager::getInstanceRef().textureCont.isTexture(nameHandle->name))
 		{
 			trans = entity.component<Transform>();
@@ -42,7 +41,6 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		{
 			win.draw(vArray->vert, trans->trans);
 		}
-
 	}
 
     for(auto entity : en.entities_with_components(trans, anim))

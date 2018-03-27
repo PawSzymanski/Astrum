@@ -21,7 +21,7 @@ bool MenuStage::init()
 {
 	font = ResourcesManager::getInstanceRef().font; 
 
-	startButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Start", sf::Vector2f(40, 20));
+	startButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Single", sf::Vector2f(40, 20));
 	startButton.rect.setOutlineThickness(12);
 	optionsButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Options", sf::Vector2f(60, 20));
 	exitButton.init(font, 40, sf::Vector2f(0, 0), sf::Color::White, "Exit", sf::Vector2f(30, 20));
@@ -110,8 +110,8 @@ bool MenuStage::update(float dt)
 		}
 		else if (actionCode == 2)
 		{
-			this->isSliding = 2;
-			resources_manager.gameplay_stage.set();
+			//this->isSliding = 2;
+			//resources_manager.gameplay_stage.set();
 		}
 		else if (actionCode == 3)
 		{
@@ -130,13 +130,14 @@ bool MenuStage::update(float dt)
 		exitButton.text.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 6.9);
 		exitButton.rect.setPosition(windowSize.x / 2, windowSize.y / 2 + windowSize.y / 6.9);
 	}
+
 	return true;
 }
 
 void MenuStage::render(sf::RenderWindow &window)
 {
 	windowSize = window.getSize();
-	window.clear(sf::Color(0, 0, 0));
+	window.clear(sf::Color(30, 30, 30, 255));
 
 	window.draw(startButton.text);
 	window.draw(startButton.rect);
@@ -151,7 +152,6 @@ void MenuStage::render(sf::RenderWindow &window)
 	window.draw(exitButton.rect);
 }
 
-
 void MenuStage::release()
 {
     startButton.text = sf::Text();
@@ -159,8 +159,6 @@ void MenuStage::release()
     optionsButton.text = sf::Text();
     exitButton.text = sf::Text();
 }
-
-
 
 void MenuStage::showBar()
 {
@@ -181,7 +179,6 @@ void MenuStage::showBar()
 		exitButton.rect.setOutlineThickness(12);
 	}
 }
-
 
 void MenuStage::input(sf::Event & event)
 {
