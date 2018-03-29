@@ -43,7 +43,7 @@ void ResourcesManager::loadContainer()
 
     std::string dir("resources/parts/");
     std::vector < std::string > filenames = {
-        "triangle_body.cfg",
+        "alien_body.cfg",
         "long_body.cfg",
         "cobra_body.cfg",
         "large_engine.cfg",
@@ -100,7 +100,8 @@ void ResourcesManager::loadContainer()
                 sf::Vector2f v;
                 v.x = parser.getFloat();
                 v.y = parser.getFloat();
-                std::cout<<v.x<<" "<<v.y<<std::endl;
+
+                std::cout<<v.x<<" "<<v.y<< " TEXTCOORDS" <<std::endl;
                 image_vec.push_back(v);
             }
         }

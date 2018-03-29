@@ -7,13 +7,17 @@ enemy_system::enemy_system(entityx::EntityX &ex, Phisics_2D &phs) : phisics(phs)
 	ex.events.subscribe<CollisionEvent>(*this);
 }
 
-
 void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
+{
+	updateCamera(en);
+}
+
+void enemy_system::updateCamera(entityx::EntityManager & en)
 {
 	Position::Handle posCamH, posPlaH;
 	isEnemyCam::Handle camH;
 	isPlayer::Handle playerH;
-	Rotation::Handle rotCamH;	
+	Rotation::Handle rotCamH;
 
 	//shooting camera
 	for (auto ent : en.entities_with_components<>(camH, posCamH))
@@ -28,22 +32,22 @@ void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & e
 		}
 		posPlaH = newEnt.component<Position>();
 		rotCamH = ent.component<Rotation>();
-	
+
 		if (vecLenghtSq(detectionSpace) < 1.1 && dir)
 		{
-			detectionSpace -= sf::Vector2f(0 ,0.4);		
+			detectionSpace -= sf::Vector2f(0, 0.6);
 		}
 		else
 		{
 			dir = false;
 			if ((vecLenghtSq(detectionSpace) < 0.25))
 				dir = true;
-			
-			detectionSpace += sf::Vector2f(0 ,0.4);
+
+			detectionSpace += sf::Vector2f(0, 0.4);
 		}
-		sf::Transform trans ;
+		sf::Transform trans;
 		trans.rotate(rotCamH->degree);
-		trans.scale(sf::Vector2f(5,5));
+		trans.scale(sf::Vector2f(5, 5));
 		detectionSpace = trans * detectionSpace;
 		detectionSpace += posCamH->pos;
 
@@ -53,7 +57,7 @@ void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & e
 			posPlaH->pos.x > detectionSpace.x - 0.5 &&
 			posPlaH->pos.x < detectionSpace.x + 0.5 &&
 			posPlaH->pos.y > detectionSpace.y - 0.5 &&
-			posPlaH->pos.y < detectionSpace.y + 0.5 )
+			posPlaH->pos.y < detectionSpace.y + 0.5)
 		{
 			auto bulletEn = en.create();
 			bulletTime = sf::Time::Zero;
@@ -69,6 +73,8 @@ void enemy_system::update(entityx::EntityManager & en, entityx::EventManager & e
 		detectionSpace = trans.getInverse() * detectionSpace;
 	}
 }
+
+
 
 void enemy_system::cameraDesrtoy(const CollisionEvent &ev)
 {

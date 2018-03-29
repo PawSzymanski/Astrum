@@ -30,7 +30,6 @@ void PartsManager::init()
     {
         current_body_name = parser.getString();
         current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(current_body_name));
-        current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(current_body_name));
 
         std::cout<<"current body: "<<current_body_name<<std::endl;
     }

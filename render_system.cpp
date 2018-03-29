@@ -42,7 +42,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
         if (ResourcesManager::getInstanceRef().textureCont.isTexture(nameHandle->name))
 		{
 			trans = entity.component<Transform>();
-			//sf::BlendMode noBlending = sf::BlendNone;
+			std::cout << nameHandle->name << std::endl;
 			sf::RenderStates renderStates;
             auto &texture = ResourcesManager::getInstanceRef().textureCont.getTexture(nameHandle->name);
 

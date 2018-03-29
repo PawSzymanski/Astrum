@@ -101,7 +101,7 @@ bool CreatorStageMulti::init()
 	int garagePositionY = 130;
     auto &container = ResourcesManager::getInstanceRef().vertCont;
     std::string bodys[3] = {
-        "TRIANGLE_BODY",
+        "ALIEN_BODY",
         "LONG_BODY",
         "COBRA_BODY"
 	};

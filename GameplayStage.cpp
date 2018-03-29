@@ -57,7 +57,7 @@ bool GameplayStage::init()
 	auto &window = ResourcesManager::getInstanceRef().window;
 	auto &resource = ResourcesManager::getInstanceRef();
 
-	resource.camera.reset(sf::FloatRect(0, 0, 2*17.5, 2*10));										//camera 
+	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));										//camera 
 
 	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
 
