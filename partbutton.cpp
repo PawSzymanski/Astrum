@@ -26,6 +26,8 @@ void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font, std::s
     rect.setOutlineThickness(6);
     rect.setPosition(pos);
 
+	textureScale = sf::Vector2f(30,30);
+
     this->text.setPosition(pos + sf::Vector2f(-10,70));
     this->text.setFillColor(sf::Color::White);
     this->text.setCharacterSize(18);
@@ -35,10 +37,10 @@ void PartButton::init(sf::Vector2f pos, std::string text, sf::Font &font, std::s
     auto & resource = ResourcesManager::getInstanceRef();
     v_array = &(resource.vertCont.getPoly(name));
 
-    if(part_name == "small_engine" || part_name == "large_engine")
-        texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
-    else
-        texture = nullptr;
+    //if(part_name == "small_engine" || part_name == "large_engine")
+        texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(name));
+   // else
+   //     texture = nullptr;
 
     assert(v_array);
 }
@@ -63,6 +65,11 @@ void PartButton::update(float dt)
     rot += 50*dt;
 }
 
+void PartButton::setTextureScale(float x, float y)
+{
+	this->textureScale = sf::Vector2f(x,y);
+}
+
 void PartButton::setPosition(const sf::Vector2f &pos)
 {
 
@@ -82,7 +89,7 @@ void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     sf::Transform trans;
     trans.translate(pos+ sf::Vector2f(30,30));
-    trans.scale(30,30);
+    trans.scale(textureScale);
     trans.rotate(rot);
 
     if(v_array == nullptr)

@@ -30,6 +30,7 @@ void PartsManager::init()
     {
         current_body_name = parser.getString();
         current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(current_body_name));
+        current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(current_body_name));
 
         std::cout<<"current body: "<<current_body_name<<std::endl;
     }
@@ -56,12 +57,13 @@ void PartsManager::init()
             std::cout<<"textures size: "<<ResourcesManager::getInstanceRef().vertCont.textures.size()<<std::endl;
 
             std::cout<<new_part.name<< " is texture = ";
-            if(new_part.name == "small_engine" ||new_part.name == "large_engine")
-                {new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
-                std::cout<<"true"<<std::endl;}
-            else
-                {new_part.texture = nullptr;
-                std::cout<<"false"<<std::endl;}
+            //if(new_part.name == "small_engine" ||new_part.name == "large_engine")
+             //   {
+				new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(new_part.name));
+            //    std::cout<<"true"<<std::endl;}
+            //else
+            //    {new_part.texture = nullptr;
+           //     std::cout<<"false"<<std::endl;}
 
             new_part.trans = sf::Transform();
             new_part.trans.translate(npos);
@@ -143,12 +145,13 @@ void PartsManager::add_part(const std::string &name)
     Part new_part(name, temp, temp_normals);
 
     std::cout<<new_part.name<< " is texture = ";
-    if(new_part.name == "small_engine" ||new_part.name == "large_engine")
-        {new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture("small_engine"));
-        std::cout<<"true"<<std::endl;}
-    else
-        {new_part.texture = nullptr;
-        std::cout<<"false"<<std::endl;}
+   // if(new_part.name == "small_engine" ||new_part.name == "large_engine")
+   //     {
+		new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(name));
+  //    std::cout<<"true"<<std::endl;}
+   // else
+   //     {new_part.texture = nullptr;
+   //     std::cout<<"false"<<std::endl;}
 
     parts.push_back(new_part);
 
@@ -314,8 +317,14 @@ void PartsManager::input(sf::Event ev)
 
 void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    if(current_body)
-        target.draw(*current_body, body_trans);
+	if (current_body)
+	{
+		sf::RenderStates renderStates;
+
+		renderStates.texture = &ResourcesManager::getInstanceRef().textureCont.getTexture(current_body_name);
+		renderStates.transform = body_trans;
+		target.draw(*current_body, renderStates);
+	}
 	int liczba = 0;
     for(auto &p: parts)
     {
@@ -346,7 +355,7 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
         sf::Text key;
         key.setCharacterSize(32);
-        key.setFillColor(sf::Color::Black);
+        key.setFillColor(sf::Color::White);
         key.setFont(ResourcesManager::getInstanceRef().font);
         key.setPosition(p.pos- sf::Vector2f(16,16));
         key.setString(p.key);

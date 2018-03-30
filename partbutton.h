@@ -12,17 +12,20 @@
 
 class PartButton : public sf::Drawable
 {
-    sf::Text text;
-    RoundRect rect;
-    sf::Vector2f pos;
-
-    bool has_mouse;
+	bool has_mouse;
 	float rot;
-
-    std::string part_name;
-
-	sf::VertexArray * v_array;
+	sf::Vector2f pos, textureScale;
+	
+	sf::VertexArray* v_array;
 	sf::Texture *texture;
+
+	std::string part_name;
+	sf::Text text;
+    RoundRect rect;
+  
+
+ 
+	
 public:
     PartButton();
 
@@ -30,6 +33,7 @@ public:
 
     void init(sf::Vector2f pos, std::string text, sf::Font & font, std::string name);
     void update(float dt);
+	void setTextureScale(float x, float y);
     void setPosition(const sf::Vector2f& pos);
 	void release();
     

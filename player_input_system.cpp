@@ -13,7 +13,7 @@ void player_input_system::init()
 
 void player_input_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
-	ConfigParser parser, parser3;
+	ConfigParser parser;
 
 	auto levelInfo = ResourcesManager::getInstanceRef().levelInfo;
 	auto shipInfo = ResourcesManager::getInstanceRef().shipInfo;
@@ -129,10 +129,11 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		assert(false);
 	}
 	std::cout << shipInfo << std::endl;
-	parser.setSection("body_info");
 	
 	std::string typeOfShip, shipColor;
 	float actualEngineForce;
+
+	parser.setSection("body_info");
 
 	while (!parser.EndOfLine())
 	{

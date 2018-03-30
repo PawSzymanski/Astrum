@@ -65,7 +65,8 @@ bool ConfigParser::setSection(std::string s)
 {
     if(dane.count(s) == 0)
     {
-        std::cout<<"nie ma sekcji \""<<s<<"\" w pliku "<<file_dir<< std::endl;
+
+	std::cout<<"nie ma sekcji \""<<s<<"\" w pliku "<<file_dir<< std::endl;
         return false;
     }
     section = s;
