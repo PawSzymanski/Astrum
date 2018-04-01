@@ -25,7 +25,7 @@ class CreatorStage : public GameStage
 
     ButtonMenu start_button;
     ButtonMenu save_button;
-
+	sf::Sprite backGroundSprite;
     sf::Text esc_text;
 	sf::RectangleShape mask_rect;
 

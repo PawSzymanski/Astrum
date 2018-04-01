@@ -1,5 +1,7 @@
 #pragma once
 
+#include <random>
+
 #include "LibsAndDeclarations.h"
 #include "GameStage.h"
 #include "ButtonMenu.h"
@@ -16,6 +18,7 @@ private:
 	
 	bool isPressed;
 	int actionCode, isSliding;
+	float xAnimMove, yAnimMove, animRot;
 	float buttonSpeed;
 	sf::Font font;
 	ButtonMenu startButton,
@@ -23,7 +26,20 @@ private:
 		exitButton,
 		multiButton;
 	sf::Vector2u windowSize;
+	sf::Texture shipTexture[3];
+	sf::Sprite backGroundSprite;
+
+	struct aniamtion {
+		aniamtion(sf::Sprite s) : spr(s){}
+
+		float x, y, rot;
+		sf::Sprite spr;
+	};
+
+	std::vector<aniamtion> animVec;
+
 public:
+	void animationsUpdate();
 	virtual bool init() override;
 	virtual bool update(float dt) override;
     virtual void render(sf::RenderWindow &window) override;

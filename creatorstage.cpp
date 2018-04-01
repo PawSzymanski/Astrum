@@ -17,6 +17,9 @@ bool CreatorStage::init()
 {
     auto& resource = ResourcesManager::getInstanceRef();
 
+	backGroundSprite.setTexture(resource.textureCont.getTexture("back_ground1"));
+	backGroundSprite.setPosition(sf::Vector2f(-50, -50));
+
     next = nullptr;
 
     esc_text.setCharacterSize(32);
@@ -178,8 +181,10 @@ bool CreatorStage::update(float dt)
 
 void CreatorStage::render(sf::RenderWindow &window)
 {
-    window.clear(sf::Color(30, 30, 30, 255));
-    window.draw(esc_text);
+    //window.clear(sf::Color(30, 30, 30, 255));
+	window.draw(backGroundSprite);
+
+	window.draw(esc_text);
 
     for(int i=0; i<3; ++i)
         window.draw(bodybuttons[i]);
@@ -196,6 +201,8 @@ void CreatorStage::render(sf::RenderWindow &window)
 
 void CreatorStage::release()
 {
+	backGroundSprite = sf::Sprite();
+
     next = nullptr;
     for(int i=0; i<3; ++i)
         bodybuttons[i].release();

@@ -27,7 +27,17 @@ class LvlSetStage :public GameStage
 	LvlButton button[5];
     GameStage * next_stage;
     sf::Text esc_text;
-    
+
+	sf::Texture shipTexture[3];
+	sf::Sprite backGroundSprite;
+	sf::Vector2u windowSize;
+	struct aniamtion {
+		aniamtion(sf::Sprite s) : spr(s) {}
+
+		float x, y, rot;
+		sf::Sprite spr;
+	};
+	std::vector<aniamtion> animVec;
 public:
     LvlSetStage();
     LvlSetStage(const LvlSetStage&) = delete;
@@ -37,6 +47,7 @@ public:
     virtual bool init() override;
     virtual void input(sf::Event &event) override;
     virtual bool update(float dt) override;
+	void animationsUpdate();
     virtual void render(sf::RenderWindow &window) override;
     virtual void release() override;
 
