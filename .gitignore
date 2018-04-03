@@ -1,3 +1,4 @@
 packages.config
-/resources/graphics/
-/resources/graphics_copy/
+/resources/graphics
+/resources/graphics_copy
+/x64
