@@ -15,7 +15,7 @@ void sliding_doors_system::update(entityx::EntityManager & en, entityx::EventMan
 	{
 		if (!doorsH->isOpen)
 		{
-			std::cout << "not all doors open" << std::endl;
+			//std::cout << "not all doors open" << std::endl;
 			for (int i = 0; i < doorsH->opener.size(); ++i)
 			{
 				//you can add more things that can be passed (one "if" one thing)

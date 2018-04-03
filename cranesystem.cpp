@@ -57,7 +57,7 @@ void CraneSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
         {
             if(!crane->block)
             {
-                std::cout<<"crane switch"<<std::endl;
+               // std::cout<<"crane switch"<<std::endl;
                 crane->block = true;
 
                 if(crane->atached)

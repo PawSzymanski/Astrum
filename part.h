@@ -29,6 +29,8 @@ struct Part
         trans = std::move(other.trans);
         pos = std::move(other.pos);
         rot = std::move(other.rot);
+		key = std::move(other.key);
+		texture = std::move(other.texture);
         return *this;
     }
 

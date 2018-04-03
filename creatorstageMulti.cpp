@@ -94,7 +94,7 @@ bool CreatorStageMulti::init()
     timer = 1.0f;
 
     std::string bodynames[3] = { "Mk. I" , "Mk. II", "Mk. III" };
-    std::string partnames[5] = { "large eng.", "small eng.", "langing legs", "crane", "gun" };
+    std::string partnames[4] = { "large eng.", "small eng.", "crane", "gun" };
 	std::string garageNames[4] = { "1 garage", "2 garage" ,"3 garage" ,"4 garage" };
     int bodyposition = 500;
     int partposition = 150;
@@ -106,10 +106,10 @@ bool CreatorStageMulti::init()
         "COBRA_BODY"
 	};
 
-	std::string parts[5] = {
+	std::string parts[4] = {
 		"large_engine",
 		"small_engine",
-		"landing_legs",
+		//"landing_legs",
 		"crane",
 		"gun"
     };
@@ -120,7 +120,7 @@ bool CreatorStageMulti::init()
         bodyposition += 120;
     }
 
-    for(int i=0; i<5; ++i)
+    for(int i=0; i<4; ++i)
     {
         partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, parts[i]);
         partposition += 120;

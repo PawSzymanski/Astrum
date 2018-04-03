@@ -32,6 +32,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		sprite.setPosition(backgroundTH->pos);
 		sprite.setScale(backgroundTH->scale);
 		sprite.setRotation(backgroundTH->rotation);
+		sprite.setColor(sf::Color(255,255,255,150));
 		
 		win.draw(sprite);
 	}
@@ -42,7 +43,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
         if (ResourcesManager::getInstanceRef().textureCont.isTexture(nameHandle->name))
 		{
 			trans = entity.component<Transform>();
-			std::cout << nameHandle->name << std::endl;
+			//std::cout << nameHandle->name << std::endl;
 			sf::RenderStates renderStates;
             auto &texture = ResourcesManager::getInstanceRef().textureCont.getTexture(nameHandle->name);
 

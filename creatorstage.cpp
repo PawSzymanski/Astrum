@@ -37,7 +37,12 @@ bool CreatorStage::init()
     timer = 1.0f;
 
     std::string bodynames[3] = { "Mk. I" , "Mk. II", "Mk. III" };
-    std::string partnames[5] = { "large eng.", "small eng.", "langing legs", "crane", "gun" };
+    std::string partnames[4] = {
+		"large eng.",
+		"small eng.",
+		//"langing legs",
+		"crane",
+		"gun" };
 	std::string garageNames[4] = { "1 garage", "2 garage" ,"3 garage" ,"4 garage" };
     int bodyposition = 500;
     int partposition = 150;
@@ -67,7 +72,7 @@ bool CreatorStage::init()
     {
         partbuttons[i].init(sf::Vector2f(1200,partposition), partnames[i], resource.font, parts[i]);
         partposition += 120;
-		partbuttons[i].setTextureScale(90, 90);
+		partbuttons[i].setTextureScale(110, 110);
     }
 	for (int i = 0; i < 4; ++i)
 	{

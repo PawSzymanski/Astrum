@@ -35,7 +35,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 					resource.isGameOver == true || 
 						resource.isPauseTime == true)
 	{
-		std::cout << "DRAW MENU" << std::endl;
+		//std::cout << "DRAW MENU" << std::endl;
 
 		if ((resource.areAllPlatfIncluded == true &&
 				resource.areAllCargoSpaceIncluded == true) || 
@@ -82,7 +82,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 				continue;
 			}
 
-			std::cout << " xy: " << (button.rect.getPosition().x) << std::endl;
+			//std::cout << " xy: " << (button.rect.getPosition().x) << std::endl;
 
 			if (ResourcesManager::getInstanceRef().mainEvent &&
 				ResourcesManager::getInstanceRef().mainEvent->type == sf::Event::MouseMoved &&

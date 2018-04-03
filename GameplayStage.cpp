@@ -57,7 +57,7 @@ bool GameplayStage::init()
 	auto &window = ResourcesManager::getInstanceRef().window;
 	auto &resource = ResourcesManager::getInstanceRef();
 
-	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));										//camera 
+	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));									//camera 
 
 	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
 
@@ -118,6 +118,7 @@ void GameplayStage::render(sf::RenderWindow &window)
 	const float dt = 0.1;
 	display_fps_time += display_fps_clock.restart();
 	float fps_f = (1.0f / fps_clock.restart().asSeconds());
+	
 	if (display_fps_time.asSeconds() >= dt)
 	{
 		display_fps_time = sf::Time::Zero;
@@ -148,6 +149,17 @@ void GameplayStage::input(sf::Event & event)
 	if (event.type == sf::Event::MouseButtonReleased)
 	{
 		ResourcesManager::getInstanceRef().isMouseButtonReleased = true;
+	}
+	else if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::Equal)
+		{
+			ResourcesManager::getInstanceRef().camera.zoom(100);
+		}
+		else if (event.key.code == sf::Keyboard::Dash)
+		{
+			ResourcesManager::getInstanceRef().camera.zoom(-1);
+		}
 	}
 	else
 	{

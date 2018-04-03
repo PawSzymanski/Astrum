@@ -34,7 +34,7 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 		n.push_back(side);
 	}
 	normals.push_back(n);
-    std::cout << " size :"  <<normals[0].size() << std::endl;
+   // std::cout << " size :"  <<normals[0].size() << std::endl;
 }
 
 void Container::addTexture(sf::Texture texture, std::string vertexName)
@@ -48,7 +48,7 @@ sf::VertexArray & Container::getPoly(const std::string &name)
 {
     if(indexes.find(name) == indexes.end())
     {
-        std::cout <<"zla nazwa: "<<name<<std::endl;
+        //std::cout <<"zla nazwa: "<<name<<std::endl;
 		return vertexArrays[indexes["small_engine"]];
         assert(false);
     }
@@ -59,7 +59,7 @@ std::vector<sf::Vector2f> &Container::getNormals(const std::string &name)
 {
     if(indexes.find(name) == indexes.end())
     {
-        std::cout <<"zla nazwa: "<<name<<std::endl;
+        //std::cout <<"zla nazwa: "<<name<<std::endl;
         assert(false);
     }
     return normals.at(indexes[name]);
@@ -74,7 +74,7 @@ sf::Texture & Container::getTexture(std::string texture)
 {
     if (textureIndexesMap.find(texture) == textureIndexesMap.end())
 	{
-		std::cout << "zla nazwa textury: " << texture << std::endl;
+		//std::cout << "zla nazwa textury: " << texture << std::endl;
 		return textures[textureIndexesMap["small_engine"]];
 	}
 	return textures[textureIndexesMap[texture]];

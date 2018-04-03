@@ -241,7 +241,7 @@ void PartsManager::input(sf::Event ev)
     }
     else if( ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Delete && latch_part)
     {
-        for(auto iter = parts.begin(); iter< parts.end(); ++iter)
+        for(auto iter = parts.begin(); iter < parts.end(); ++iter)
         {
             if(&(*iter) == latch_part)
             {

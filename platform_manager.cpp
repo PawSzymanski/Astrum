@@ -45,7 +45,7 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 				{
 					platVerH->vert[i].color = sf::Color::Green;
 				}
-				std::cout << "PASSED " << verCount << std::endl;
+			//	std::cout << "PASSED " << verCount << std::endl;
 			}
 		}
 		else
