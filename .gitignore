@@ -1,2 +1,3 @@
-/resources/graphics
-/resources/graphics_copy
+packages.config
+/resources/graphics/
+/resources/graphics_copy/
