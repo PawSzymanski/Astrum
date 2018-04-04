@@ -2,7 +2,7 @@
  *  creatorstage.cpp
  *
  *  Created: 2017-07-07
- *   Author: Patryk Wojtanowski
+ *   Author: Patryk Wojtanowski modified by Pawel Szymanski
  */
 
 #include "creatorstage.h"
@@ -17,9 +17,10 @@ bool CreatorStage::init()
 {
     auto& resource = ResourcesManager::getInstanceRef();
 
-	backGroundSprite.setTexture(resource.textureCont.getTexture("back_ground1"));
-	backGroundSprite.setPosition(sf::Vector2f(-50, -50));
 
+	backGroundSprite.setTexture(resource.textureCont.getTexture("back_ground2"));
+	backGroundSprite.setPosition(sf::Vector2f(-50, -50));
+	backGroundSprite.setColor(sf::Color(100, 100, 100));
     next = nullptr;
 
     esc_text.setCharacterSize(32);
@@ -27,6 +28,25 @@ bool CreatorStage::init()
     esc_text.setPosition(50,50);
     esc_text.setFont(resource.font);
     esc_text.setString("Lvl set:  ESC");
+
+	helpTextParts.setCharacterSize(27);
+	helpTextParts.setFillColor(sf::Color::White);
+	helpTextParts.setPosition(860, 200);
+	helpTextParts.setFont(resource.font);
+	helpTextParts.setString("Pick part and drag \n it on to a ship, \n use left Mouse button \n to change key assigned \n to part, scroll to trun it \n and 'Delete' key \n to  erase part.  \n Remember if you want \n to change the body \n you must delete all \n parts from ship ;)");
+
+	helpTextGarage.setCharacterSize(27);
+	helpTextGarage.setFillColor(sf::Color::White);
+	helpTextGarage.setPosition(200, 200);
+	helpTextGarage.setFont(resource.font);
+	helpTextGarage.setString("You can save your \n ships in garages by \n picking one and by \n using save button");
+
+	isHelpSeen = true;
+	help.setCharacterSize(27);
+	help.setFillColor(sf::Color::White);
+	help.setPosition(1200, 60);
+	help.setFont(resource.font);
+	help.setString("help? YES");
 
     mask_rect.setFillColor(sf::Color::Black);
     mask_rect.setPosition(sf::Vector2f(0,0));
@@ -149,6 +169,31 @@ void CreatorStage::input(sf::Event &event)
         manager.saveShip(ResourcesManager::getInstanceRef().shipInfo);
 
     manager.input(event);
+	helpUpdate(event);
+}
+
+void CreatorStage::helpUpdate(sf::Event &event)
+{
+
+	if (event.type == sf::Event::MouseMoved)
+	{
+		hasHelpMouse = (event.mouseMove.x > help.getPosition().x && event.mouseMove.x < help.getPosition().x + 100 &&
+			event.mouseMove.y > help.getPosition().y && event.mouseMove.y < help.getPosition().y + 30);
+	}
+	else if(hasHelpMouse && event.type == sf::Event::MouseButtonReleased)
+	{
+		std::cout << "11111" << std::endl;
+		if (isHelpSeen)
+		{
+			help.setString("help?: No");
+			isHelpSeen = false;
+		}
+		else
+		{
+			help.setString("help?: Yes");
+			isHelpSeen = true;
+		}
+	}
 }
 
 bool CreatorStage::update(float dt)
@@ -190,6 +235,13 @@ void CreatorStage::render(sf::RenderWindow &window)
 	window.draw(backGroundSprite);
 
 	window.draw(esc_text);
+
+	if (isHelpSeen)
+	{
+		window.draw(helpTextGarage);
+		window.draw(helpTextParts);
+	}
+	window.draw(help);
 
     for(int i=0; i<3; ++i)
         window.draw(bodybuttons[i]);

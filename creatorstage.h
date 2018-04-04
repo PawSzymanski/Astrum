@@ -17,6 +17,7 @@
 class CreatorStage : public GameStage
 {
 	bool fade_in, fade_out;
+	bool isHelpSeen, hasHelpMouse;
 	float timer;
 
     PartButton bodybuttons[3];
@@ -26,12 +27,15 @@ class CreatorStage : public GameStage
     ButtonMenu start_button;
     ButtonMenu save_button;
 	sf::Sprite backGroundSprite;
-    sf::Text esc_text;
+    sf::Text esc_text, helpTextParts, helpTextGarage, help;
 	sf::RectangleShape mask_rect;
+	
 
     GameStage * next;
 
     PartsManager manager;
+	void helpUpdate(sf::Event & event);
+
 public:
     CreatorStage();
 
