@@ -24,7 +24,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	}
 	std::string typeOfElement, pathToShip = "resources/parts/";
 	int idWorldPart;
-	float xPos, yPos, xVel, yVel, rot, mass, xScale, yScale;
+	float xPos, yPos, xVel, yVel, rot, mass, xScale, yScale, alphaTexture;
 
 	//LOADING TESXTURES TO WORLD
 	if (parser.setSection("textures"))
@@ -38,13 +38,15 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			xScale = parser.getFloat();
 			yScale = parser.getFloat();
 			rot = parser.getFloat();
+			alphaTexture = parser.getFloat();
 
 			auto textureEn = en.create();
 			textureEn.assign<backgroundTexture>(typeOfElement, xPos, yPos, xScale, yScale, rot);
 			backgroundTexture::Handle backTH = textureEn.component<backgroundTexture>();
 
 			backTH->texture = &ResourcesManager::getInstanceRef().textureCont.getTexture(typeOfElement);
-			std::cout << "TEXTURE LOADED" + typeOfElement << std::endl;
+			backTH->alphaTexture = alphaTexture;
+			std::cout << "TEXTURE BACKGROUND LOADED: " + typeOfElement << std::endl;
 		}
 	}
 	//LOADING WORLD ELEMENTS

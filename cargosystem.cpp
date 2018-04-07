@@ -28,7 +28,6 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
 				cargo = entity1; 
 				break; 
 			}
-
         Position::Handle cargo_posH = cargo.component<Position>();
 	
         sf::Vector2f cargo_pos = cargo_posH->pos;
@@ -48,11 +47,6 @@ void CargoSystem::update(entityx::EntityManager &en, entityx::EventManager &ev, 
         else
             cargo_space->time = sf::Time::Zero;
     }
-
-
-
-
-
 	ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = true;
 	for (auto en1 : en.entities_with_components(cargo_space))
 	{

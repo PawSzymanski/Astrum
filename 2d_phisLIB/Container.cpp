@@ -34,7 +34,6 @@ void Container::addPoly(sf::VertexArray & v, int size, std::string name)
 		n.push_back(side);
 	}
 	normals.push_back(n);
-   // std::cout << " size :"  <<normals[0].size() << std::endl;
 }
 
 void Container::addTexture(sf::Texture texture, std::string vertexName)

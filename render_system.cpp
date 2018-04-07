@@ -4,11 +4,7 @@
 
 render_system::render_system(sf::RenderWindow &window) : win(window)
 {
-	//if (!engineTexture.loadFromFile("resources/graphics/engine1.png"))
-	{
-	//	std::cout << "NIE £ADUJE OBRAZKA" << std::endl;
-	}
-	//renderStates.texture(&engineTexture);
+
 }
 
 void render_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
@@ -32,7 +28,7 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		sprite.setPosition(backgroundTH->pos);
 		sprite.setScale(backgroundTH->scale);
 		sprite.setRotation(backgroundTH->rotation);
-		sprite.setColor(sf::Color(255,255,255,150));
+		sprite.setColor(sf::Color(255,255,255,backgroundTH->alphaTexture));
 		
 		win.draw(sprite);
 	}
@@ -83,21 +79,24 @@ void render_system::update(entityx::EntityManager & en, entityx::EventManager & 
 		win.draw(line->line);
 	}
 
-	if ((ResourcesManager::getInstanceRef().areAllPlatfIncluded && ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded)
-		|| ResourcesManager::getInstanceRef().isGameOver)
-	{
+	if(ResourcesManager::getInstanceRef().isGameOver)
+	{ 		
 		int i = 0;
 		for (auto & button : ResourcesManager::getInstanceRef().GOButton)
 		{
 			sf::RenderStates states, states2;
-			
-			states2.transform.translate(button.text.getPosition() - button.text.getOrigin());//sf::Vector2f(8.15, 3.9 + i));
+
+			states2.transform.translate(button.text.getPosition() - button.text.getOrigin());
 			states2.transform.scale(sf::Vector2f(0.01, 0.01));
-			
+
 			win.draw(button.rect, states);
 			win.draw(button.text, states2);
 			++i;
 		}
+	}
+	if (ResourcesManager::getInstanceRef().areAllPlatfIncluded && ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded)
+	{	
+		win.draw(ResourcesManager::getInstanceRef().winText);
 	}
 }
 render_system::~render_system()

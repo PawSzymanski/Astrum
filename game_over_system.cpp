@@ -4,6 +4,16 @@
 game_over_system::game_over_system() :doEnd(false), licznik(0)
 {
 	clock.restart();
+	
+
+	auto &resource = ResourcesManager::getInstanceRef();
+	resource.winText.setScale(0.01,0.01);
+	resource.winText.setCharacterSize(60);
+	resource.winText.setFont(resource.font);
+	resource.winText.setOrigin(330,0);
+	resource.winText.setPosition(resource.camera.getCenter().x, resource.camera.getCenter().y / 3);
+	resource.winText.setString("Congratulations you did it \n Your life is different now!");
+
 }
 
 void game_over_system::release()
@@ -21,6 +31,7 @@ void game_over_system::release()
 	newEntity1.destroy();
 }
 
+
 void game_over_system::update(entityx::EntityManager & en, entityx::EventManager & ev, double dt)
 {
 	auto &resource = ResourcesManager::getInstanceRef();
@@ -31,22 +42,23 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 	}
 	//std::cout << resource.areAllPlatfIncluded << resource.areAllCargoSpaceIncluded << std::endl;
 
-	if ( ( resource.areAllPlatfIncluded == true && resource.areAllCargoSpaceIncluded == true ) ||
-					resource.isGameOver == true || 
-						resource.isPauseTime == true)
+	if ( ( resource.areAllPlatfIncluded == true && 
+		   resource.areAllCargoSpaceIncluded == true ) ||
+		   resource.isGameOver == true ||	
+		   resource.isPauseTime == true)
 	{
-		//std::cout << "DRAW MENU" << std::endl;
-
-		if ((resource.areAllPlatfIncluded == true &&
-				resource.areAllCargoSpaceIncluded == true) || 
-					!resource.isPauseTime)
+		if (resource.areAllPlatfIncluded == true &&
+			resource.areAllCargoSpaceIncluded == true)
+		{
+			resource.GOButton[0].lock = true;
+		}
+		else if(!resource.isPauseTime)
 		{
 			resource.GOButton[0].lock = true;
 		}
 		resource.isGameOver = true;
 
-		ResourcesManager::getInstanceRef().isGameOver = true;
-		
+
 		if (!newEntity1.valid())
 		{
 			clock.restart();
@@ -117,6 +129,11 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 						ResourcesManager::getInstanceRef().lvl_set_stage.set();
 						release();
 					}
+					else if (button.text.getString() == "Again")
+					{
+						ResourcesManager::getInstanceRef().gameplay_stage.set();
+						release();
+					}
 				}
 			}
 		}
@@ -134,6 +151,7 @@ void game_over_system::update(entityx::EntityManager & en, entityx::EventManager
 		}
 	}
 }
+
 
 
 game_over_system::~game_over_system()

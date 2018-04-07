@@ -174,7 +174,6 @@ void CreatorStage::input(sf::Event &event)
 
 void CreatorStage::helpUpdate(sf::Event &event)
 {
-
 	if (event.type == sf::Event::MouseMoved)
 	{
 		hasHelpMouse = (event.mouseMove.x > help.getPosition().x && event.mouseMove.x < help.getPosition().x + 100 &&
@@ -182,7 +181,6 @@ void CreatorStage::helpUpdate(sf::Event &event)
 	}
 	else if(hasHelpMouse && event.type == sf::Event::MouseButtonReleased)
 	{
-		std::cout << "11111" << std::endl;
 		if (isHelpSeen)
 		{
 			help.setString("help?: No");
@@ -241,6 +239,7 @@ void CreatorStage::render(sf::RenderWindow &window)
 		window.draw(helpTextGarage);
 		window.draw(helpTextParts);
 	}
+
 	window.draw(help);
 
     for(int i=0; i<3; ++i)

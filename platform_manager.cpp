@@ -72,8 +72,6 @@ void platform_manager::update(entityx::EntityManager & en, entityx::EventManager
 				ResourcesManager::getInstanceRef().areAllPlatfIncluded = true;
 			}
 		}
-
-
 		isPlatColliding = false;
 		clock.restart();
 	}

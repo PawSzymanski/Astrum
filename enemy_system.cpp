@@ -63,7 +63,7 @@ void enemy_system::updateCamera(entityx::EntityManager & en)
 			bulletTime = sf::Time::Zero;
 
 			phisics.createPolygon(bulletEn, posCamH->pos,
-				trans * sf::Vector2f(0, -8), 0, 0.1, "bullet");
+				trans * sf::Vector2f(0, -8), 0, 0.1, "enemy_bullet");
 			bulletEn.assign<isBullet>(true);
 		}
 		bulletTime += bulletClock.restart();

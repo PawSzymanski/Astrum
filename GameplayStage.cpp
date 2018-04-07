@@ -60,6 +60,7 @@ bool GameplayStage::init()
 	resource.camera.reset(sf::FloatRect(0, 0, 17.5, 10));									//camera 
 
 	ResourcesManager::getInstanceRef().areAllPlatfIncluded = false;
+	ResourcesManager::getInstanceRef().areAllCargoSpaceIncluded = false;
 
 	(*ex_ptr).systems.add<player_input_system>(*phisics_ptr);
 	(*ex_ptr).systems.update<player_input_system>(dtime);
@@ -154,11 +155,13 @@ void GameplayStage::input(sf::Event & event)
 	{
 		if (event.key.code == sf::Keyboard::Equal)
 		{
-			ResourcesManager::getInstanceRef().camera.zoom(100);
+			std::cout << "zoom+";
+			ResourcesManager::getInstanceRef().camera.zoom(2.0f);
 		}
 		else if (event.key.code == sf::Keyboard::Dash)
 		{
-			ResourcesManager::getInstanceRef().camera.zoom(-1);
+			std::cout << "zoom-";
+			ResourcesManager::getInstanceRef().camera.zoom(0.5f);
 		}
 	}
 	else

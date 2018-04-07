@@ -339,7 +339,7 @@ struct backgroundTexture : public entityx::Component<backgroundTexture>
 	{
 		
 	}
-	float rotation;
+	float rotation, alphaTexture;
 	std::string textureName;
 	sf::Vector2f pos;
 	sf::Vector2f scale;

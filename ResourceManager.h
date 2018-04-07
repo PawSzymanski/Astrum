@@ -38,7 +38,14 @@ public:
 	static ResourcesManager& getInstanceRef();
 	static void deleteInstance();
 
-	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime, isMovingCameraOn;
+	bool isMovingCameraOn;
+	//game_over_system resources
+	bool areAllPlatfIncluded, areAllCargoSpaceIncluded, isMouseButtonReleased, isGameOver, isPauseTime;
+	sf::Text winText;
+	ButtonMenu GOButton[4];
+	std::shared_ptr<sf::Event> mainEvent;
+
+
 	sf::View camera;
 	std::string levelInfo;
 	std::string shipInfo, shipInfoMulti;
@@ -50,9 +57,6 @@ public:
     sf::Font font;
 	sf::RenderWindow window;
 	
-	std::shared_ptr<sf::Event> mainEvent;
-	ButtonMenu GOButton[3];
-
 	//Offline sages
 	MenuStage menu_stage;
     LvlSetStage lvl_set_stage;

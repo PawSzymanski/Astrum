@@ -20,8 +20,9 @@ ResourcesManager::ResourcesManager() : gameplay_stage(vertCont), levelInfo("reso
     loadContainer();
 	//game over buttons initialisation
 	GOButton[0].init(font, 40, sf::Vector2f(8.75, 4), sf::Color::White, "Back", sf::Vector2f(0.4, 0.2));
-	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Next", sf::Vector2f(0.4, 0.2));
-	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Exit", sf::Vector2f(0.4, 0.2));
+	GOButton[1].init(font, 40, sf::Vector2f(8.75, 5), sf::Color::White, "Again", sf::Vector2f(0.4, 0.2));
+	GOButton[2].init(font, 40, sf::Vector2f(8.75, 6), sf::Color::White, "Next", sf::Vector2f(0.4, 0.2));
+	GOButton[3].init(font, 40, sf::Vector2f(8.75, 7), sf::Color::White, "Exit", sf::Vector2f(0.4, 0.2));
 }
 
 ResourcesManager::~ResourcesManager()
@@ -64,6 +65,7 @@ void ResourcesManager::loadContainer()
 		"faded_screen.cfg",
 		"gun.cfg",
 		"bullet.cfg",
+		"enemy_bullet.cfg",
 		"shooting_camera.cfg",
 		"sliding_doors.cfg",
 		"square.cfg"

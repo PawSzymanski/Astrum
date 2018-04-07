@@ -14,10 +14,13 @@ class game_over_system : public entityx::System<game_over_system>
 
 
 	void release();
+	void isAllDone();
 public:
 	game_over_system();
 	
 	void update(entityx::EntityManager & en, entityx::EventManager & ev, double dt);
+
+
 
 	~game_over_system();
 };
