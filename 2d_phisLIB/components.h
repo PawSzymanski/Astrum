@@ -120,7 +120,6 @@ struct VertexArray : public entityx::Component<VertexArray>
 {
 	VertexArray(sf::VertexArray v, std::vector <sf::Vector2f> &n)
 		:vert(v), normals(n) {
-		std::cout << "component check: " << normals.size() << std::endl;
 	}
 	sf::VertexArray vert;
 	std::vector <sf::Vector2f> & normals;

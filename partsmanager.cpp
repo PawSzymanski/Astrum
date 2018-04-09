@@ -31,8 +31,6 @@ void PartsManager::init()
         current_body_name = parser.getString();
         current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(current_body_name));
         current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(current_body_name));
-
-        std::cout<<"current body: "<<current_body_name<<std::endl;
     }
 
     if(parser.setSection("parts_info"))
@@ -54,23 +52,15 @@ void PartsManager::init()
             new_part.normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(new_part.name));
             new_part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(new_part.name));
 
-            std::cout<<"textures size: "<<ResourcesManager::getInstanceRef().vertCont.textures.size()<<std::endl;
-
-            std::cout<<new_part.name<< " is texture = ";
-            //if(new_part.name == "small_engine" ||new_part.name == "large_engine")
-             //   {
-				new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(new_part.name));
-            //    std::cout<<"true"<<std::endl;}
-            //else
-            //    {new_part.texture = nullptr;
-           //     std::cout<<"false"<<std::endl;}
+        
+			new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(new_part.name));
 
             new_part.trans = sf::Transform();
             new_part.trans.translate(npos);
             new_part.trans.rotate(new_part.rot);
             new_part.trans.scale(200,200);
 
-			//ResourcesManager::getInstanceRef().
+			
             parts.push_back(new_part);
         }
     }
@@ -83,9 +73,6 @@ bool PartsManager::is_body_set()
 
 void PartsManager::set_body(const std::string &name)
 {
-   // if(parts.size() > 0)
-   //     return;
-	//std::cout << "poszlo" << std::endl;
     current_body_name = name;
     current_body = &(ResourcesManager::getInstanceRef().vertCont.getPoly(name));
     current_normals = &(ResourcesManager::getInstanceRef().vertCont.getNormals(name));
@@ -107,7 +94,6 @@ void PartsManager::loadPartFromFile(std::string dir)
 
 	while (!pars.EndOfSection())
 	{
-		std::cout << "loaded!!!!" << std::endl;
 		part.name.clear();
 		part.name = pars.getString();
 		part.v_array = &(ResourcesManager::getInstanceRef().vertCont.getPoly(part.name));
@@ -144,14 +130,7 @@ void PartsManager::add_part(const std::string &name)
 
     Part new_part(name, temp, temp_normals);
 
-    std::cout<<new_part.name<< " is texture = ";
-   // if(new_part.name == "small_engine" ||new_part.name == "large_engine")
-   //     {
-		new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(name));
-  //    std::cout<<"true"<<std::endl;}
-   // else
-   //     {new_part.texture = nullptr;
-   //     std::cout<<"false"<<std::endl;}
+	new_part.texture = &(ResourcesManager::getInstanceRef().textureCont.getTexture(name));
 
     parts.push_back(new_part);
 
@@ -328,8 +307,6 @@ void PartsManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	int liczba = 0;
     for(auto &p: parts)
     {
-		//std::cout << " number of parts : " << liczba++ << std::endl;
-		//system("pause");
         sf::Vertex line[2]
         {
             sf::Vertex(p.trans * sf::Vector2f(0,0), sf::Color::White),

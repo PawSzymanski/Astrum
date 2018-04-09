@@ -33,7 +33,7 @@ bool CreatorStage::init()
 	helpTextParts.setFillColor(sf::Color::White);
 	helpTextParts.setPosition(860, 200);
 	helpTextParts.setFont(resource.font);
-	helpTextParts.setString("Pick part and drag \n it on to a ship, \n use left Mouse button \n to change key assigned \n to part, scroll to trun it \n and 'Delete' key \n to  erase part.  \n Remember if you want \n to change the body \n you must delete all \n parts from ship ;)");
+	helpTextParts.setString("Pick part and drag \n it on to a ship, \n use right Mouse button \n to change key assigned \n to part, scroll to trun it \n and 'Delete' key \n to  erase part.  \n Remember if you want \n to change the body \n you must delete all \n parts from ship ;)");
 
 	helpTextGarage.setCharacterSize(27);
 	helpTextGarage.setFillColor(sf::Color::White);
@@ -137,7 +137,6 @@ void CreatorStage::input(sf::Event &event)
 	{
 		if (garageButtons[i].input(event))
 		{
-			std::cout << i + 1 << "  =  numer statku!" << std::endl;
 			std::string & str = (ResourcesManager::getInstanceRef().shipInfo);
 			
 			str = "resources/levelData/ship_" + std::to_string(i + 1) + ".cfg";

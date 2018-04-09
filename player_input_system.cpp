@@ -46,7 +46,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 
 			backTH->texture = &ResourcesManager::getInstanceRef().textureCont.getTexture(typeOfElement);
 			backTH->alphaTexture = alphaTexture;
-			std::cout << "TEXTURE BACKGROUND LOADED: " + typeOfElement << std::endl;
 		}
 	}
 	//LOADING WORLD ELEMENTS
@@ -56,7 +55,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		while (!parser.EndOfSection())
 		{
 			typeOfElement = parser.getString();
-			std::cout << typeOfElement << std::endl;
+			//std::cout << typeOfElement << std::endl;
 			xPos = parser.getFloat();
 			yPos = parser.getFloat();
 			xVel = parser.getFloat();
@@ -69,12 +68,10 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 			if (typeOfElement == "platform")
 			{
 				poly.assign<isPlatform>(parser.getFloat());
-
-				std::cout << "PLATFORM LOADED" << std::endl;
 			}
 			else if (typeOfElement == "wall")
 			{
-				std::cout << "WALL LOADED" << std::endl;
+				
 			}
 			else if (typeOfElement == "bomb")
 			{
@@ -130,7 +127,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	{
 		assert(false);
 	}
-	std::cout << shipInfo << std::endl;
 	
 	std::string typeOfShip, shipColor;
 	float actualEngineForce;
@@ -145,7 +141,6 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 	if (typeOfShip.size() == 0)
 	{
 		auto &stage = ResourcesManager::getInstanceRef();
-		std::cout << "WYBIERZ JAKIS STATEK" << std::endl;
 		stage.creator_stage.set();
 		return;
 	}
@@ -202,7 +197,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		
 		parser2.setSection("engineForce");
 		actualEngineForce = parser2.getFloat();
-		std::cout << " ENGINE FORCE :" << actualEngineForce << std::endl;
+		//std::cout << " ENGINE FORCE :" << actualEngineForce << std::endl;
 
 		sf::Vector2f engineForce = sf::Vector2f(0, -actualEngineForce);
 		
@@ -223,7 +218,7 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
         }
         else if (partVert == "small_engine" || partVert == "large_engine")
 		{
-			std::cout << "engine loaded" << std::endl;
+			//std::cout << "engine loaded" << std::endl;
 			partEn.assign<isEngine>();
 
 			partEn.assign<ForcePoint>(engineForce);
@@ -232,14 +227,14 @@ void player_input_system::update(entityx::EntityManager & en, entityx::EventMana
 		}
 		else if (partVert == "gun")
 		{
-			std::cout << "gun loaded" << std::endl;
+			//std::cout << "gun loaded" << std::endl;
 
 			partEn.assign<isGun>();
 
 			partEn.assign<KeyAssigned>(conversion.string_to_sf_key[partKey]);
 		}
         else {
-			std::cout << "legs loaded" << std::endl;
+			//std::cout << "legs loaded" << std::endl;
 
             partEn.assign<isSlave>(playerEn);
             phisics.createPolygon(partEn,sf::Vector2f(0,0),sf::Vector2f(0,0), partDegree, 1, partVert);

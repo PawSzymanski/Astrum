@@ -97,7 +97,6 @@ void PartButton::draw(sf::RenderTarget &target, sf::RenderStates states) const
         assert(false);
     }
 
-    //std::cout<<(*v_array)[0].position.x<<std::endl;
     sf::RenderStates united_states;
 
     //v_array[0][0].texCoords = sf::Vector2f(0, 0);

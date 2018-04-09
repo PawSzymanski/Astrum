@@ -26,6 +26,8 @@ void LvlButton::init(sf::Vector2f pos, int num, std::string text, sf::Font &font
     std::stringstream ss;
     ss<<num;
     this->num.setPosition(pos + sf::Vector2f(30,-30));
+	if(num!=1)
+	this->num.setOrigin(sf::Vector2f(10, 0));
     this->num.setFillColor(sf::Color::White);
     this->num.setCharacterSize(128);
     this->num.setFont(font);
@@ -51,7 +53,6 @@ bool LvlButton::input(sf::Event &ev)
         return true;
     else if(highlighted && ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Return)
     {
-        std::cout<<"return"<<std::endl;
         return true;
 
     }

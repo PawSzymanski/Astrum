@@ -131,7 +131,6 @@ void MenuStage::slidingRight(float dt)
 
 		exitButton.rect.setPosition(exitButton.rect.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
 		exitButton.text.setPosition(exitButton.text.getPosition().x - buttonSpeed*dt, windowSize.y / 2 + windowSize.y / 6.9);
-		std::cout << " x:" <<startButton.rect.getPosition().x << std::endl;
 	}
 	else {
 		this->isSliding = 0;
@@ -160,8 +159,6 @@ void MenuStage::slidingLeft(float dt)
 		isSliding = 0;
 	}
 }
-
-//DODAC SIEBIE JAKO AUTORA DO PLIKÓW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 bool MenuStage::update(float dt)
 {
